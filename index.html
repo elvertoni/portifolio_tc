@@ -60,7 +60,7 @@
 <body class="antialiased font-sans selection:bg-primary selection:text-white">
 
     <!-- Header / Navbar Fixa -->
-    <header class="fixed w-full top-0 z-50 glass-card border-b-0 border-x-0 border-t-0 bg-base/80">
+    <header class="fixed w-full top-0 z-50 glass-panel border-b-0 border-x-0 border-t-0 bg-base/80">
         <div class="container mx-auto px-6 py-4 flex justify-between items-center">
             <a class="flex items-center group" aria-label="Logo Toni Coimbra" href="#" onclick="window.scrollTo(0, 0)">
                 <svg viewBox="0 0 100 100"
@@ -77,7 +77,7 @@
                 <i class="fas fa-bars text-2xl"></i>
             </button>
 
-            <nav class="hidden md:flex space-x-8 text-sm font-medium">
+            <nav class="hidden md:flex space-x-8 text-base font-medium">
                 <a class="text-textMuted hover:text-white transition-colors" href="#sobre">Sobre</a>
                 <a class="text-textMuted hover:text-white transition-colors" href="#skills">Skills</a>
                 <a class="text-textMuted hover:text-white transition-colors" href="#projetos">Projetos</a>
@@ -104,7 +104,7 @@
         <canvas id="particle-canvas"></canvas>
         <div class="container mx-auto px-6 relative z-10">
             <div class="max-w-4xl">
-                <p class="text-accent font-medium tracking-widest mb-4 uppercase text-sm reveal">Olá, eu sou</p>
+                <p class="text-accent font-medium tracking-widest mb-4 uppercase text-base reveal">Olá, eu sou</p>
                 <h1 class="text-5xl md:text-7xl font-bold text-white mb-6 leading-tight reveal"
                     style="transition-delay: 100ms;">
                     Toni Coimbra<span class="text-primary">.</span>
@@ -138,7 +138,7 @@
 
         <!-- Scroll indicator -->
         <div class="absolute bottom-10 left-1/2 transform -translate-x-1/2 flex flex-col items-center animate-bounce">
-            <span class="text-sm text-textMuted mb-2">Scroll</span>
+            <span class="text-base text-textMuted mb-2">Scroll</span>
             <a class="text-textMuted hover:text-accent transition-colors" aria-label="Scroll down" href="#sobre">
                 <i class="fas fa-chevron-down"></i>
             </a>
@@ -156,13 +156,13 @@
 
             <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
                 <!-- Trajetória -->
-                <div class="glass-card p-8 rounded-xl reveal">
+                <div class="glass-panel p-8 rounded-xl reveal">
                     <div
                         class="w-12 h-12 rounded-full bg-primary/20 flex items-center justify-center text-primary mb-6">
                         <i class="fas fa-route text-2xl"></i>
                     </div>
                     <h3 class="text-xl font-bold text-white mb-4">Trajetória</h3>
-                    <p class="text-textMuted text-sm leading-relaxed">
+                    <p class="text-textMuted text-base leading-relaxed">
                         Mais de 20 anos de experiência pregressa em diagramação e arte-finalismo. Essa base sólida na
                         indústria gráfica me proporcionou uma extrema atenção a detalhes e qualidade de entrega,
                         habilidades que hoje aplico rigorosamente no desenvolvimento de software e automação.
@@ -170,35 +170,35 @@
                 </div>
 
                 <!-- Formação -->
-                <div class="glass-card p-8 rounded-xl reveal" style="transition-delay: 150ms;">
+                <div class="glass-panel p-8 rounded-xl reveal" style="transition-delay: 150ms;">
                     <div
                         class="w-12 h-12 rounded-full bg-secondary/20 flex items-center justify-center text-secondary mb-6">
                         <i class="fas fa-graduation-cap text-2xl"></i>
                     </div>
                     <h3 class="text-xl font-bold text-white mb-4">Formação Base</h3>
-                    <ul class="text-textMuted text-sm space-y-3">
+                    <ul class="text-textMuted text-base space-y-3">
                         <li class="flex items-start">
-                            <i class="fas fa-check text-accent mt-1 mr-2 text-xs"></i>
+                            <i class="fas fa-check text-accent mt-1 mr-2 text-sm"></i>
                             <span>Especialização em Inteligência Artificial Aplicada (UFPR)</span>
                         </li>
                         <li class="flex items-start">
-                            <i class="fas fa-check text-accent mt-1 mr-2 text-xs"></i>
+                            <i class="fas fa-check text-accent mt-1 mr-2 text-sm"></i>
                             <span>Análise e Desenv. de Sistemas (UP, 2023)</span>
                         </li>
                         <li class="flex items-start">
-                            <i class="fas fa-check text-accent mt-1 mr-2 text-xs"></i>
+                            <i class="fas fa-check text-accent mt-1 mr-2 text-sm"></i>
                             <span>Sistemas de Informação (UENP, 2006)</span>
                         </li>
                     </ul>
                 </div>
 
                 <!-- Atuação -->
-                <div class="glass-card p-8 rounded-xl reveal" style="transition-delay: 300ms;">
+                <div class="glass-panel p-8 rounded-xl reveal" style="transition-delay: 300ms;">
                     <div class="w-12 h-12 rounded-full bg-accent/20 flex items-center justify-center text-accent mb-6">
                         <i class="fas fa-robot text-2xl"></i>
                     </div>
                     <h3 class="text-xl font-bold text-white mb-4">Atuação Atual</h3>
-                    <p class="text-textMuted text-sm leading-relaxed">
+                    <p class="text-textMuted text-base leading-relaxed">
                         No Tribunal de Justiça do Paraná (Assessoria STF/STJ), foco em soluções de Inteligência
                         Artificial e Automação de processos. Construo pipelines para análise inteligente de grandes
                         volumes de documentos e crio fluxos integrados que economizam milhares de horas de trabalho
@@ -232,12 +232,12 @@
                         <i class="fas fa-brain text-secondary mr-2"></i> IA & Machine Learning
                     </h3>
                     <div class="flex flex-wrap gap-2">
-                        <span class="badge px-3 py-1 rounded-full text-xs text-textMain">Python</span>
-                        <span class="badge px-3 py-1 rounded-full text-xs text-textMain">LangChain</span>
-                        <span class="badge px-3 py-1 rounded-full text-xs text-textMain">OpenCV</span>
-                        <span class="badge px-3 py-1 rounded-full text-xs text-textMain">MediaPipe</span>
-                        <span class="badge px-3 py-1 rounded-full text-xs text-textMain">Scikit-learn</span>
-                        <span class="badge px-3 py-1 rounded-full text-xs text-textMain">LLMs API</span>
+                        <span class="badge px-3 py-1 rounded-full text-sm text-textMain">Python</span>
+                        <span class="badge px-3 py-1 rounded-full text-sm text-textMain">LangChain</span>
+                        <span class="badge px-3 py-1 rounded-full text-sm text-textMain">OpenCV</span>
+                        <span class="badge px-3 py-1 rounded-full text-sm text-textMain">MediaPipe</span>
+                        <span class="badge px-3 py-1 rounded-full text-sm text-textMain">Scikit-learn</span>
+                        <span class="badge px-3 py-1 rounded-full text-sm text-textMain">LLMs API</span>
                     </div>
                 </div>
 
@@ -248,11 +248,11 @@
                         <i class="fas fa-bolt text-accent mr-2"></i> Automação & Integração
                     </h3>
                     <div class="flex flex-wrap gap-2">
-                        <span class="badge px-3 py-1 rounded-full text-xs text-textMain">n8n</span>
-                        <span class="badge px-3 py-1 rounded-full text-xs text-textMain">Evolution API</span>
-                        <span class="badge px-3 py-1 rounded-full text-xs text-textMain">WhatsApp API</span>
-                        <span class="badge px-3 py-1 rounded-full text-xs text-textMain">Webhooks</span>
-                        <span class="badge px-3 py-1 rounded-full text-xs text-textMain">REST APIs</span>
+                        <span class="badge px-3 py-1 rounded-full text-sm text-textMain">n8n</span>
+                        <span class="badge px-3 py-1 rounded-full text-sm text-textMain">Evolution API</span>
+                        <span class="badge px-3 py-1 rounded-full text-sm text-textMain">WhatsApp API</span>
+                        <span class="badge px-3 py-1 rounded-full text-sm text-textMain">Webhooks</span>
+                        <span class="badge px-3 py-1 rounded-full text-sm text-textMain">REST APIs</span>
                     </div>
                 </div>
 
@@ -263,11 +263,11 @@
                         <i class="fas fa-database text-primary mr-2"></i> Dados & Processamento
                     </h3>
                     <div class="flex flex-wrap gap-2">
-                        <span class="badge px-3 py-1 rounded-full text-xs text-textMain">PostgreSQL</span>
-                        <span class="badge px-3 py-1 rounded-full text-xs text-textMain">Google Sheets API</span>
-                        <span class="badge px-3 py-1 rounded-full text-xs text-textMain">Processamento de PDF</span>
-                        <span class="badge px-3 py-1 rounded-full text-xs text-textMain">Pandas</span>
-                        <span class="badge px-3 py-1 rounded-full text-xs text-textMain">Regex</span>
+                        <span class="badge px-3 py-1 rounded-full text-sm text-textMain">PostgreSQL</span>
+                        <span class="badge px-3 py-1 rounded-full text-sm text-textMain">Google Sheets API</span>
+                        <span class="badge px-3 py-1 rounded-full text-sm text-textMain">Processamento de PDF</span>
+                        <span class="badge px-3 py-1 rounded-full text-sm text-textMain">Pandas</span>
+                        <span class="badge px-3 py-1 rounded-full text-sm text-textMain">Regex</span>
                     </div>
                 </div>
 
@@ -278,11 +278,11 @@
                         <i class="fas fa-server text-secondary mr-2"></i> Infraestrutura & Dev
                     </h3>
                     <div class="flex flex-wrap gap-2">
-                        <span class="badge px-3 py-1 rounded-full text-xs text-textMain">Docker</span>
-                        <span class="badge px-3 py-1 rounded-full text-xs text-textMain">Linux</span>
-                        <span class="badge px-3 py-1 rounded-full text-xs text-textMain">FastAPI</span>
-                        <span class="badge px-3 py-1 rounded-full text-xs text-textMain">VPS Management</span>
-                        <span class="badge px-3 py-1 rounded-full text-xs text-textMain">Git / GitHub</span>
+                        <span class="badge px-3 py-1 rounded-full text-sm text-textMain">Docker</span>
+                        <span class="badge px-3 py-1 rounded-full text-sm text-textMain">Linux</span>
+                        <span class="badge px-3 py-1 rounded-full text-sm text-textMain">FastAPI</span>
+                        <span class="badge px-3 py-1 rounded-full text-sm text-textMain">VPS Management</span>
+                        <span class="badge px-3 py-1 rounded-full text-sm text-textMain">Git / GitHub</span>
                     </div>
                 </div>
             </div>
@@ -300,7 +300,7 @@
 
             <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
                 <!-- Projeto 1 -->
-                <div class="glass-card rounded-xl overflow-hidden reveal flex flex-col h-full">
+                <div class="glass-panel rounded-xl overflow-hidden reveal flex flex-col h-full">
                     <div class="h-48 bg-base relative overflow-hidden flex items-center justify-center group">
                         <div
                             class="absolute inset-0 bg-primary/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
@@ -309,22 +309,22 @@
                     </div>
                     <div class="p-6 flex-grow flex flex-col">
                         <h3 class="text-xl font-bold text-white mb-2">Análise de Jurisprudência com IA</h3>
-                        <p class="text-textMuted text-sm mb-4 flex-grow">
+                        <p class="text-textMuted text-base mb-4 flex-grow">
                             Sistema desenvolvido para o TJPR capaz de ler, classificar e analisar um acervo de mais de
                             200.000 documentos PDF utilizando inteligência artificial, acelerando exponencialmente a
                             pesquisa jurisprudencial.
                         </p>
                         <div class="flex flex-wrap gap-2 mt-auto">
-                            <span class="text-xs text-accent font-mono bg-accent/10 px-2 py-1 rounded">Python</span>
-                            <span class="text-xs text-accent font-mono bg-accent/10 px-2 py-1 rounded">NLP</span>
-                            <span class="text-xs text-accent font-mono bg-accent/10 px-2 py-1 rounded">PDF
+                            <span class="text-sm text-accent font-mono bg-accent/10 px-2 py-1 rounded">Python</span>
+                            <span class="text-sm text-accent font-mono bg-accent/10 px-2 py-1 rounded">NLP</span>
+                            <span class="text-sm text-accent font-mono bg-accent/10 px-2 py-1 rounded">PDF
                                 Processing</span>
                         </div>
                     </div>
                 </div>
 
                 <!-- Projeto 2 -->
-                <div class="glass-card rounded-xl overflow-hidden reveal flex flex-col h-full"
+                <div class="glass-panel rounded-xl overflow-hidden reveal flex flex-col h-full"
                     style="transition-delay: 100ms;">
                     <div class="h-48 bg-base relative overflow-hidden flex items-center justify-center group">
                         <div
@@ -334,22 +334,22 @@
                     </div>
                     <div class="p-6 flex-grow flex flex-col">
                         <h3 class="text-xl font-bold text-white mb-2">Sistema de Notificações via WhatsApp</h3>
-                        <p class="text-textMuted text-sm mb-4 flex-grow">
+                        <p class="text-textMuted text-base mb-4 flex-grow">
                             Fluxo automatizado para envio de notificações jurídicas via WhatsApp, integrando Evolution
                             API e banco de dados para gestão de disparos, confirmações de leitura e respostas
                             padronizadas.
                         </p>
                         <div class="flex flex-wrap gap-2 mt-auto">
-                            <span class="text-xs text-accent font-mono bg-accent/10 px-2 py-1 rounded">n8n</span>
-                            <span class="text-xs text-accent font-mono bg-accent/10 px-2 py-1 rounded">Evolution
+                            <span class="text-sm text-accent font-mono bg-accent/10 px-2 py-1 rounded">n8n</span>
+                            <span class="text-sm text-accent font-mono bg-accent/10 px-2 py-1 rounded">Evolution
                                 API</span>
-                            <span class="text-xs text-accent font-mono bg-accent/10 px-2 py-1 rounded">Webhooks</span>
+                            <span class="text-sm text-accent font-mono bg-accent/10 px-2 py-1 rounded">Webhooks</span>
                         </div>
                     </div>
                 </div>
 
                 <!-- Projeto 3 -->
-                <div class="glass-card rounded-xl overflow-hidden reveal flex flex-col h-full">
+                <div class="glass-panel rounded-xl overflow-hidden reveal flex flex-col h-full">
                     <div class="h-48 bg-base relative overflow-hidden flex items-center justify-center group">
                         <div
                             class="absolute inset-0 bg-accent/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
@@ -358,21 +358,21 @@
                     </div>
                     <div class="p-6 flex-grow flex flex-col">
                         <h3 class="text-xl font-bold text-white mb-2">Gesture Control Integration</h3>
-                        <p class="text-textMuted text-sm mb-4 flex-grow">
+                        <p class="text-textMuted text-base mb-4 flex-grow">
                             Aplicação de visão computacional para controle de interfaces de software através de gestos
                             mapeados pelas mãos, utilizando a câmera do dispositivo em tempo real sem hardware
                             adicional.
                         </p>
                         <div class="flex flex-wrap gap-2 mt-auto">
-                            <span class="text-xs text-accent font-mono bg-accent/10 px-2 py-1 rounded">OpenCV</span>
-                            <span class="text-xs text-accent font-mono bg-accent/10 px-2 py-1 rounded">MediaPipe</span>
-                            <span class="text-xs text-accent font-mono bg-accent/10 px-2 py-1 rounded">Python</span>
+                            <span class="text-sm text-accent font-mono bg-accent/10 px-2 py-1 rounded">OpenCV</span>
+                            <span class="text-sm text-accent font-mono bg-accent/10 px-2 py-1 rounded">MediaPipe</span>
+                            <span class="text-sm text-accent font-mono bg-accent/10 px-2 py-1 rounded">Python</span>
                         </div>
                     </div>
                 </div>
 
                 <!-- Projeto 4 -->
-                <div class="glass-card rounded-xl overflow-hidden reveal flex flex-col h-full"
+                <div class="glass-panel rounded-xl overflow-hidden reveal flex flex-col h-full"
                     style="transition-delay: 100ms;">
                     <div class="h-48 bg-base relative overflow-hidden flex items-center justify-center group">
                         <div
@@ -382,16 +382,16 @@
                     </div>
                     <div class="p-6 flex-grow flex flex-col">
                         <h3 class="text-xl font-bold text-white mb-2">Automação de Fluxos STF/STJ</h3>
-                        <p class="text-textMuted text-sm mb-4 flex-grow">
+                        <p class="text-textMuted text-base mb-4 flex-grow">
                             Conjunto de scripts e pipelines no TJPR que eliminam trabalho repetitivo em triagem de
                             recursos, conectando bases de dados, planilhas e gerando relatórios de acompanhamento
                             automaticamente.
                         </p>
                         <div class="flex flex-wrap gap-2 mt-auto">
-                            <span class="text-xs text-accent font-mono bg-accent/10 px-2 py-1 rounded">PostgreSQL</span>
-                            <span class="text-xs text-accent font-mono bg-accent/10 px-2 py-1 rounded">Google
+                            <span class="text-sm text-accent font-mono bg-accent/10 px-2 py-1 rounded">PostgreSQL</span>
+                            <span class="text-sm text-accent font-mono bg-accent/10 px-2 py-1 rounded">Google
                                 Sheets</span>
-                            <span class="text-xs text-accent font-mono bg-accent/10 px-2 py-1 rounded">Docker</span>
+                            <span class="text-sm text-accent font-mono bg-accent/10 px-2 py-1 rounded">Docker</span>
                         </div>
                     </div>
                 </div>
@@ -419,13 +419,13 @@
                         class="absolute left-0 top-2 w-4 h-4 bg-accent rounded-full transform -translate-x-1/2 timeline-dot z-10 border-2 border-base">
                     </div>
                     <div
-                        class="glass-card p-6 rounded-xl relative before:content-[''] before:absolute before:left-[-8px] before:top-4 before:w-4 before:h-4 before:bg-white/5 before:rotate-45 before:border-b before:border-l before:border-primary/20">
+                        class="glass-panel p-6 rounded-xl relative before:content-[''] before:absolute before:left-[-8px] before:top-4 before:w-4 before:h-4 before:bg-white/5 before:rotate-45 before:border-b before:border-l before:border-primary/20">
                         <span
-                            class="inline-block px-3 py-1 bg-primary/20 text-primary text-xs font-bold rounded-full mb-3">Presente</span>
+                            class="inline-block px-3 py-1 bg-primary/20 text-primary text-sm font-bold rounded-full mb-3">Presente</span>
                         <h3 class="text-xl font-bold text-white">Tribunal de Justiça do Paraná (TJPR)</h3>
                         <h4 class="text-accent font-medium mb-3">Automação & Inteligência Artificial - Assessoria
                             STF/STJ</h4>
-                        <p class="text-textMuted text-sm">
+                        <p class="text-textMuted text-base">
                             Desenvolvimento e implantação de ferramentas de IA para sumarização e análise
                             jurisprudencial. Integração de APIs e automação de planilhas e banco de dados para ganho de
                             performance e mitigação de erros manuais.
@@ -439,12 +439,12 @@
                         class="absolute left-0 top-2 w-4 h-4 bg-secondary rounded-full transform -translate-x-1/2 z-10 border-2 border-base">
                     </div>
                     <div
-                        class="glass-card p-6 rounded-xl relative before:content-[''] before:absolute before:left-[-8px] before:top-4 before:w-4 before:h-4 before:bg-white/5 before:rotate-45 before:border-b before:border-l before:border-primary/20">
+                        class="glass-panel p-6 rounded-xl relative before:content-[''] before:absolute before:left-[-8px] before:top-4 before:w-4 before:h-4 before:bg-white/5 before:rotate-45 before:border-b before:border-l before:border-primary/20">
                         <span
-                            class="inline-block px-3 py-1 bg-secondary/20 text-secondary text-xs font-bold rounded-full mb-3">Presente</span>
+                            class="inline-block px-3 py-1 bg-secondary/20 text-secondary text-sm font-bold rounded-full mb-3">Presente</span>
                         <h3 class="text-xl font-bold text-white">Professor - SEED-PR</h3>
                         <h4 class="text-textMain font-medium mb-3">Curso Técnico em Desenvolvimento de Sistemas</h4>
-                        <p class="text-textMuted text-sm">
+                        <p class="text-textMuted text-base">
                             Atuação docente lecionando disciplinas ligadas a lógica de programação, banco de dados e
                             desenvolvimento de software, capacitando novos profissionais para o mercado de tecnologia.
                         </p>
@@ -457,13 +457,13 @@
                         class="absolute left-0 top-2 w-4 h-4 bg-textMuted rounded-full transform -translate-x-1/2 z-10 border-2 border-base">
                     </div>
                     <div
-                        class="glass-card p-6 rounded-xl relative before:content-[''] before:absolute before:left-[-8px] before:top-4 before:w-4 before:h-4 before:bg-white/5 before:rotate-45 before:border-b before:border-l before:border-primary/20">
+                        class="glass-panel p-6 rounded-xl relative before:content-[''] before:absolute before:left-[-8px] before:top-4 before:w-4 before:h-4 before:bg-white/5 before:rotate-45 before:border-b before:border-l before:border-primary/20">
                         <span
-                            class="inline-block px-3 py-1 bg-white/10 text-textMuted text-xs font-bold rounded-full mb-3">+20
+                            class="inline-block px-3 py-1 bg-white/10 text-textMuted text-sm font-bold rounded-full mb-3">+20
                             anos</span>
                         <h3 class="text-xl font-bold text-white">Indústria Gráfica</h3>
                         <h4 class="text-textMain font-medium mb-3">Diagramador & Arte-finalista</h4>
-                        <p class="text-textMuted text-sm">
+                        <p class="text-textMuted text-base">
                             Ampla experiência na revisão rigorosa, diagramação técnica e fechamento de arquivos
                             complexos para impressão. Esta trajetória formou uma disciplina baseada na atenção extrema a
                             detalhes e qualidade impecável da entrega final.
@@ -488,11 +488,11 @@
                     class="bg-base rounded-lg border border-primary/10 p-6 hover:border-accent/40 transition-colors reveal">
                     <div class="flex items-center justify-between mb-4">
                         <i class="fas fa-microchip text-3xl text-accent"></i>
-                        <span class="text-xs font-bold text-accent bg-accent/10 px-2 py-1 rounded">Pós-Graduação</span>
+                        <span class="text-sm font-bold text-accent bg-accent/10 px-2 py-1 rounded">Pós-Graduação</span>
                     </div>
                     <h3 class="font-bold text-white mb-1">Inteligência Artificial Aplicada</h3>
-                    <p class="text-sm text-textMuted mb-2">Universidade Federal do Paraná (UFPR)</p>
-                    <p class="text-xs text-textMuted/70 italic">Especialização voltada à aplicação prática de IA no
+                    <p class="text-base text-textMuted mb-2">Universidade Federal do Paraná (UFPR)</p>
+                    <p class="text-sm text-textMuted/70 italic">Especialização voltada à aplicação prática de IA no
                         mercado.</p>
                 </div>
 
@@ -501,11 +501,11 @@
                     style="transition-delay: 100ms;">
                     <div class="flex items-center justify-between mb-4">
                         <i class="fas fa-laptop-code text-3xl text-secondary"></i>
-                        <span class="text-xs font-bold text-secondary bg-secondary/10 px-2 py-1 rounded">2023</span>
+                        <span class="text-sm font-bold text-secondary bg-secondary/10 px-2 py-1 rounded">2023</span>
                     </div>
                     <h3 class="font-bold text-white mb-1">Análise e Desenv. de Sistemas</h3>
-                    <p class="text-sm text-textMuted mb-2">Universidade Positivo (UP)</p>
-                    <p class="text-xs text-textMuted/70 italic">Transição formal para a área de Tecnologia da
+                    <p class="text-base text-textMuted mb-2">Universidade Positivo (UP)</p>
+                    <p class="text-sm text-textMuted/70 italic">Transição formal para a área de Tecnologia da
                         Informação.</p>
                 </div>
 
@@ -514,11 +514,11 @@
                     style="transition-delay: 200ms;">
                     <div class="flex items-center justify-between mb-4">
                         <i class="fas fa-network-wired text-3xl text-textMuted"></i>
-                        <span class="text-xs font-bold text-textMuted bg-white/10 px-2 py-1 rounded">2006</span>
+                        <span class="text-sm font-bold text-textMuted bg-white/10 px-2 py-1 rounded">2006</span>
                     </div>
                     <h3 class="font-bold text-white mb-1">Sistemas de Informação</h3>
-                    <p class="text-sm text-textMuted mb-2">Universidade Estadual do N. do Paraná (UENP)</p>
-                    <p class="text-xs text-textMuted/70 italic">Base fundacional e fundamentos de computação.</p>
+                    <p class="text-base text-textMuted mb-2">Universidade Estadual do N. do Paraná (UENP)</p>
+                    <p class="text-sm text-textMuted/70 italic">Base fundacional e fundamentos de computação.</p>
                 </div>
             </div>
         </div>
@@ -540,14 +540,14 @@
                     artificial pode resolver problemas reais. Preencha o formulário abaixo e entrarei em contato!
                 </p>
 
-                <div class="max-w-xl mx-auto glass-card p-8 rounded-2xl text-left relative z-20 mb-16">
+                <div class="max-w-xl mx-auto glass-panel p-8 rounded-2xl text-left relative z-20 mb-16">
                     <form id="contact-form" class="space-y-6">
                         <input type="hidden" name="access_key" value="9981a893-6116-438b-8528-4bb6d41fc606">
                         <input type="hidden" name="subject" value="Novo contato pelo Portfólio!">
                         <input type="checkbox" name="botcheck" class="hidden" style="display: none;">
 
                         <div>
-                            <label for="name" class="block text-sm font-medium text-textMuted mb-2">Nome
+                            <label for="name" class="block text-base font-medium text-textMuted mb-2">Nome
                                 Completo</label>
                             <input type="text" id="name" name="name" required
                                 class="w-full px-4 py-3 rounded-lg bg-surface/50 border border-primary/20 text-white placeholder-textMuted/50 focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-colors"
@@ -555,7 +555,7 @@
                         </div>
 
                         <div>
-                            <label for="email" class="block text-sm font-medium text-textMuted mb-2">E-mail de
+                            <label for="email" class="block text-base font-medium text-textMuted mb-2">E-mail de
                                 Contato</label>
                             <input type="email" id="email" name="email" required
                                 class="w-full px-4 py-3 rounded-lg bg-surface/50 border border-primary/20 text-white placeholder-textMuted/50 focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-colors"
@@ -563,7 +563,7 @@
                         </div>
 
                         <div>
-                            <label for="message" class="block text-sm font-medium text-textMuted mb-2">Sua
+                            <label for="message" class="block text-base font-medium text-textMuted mb-2">Sua
                                 Mensagem</label>
                             <textarea id="message" name="message" rows="4" required
                                 class="w-full px-4 py-3 rounded-lg bg-surface/50 border border-primary/20 text-white placeholder-textMuted/50 focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-colors resize-none"
@@ -579,7 +579,7 @@
 
                     <!-- Mensagem de Resposta -->
                     <div id="form-result"
-                        class="hidden mt-4 p-4 rounded-lg text-center text-sm font-medium transition-all"></div>
+                        class="hidden mt-4 p-4 rounded-lg text-center text-base font-medium transition-all"></div>
                 </div>
 
                 <div class="flex justify-center space-x-6">
@@ -597,7 +597,7 @@
     </section>
 
     <!-- Footer base -->
-    <footer class="bg-base border-t border-white/5 py-8 text-center text-sm text-textMuted">
+    <footer class="bg-base border-t border-white/5 py-8 text-center text-base text-textMuted">
         <div class="container mx-auto px-6 font-mono">
             <p>&copy; <span id="current-year"></span> Toni Coimbra. <span class="hidden sm:inline">Construído com
                     HTML, TailwindCSS & Vanilla JS.</span></p>
