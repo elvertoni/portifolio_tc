@@ -1,0 +1,7 @@
+.git
+.gitignore
+.agent
+.gemini
+extract.py
+README.md
+*.md
