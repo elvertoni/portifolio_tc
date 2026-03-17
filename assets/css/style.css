@@ -1,26 +1,59 @@
+/* =========================================================
+   PORTFÓLIO — TONI COIMBRA
+   Design System: Dark violet/purple with cyan accent
+   ========================================================= */
+
+/* Base */
 body {
     background-color: #0d0d1a;
     color: #e4e4f0;
     overflow-x: hidden;
 }
 
-/* Efeitos Glassmorphism e Bordas Sutis */
+/* Top radial glow anchoring the violet brand */
+body::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 60vh;
+    background: radial-gradient(
+        ellipse 80% 40% at 50% -5%,
+        rgba(124, 58, 237, 0.12),
+        transparent
+    );
+    pointer-events: none;
+    z-index: 0;
+}
+
+/* =========================================================
+   GLASS PANELS
+   ========================================================= */
 .glass-panel {
     background-color: rgba(26, 26, 46, 0.6);
     backdrop-filter: blur(12px);
     -webkit-backdrop-filter: blur(12px);
     border: 1px solid rgba(39, 39, 42, 0.5);
-    transition: all 0.3s ease;
+    transition: box-shadow 0.3s ease, border-color 0.3s ease, background-color 0.3s ease;
 }
 
-.glass-panel:hover {
+/* Only lift cards that are meant to be interactive — not timeline */
+.glass-panel.card-hover:hover {
     box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
     border-color: rgba(124, 58, 237, 0.3);
-    transform: translateY(-5px);
     background-color: rgba(26, 26, 46, 0.85);
 }
 
-/* Text Gradient */
+/* Timeline cards: subtle hover without translateY */
+.glass-panel.timeline-card:hover {
+    border-color: rgba(124, 58, 237, 0.25);
+    background-color: rgba(26, 26, 46, 0.75);
+}
+
+/* =========================================================
+   TEXT GRADIENT
+   ========================================================= */
 .text-gradient {
     background: linear-gradient(135deg, #7c3aed 0%, #a78bfa 100%);
     -webkit-background-clip: text;
@@ -28,29 +61,26 @@ body {
     background-clip: text;
 }
 
-/* Animações Typewriter e Cursor */
+/* =========================================================
+   TYPEWRITER
+   ========================================================= */
 .typewriter-cursor {
-    border-right: 3px solid #7c3aed;
+    border-right: 2px solid #7c3aed;
     animation: blink 0.7s infinite;
 }
 
 @keyframes blink {
-
-    0%,
-    100% {
-        border-color: transparent;
-    }
-
-    50% {
-        border-color: #7c3aed;
-    }
+    0%, 100% { border-color: transparent; }
+    50%       { border-color: #7c3aed; }
 }
 
-/* Scroll Reveal Effect */
+/* =========================================================
+   SCROLL REVEAL
+   ========================================================= */
 .reveal {
     opacity: 0;
-    transform: translateY(30px);
-    transition: all 0.8s ease-out;
+    transform: translateY(24px);
+    transition: opacity 0.7s ease-out, transform 0.7s ease-out;
 }
 
 .reveal.active {
@@ -58,16 +88,38 @@ body {
     transform: translateY(0);
 }
 
-/* Neumorphism/Neon Glow */
-.neon-border {
-    border: 1px solid rgba(124, 58, 237, 0.3);
-    box-shadow: inset 0 0 10px rgba(124, 58, 237, 0.1);
+/* Respect user motion preferences */
+@media (prefers-reduced-motion: reduce) {
+    .reveal {
+        opacity: 1;
+        transform: none;
+        transition: none;
+    }
+    .reveal.active {
+        opacity: 1;
+        transform: none;
+    }
+    .timeline-dot {
+        animation: none !important;
+    }
+    .typewriter-cursor {
+        animation: none !important;
+        border-color: #7c3aed;
+    }
+    * {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
 }
 
+/* =========================================================
+   BUTTONS
+   ========================================================= */
 .btn-primary {
     background: linear-gradient(135deg, #7c3aed 0%, #6d28d9 100%);
-    box-shadow: 0 4px 20px rgba(124, 58, 237, 0.4);
-    transition: all 0.3s ease;
+    box-shadow: 0 4px 20px rgba(124, 58, 237, 0.35);
+    transition: box-shadow 0.3s ease, transform 0.2s ease;
 }
 
 .btn-primary:hover {
@@ -75,63 +127,79 @@ body {
     transform: translateY(-2px);
 }
 
+.btn-primary:focus-visible {
+    outline: 2px solid #a78bfa;
+    outline-offset: 3px;
+}
+
 .btn-outline {
     background: transparent;
     border: 1px solid rgba(148, 163, 184, 0.18);
-    transition: all 0.3s ease;
+    transition: background 0.3s ease, border-color 0.3s ease, transform 0.2s ease;
 }
 
 .btn-outline:hover {
     background: rgba(124, 58, 237, 0.08);
-    border-color: rgba(124, 58, 237, 0.3);
+    border-color: rgba(124, 58, 237, 0.35);
     transform: translateY(-2px);
 }
 
-/* Badges */
-.badge {
-    background: rgba(124, 58, 237, 0.12);
-    border: 1px solid rgba(124, 58, 237, 0.3);
+.btn-outline:focus-visible {
+    outline: 2px solid #a78bfa;
+    outline-offset: 3px;
 }
 
-/* Timeline Styles */
+/* =========================================================
+   BADGES (skill tags)
+   ========================================================= */
+.badge {
+    background: rgba(124, 58, 237, 0.1);
+    border: 1px solid rgba(124, 58, 237, 0.25);
+    transition: background 0.2s ease, border-color 0.2s ease;
+}
+
+.badge:hover {
+    background: rgba(124, 58, 237, 0.18);
+    border-color: rgba(124, 58, 237, 0.4);
+}
+
+/* =========================================================
+   TIMELINE
+   ========================================================= */
 .timeline-line {
     width: 2px;
-    background: linear-gradient(to bottom, #7c3aed, #a78bfa);
+    background: linear-gradient(to bottom, #7c3aed 0%, rgba(124, 58, 237, 0.1) 100%);
 }
 
 .timeline-dot {
-    box-shadow: 0 0 10px #7c3aed;
-    animation: pulse-dot 2s infinite;
+    box-shadow: 0 0 0 0 rgba(124, 58, 237, 0.4);
+    animation: pulse-dot 2.5s ease-out infinite;
 }
 
 @keyframes pulse-dot {
-    0% {
-        box-shadow: 0 0 0 0 rgba(139, 92, 246, 0.4);
-    }
-
-    70% {
-        box-shadow: 0 0 0 10px rgba(139, 92, 246, 0);
-    }
-
-    100% {
-        box-shadow: 0 0 0 0 rgba(139, 92, 246, 0);
-    }
+    0%   { box-shadow: 0 0 0 0 rgba(124, 58, 237, 0.5); }
+    70%  { box-shadow: 0 0 0 10px rgba(124, 58, 237, 0); }
+    100% { box-shadow: 0 0 0 0 rgba(124, 58, 237, 0); }
 }
 
-/* Background Particle Canvas */
+/* =========================================================
+   PARTICLE CANVAS
+   ========================================================= */
 #particle-canvas {
     position: absolute;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    z-index: -1;
-    opacity: 0.5;
+    z-index: 0;
+    opacity: 0.45;
 }
 
-/* Scrollbar customizada violet */
+/* =========================================================
+   SCROLLBAR
+   ========================================================= */
 ::-webkit-scrollbar {
-    width: 6px;
+    width: 5px;
 }
 
 ::-webkit-scrollbar-track {
@@ -139,29 +207,109 @@ body {
 }
 
 ::-webkit-scrollbar-thumb {
-    background: rgba(124, 58, 237, 0.4);
+    background: rgba(124, 58, 237, 0.35);
     border-radius: 3px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-    background: rgba(124, 58, 237, 0.7);
+    background: rgba(124, 58, 237, 0.65);
 }
 
-/* Selection violet */
+/* =========================================================
+   SELECTION
+   ========================================================= */
 ::selection {
     background: rgba(124, 58, 237, 0.35);
     color: #e4e4f0;
 }
 
-/* Cursor glow violet */
+/* =========================================================
+   CURSOR GLOW
+   ========================================================= */
 .cursor-glow {
     pointer-events: none;
     position: fixed;
-    width: 300px;
-    height: 300px;
+    width: 320px;
+    height: 320px;
     border-radius: 50%;
-    background: radial-gradient(circle, rgba(124, 58, 237, 0.08) 0%, transparent 70%);
+    background: radial-gradient(circle, rgba(124, 58, 237, 0.07) 0%, transparent 70%);
     transform: translate(-50%, -50%);
     z-index: 9999;
-    transition: opacity 0.3s ease;
+    transition: opacity 0.4s ease;
+}
+
+/* =========================================================
+   FOCUS VISIBLE — Global accessible focus ring
+   ========================================================= */
+:focus-visible {
+    outline: 2px solid rgba(167, 139, 250, 0.8);
+    outline-offset: 3px;
+    border-radius: 4px;
+}
+
+/* =========================================================
+   FORM INPUTS — Override to ensure consistent focus ring
+   ========================================================= */
+input:focus-visible,
+textarea:focus-visible {
+    outline: none;
+}
+
+/* =========================================================
+   NAV ACTIVE STATE
+   ========================================================= */
+nav a.nav-active {
+    color: #a78bfa;
+}
+
+/* =========================================================
+   HERO SECTION HEADING GRADIENT OVERRIDE
+   ========================================================= */
+.hero-name {
+    line-height: 1.1;
+    letter-spacing: -0.02em;
+}
+
+/* =========================================================
+   SECTION DIVIDER
+   ========================================================= */
+.section-divider {
+    width: 48px;
+    height: 3px;
+    background: linear-gradient(90deg, #7c3aed, #a78bfa);
+    border-radius: 2px;
+}
+
+/* =========================================================
+   PROJECT CARD IMAGE AREA
+   ========================================================= */
+.project-img-area {
+    position: relative;
+    overflow: hidden;
+}
+
+.project-img-area::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to bottom, transparent 60%, rgba(13, 13, 26, 0.6) 100%);
+}
+
+/* =========================================================
+   MOBILE TOUCH TARGETS
+   ========================================================= */
+@media (max-width: 768px) {
+    .mobile-link {
+        padding: 0.75rem 1.5rem;
+        min-height: 44px;
+        display: flex;
+        align-items: center;
+        width: 100%;
+        justify-content: center;
+    }
+
+    /* Reduce reveal translate on mobile for subtler effect */
+    .reveal {
+        transform: translateY(16px);
+    }
 }
