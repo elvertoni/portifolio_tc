@@ -1,32 +1,28 @@
 body {
-    background-color: #0f172a;
-    color: #f1f5f9;
+    background-color: #0d0d1a;
+    color: #e4e4f0;
     overflow-x: hidden;
 }
 
 /* Efeitos Glassmorphism e Bordas Sutis */
 .glass-panel {
-    background-color: rgba(20, 30, 51, 0.6);
-    /* bg-white/5 */
+    background-color: rgba(26, 26, 46, 0.6);
     backdrop-filter: blur(12px);
     -webkit-backdrop-filter: blur(12px);
-    border: 1px solid rgba(148, 163, 184, 0.08);
-    /* style 2 --border */
+    border: 1px solid rgba(39, 39, 42, 0.5);
     transition: all 0.3s ease;
 }
 
 .glass-panel:hover {
     box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
-    border-color: rgba(148, 163, 184, 0.18);
-    /* style 2 --border-hover */
+    border-color: rgba(124, 58, 237, 0.3);
     transform: translateY(-5px);
-    background-color: rgba(26, 38, 68, 0.75);
-    /* style 2 --bg-panel-hover */
+    background-color: rgba(26, 26, 46, 0.85);
 }
 
 /* Text Gradient */
 .text-gradient {
-    background: linear-gradient(135deg, #0d9488 0%, #06b6d4 100%);
+    background: linear-gradient(135deg, #7c3aed 0%, #a78bfa 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
@@ -34,7 +30,7 @@ body {
 
 /* Animações Typewriter e Cursor */
 .typewriter-cursor {
-    border-right: 3px solid #06b6d4;
+    border-right: 3px solid #7c3aed;
     animation: blink 0.7s infinite;
 }
 
@@ -46,7 +42,7 @@ body {
     }
 
     50% {
-        border-color: #06b6d4;
+        border-color: #7c3aed;
     }
 }
 
@@ -64,18 +60,18 @@ body {
 
 /* Neumorphism/Neon Glow */
 .neon-border {
-    border: 1px solid rgba(37, 99, 235, 0.3);
-    box-shadow: inset 0 0 10px rgba(37, 99, 235, 0.1);
+    border: 1px solid rgba(124, 58, 237, 0.3);
+    box-shadow: inset 0 0 10px rgba(124, 58, 237, 0.1);
 }
 
 .btn-primary {
-    background: linear-gradient(135deg, #2563eb 0%, #0d9488 100%);
-    box-shadow: 0 4px 20px rgba(37, 99, 235, 0.4);
+    background: linear-gradient(135deg, #7c3aed 0%, #6d28d9 100%);
+    box-shadow: 0 4px 20px rgba(124, 58, 237, 0.4);
     transition: all 0.3s ease;
 }
 
 .btn-primary:hover {
-    box-shadow: 0 8px 30px rgba(37, 99, 235, 0.55);
+    box-shadow: 0 8px 30px rgba(124, 58, 237, 0.55);
     transform: translateY(-2px);
 }
 
@@ -86,39 +82,39 @@ body {
 }
 
 .btn-outline:hover {
-    background: rgba(148, 163, 184, 0.05);
-    border-color: rgba(148, 163, 184, 0.3);
+    background: rgba(124, 58, 237, 0.08);
+    border-color: rgba(124, 58, 237, 0.3);
     transform: translateY(-2px);
 }
 
 /* Badges */
 .badge {
-    background: rgba(37, 99, 235, 0.12);
-    border: 1px solid rgba(37, 99, 235, 0.3);
+    background: rgba(124, 58, 237, 0.12);
+    border: 1px solid rgba(124, 58, 237, 0.3);
 }
 
 /* Timeline Styles */
 .timeline-line {
     width: 2px;
-    background: linear-gradient(to bottom, #2563eb, #06b6d4);
+    background: linear-gradient(to bottom, #7c3aed, #a78bfa);
 }
 
 .timeline-dot {
-    box-shadow: 0 0 10px #06b6d4;
+    box-shadow: 0 0 10px #7c3aed;
     animation: pulse-dot 2s infinite;
 }
 
 @keyframes pulse-dot {
     0% {
-        box-shadow: 0 0 0 0 rgba(6, 182, 212, 0.4);
+        box-shadow: 0 0 0 0 rgba(139, 92, 246, 0.4);
     }
 
     70% {
-        box-shadow: 0 0 0 10px rgba(6, 182, 212, 0);
+        box-shadow: 0 0 0 10px rgba(139, 92, 246, 0);
     }
 
     100% {
-        box-shadow: 0 0 0 0 rgba(6, 182, 212, 0);
+        box-shadow: 0 0 0 0 rgba(139, 92, 246, 0);
     }
 }
 
@@ -131,4 +127,41 @@ body {
     height: 100%;
     z-index: -1;
     opacity: 0.5;
+}
+
+/* Scrollbar customizada violet */
+::-webkit-scrollbar {
+    width: 6px;
+}
+
+::-webkit-scrollbar-track {
+    background: #0d0d1a;
+}
+
+::-webkit-scrollbar-thumb {
+    background: rgba(124, 58, 237, 0.4);
+    border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: rgba(124, 58, 237, 0.7);
+}
+
+/* Selection violet */
+::selection {
+    background: rgba(124, 58, 237, 0.35);
+    color: #e4e4f0;
+}
+
+/* Cursor glow violet */
+.cursor-glow {
+    pointer-events: none;
+    position: fixed;
+    width: 300px;
+    height: 300px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(124, 58, 237, 0.08) 0%, transparent 70%);
+    transform: translate(-50%, -50%);
+    z-index: 9999;
+    transition: opacity 0.3s ease;
 }
