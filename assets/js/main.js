@@ -304,7 +304,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
                 setTimeout(() => {
                     result.className = 'hidden';
-                }, 6000);
+                }, 12000); /* aumentado para 12s — tempo para ler a resposta */
             }
         });
     }
