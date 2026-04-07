@@ -1,61 +1,172 @@
 /* =========================================================
    PORTFÓLIO — TONI COIMBRA
-   Design System: Dark violet/purple with cyan accent
+   Design System: ProfessorDash — Dark emerald/cyan
+   Audited against interface-design principles
    ========================================================= */
 
-/* Base */
-body {
-    background-color: #0d0d1a;
-    color: #e4e4f0;
-    overflow-x: hidden;
-}
+/* =========================================================
+   CSS CUSTOM PROPERTIES (Design Tokens)
+   ========================================================= */
+:root {
+    /* Backgrounds — subtle elevation scale (4-step) */
+    --bg:          #040405;
+    --bg-elevated: #09090b;
+    --surface:     rgba(17,17,20,0.92);
+    --surface-h:   rgba(23,23,28,0.96);
 
-/* Top radial glow anchoring the violet brand */
-body::before {
-    content: '';
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    height: 60vh;
-    background: radial-gradient(
-        ellipse 80% 40% at 50% -5%,
-        rgba(124, 58, 237, 0.12),
-        transparent
-    );
-    pointer-events: none;
-    z-index: 0;
+    /* Borders — 4-level progression */
+    --border-subtle: rgba(255,255,255,0.05);
+    --border:        rgba(255,255,255,0.08);
+    --border-s:      rgba(255,255,255,0.14);
+    --border-strong:  rgba(255,255,255,0.22);
+
+    /* Text — 4-level hierarchy (WCAG AA compliant on #040405) */
+    --text:      #ece8e7;
+    --text-sec:  #b8b5bd;   /* brightened for 7.5:1 contrast ratio */
+    --text-tert: #8a8694;   /* lifted for 5.2:1 contrast ratio */
+    --text-faint: rgba(138,134,148,0.55);
+
+    /* Brand */
+    --primary:    #10b981;
+    --primary-s:  #059669;
+    --secondary:  #8b5cf6;
+    --cyan:       #06b6d4;
+
+    /* Semantic */
+    --danger:   #f87171;
+    --warning:  #fbbf24;
+    --success:  #10b981;
+
+    /* Radius — 3-step scale */
+    --radius-sm: 0.5rem;
+    --radius-md: 0.75rem;
+    --radius-lg: 1rem;
+    --radius-xl: 1.25rem;
+
+    /* Spacing base: 4px */
+    --space-1: 0.25rem;   /* 4px */
+    --space-2: 0.5rem;    /* 8px */
+    --space-3: 0.75rem;   /* 12px */
+    --space-4: 1rem;      /* 16px */
+    --space-5: 1.25rem;   /* 20px */
+    --space-6: 1.5rem;    /* 24px */
+    --space-8: 2rem;      /* 32px */
+
+    /* Transitions — fast for micro, standard for layout */
+    --ease-micro: 150ms ease-out;
+    --ease-std:   200ms ease-out;
 }
 
 /* =========================================================
-   GLASS PANELS
+   BASE
+   ========================================================= */
+body {
+    background:
+        radial-gradient(circle at top left,  rgba(16,185,129,0.10), transparent 30%),
+        radial-gradient(circle at top right, rgba(6,182,212,0.06),  transparent 26%),
+        radial-gradient(circle at 50% 0%,    rgba(124,58,237,0.04), transparent 24%),
+        linear-gradient(180deg, var(--bg) 0%, var(--bg-elevated) 100%);
+    background-attachment: fixed;
+    color: var(--text);
+    overflow-x: hidden;
+    font-family: 'Geist', sans-serif;
+    line-height: 1.6;
+    font-size: 1rem;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+/* =========================================================
+   SELECTION
+   ========================================================= */
+::selection {
+    background: rgba(16,185,129,0.28);
+    color: #fff;
+}
+
+/* =========================================================
+   GLASS PANELS — Surface elevation
    ========================================================= */
 .glass-panel {
-    background-color: rgba(26, 26, 46, 0.6);
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
-    border: 1px solid rgba(39, 39, 42, 0.5);
-    transition: box-shadow 0.3s ease, border-color 0.3s ease, background-color 0.3s ease;
+    background: var(--surface);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 1px solid var(--border);
+    transition: box-shadow var(--ease-std), border-color var(--ease-micro), background var(--ease-std);
 }
 
-/* Only lift cards that are meant to be interactive — not timeline */
 .glass-panel.card-hover:hover {
-    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
-    border-color: rgba(124, 58, 237, 0.3);
-    background-color: rgba(26, 26, 46, 0.85);
+    box-shadow: 0 4px 24px rgba(0, 0, 0, 0.35);
+    border-color: var(--border-s);
+    background: var(--surface-h);
 }
 
-/* Timeline cards: subtle hover without translateY */
 .glass-panel.timeline-card:hover {
-    border-color: rgba(124, 58, 237, 0.25);
-    background-color: rgba(26, 26, 46, 0.75);
+    border-color: var(--border-s);
+    background: var(--surface-h);
+}
+
+/* =========================================================
+   SKILL CARDS — Hover via CSS, not inline JS
+   ========================================================= */
+.skill-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-xl);
+    transition: border-color var(--ease-micro), box-shadow var(--ease-std);
+}
+
+.skill-card:hover {
+    border-color: var(--border-s);
+}
+
+.skill-card[data-accent="violet"]:hover {
+    border-color: rgba(139,92,246,0.35);
+    box-shadow: 0 0 16px rgba(139,92,246,0.06);
+}
+
+.skill-card[data-accent="cyan"]:hover {
+    border-color: rgba(6,182,212,0.35);
+    box-shadow: 0 0 16px rgba(6,182,212,0.05);
+}
+
+.skill-card[data-accent="emerald"]:hover {
+    border-color: rgba(16,185,129,0.35);
+    box-shadow: 0 0 16px rgba(16,185,129,0.05);
+}
+
+.skill-card[data-accent="amber"]:hover {
+    border-color: rgba(251,191,36,0.35);
+    box-shadow: 0 0 16px rgba(251,191,36,0.04);
+}
+
+/* =========================================================
+   ACADEMIC CARDS — Hover via CSS
+   ========================================================= */
+.academic-card {
+    background: var(--bg);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-xl);
+    transition: border-color var(--ease-micro);
+}
+
+.academic-card[data-accent="emerald"]:hover {
+    border-color: rgba(16,185,129,0.30);
+}
+
+.academic-card[data-accent="cyan"]:hover {
+    border-color: rgba(6,182,212,0.30);
+}
+
+.academic-card[data-accent="neutral"]:hover {
+    border-color: var(--border-s);
 }
 
 /* =========================================================
    TEXT GRADIENT
    ========================================================= */
 .text-gradient {
-    background: linear-gradient(135deg, #7c3aed 0%, #a78bfa 100%);
+    background: linear-gradient(135deg, #10b981 0%, #06b6d4 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
@@ -65,13 +176,13 @@ body::before {
    TYPEWRITER
    ========================================================= */
 .typewriter-cursor {
-    border-right: 2px solid #7c3aed;
+    border-right: 2px solid var(--primary);
     animation: blink 0.7s infinite;
 }
 
 @keyframes blink {
     0%, 100% { border-color: transparent; }
-    50%       { border-color: #7c3aed; }
+    50%       { border-color: var(--primary); }
 }
 
 /* =========================================================
@@ -80,7 +191,7 @@ body::before {
 .reveal {
     opacity: 0;
     transform: translateY(24px);
-    transition: opacity 0.7s ease-out, transform 0.7s ease-out;
+    transition: opacity 0.6s ease-out, transform 0.6s ease-out;
 }
 
 .reveal.active {
@@ -88,7 +199,6 @@ body::before {
     transform: translateY(0);
 }
 
-/* Respect user motion preferences */
 @media (prefers-reduced-motion: reduce) {
     .reveal {
         opacity: 1;
@@ -104,7 +214,7 @@ body::before {
     }
     .typewriter-cursor {
         animation: none !important;
-        border-color: #7c3aed;
+        border-color: var(--primary);
     }
     * {
         animation-duration: 0.01ms !important;
@@ -117,50 +227,98 @@ body::before {
    BUTTONS
    ========================================================= */
 .btn-primary {
-    background: linear-gradient(135deg, #7c3aed 0%, #6d28d9 100%);
-    box-shadow: 0 4px 20px rgba(124, 58, 237, 0.35);
-    transition: box-shadow 0.3s ease, transform 0.2s ease;
+    background: var(--primary);
+    color: #000;
+    font-weight: 600;
+    padding: var(--space-3) var(--space-6);
+    border-radius: var(--radius-md);
+    border: none;
+    box-shadow: 0 2px 12px rgba(16,185,129,0.25);
+    transition: background var(--ease-micro), transform var(--ease-micro), box-shadow var(--ease-std);
 }
 
 .btn-primary:hover {
-    box-shadow: 0 8px 30px rgba(124, 58, 237, 0.55);
-    transform: translateY(-2px);
+    background: var(--primary-s);
+    transform: translateY(-1px);
+    box-shadow: 0 4px 20px rgba(16,185,129,0.35);
+}
+
+.btn-primary:active {
+    transform: translateY(0);
+    box-shadow: 0 1px 8px rgba(16,185,129,0.2);
 }
 
 .btn-primary:focus-visible {
-    outline: 2px solid #a78bfa;
+    outline: 2px solid var(--primary);
     outline-offset: 3px;
 }
 
 .btn-outline {
     background: transparent;
-    border: 1px solid rgba(148, 163, 184, 0.18);
-    transition: background 0.3s ease, border-color 0.3s ease, transform 0.2s ease;
+    border: 1px solid var(--border);
+    transition: background var(--ease-micro), border-color var(--ease-micro), transform var(--ease-micro);
 }
 
 .btn-outline:hover {
-    background: rgba(124, 58, 237, 0.08);
-    border-color: rgba(124, 58, 237, 0.35);
-    transform: translateY(-2px);
+    background: rgba(16,185,129,0.06);
+    border-color: rgba(16,185,129,0.30);
+    transform: translateY(-1px);
+}
+
+.btn-outline:active {
+    transform: translateY(0);
 }
 
 .btn-outline:focus-visible {
-    outline: 2px solid #a78bfa;
+    outline: 2px solid var(--primary);
     outline-offset: 3px;
 }
 
 /* =========================================================
-   BADGES (skill tags)
+   BADGES — Pill-shaped, consistent
    ========================================================= */
 .badge {
-    background: rgba(124, 58, 237, 0.1);
-    border: 1px solid rgba(124, 58, 237, 0.25);
-    transition: background 0.2s ease, border-color 0.2s ease;
+    display: inline-flex;
+    align-items: center;
+    padding: 0.1875rem var(--space-3); /* 3px 12px */
+    border-radius: 9999px;
+    font-size: 0.8125rem; /* 13px — readable minimum */
+    font-weight: 500;
+    line-height: 1.35;
+    letter-spacing: 0.01em;
+    border: 1px solid var(--border);
+    background: rgba(255,255,255,0.03);
+    color: var(--text-sec);
+    transition: background var(--ease-micro);
+    white-space: nowrap;
 }
 
 .badge:hover {
-    background: rgba(124, 58, 237, 0.18);
-    border-color: rgba(124, 58, 237, 0.4);
+    background: rgba(255,255,255,0.06);
+}
+
+.badge-primary {
+    border-color: rgba(16,185,129,0.25);
+    background: rgba(16,185,129,0.08);
+    color: var(--primary);
+}
+
+.badge-violet {
+    border-color: rgba(139,92,246,0.25);
+    background: rgba(139,92,246,0.08);
+    color: var(--secondary);
+}
+
+.badge-cyan {
+    border-color: rgba(6,182,212,0.25);
+    background: rgba(6,182,212,0.08);
+    color: var(--cyan);
+}
+
+.badge-amber {
+    border-color: rgba(251,191,36,0.25);
+    background: rgba(251,191,36,0.08);
+    color: var(--warning);
 }
 
 /* =========================================================
@@ -168,18 +326,18 @@ body::before {
    ========================================================= */
 .timeline-line {
     width: 2px;
-    background: linear-gradient(to bottom, #7c3aed 0%, rgba(124, 58, 237, 0.1) 100%);
+    background: linear-gradient(to bottom, var(--primary) 0%, rgba(16,185,129,0.08) 100%);
 }
 
 .timeline-dot {
-    box-shadow: 0 0 0 0 rgba(124, 58, 237, 0.4);
+    box-shadow: 0 0 0 0 rgba(16,185,129,0.4);
     animation: pulse-dot 2.5s ease-out infinite;
 }
 
 @keyframes pulse-dot {
-    0%   { box-shadow: 0 0 0 0 rgba(124, 58, 237, 0.5); }
-    70%  { box-shadow: 0 0 0 10px rgba(124, 58, 237, 0); }
-    100% { box-shadow: 0 0 0 0 rgba(124, 58, 237, 0); }
+    0%   { box-shadow: 0 0 0 0 rgba(16,185,129,0.45); }
+    70%  { box-shadow: 0 0 0 8px rgba(16,185,129,0); }
+    100% { box-shadow: 0 0 0 0 rgba(16,185,129,0); }
 }
 
 /* =========================================================
@@ -192,7 +350,7 @@ body::before {
     width: 100%;
     height: 100%;
     z-index: 0;
-    opacity: 0.45;
+    opacity: 0.4;
 }
 
 /* =========================================================
@@ -203,24 +361,16 @@ body::before {
 }
 
 ::-webkit-scrollbar-track {
-    background: #0d0d1a;
+    background: var(--bg);
 }
 
 ::-webkit-scrollbar-thumb {
-    background: rgba(124, 58, 237, 0.35);
+    background: rgba(16,185,129,0.3);
     border-radius: 3px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-    background: rgba(124, 58, 237, 0.65);
-}
-
-/* =========================================================
-   SELECTION
-   ========================================================= */
-::selection {
-    background: rgba(124, 58, 237, 0.35);
-    color: #e4e4f0;
+    background: rgba(16,185,129,0.55);
 }
 
 /* =========================================================
@@ -232,42 +382,61 @@ body::before {
     width: 320px;
     height: 320px;
     border-radius: 50%;
-    background: radial-gradient(circle, rgba(124, 58, 237, 0.07) 0%, transparent 70%);
+    background: radial-gradient(circle, rgba(16,185,129,0.05) 0%, transparent 70%);
     transform: translate(-50%, -50%);
     z-index: 9999;
-    transition: opacity 0.4s ease;
+    transition: opacity 0.3s ease;
 }
 
 /* =========================================================
-   FOCUS VISIBLE — Global accessible focus ring
+   FOCUS VISIBLE
    ========================================================= */
 :focus-visible {
-    outline: 2px solid rgba(167, 139, 250, 0.8);
+    outline: 2px solid rgba(16,185,129,0.7);
     outline-offset: 3px;
     border-radius: 4px;
 }
 
-/* =========================================================
-   FORM INPUTS — Override to ensure consistent focus ring
-   ========================================================= */
 input:focus-visible,
 textarea:focus-visible {
     outline: none;
 }
 
 /* =========================================================
-   NAV ACTIVE STATE
+   FORM CONTROLS — Inset feel (slightly darker bg)
    ========================================================= */
-nav a.nav-active {
-    color: #a78bfa;
+.form-control {
+    background: var(--bg);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-md);
+    color: var(--text);
+    transition: border-color var(--ease-micro);
+}
+
+.form-control:focus {
+    border-color: rgba(16,185,129,0.5);
+    box-shadow: 0 0 0 2px rgba(16,185,129,0.12);
+}
+
+.form-control::placeholder {
+    color: var(--text-faint);
 }
 
 /* =========================================================
-   HERO SECTION HEADING GRADIENT OVERRIDE
+   NAV ACTIVE STATE
+   ========================================================= */
+nav a.nav-active {
+    color: var(--primary);
+}
+
+/* =========================================================
+   HERO NAME
    ========================================================= */
 .hero-name {
-    line-height: 1.1;
-    letter-spacing: -0.02em;
+    line-height: 1.08;
+    letter-spacing: -0.03em;
+    font-weight: 800;
+    font-size: clamp(2.75rem, 5vw + 1rem, 4.5rem);
 }
 
 /* =========================================================
@@ -276,7 +445,8 @@ nav a.nav-active {
 .section-divider {
     width: 48px;
     height: 3px;
-    background: linear-gradient(90deg, #7c3aed, #a78bfa);
+    margin-top: var(--space-4);
+    background: linear-gradient(90deg, var(--primary), var(--cyan));
     border-radius: 2px;
 }
 
@@ -286,13 +456,70 @@ nav a.nav-active {
 .project-img-area {
     position: relative;
     overflow: hidden;
+    background: var(--bg);
 }
 
 .project-img-area::after {
     content: '';
     position: absolute;
     inset: 0;
-    background: linear-gradient(to bottom, transparent 60%, rgba(13, 13, 26, 0.6) 100%);
+    background: linear-gradient(to bottom, transparent 60%, rgba(4,4,5,0.5) 100%);
+}
+
+/* =========================================================
+   FEATURED PROJECT CARD
+   ========================================================= */
+.card-featured {
+    border-left: 3px solid var(--primary);
+}
+
+/* =========================================================
+   HEADINGS — Geist typographic refinement
+   ========================================================= */
+h1, h2, h3, h4, h5, h6 {
+    font-family: 'Geist', sans-serif;
+    letter-spacing: -0.02em;
+    line-height: 1.2;
+}
+
+h1 { font-weight: 800; letter-spacing: -0.03em; }
+h2 { font-weight: 700; font-size: clamp(1.75rem, 3vw + 0.5rem, 2.25rem); }
+h3, h4 { font-weight: 600; }
+
+/* =========================================================
+   MONO TEXT
+   ========================================================= */
+.font-mono, code, pre {
+    font-family: 'Geist Mono', monospace;
+    font-variant-numeric: tabular-nums;
+}
+
+/* =========================================================
+   SOCIAL LINK
+   ========================================================= */
+.social-link {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    transition: border-color var(--ease-micro), box-shadow var(--ease-std), color var(--ease-micro);
+}
+
+.social-link:hover {
+    border-color: rgba(16,185,129,0.4);
+    box-shadow: 0 0 12px rgba(16,185,129,0.25);
+    color: #fff;
+}
+
+/* =========================================================
+   SECTION BACKGROUNDS
+   ========================================================= */
+.section-alt {
+    background: rgba(17,17,20,0.3);
+}
+
+.section-inset {
+    background: rgba(17,17,20,0.4);
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
 }
 
 /* =========================================================
@@ -300,7 +527,7 @@ nav a.nav-active {
    ========================================================= */
 @media (max-width: 768px) {
     .mobile-link {
-        padding: 0.75rem 1.5rem;
+        padding: var(--space-3) var(--space-6);
         min-height: 44px;
         display: flex;
         align-items: center;
@@ -308,7 +535,6 @@ nav a.nav-active {
         justify-content: center;
     }
 
-    /* Reduce reveal translate on mobile for subtler effect */
     .reveal {
         transform: translateY(16px);
     }

@@ -5,22 +5,23 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description"
-        content="Portfólio de Toni Coimbra — Especialista em IA & Automação, Professor e Desenvolvedor Python. Veja meus projetos e entre em contato.">
+        content="Portfólio de Toni Coimbra — Especialista em IA &amp; Automação, Professor e Desenvolvedor Python. Veja meus projetos e entre em contato.">
 
     <!-- Open Graph / Meta tags para redes sociais -->
-    <meta property="og:title" content="Toni Coimbra — IA & Automação">
+    <meta property="og:title" content="Toni Coimbra — IA &amp; Automação">
     <meta property="og:description"
-        content="Portfólio de Toni Coimbra — Especialista em IA & Automação, Professor e Desenvolvedor Python.">
+        content="Portfólio de Toni Coimbra — Especialista em IA &amp; Automação, Professor e Desenvolvedor Python.">
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://tonicoimbra.com">
     <meta property="og:image" content="https://tonicoimbra.com/assets/og-image.jpg">
 
-    <title>Toni Coimbra — IA & Automação</title>
+    <title>Toni Coimbra — IA &amp; Automação</title>
 
-    <!-- Google Fonts: Inter -->
+    <!-- Google Fonts: Geist -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
+    <link
+        href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600;700;800&family=Geist+Mono:wght@400;500&display=swap"
         rel="stylesheet">
 
     <!-- FontAwesome para Ícones -->
@@ -35,19 +36,21 @@
             theme: {
                 extend: {
                     fontFamily: {
-                        sans: ['Inter', 'sans-serif'],
+                        sans: ['Geist', 'sans-serif'],
+                        mono: ['Geist Mono', 'monospace'],
                     },
                     colors: {
-                        base:      '#0d0d1a',
-                        surface:   '#1a1a2e',
-                        primary:   '#7c3aed',
-                        secondary: '#06b6d4',
-                        accent:    '#22d3ee',
-                        textMain:  '#e4e4f0',
-                        textMuted: '#8b8ba7',
+                        base: '#040405',
+                        surface: 'rgba(17,17,20,0.92)',
+                        primary: '#10b981',
+                        secondary: '#8b5cf6',
+                        accent: '#06b6d4',
+                        textMain: '#ece8e7',
+                        textMuted: '#b0adb5',
+                        soft: '#84808c',
                     },
                     backgroundImage: {
-                        'gradient-brand': 'linear-gradient(135deg, #7c3aed 0%, #a78bfa 100%)',
+                        'gradient-brand': 'linear-gradient(135deg, #10b981 0%, #06b6d4 100%)',
                     }
                 }
             }
@@ -61,58 +64,58 @@
 
     <!-- Skip Navigation for screen readers -->
     <a href="#sobre"
-        class="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-[9999] focus:bg-primary focus:text-white focus:px-4 focus:py-2 focus:rounded-md focus:text-sm focus:font-medium">
+        class="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-[9999] focus:bg-primary focus:text-black focus:px-4 focus:py-2 focus:rounded-md focus:text-sm focus:font-medium">
         Pular para o conteúdo
     </a>
 
     <!-- ============================================================
          HEADER / NAVBAR FIXA
          ============================================================ -->
-    <header id="main-header" class="fixed w-full top-0 z-50 glass-panel border-b border-zinc-800/60 bg-base/80"
-        style="border-left: none; border-right: none; border-top: none;">
+    <header id="main-header" class="fixed w-full top-0 z-50 backdrop-blur-2xl border-b border-white/[0.06]"
+        style="background: rgba(4,4,5,0.85); border-left: none; border-right: none; border-top: none;">
         <div class="container mx-auto px-6 py-4 flex justify-between items-center">
 
             <!-- Logo -->
             <a class="flex items-center group" aria-label="Toni Coimbra — voltar ao início" href="#"
                 onclick="window.scrollTo({top:0,behavior:'smooth'}); return false;">
                 <svg viewBox="0 0 100 100"
-                    class="w-[54px] h-[54px] transform group-hover:scale-105 group-hover:drop-shadow-[0_0_12px_rgba(139,92,246,0.65)] transition-all duration-300"
-                    fill="none" stroke-width="12" stroke-linecap="round" stroke-linejoin="round"
-                    aria-hidden="true">
-                    <path d="M 75 25 A 35 35 0 1 0 75 75" class="text-accent stroke-current" />
-                    <path d="M 83 35 A 35 35 0 0 1 83 65" class="text-primary stroke-current" />
-                    <path d="M 85 50 L 35 50" class="text-primary stroke-current" />
+                    class="w-[54px] h-[54px] transform group-hover:scale-105 group-hover:drop-shadow-[0_0_12px_rgba(0,188,212,0.6)] transition-all duration-200"
+                    fill="none" stroke-width="12" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                    <path d="M 75 25 A 35 35 0 1 0 75 75" stroke="#22D3EE" />
+                    <path d="M 83 35 A 35 35 0 0 1 83 65" stroke="#0A2F6B" />
+                    <path d="M 85 50 L 35 50" stroke="#0A2F6B" />
                 </svg>
             </a>
 
             <!-- Mobile Menu Button -->
             <button id="mobile-menu-btn"
-                class="md:hidden text-textMuted hover:text-white focus:outline-none focus-visible:ring-2 focus-visible:ring-violet-500 rounded p-1 min-h-[44px] min-w-[44px] flex items-center justify-center"
-                aria-expanded="false"
-                aria-controls="mobile-menu"
-                aria-label="Abrir menu de navegação">
+                class="md:hidden text-soft hover:text-white focus:outline-none focus-visible:ring-2 focus-visible:ring-primary rounded p-1 min-h-[44px] min-w-[44px] flex items-center justify-center"
+                aria-expanded="false" aria-controls="mobile-menu" aria-label="Abrir menu de navegação">
                 <i class="fas fa-bars text-xl" aria-hidden="true"></i>
             </button>
 
             <!-- Desktop Nav -->
             <nav class="hidden md:flex space-x-8 text-base font-medium" aria-label="Navegação principal">
-                <a class="text-textMuted hover:text-white transition-colors duration-200 py-1" href="#sobre">Sobre</a>
-                <a class="text-textMuted hover:text-white transition-colors duration-200 py-1" href="#skills">Skills</a>
-                <a class="text-textMuted hover:text-white transition-colors duration-200 py-1" href="#projetos">Projetos</a>
-                <a class="text-textMuted hover:text-white transition-colors duration-200 py-1" href="#experiencia">Experiência</a>
-                <a class="text-textMuted hover:text-white transition-colors duration-200 py-1" href="#contato">Contato</a>
+                <a class="text-soft hover:text-textMain transition-colors duration-150 py-1" href="#sobre">Sobre</a>
+                <a class="text-soft hover:text-textMain transition-colors duration-150 py-1" href="#skills">Skills</a>
+                <a class="text-soft hover:text-textMain transition-colors duration-150 py-1"
+                    href="#projetos">Projetos</a>
+                <a class="text-soft hover:text-textMain transition-colors duration-150 py-1"
+                    href="#experiencia">Experiência</a>
+                <a class="text-soft hover:text-textMain transition-colors duration-150 py-1" href="#contato">Contato</a>
             </nav>
         </div>
 
         <!-- Mobile Nav Menu -->
-        <div id="mobile-menu"
-            class="hidden md:hidden absolute w-full bg-base/98 backdrop-blur-xl border-b border-zinc-800">
+        <div id="mobile-menu" class="hidden md:hidden absolute w-full backdrop-blur-2xl border-b border-white/[0.06]"
+            style="background: rgba(4,4,5,0.98);">
             <nav class="flex flex-col items-center py-6 space-y-1" aria-label="Navegação mobile">
-                <a class="mobile-link text-textMuted hover:text-white transition-colors" href="#sobre">Sobre</a>
-                <a class="mobile-link text-textMuted hover:text-white transition-colors" href="#skills">Skills</a>
-                <a class="mobile-link text-textMuted hover:text-white transition-colors" href="#projetos">Projetos</a>
-                <a class="mobile-link text-textMuted hover:text-white transition-colors" href="#experiencia">Experiência</a>
-                <a class="mobile-link text-textMuted hover:text-white transition-colors" href="#contato">Contato</a>
+                <a class="mobile-link text-soft hover:text-textMain transition-colors" href="#sobre">Sobre</a>
+                <a class="mobile-link text-soft hover:text-textMain transition-colors" href="#skills">Skills</a>
+                <a class="mobile-link text-soft hover:text-textMain transition-colors" href="#projetos">Projetos</a>
+                <a class="mobile-link text-soft hover:text-textMain transition-colors"
+                    href="#experiencia">Experiência</a>
+                <a class="mobile-link text-soft hover:text-textMain transition-colors" href="#contato">Contato</a>
             </nav>
         </div>
     </header>
@@ -127,40 +130,39 @@
             <div class="max-w-4xl">
 
                 <!-- Pre-heading label -->
-                <p class="text-accent font-medium tracking-[0.2em] mb-5 uppercase text-base reveal">
+                <p class="text-accent font-medium tracking-[0.2em] mb-5 uppercase text-sm reveal">
                     Olá, eu sou
                 </p>
 
                 <!-- Name -->
-                <h1 class="hero-name text-5xl md:text-7xl font-bold text-white mb-6 reveal"
-                    style="transition-delay: 100ms;">
-                    Toni Coimbra<span class="text-violet-400"
-                        style="text-shadow: 0 0 16px rgba(139,92,246,0.7)">.</span>
+                <h1 class="hero-name text-white mb-6 reveal" style="transition-delay: 80ms;">
+                    Toni Coimbra<span class="text-primary" style="text-shadow: 0 0 16px rgba(16,185,129,0.6)">.</span>
                 </h1>
 
                 <!-- Typewriter -->
-                <div class="h-10 md:h-12 mb-7 reveal" style="transition-delay: 200ms;" aria-live="polite"
+                <div class="h-10 md:h-12 mb-8 reveal" style="transition-delay: 160ms;" aria-live="polite"
                     aria-label="Especialidades em rotação">
-                    <h2 class="text-2xl md:text-3xl font-light text-textMuted">
-                        <span id="typewriter-text"></span><span class="typewriter-cursor" aria-hidden="true">&nbsp;</span>
+                    <h2 class="text-2xl md:text-3xl font-normal text-textMuted">
+                        <span id="typewriter-text"></span><span class="typewriter-cursor"
+                            aria-hidden="true">&nbsp;</span>
                     </h2>
                 </div>
 
                 <!-- Body copy -->
-                <p class="text-lg md:text-xl text-textMuted max-w-2xl mb-10 leading-relaxed reveal"
-                    style="transition-delay: 300ms;">
+                <p class="text-lg md:text-xl text-textMuted max-w-2xl mb-10 reveal"
+                    style="transition-delay: 240ms; line-height: 1.7;">
                     Atuando no <span class="text-white font-medium">TJPR (Assessoria STF/STJ)</span> focado em
-                    <span class="text-violet-300 font-medium">soluções de automação e integração de IA</span>
+                    <span class="text-primary font-medium">soluções de automação e integração de IA</span>
                     para otimização de fluxos operacionais internos e análise inteligente de dados.
                 </p>
 
                 <!-- CTAs -->
-                <div class="flex flex-col sm:flex-row gap-4 reveal" style="transition-delay: 400ms;">
-                    <a class="btn-primary text-white font-semibold px-8 py-3 rounded-lg text-center text-base"
+                <div class="flex flex-col sm:flex-row gap-4 reveal" style="transition-delay: 320ms;">
+                    <a class="btn-primary text-black font-semibold px-8 py-3 rounded-xl text-center text-base"
                         href="#projetos">
                         Ver Projetos
                     </a>
-                    <a class="btn-outline text-white font-semibold px-8 py-3 rounded-lg text-center text-base"
+                    <a class="btn-outline text-white font-semibold px-8 py-3 rounded-xl text-center text-base"
                         href="#contato">
                         Fale Comigo
                     </a>
@@ -169,10 +171,9 @@
         </div>
 
         <!-- Scroll indicator -->
-        <div class="absolute bottom-10 left-1/2 -translate-x-1/2 flex flex-col items-center"
-            aria-hidden="true">
-            <span class="text-xs text-textMuted/60 mb-2 tracking-widest uppercase">Scroll</span>
-            <a class="text-textMuted/60 hover:text-violet-400 transition-colors animate-bounce block p-2"
+        <div class="absolute bottom-10 left-1/2 -translate-x-1/2 flex flex-col items-center" aria-hidden="true">
+            <span class="text-xs text-soft/60 mb-2 tracking-widest uppercase">Scroll</span>
+            <a class="text-soft/60 hover:text-primary transition-colors duration-150 animate-bounce block p-2"
                 href="#sobre" tabindex="-1">
                 <i class="fas fa-chevron-down text-sm" aria-hidden="true"></i>
             </a>
@@ -182,7 +183,7 @@
     <!-- ============================================================
          2. SOBRE SECTION
          ============================================================ -->
-    <section id="sobre" class="py-24 bg-surface/20">
+    <section id="sobre" class="py-24 section-alt">
         <div class="container mx-auto px-6">
 
             <div class="mb-14 text-center reveal">
@@ -195,9 +196,9 @@
             <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
 
                 <!-- Trajetória -->
-                <div class="glass-panel card-hover p-8 rounded-xl reveal">
-                    <div class="w-11 h-11 rounded-lg bg-violet-500/10 border border-violet-500/20
-                                flex items-center justify-center text-violet-400 mb-6">
+                <div class="glass-panel card-hover p-8 rounded-xl reveal" style="border-radius: var(--radius-xl);">
+                    <div class="w-11 h-11 rounded-lg flex items-center justify-center text-primary mb-6"
+                        style="background: rgba(16,185,129,0.08); border: 1px solid rgba(16,185,129,0.15);">
                         <i class="fas fa-route text-lg" aria-hidden="true"></i>
                     </div>
                     <h3 class="text-lg font-semibold text-white mb-3">Trajetória</h3>
@@ -209,32 +210,34 @@
                 </div>
 
                 <!-- Formação -->
-                <div class="glass-panel card-hover p-8 rounded-xl reveal" style="transition-delay: 150ms;">
-                    <div class="w-11 h-11 rounded-lg bg-cyan-500/10 border border-cyan-500/20
-                                flex items-center justify-center text-cyan-400 mb-6">
+                <div class="glass-panel card-hover p-8 rounded-xl reveal"
+                    style="transition-delay: 120ms; border-radius: var(--radius-xl);">
+                    <div class="w-11 h-11 rounded-lg flex items-center justify-center text-accent mb-6"
+                        style="background: rgba(6,182,212,0.08); border: 1px solid rgba(6,182,212,0.15);">
                         <i class="fas fa-graduation-cap text-lg" aria-hidden="true"></i>
                     </div>
                     <h3 class="text-lg font-semibold text-white mb-3">Formação Base</h3>
                     <ul class="text-textMuted text-base space-y-3">
                         <li class="flex items-start gap-2">
-                            <i class="fas fa-check text-accent mt-0.5 flex-shrink-0" aria-hidden="true"></i>
+                            <i class="fas fa-check text-primary mt-0.5 flex-shrink-0" aria-hidden="true"></i>
                             <span>Especialização em Inteligência Artificial Aplicada (UFPR)</span>
                         </li>
                         <li class="flex items-start gap-2">
-                            <i class="fas fa-check text-accent mt-0.5 flex-shrink-0" aria-hidden="true"></i>
+                            <i class="fas fa-check text-primary mt-0.5 flex-shrink-0" aria-hidden="true"></i>
                             <span>Análise e Desenv. de Sistemas (UP, 2023)</span>
                         </li>
                         <li class="flex items-start gap-2">
-                            <i class="fas fa-check text-accent mt-0.5 flex-shrink-0" aria-hidden="true"></i>
+                            <i class="fas fa-check text-primary mt-0.5 flex-shrink-0" aria-hidden="true"></i>
                             <span>Sistemas de Informação (UENP, 2006)</span>
                         </li>
                     </ul>
                 </div>
 
                 <!-- Atuação -->
-                <div class="glass-panel card-hover p-8 rounded-xl reveal" style="transition-delay: 300ms;">
-                    <div class="w-11 h-11 rounded-lg bg-emerald-500/10 border border-emerald-500/20
-                                flex items-center justify-center text-emerald-400 mb-6">
+                <div class="glass-panel card-hover p-8 rounded-xl reveal"
+                    style="transition-delay: 240ms; border-radius: var(--radius-xl);">
+                    <div class="w-11 h-11 rounded-lg flex items-center justify-center text-secondary mb-6"
+                        style="background: rgba(139,92,246,0.08); border: 1px solid rgba(139,92,246,0.15);">
                         <i class="fas fa-robot text-lg" aria-hidden="true"></i>
                     </div>
                     <h3 class="text-lg font-semibold text-white mb-3">Atuação Atual</h3>
@@ -255,8 +258,8 @@
 
         <!-- Ambient glow -->
         <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2
-                    w-[700px] h-[700px] bg-violet-600/4 rounded-full blur-[120px] pointer-events-none"
-            aria-hidden="true"></div>
+                    w-[700px] h-[700px] rounded-full blur-[120px] pointer-events-none"
+            style="background: rgba(16,185,129,0.03);" aria-hidden="true"></div>
 
         <div class="container mx-auto px-6 relative z-10">
 
@@ -272,102 +275,76 @@
 
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5">
 
-                <!-- IA & ML — acento: violet -->
-                <div class="bg-surface border border-zinc-800 rounded-xl p-6 reveal
-                            hover:border-violet-500/40 hover:shadow-[0_0_20px_rgba(124,58,237,0.08)]
-                            transition-all duration-300">
+                <!-- IA & ML -->
+                <div class="skill-card p-6 reveal" data-accent="violet">
                     <h3 class="text-base font-semibold text-white mb-4 flex items-center gap-2">
-                        <span class="w-6 h-6 rounded bg-violet-500/10 border border-violet-500/20
-                                     flex items-center justify-center flex-shrink-0">
-                            <i class="fas fa-brain text-violet-400 text-xs" aria-hidden="true"></i>
+                        <span class="w-6 h-6 rounded flex items-center justify-center flex-shrink-0"
+                            style="background: rgba(139,92,246,0.08); border: 1px solid rgba(139,92,246,0.15);">
+                            <i class="fas fa-brain text-secondary text-xs" aria-hidden="true"></i>
                         </span>
-                        IA & Machine Learning
+                        IA &amp; Machine Learning
                     </h3>
                     <div class="flex flex-wrap gap-1.5">
-                        <span class="badge px-2.5 py-1 rounded-md text-sm text-violet-300">Python</span>
-                        <span class="badge px-2.5 py-1 rounded-md text-sm text-violet-300">LangChain</span>
-                        <span class="badge px-2.5 py-1 rounded-md text-sm text-violet-300">OpenCV</span>
-                        <span class="badge px-2.5 py-1 rounded-md text-sm text-violet-300">MediaPipe</span>
-                        <span class="badge px-2.5 py-1 rounded-md text-sm text-violet-300">Scikit-learn</span>
-                        <span class="badge px-2.5 py-1 rounded-md text-sm text-violet-300">LLMs API</span>
+                        <span class="badge badge-violet">Python</span>
+                        <span class="badge badge-violet">LangChain</span>
+                        <span class="badge badge-violet">OpenCV</span>
+                        <span class="badge badge-violet">MediaPipe</span>
+                        <span class="badge badge-violet">Scikit-learn</span>
+                        <span class="badge badge-violet">LLMs API</span>
                     </div>
                 </div>
 
-                <!-- Automação — acento: cyan -->
-                <div class="bg-surface border border-zinc-800 rounded-xl p-6 reveal
-                            hover:border-cyan-500/40 hover:shadow-[0_0_20px_rgba(6,182,212,0.06)]
-                            transition-all duration-300"
-                    style="transition-delay: 100ms;">
+                <!-- Automação -->
+                <div class="skill-card p-6 reveal" data-accent="cyan" style="transition-delay: 80ms;">
                     <h3 class="text-base font-semibold text-white mb-4 flex items-center gap-2">
-                        <span class="w-6 h-6 rounded bg-cyan-500/10 border border-cyan-500/20
-                                     flex items-center justify-center flex-shrink-0">
-                            <i class="fas fa-bolt text-cyan-400 text-xs" aria-hidden="true"></i>
+                        <span class="w-6 h-6 rounded flex items-center justify-center flex-shrink-0"
+                            style="background: rgba(6,182,212,0.08); border: 1px solid rgba(6,182,212,0.15);">
+                            <i class="fas fa-bolt text-accent text-xs" aria-hidden="true"></i>
                         </span>
-                        Automação & Integração
+                        Automação &amp; Integração
                     </h3>
                     <div class="flex flex-wrap gap-1.5">
-                        <span class="bg-cyan-500/10 border border-cyan-500/20 text-cyan-300
-                                     px-2.5 py-1 rounded-md text-sm transition-colors">n8n</span>
-                        <span class="bg-cyan-500/10 border border-cyan-500/20 text-cyan-300
-                                     px-2.5 py-1 rounded-md text-sm transition-colors">Evolution API</span>
-                        <span class="bg-cyan-500/10 border border-cyan-500/20 text-cyan-300
-                                     px-2.5 py-1 rounded-md text-sm transition-colors">WhatsApp API</span>
-                        <span class="bg-cyan-500/10 border border-cyan-500/20 text-cyan-300
-                                     px-2.5 py-1 rounded-md text-sm transition-colors">Webhooks</span>
-                        <span class="bg-cyan-500/10 border border-cyan-500/20 text-cyan-300
-                                     px-2.5 py-1 rounded-md text-sm transition-colors">REST APIs</span>
+                        <span class="badge badge-cyan">n8n</span>
+                        <span class="badge badge-cyan">Evolution API</span>
+                        <span class="badge badge-cyan">WhatsApp API</span>
+                        <span class="badge badge-cyan">Webhooks</span>
+                        <span class="badge badge-cyan">REST APIs</span>
                     </div>
                 </div>
 
-                <!-- Dados — acento: emerald -->
-                <div class="bg-surface border border-zinc-800 rounded-xl p-6 reveal
-                            hover:border-emerald-500/40 hover:shadow-[0_0_20px_rgba(52,211,153,0.06)]
-                            transition-all duration-300"
-                    style="transition-delay: 200ms;">
+                <!-- Dados -->
+                <div class="skill-card p-6 reveal" data-accent="emerald" style="transition-delay: 160ms;">
                     <h3 class="text-base font-semibold text-white mb-4 flex items-center gap-2">
-                        <span class="w-6 h-6 rounded bg-emerald-500/10 border border-emerald-500/20
-                                     flex items-center justify-center flex-shrink-0">
-                            <i class="fas fa-database text-emerald-400 text-xs" aria-hidden="true"></i>
+                        <span class="w-6 h-6 rounded flex items-center justify-center flex-shrink-0"
+                            style="background: rgba(16,185,129,0.08); border: 1px solid rgba(16,185,129,0.15);">
+                            <i class="fas fa-database text-primary text-xs" aria-hidden="true"></i>
                         </span>
-                        Dados & Processamento
+                        Dados &amp; Processamento
                     </h3>
                     <div class="flex flex-wrap gap-1.5">
-                        <span class="bg-emerald-500/10 border border-emerald-500/20 text-emerald-300
-                                     px-2.5 py-1 rounded-md text-sm">PostgreSQL</span>
-                        <span class="bg-emerald-500/10 border border-emerald-500/20 text-emerald-300
-                                     px-2.5 py-1 rounded-md text-sm">Google Sheets API</span>
-                        <span class="bg-emerald-500/10 border border-emerald-500/20 text-emerald-300
-                                     px-2.5 py-1 rounded-md text-sm">PDF Processing</span>
-                        <span class="bg-emerald-500/10 border border-emerald-500/20 text-emerald-300
-                                     px-2.5 py-1 rounded-md text-sm">Pandas</span>
-                        <span class="bg-emerald-500/10 border border-emerald-500/20 text-emerald-300
-                                     px-2.5 py-1 rounded-md text-sm">Regex</span>
+                        <span class="badge badge-primary">PostgreSQL</span>
+                        <span class="badge badge-primary">Google Sheets API</span>
+                        <span class="badge badge-primary">PDF Processing</span>
+                        <span class="badge badge-primary">Pandas</span>
+                        <span class="badge badge-primary">Regex</span>
                     </div>
                 </div>
 
-                <!-- Infra/Dev — acento: amber -->
-                <div class="bg-surface border border-zinc-800 rounded-xl p-6 reveal
-                            hover:border-amber-500/40 hover:shadow-[0_0_20px_rgba(251,191,36,0.05)]
-                            transition-all duration-300"
-                    style="transition-delay: 300ms;">
+                <!-- Infra/Dev -->
+                <div class="skill-card p-6 reveal" data-accent="amber" style="transition-delay: 240ms;">
                     <h3 class="text-base font-semibold text-white mb-4 flex items-center gap-2">
-                        <span class="w-6 h-6 rounded bg-amber-500/10 border border-amber-500/20
-                                     flex items-center justify-center flex-shrink-0">
-                            <i class="fas fa-server text-amber-400 text-xs" aria-hidden="true"></i>
+                        <span class="w-6 h-6 rounded flex items-center justify-center flex-shrink-0"
+                            style="background: rgba(251,191,36,0.08); border: 1px solid rgba(251,191,36,0.15);">
+                            <i class="fas fa-server text-yellow-400 text-xs" aria-hidden="true"></i>
                         </span>
-                        Infraestrutura & Dev
+                        Infraestrutura &amp; Dev
                     </h3>
                     <div class="flex flex-wrap gap-1.5">
-                        <span class="bg-amber-500/10 border border-amber-500/20 text-amber-300
-                                     px-2.5 py-1 rounded-md text-sm">Docker</span>
-                        <span class="bg-amber-500/10 border border-amber-500/20 text-amber-300
-                                     px-2.5 py-1 rounded-md text-sm">Linux</span>
-                        <span class="bg-amber-500/10 border border-amber-500/20 text-amber-300
-                                     px-2.5 py-1 rounded-md text-sm">FastAPI</span>
-                        <span class="bg-amber-500/10 border border-amber-500/20 text-amber-300
-                                     px-2.5 py-1 rounded-md text-sm">VPS Management</span>
-                        <span class="bg-amber-500/10 border border-amber-500/20 text-amber-300
-                                     px-2.5 py-1 rounded-md text-sm">Git / GitHub</span>
+                        <span class="badge badge-amber">Docker</span>
+                        <span class="badge badge-amber">Linux</span>
+                        <span class="badge badge-amber">FastAPI</span>
+                        <span class="badge badge-amber">VPS Management</span>
+                        <span class="badge badge-amber">Git / GitHub</span>
                     </div>
                 </div>
             </div>
@@ -377,7 +354,7 @@
     <!-- ============================================================
          4. PROJETOS EM DESTAQUE
          ============================================================ -->
-    <section id="projetos" class="py-24 bg-surface/20">
+    <section id="projetos" class="py-24 section-alt">
         <div class="container mx-auto px-6">
 
             <div class="mb-14 text-center reveal">
@@ -389,17 +366,58 @@
 
             <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
 
+                <!-- ★ Projeto FEATURED — ProfessorDash -->
+                <article class="glass-panel card-hover card-featured overflow-hidden reveal flex flex-col md:col-span-2"
+                    style="border-radius: var(--radius-xl);">
+                    <div class="flex flex-col md:flex-row">
+                        <div
+                            class="project-img-area md:w-80 h-52 md:h-auto flex-shrink-0 flex items-center justify-center group">
+                            <div class="absolute inset-0 bg-gradient-to-br from-emerald-900/20 to-transparent
+                                        opacity-0 group-hover:opacity-100 transition-opacity duration-200"></div>
+                            <div class="relative z-10 text-center">
+                                <i class="fas fa-chalkboard-teacher text-5xl text-primary/40 mb-3 block"
+                                    aria-hidden="true"></i>
+                                <span
+                                    class="badge badge-primary text-xs font-bold uppercase tracking-widest px-3 py-1">Em
+                                    produção</span>
+                            </div>
+                        </div>
+                        <div class="p-8 flex-grow flex flex-col justify-center">
+                            <h3 class="text-xl font-bold text-white mb-2">Prof Toni Coimbra — ProfessorDash</h3>
+                            <p class="text-textMuted text-base mb-5 leading-relaxed max-w-2xl">
+                                Sistema completo de gestão de turmas, aulas, materiais e atividades
+                                para professores da rede pública. Portal público para alunos com Google OAuth,
+                                apostilas HTML, grade de tarefas e boletim automático.
+                            </p>
+                            <div class="flex flex-wrap gap-1.5 mb-5">
+                                <span class="badge badge-primary">Python</span>
+                                <span class="badge badge-primary">Django 5</span>
+                                <span class="badge badge-cyan">HTMX</span>
+                                <span class="badge badge-cyan">Alpine.js</span>
+                                <span class="badge badge-violet">Tailwind CSS</span>
+                                <span class="badge badge-primary">PostgreSQL</span>
+                                <span class="badge badge-amber">Docker</span>
+                                <span class="badge badge-amber">EasyPanel</span>
+                            </div>
+                            <a href="https://aulas.tonicoimbra.com" target="_blank" rel="noopener noreferrer"
+                                class="btn-primary inline-flex items-center gap-2 w-fit text-sm px-5 py-2.5 rounded-xl">
+                                <span>Visitar Projeto</span>
+                                <i class="fas fa-external-link-alt text-xs" aria-hidden="true"></i>
+                            </a>
+                        </div>
+                    </div>
+                </article>
+
                 <!-- Projeto 1 — Jurisprudência -->
-                <article class="glass-panel card-hover rounded-xl overflow-hidden reveal flex flex-col">
-                    <div class="project-img-area h-44 bg-base flex items-center justify-center group">
+                <article class="glass-panel card-hover overflow-hidden reveal flex flex-col"
+                    style="border-radius: var(--radius-xl);">
+                    <div class="project-img-area h-44 flex items-center justify-center group">
                         <div class="absolute inset-0 bg-gradient-to-br from-violet-900/20 to-transparent
-                                    opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                                    opacity-0 group-hover:opacity-100 transition-opacity duration-200"></div>
                         <div class="relative z-10 text-center">
-                            <i class="fas fa-balance-scale text-4xl text-violet-500/40 mb-2 block"
-                               aria-hidden="true"></i>
-                            <span class="text-xs font-bold uppercase tracking-widest
-                                         text-violet-400 bg-violet-400/10 border border-violet-400/20
-                                         px-2 py-0.5 rounded">TJPR</span>
+                            <i class="fas fa-balance-scale text-4xl text-secondary/40 mb-2 block"
+                                aria-hidden="true"></i>
+                            <span class="badge badge-violet text-xs font-bold uppercase tracking-widest">TJPR</span>
                         </div>
                     </div>
                     <div class="p-6 flex-grow flex flex-col">
@@ -410,29 +428,23 @@
                             no TJPR.
                         </p>
                         <div class="flex flex-wrap gap-1.5 mt-auto">
-                            <span class="bg-violet-500/10 border border-violet-500/20 text-violet-300
-                                         text-sm font-mono px-2 py-0.5 rounded">Python</span>
-                            <span class="bg-violet-500/10 border border-violet-500/20 text-violet-300
-                                         text-sm font-mono px-2 py-0.5 rounded">NLP</span>
-                            <span class="bg-violet-500/10 border border-violet-500/20 text-violet-300
-                                         text-sm font-mono px-2 py-0.5 rounded">PDF Processing</span>
-                            <span class="bg-violet-500/10 border border-violet-500/20 text-violet-300
-                                         text-sm font-mono px-2 py-0.5 rounded">LangChain</span>
+                            <span class="badge badge-violet">Python</span>
+                            <span class="badge badge-violet">NLP</span>
+                            <span class="badge badge-violet">PDF Processing</span>
+                            <span class="badge badge-violet">LangChain</span>
                         </div>
                     </div>
                 </article>
 
                 <!-- Projeto 2 — WhatsApp -->
-                <article class="glass-panel card-hover rounded-xl overflow-hidden reveal flex flex-col"
-                    style="transition-delay: 100ms;">
-                    <div class="project-img-area h-44 bg-base flex items-center justify-center group">
+                <article class="glass-panel card-hover overflow-hidden reveal flex flex-col"
+                    style="transition-delay: 80ms; border-radius: var(--radius-xl);">
+                    <div class="project-img-area h-44 flex items-center justify-center group">
                         <div class="absolute inset-0 bg-gradient-to-br from-cyan-900/20 to-transparent
-                                    opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                                    opacity-0 group-hover:opacity-100 transition-opacity duration-200"></div>
                         <div class="relative z-10 text-center">
-                            <i class="fab fa-whatsapp text-4xl text-cyan-500/40 mb-2 block" aria-hidden="true"></i>
-                            <span class="text-xs font-bold uppercase tracking-widest
-                                         text-cyan-400 bg-cyan-400/10 border border-cyan-400/20
-                                         px-2 py-0.5 rounded">Automação</span>
+                            <i class="fab fa-whatsapp text-4xl text-accent/40 mb-2 block" aria-hidden="true"></i>
+                            <span class="badge badge-cyan text-xs font-bold uppercase tracking-widest">Automação</span>
                         </div>
                     </div>
                     <div class="p-6 flex-grow flex flex-col">
@@ -443,27 +455,22 @@
                             respostas padronizadas.
                         </p>
                         <div class="flex flex-wrap gap-1.5 mt-auto">
-                            <span class="bg-cyan-500/10 border border-cyan-500/20 text-cyan-300
-                                         text-sm font-mono px-2 py-0.5 rounded">n8n</span>
-                            <span class="bg-cyan-500/10 border border-cyan-500/20 text-cyan-300
-                                         text-sm font-mono px-2 py-0.5 rounded">Evolution API</span>
-                            <span class="bg-cyan-500/10 border border-cyan-500/20 text-cyan-300
-                                         text-sm font-mono px-2 py-0.5 rounded">Webhooks</span>
+                            <span class="badge badge-cyan">n8n</span>
+                            <span class="badge badge-cyan">Evolution API</span>
+                            <span class="badge badge-cyan">Webhooks</span>
                         </div>
                     </div>
                 </article>
 
                 <!-- Projeto 3 — Gesture Control -->
-                <article class="glass-panel card-hover rounded-xl overflow-hidden reveal flex flex-col">
-                    <div class="project-img-area h-44 bg-base flex items-center justify-center group">
+                <article class="glass-panel card-hover overflow-hidden reveal flex flex-col"
+                    style="border-radius: var(--radius-xl);">
+                    <div class="project-img-area h-44 flex items-center justify-center group">
                         <div class="absolute inset-0 bg-gradient-to-br from-emerald-900/20 to-transparent
-                                    opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                                    opacity-0 group-hover:opacity-100 transition-opacity duration-200"></div>
                         <div class="relative z-10 text-center">
-                            <i class="fas fa-hand-paper text-4xl text-emerald-500/40 mb-2 block"
-                               aria-hidden="true"></i>
-                            <span class="text-xs font-bold uppercase tracking-widest
-                                         text-emerald-400 bg-emerald-400/10 border border-emerald-400/20
-                                         px-2 py-0.5 rounded">CV</span>
+                            <i class="fas fa-hand-paper text-4xl text-primary/40 mb-2 block" aria-hidden="true"></i>
+                            <span class="badge badge-primary text-xs font-bold uppercase tracking-widest">CV</span>
                         </div>
                     </div>
                     <div class="p-6 flex-grow flex flex-col">
@@ -474,27 +481,22 @@
                             sem hardware adicional.
                         </p>
                         <div class="flex flex-wrap gap-1.5 mt-auto">
-                            <span class="bg-emerald-500/10 border border-emerald-500/20 text-emerald-300
-                                         text-sm font-mono px-2 py-0.5 rounded">OpenCV</span>
-                            <span class="bg-emerald-500/10 border border-emerald-500/20 text-emerald-300
-                                         text-sm font-mono px-2 py-0.5 rounded">MediaPipe</span>
-                            <span class="bg-emerald-500/10 border border-emerald-500/20 text-emerald-300
-                                         text-sm font-mono px-2 py-0.5 rounded">Python</span>
+                            <span class="badge badge-primary">OpenCV</span>
+                            <span class="badge badge-primary">MediaPipe</span>
+                            <span class="badge badge-primary">Python</span>
                         </div>
                     </div>
                 </article>
 
                 <!-- Projeto 4 — STF/STJ Automação -->
-                <article class="glass-panel card-hover rounded-xl overflow-hidden reveal flex flex-col"
-                    style="transition-delay: 100ms;">
-                    <div class="project-img-area h-44 bg-base flex items-center justify-center group">
-                        <div class="absolute inset-0 bg-gradient-to-br from-amber-900/15 to-transparent
-                                    opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                <article class="glass-panel card-hover overflow-hidden reveal flex flex-col"
+                    style="transition-delay: 80ms; border-radius: var(--radius-xl);">
+                    <div class="project-img-area h-44 flex items-center justify-center group">
+                        <div class="absolute inset-0 bg-gradient-to-br from-yellow-900/15 to-transparent
+                                    opacity-0 group-hover:opacity-100 transition-opacity duration-200"></div>
                         <div class="relative z-10 text-center">
-                            <i class="fas fa-cogs text-4xl text-amber-500/40 mb-2 block" aria-hidden="true"></i>
-                            <span class="text-xs font-bold uppercase tracking-widest
-                                         text-amber-400 bg-amber-400/10 border border-amber-400/20
-                                         px-2 py-0.5 rounded">DevOps</span>
+                            <i class="fas fa-cogs text-4xl text-yellow-400/40 mb-2 block" aria-hidden="true"></i>
+                            <span class="badge badge-amber text-xs font-bold uppercase tracking-widest">DevOps</span>
                         </div>
                     </div>
                     <div class="p-6 flex-grow flex flex-col">
@@ -505,12 +507,9 @@
                             automaticamente.
                         </p>
                         <div class="flex flex-wrap gap-1.5 mt-auto">
-                            <span class="bg-amber-500/10 border border-amber-500/20 text-amber-300
-                                         text-sm font-mono px-2 py-0.5 rounded">PostgreSQL</span>
-                            <span class="bg-amber-500/10 border border-amber-500/20 text-amber-300
-                                         text-sm font-mono px-2 py-0.5 rounded">Google Sheets</span>
-                            <span class="bg-amber-500/10 border border-amber-500/20 text-amber-300
-                                         text-sm font-mono px-2 py-0.5 rounded">Docker</span>
+                            <span class="badge badge-amber">PostgreSQL</span>
+                            <span class="badge badge-amber">Google Sheets</span>
+                            <span class="badge badge-amber">Docker</span>
                         </div>
                     </div>
                 </article>
@@ -535,21 +534,18 @@
             <div class="relative max-w-3xl ml-4 md:ml-8">
 
                 <!-- Linha Vertical -->
-                <div class="absolute left-0 top-2 bottom-0 timeline-line -translate-x-1/2"
-                    aria-hidden="true"></div>
+                <div class="absolute left-0 top-2 bottom-0 timeline-line -translate-x-1/2" aria-hidden="true"></div>
 
                 <!-- Item 1 — TJPR (atual) -->
                 <div class="relative pl-10 mb-12 reveal">
-                    <div class="absolute left-0 top-2 w-3.5 h-3.5 bg-accent rounded-full -translate-x-1/2
-                                timeline-dot z-10 border-2 border-base"
-                        aria-hidden="true"></div>
-                    <div class="glass-panel timeline-card p-6 rounded-xl">
-                        <span class="inline-block text-xs font-bold uppercase tracking-widest
-                                     text-emerald-400 bg-emerald-400/10 border border-emerald-400/20
-                                     px-2 py-0.5 rounded mb-4">Presente</span>
+                    <div class="absolute left-0 top-2 w-3.5 h-3.5 bg-primary rounded-full -translate-x-1/2
+                                timeline-dot z-10 border-2 border-base" aria-hidden="true"></div>
+                    <div class="glass-panel timeline-card p-6" style="border-radius: var(--radius-xl);">
+                        <span
+                            class="badge badge-primary text-xs font-bold uppercase tracking-widest mb-4 inline-block">Presente</span>
                         <h3 class="text-lg font-bold text-white">Tribunal de Justiça do Paraná (TJPR)</h3>
-                        <h4 class="text-violet-400 text-base font-medium mt-1 mb-3">
-                            Automação & Inteligência Artificial — Assessoria STF/STJ
+                        <h4 class="text-primary text-base font-medium mt-1 mb-3">
+                            Automação &amp; Inteligência Artificial — Assessoria STF/STJ
                         </h4>
                         <p class="text-textMuted text-base leading-relaxed">
                             Desenvolvimento e implantação de ferramentas de IA para sumarização e análise
@@ -560,14 +556,12 @@
                 </div>
 
                 <!-- Item 2 — SEED-PR (atual) -->
-                <div class="relative pl-10 mb-12 reveal" style="transition-delay: 150ms;">
+                <div class="relative pl-10 mb-12 reveal" style="transition-delay: 120ms;">
                     <div class="absolute left-0 top-2 w-3.5 h-3.5 bg-secondary rounded-full -translate-x-1/2
-                                z-10 border-2 border-base"
-                        aria-hidden="true"></div>
-                    <div class="glass-panel timeline-card p-6 rounded-xl">
-                        <span class="inline-block text-xs font-bold uppercase tracking-widest
-                                     text-violet-400 bg-violet-400/10 border border-violet-400/20
-                                     px-2 py-0.5 rounded mb-4">Presente</span>
+                                z-10 border-2 border-base" aria-hidden="true"></div>
+                    <div class="glass-panel timeline-card p-6" style="border-radius: var(--radius-xl);">
+                        <span
+                            class="badge badge-violet text-xs font-bold uppercase tracking-widest mb-4 inline-block">Presente</span>
                         <h3 class="text-lg font-bold text-white">Professor — SEED-PR</h3>
                         <h4 class="text-textMain text-base font-medium mt-1 mb-3">
                             Curso Técnico em Desenvolvimento de Sistemas
@@ -581,17 +575,15 @@
                 </div>
 
                 <!-- Item 3 — Indústria Gráfica -->
-                <div class="relative pl-10 reveal" style="transition-delay: 300ms;">
+                <div class="relative pl-10 reveal" style="transition-delay: 240ms;">
                     <div class="absolute left-0 top-2 w-3.5 h-3.5 bg-zinc-600 rounded-full -translate-x-1/2
-                                z-10 border-2 border-base"
-                        aria-hidden="true"></div>
-                    <div class="glass-panel timeline-card p-6 rounded-xl">
-                        <span class="inline-block text-xs font-bold uppercase tracking-widest
-                                     text-zinc-400 bg-zinc-500/10 border border-zinc-600/30
-                                     px-2 py-0.5 rounded mb-4">+20 anos</span>
+                                z-10 border-2 border-base" aria-hidden="true"></div>
+                    <div class="glass-panel timeline-card p-6" style="border-radius: var(--radius-xl);">
+                        <span class="badge text-xs font-bold uppercase tracking-widest mb-4 inline-block">+20
+                            anos</span>
                         <h3 class="text-lg font-bold text-white">Indústria Gráfica</h3>
                         <h4 class="text-textMain text-base font-medium mt-1 mb-3">
-                            Diagramador & Arte-finalista
+                            Diagramador &amp; Arte-finalista
                         </h4>
                         <p class="text-textMuted text-base leading-relaxed">
                             Ampla experiência na revisão rigorosa, diagramação técnica e fechamento de arquivos
@@ -607,7 +599,7 @@
     <!-- ============================================================
          6. HISTÓRICO ACADÊMICO
          ============================================================ -->
-    <section class="py-20 bg-surface/30 border-y border-zinc-800/60">
+    <section class="py-20 section-inset">
         <div class="container mx-auto px-6">
 
             <div class="mb-12 text-center reveal">
@@ -620,48 +612,40 @@
             <div class="grid grid-cols-1 md:grid-cols-3 gap-5">
 
                 <!-- Especialização -->
-                <div class="bg-base rounded-xl border border-zinc-800 p-6
-                            hover:border-violet-500/35 transition-colors duration-300 reveal">
+                <div class="academic-card p-6 reveal" data-accent="emerald">
                     <div class="flex items-center justify-between mb-5">
                         <i class="fas fa-microchip text-2xl text-accent" aria-hidden="true"></i>
-                        <span class="text-xs font-bold text-violet-400 bg-violet-400/10
-                                     border border-violet-400/20 px-2 py-1 rounded">Pós-Graduação</span>
+                        <span class="badge badge-violet text-xs font-bold">Pós-Graduação</span>
                     </div>
                     <h3 class="text-base font-semibold text-white mb-1">Inteligência Artificial Aplicada</h3>
                     <p class="text-base text-textMuted mb-2">Universidade Federal do Paraná (UFPR)</p>
-                    <p class="text-xs text-textMuted/60 italic leading-relaxed">
+                    <p class="text-xs text-soft italic leading-relaxed">
                         Especialização voltada à aplicação prática de IA no mercado.
                     </p>
                 </div>
 
                 <!-- Graduação 2 -->
-                <div class="bg-base rounded-xl border border-zinc-800 p-6
-                            hover:border-cyan-500/35 transition-colors duration-300 reveal"
-                    style="transition-delay: 100ms;">
+                <div class="academic-card p-6 reveal" data-accent="cyan" style="transition-delay: 80ms;">
                     <div class="flex items-center justify-between mb-5">
                         <i class="fas fa-laptop-code text-2xl text-secondary" aria-hidden="true"></i>
-                        <span class="text-xs font-bold text-cyan-400 bg-cyan-400/10
-                                     border border-cyan-400/20 px-2 py-1 rounded">2023</span>
+                        <span class="badge badge-cyan text-xs font-bold">2023</span>
                     </div>
                     <h3 class="text-base font-semibold text-white mb-1">Análise e Desenv. de Sistemas</h3>
                     <p class="text-base text-textMuted mb-2">Universidade Positivo (UP)</p>
-                    <p class="text-xs text-textMuted/60 italic leading-relaxed">
+                    <p class="text-xs text-soft italic leading-relaxed">
                         Transição formal para a área de Tecnologia da Informação.
                     </p>
                 </div>
 
                 <!-- Graduação 1 -->
-                <div class="bg-base rounded-xl border border-zinc-800 p-6
-                            hover:border-zinc-600/60 transition-colors duration-300 reveal"
-                    style="transition-delay: 200ms;">
+                <div class="academic-card p-6 reveal" data-accent="neutral" style="transition-delay: 160ms;">
                     <div class="flex items-center justify-between mb-5">
-                        <i class="fas fa-network-wired text-2xl text-textMuted" aria-hidden="true"></i>
-                        <span class="text-xs font-bold text-zinc-400 bg-zinc-500/10
-                                     border border-zinc-700 px-2 py-1 rounded">2006</span>
+                        <i class="fas fa-network-wired text-2xl text-soft" aria-hidden="true"></i>
+                        <span class="badge text-xs font-bold">2006</span>
                     </div>
                     <h3 class="text-base font-semibold text-white mb-1">Sistemas de Informação</h3>
                     <p class="text-base text-textMuted mb-2">Universidade Estadual do N. do Paraná (UENP)</p>
-                    <p class="text-xs text-textMuted/60 italic leading-relaxed">
+                    <p class="text-xs text-soft italic leading-relaxed">
                         Base fundacional e fundamentos de computação.
                     </p>
                 </div>
@@ -675,9 +659,9 @@
     <section id="contato" class="py-24 relative overflow-hidden">
 
         <!-- Ambient glow -->
-        <div class="absolute bottom-0 right-0 w-[500px] h-[500px] bg-violet-600/8
+        <div class="absolute bottom-0 right-0 w-[500px] h-[500px]
                     rounded-full blur-[120px] pointer-events-none translate-x-1/2 translate-y-1/2"
-            aria-hidden="true"></div>
+            style="background: rgba(16,185,129,0.04);" aria-hidden="true"></div>
 
         <div class="container mx-auto px-6 relative z-10 text-center">
             <div class="reveal">
@@ -691,54 +675,44 @@
                 </p>
 
                 <!-- Contact Form -->
-                <div class="max-w-xl mx-auto glass-panel p-8 rounded-2xl text-left relative z-20 mb-14">
+                <div class="max-w-xl mx-auto glass-panel p-8 text-left relative z-20 mb-14"
+                    style="border-radius: var(--radius-xl);">
                     <form id="contact-form" class="space-y-5" novalidate>
                         <input type="hidden" name="access_key" value="9981a893-6116-438b-8528-4bb6d41fc606">
                         <input type="hidden" name="subject" value="Novo contato pelo Portfólio!">
                         <input type="checkbox" name="botcheck" class="hidden" aria-hidden="true" tabindex="-1">
 
                         <div>
-                            <label for="name" class="block text-sm font-semibold text-textMuted mb-2 uppercase tracking-wider">
+                            <label for="name"
+                                class="block text-sm font-semibold text-textMuted mb-2.5 uppercase tracking-wider">
                                 Nome Completo
                             </label>
                             <input type="text" id="name" name="name" required autocomplete="name"
-                                class="w-full px-4 py-3 rounded-lg bg-base border border-zinc-800 text-textMain
-                                       placeholder-textMuted/40 text-base
-                                       focus:outline-none focus:border-violet-500/60 focus:ring-1 focus:ring-violet-500/25
-                                       transition-colors duration-200"
-                                placeholder="João da Silva">
+                                class="form-control w-full px-4 py-3 text-base" placeholder="João da Silva">
                         </div>
 
                         <div>
-                            <label for="email" class="block text-sm font-semibold text-textMuted mb-2 uppercase tracking-wider">
+                            <label for="email"
+                                class="block text-sm font-semibold text-textMuted mb-2.5 uppercase tracking-wider">
                                 E-mail de Contato
                             </label>
                             <input type="email" id="email" name="email" required autocomplete="email"
-                                class="w-full px-4 py-3 rounded-lg bg-base border border-zinc-800 text-textMain
-                                       placeholder-textMuted/40 text-base
-                                       focus:outline-none focus:border-violet-500/60 focus:ring-1 focus:ring-violet-500/25
-                                       transition-colors duration-200"
-                                placeholder="joao@exemplo.com">
+                                class="form-control w-full px-4 py-3 text-base" placeholder="joao@exemplo.com">
                         </div>
 
                         <div>
-                            <label for="message" class="block text-sm font-semibold text-textMuted mb-2 uppercase tracking-wider">
+                            <label for="message"
+                                class="block text-sm font-semibold text-textMuted mb-2.5 uppercase tracking-wider">
                                 Sua Mensagem
                             </label>
                             <textarea id="message" name="message" rows="4" required
-                                class="w-full px-4 py-3 rounded-lg bg-base border border-zinc-800 text-textMain
-                                       placeholder-textMuted/40 text-sm
-                                       focus:outline-none focus:border-violet-500/60 focus:ring-1 focus:ring-violet-500/25
-                                       transition-colors duration-200 resize-none"
+                                class="form-control w-full px-4 py-3 text-base resize-none"
                                 placeholder="Olá Toni, gostaria de conversar sobre..."></textarea>
                         </div>
 
-                        <button type="submit" id="submit-btn"
-                            class="w-full flex justify-center items-center gap-3 btn-primary
-                                   text-white font-semibold px-8 py-3.5 rounded-xl text-base
-                                   shadow-[0_0_15px_rgba(124,58,237,0.25)]
-                                   hover:shadow-[0_0_25px_rgba(124,58,237,0.45)]
-                                   transition-all duration-300">
+                        <button type="submit" id="submit-btn" class="w-full flex justify-center items-center gap-3 btn-primary
+                                   text-black font-semibold px-8 py-3.5 rounded-xl text-base
+                                   transition-all">
                             <span>Enviar Mensagem</span>
                             <i class="fas fa-paper-plane text-xs" aria-hidden="true"></i>
                         </button>
@@ -752,22 +726,16 @@
                 <!-- Social Links -->
                 <div class="flex justify-center gap-4" role="list" aria-label="Redes sociais">
                     <a href="https://www.linkedin.com/in/elvertoni/" target="_blank" rel="noopener noreferrer"
-                        role="listitem"
-                        aria-label="LinkedIn de Toni Coimbra (abre em nova aba)"
-                        class="w-12 h-12 rounded-full bg-surface border border-zinc-700 flex items-center justify-center
-                               text-textMuted hover:text-white hover:border-violet-500/50
-                               hover:shadow-[0_0_15px_rgba(124,58,237,0.4)]
-                               transition-all duration-300 group">
-                        <i class="fab fa-linkedin-in text-lg group-hover:scale-110 transition-transform" aria-hidden="true"></i>
+                        role="listitem" aria-label="LinkedIn de Toni Coimbra (abre em nova aba)" class="social-link w-12 h-12 rounded-full flex items-center justify-center
+                               text-soft group">
+                        <i class="fab fa-linkedin-in text-lg group-hover:scale-110 transition-transform duration-150"
+                            aria-hidden="true"></i>
                     </a>
-                    <a href="https://github.com/elvertoni" target="_blank" rel="noopener noreferrer"
-                        role="listitem"
-                        aria-label="GitHub de Toni Coimbra (abre em nova aba)"
-                        class="w-12 h-12 rounded-full bg-surface border border-zinc-700 flex items-center justify-center
-                               text-textMuted hover:text-white hover:border-zinc-500
-                               hover:shadow-[0_0_15px_rgba(124,58,237,0.3)]
-                               transition-all duration-300 group">
-                        <i class="fab fa-github text-lg group-hover:scale-110 transition-transform" aria-hidden="true"></i>
+                    <a href="https://github.com/elvertoni" target="_blank" rel="noopener noreferrer" role="listitem"
+                        aria-label="GitHub de Toni Coimbra (abre em nova aba)" class="social-link w-12 h-12 rounded-full flex items-center justify-center
+                               text-soft group">
+                        <i class="fab fa-github text-lg group-hover:scale-110 transition-transform duration-150"
+                            aria-hidden="true"></i>
                     </a>
                 </div>
             </div>
@@ -777,11 +745,11 @@
     <!-- ============================================================
          FOOTER
          ============================================================ -->
-    <footer class="bg-base border-t border-zinc-800/70 py-8 text-center">
-        <div class="container mx-auto px-6 font-mono text-xs text-textMuted">
+    <footer class="py-8 text-center" style="background: var(--bg); border-top: 1px solid var(--border-subtle);">
+        <div class="container mx-auto px-6 font-mono text-sm text-textMuted">
             <p>
                 &copy; <span id="current-year"></span>
-                <span class="text-violet-400 font-medium">Toni Coimbra</span>.
+                <span class="text-primary font-medium">Toni Coimbra</span>.
                 <span class="hidden sm:inline">Construído com HTML, TailwindCSS &amp; Vanilla JS.</span>
             </p>
         </div>

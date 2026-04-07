@@ -46,10 +46,10 @@ document.addEventListener('DOMContentLoaded', () => {
     window.addEventListener('scroll', () => {
         if (window.scrollY > 50) {
             header.classList.add('shadow-lg', 'shadow-black/30');
-            header.style.backgroundColor = 'rgba(13, 13, 26, 0.95)';
+            header.style.backgroundColor = 'rgba(4, 4, 5, 0.95)';
         } else {
             header.classList.remove('shadow-lg', 'shadow-black/30');
-            header.style.backgroundColor = 'rgba(13, 13, 26, 0.80)';
+            header.style.backgroundColor = 'rgba(4, 4, 5, 0.85)';
         }
     }, { passive: true });
 
@@ -64,10 +64,10 @@ document.addEventListener('DOMContentLoaded', () => {
                 navLinks.forEach(link => {
                     if (link.getAttribute('href') === `#${id}`) {
                         link.classList.add('text-white');
-                        link.classList.remove('text-textMuted');
+                        link.classList.remove('text-soft');
                     } else {
                         link.classList.remove('text-white');
-                        link.classList.add('text-textMuted');
+                        link.classList.add('text-soft');
                     }
                 });
             }
@@ -155,11 +155,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Colour palette: mix of violet and cyan dots
     const particleColors = [
-        'rgba(124, 58, 237,',   // violet-700
-        'rgba(139, 92, 246,',   // violet-500
-        'rgba(167, 139, 250,',  // violet-400
-        'rgba(34, 211, 238,',   // cyan-400
+        'rgba(16, 185, 129,',   // emerald-500
+        'rgba(5, 150, 105,',    // emerald-600
+        'rgba(52, 211, 153,',   // emerald-400
         'rgba(6, 182, 212,',    // cyan-500
+        'rgba(34, 211, 238,',   // cyan-400
     ];
 
     class Particle {
