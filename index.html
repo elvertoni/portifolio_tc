@@ -21,7 +21,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link
-        href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600;700;800&family=Geist+Mono:wght@400;500&display=swap"
+        href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700;800&family=Geist+Mono:wght@400;500&display=swap"
         rel="stylesheet">
 
     <!-- FontAwesome para Ícones -->
@@ -47,7 +47,7 @@
                         accent: '#06b6d4',
                         textMain: '#ece8e7',
                         textMuted: '#b0adb5',
-                        soft: '#84808c',
+                        soft: '#8a8694', /* raised from #84808c: 4.34:1→4.77:1 over surface — AA */
                     },
                     backgroundImage: {
                         'gradient-brand': 'linear-gradient(135deg, #10b981 0%, #06b6d4 100%)',
@@ -82,8 +82,8 @@
                     class="w-[54px] h-[54px] transform group-hover:scale-105 group-hover:drop-shadow-[0_0_12px_rgba(0,188,212,0.6)] transition-all duration-200"
                     fill="none" stroke-width="12" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
                     <path d="M 75 25 A 35 35 0 1 0 75 75" stroke="#22D3EE" />
-                    <path d="M 83 35 A 35 35 0 0 1 83 65" stroke="#0A2F6B" />
-                    <path d="M 85 50 L 35 50" stroke="#0A2F6B" />
+                    <path d="M 83 35 A 35 35 0 0 1 83 65" stroke="#10b981" />
+                    <path d="M 85 50 L 35 50" stroke="#10b981" />
                 </svg>
             </a>
 
@@ -126,7 +126,7 @@
     <section id="hero" class="relative min-h-screen flex items-center pt-20 overflow-hidden">
         <canvas id="particle-canvas" aria-hidden="true"></canvas>
 
-        <div class="container mx-auto px-6 relative z-10">
+        <div class="container mx-auto px-4 sm:px-6 relative z-10">
             <div class="max-w-4xl">
 
                 <!-- Pre-heading label -->
@@ -140,7 +140,7 @@
                 </h1>
 
                 <!-- Typewriter -->
-                <div class="h-10 md:h-12 mb-8 reveal" style="transition-delay: 160ms;" aria-live="polite"
+                <div class="min-h-[40px] md:min-h-[48px] mb-8 reveal" style="transition-delay: 160ms;" aria-live="polite"
                     aria-label="Especialidades em rotação">
                     <h2 class="text-2xl md:text-3xl font-normal text-textMuted">
                         <span id="typewriter-text"></span><span class="typewriter-cursor"
@@ -273,7 +273,7 @@
                 </p>
             </div>
 
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5">
 
                 <!-- IA & ML -->
                 <div class="skill-card p-6 reveal" data-accent="violet">
@@ -619,7 +619,7 @@
                     </div>
                     <h3 class="text-base font-semibold text-white mb-1">Inteligência Artificial Aplicada</h3>
                     <p class="text-base text-textMuted mb-2">Universidade Federal do Paraná (UFPR)</p>
-                    <p class="text-xs text-soft italic leading-relaxed">
+                    <p class="text-sm text-soft italic leading-relaxed">
                         Especialização voltada à aplicação prática de IA no mercado.
                     </p>
                 </div>
@@ -632,7 +632,7 @@
                     </div>
                     <h3 class="text-base font-semibold text-white mb-1">Análise e Desenv. de Sistemas</h3>
                     <p class="text-base text-textMuted mb-2">Universidade Positivo (UP)</p>
-                    <p class="text-xs text-soft italic leading-relaxed">
+                    <p class="text-sm text-soft italic leading-relaxed">
                         Transição formal para a área de Tecnologia da Informação.
                     </p>
                 </div>
@@ -645,7 +645,7 @@
                     </div>
                     <h3 class="text-base font-semibold text-white mb-1">Sistemas de Informação</h3>
                     <p class="text-base text-textMuted mb-2">Universidade Estadual do N. do Paraná (UENP)</p>
-                    <p class="text-xs text-soft italic leading-relaxed">
+                    <p class="text-sm text-soft italic leading-relaxed">
                         Base fundacional e fundamentos de computação.
                     </p>
                 </div>
@@ -675,7 +675,7 @@
                 </p>
 
                 <!-- Contact Form -->
-                <div class="max-w-xl mx-auto glass-panel p-8 text-left relative z-20 mb-14"
+                <div class="max-w-xl mx-auto glass-panel contact-panel p-5 sm:p-8 text-left relative z-20 mb-14"
                     style="border-radius: var(--radius-xl);">
                     <form id="contact-form" class="space-y-5" novalidate>
                         <input type="hidden" name="access_key" value="9981a893-6116-438b-8528-4bb6d41fc606">
@@ -750,7 +750,7 @@
             <p>
                 &copy; <span id="current-year"></span>
                 <span class="text-primary font-medium">Toni Coimbra</span>.
-                <span class="hidden sm:inline">Construído com HTML, TailwindCSS &amp; Vanilla JS.</span>
+                <span>Construído com HTML, TailwindCSS &amp; Vanilla JS.</span>
             </p>
         </div>
     </footer>

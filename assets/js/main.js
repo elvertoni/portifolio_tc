@@ -153,13 +153,15 @@ document.addEventListener('DOMContentLoaded', () => {
     window.addEventListener('resize', resizeCanvas, { passive: true });
     resizeCanvas();
 
-    // Colour palette: mix of violet and cyan dots
+    // Colour palette: emerald + cyan + violet to match design system
     const particleColors = [
         'rgba(16, 185, 129,',   // emerald-500
         'rgba(5, 150, 105,',    // emerald-600
         'rgba(52, 211, 153,',   // emerald-400
         'rgba(6, 182, 212,',    // cyan-500
         'rgba(34, 211, 238,',   // cyan-400
+        'rgba(139, 92, 246,',   // violet-500
+        'rgba(167, 139, 250,',  // violet-400
     ];
 
     class Particle {
