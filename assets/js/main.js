@@ -143,16 +143,6 @@ document.addEventListener('DOMContentLoaded', () => {
     let particles = [];
     let animFrameId;
 
-    function resizeCanvas() {
-        canvas.width  = window.innerWidth;
-        canvas.height = document.getElementById('hero').offsetHeight;
-        // Re-init particles to fill new dimensions
-        initParticles();
-    }
-
-    window.addEventListener('resize', resizeCanvas, { passive: true });
-    resizeCanvas();
-
     // Colour palette: emerald + cyan + violet to match design system
     const particleColors = [
         'rgba(16, 185, 129,',   // emerald-500
@@ -164,6 +154,8 @@ document.addEventListener('DOMContentLoaded', () => {
         'rgba(167, 139, 250,',  // violet-400
     ];
 
+    // class Particle declarada ANTES de qualquer uso —
+    // diferente de function, class não sofre hoisting
     class Particle {
         constructor() {
             this.reset(true);
@@ -225,8 +217,17 @@ document.addEventListener('DOMContentLoaded', () => {
         animFrameId = requestAnimationFrame(animateParticles);
     }
 
-    if (!prefersReducedMotion) {
+    // resizeCanvas chamado após todas as dependências estarem definidas
+    function resizeCanvas() {
+        canvas.width  = window.innerWidth;
+        canvas.height = document.getElementById('hero').offsetHeight;
         initParticles();
+    }
+
+    window.addEventListener('resize', resizeCanvas, { passive: true });
+    resizeCanvas();
+
+    if (!prefersReducedMotion) {
         animateParticles();
     }
 
