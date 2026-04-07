@@ -406,20 +406,33 @@ textarea:focus-visible {
    FORM CONTROLS — Inset feel (slightly darker bg)
    ========================================================= */
 .form-control {
-    background: var(--bg);
-    border: 1px solid var(--border);
+    background: var(--bg-elevated);          /* #09090b — leve contraste com o painel */
+    border: 1px solid rgba(255,255,255,0.12); /* um pouco mais visível que --border */
     border-radius: var(--radius-md);
-    color: var(--text);
+    color: #ece8e7;                           /* explícito, não via var() */
+    -webkit-text-fill-color: #ece8e7;         /* garante exibição no Safari/Chrome */
     transition: border-color var(--ease-micro);
 }
 
 .form-control:focus {
     border-color: rgba(16,185,129,0.5);
     box-shadow: 0 0 0 2px rgba(16,185,129,0.12);
+    outline: none;
 }
 
 .form-control::placeholder {
     color: var(--text-faint);
+    -webkit-text-fill-color: var(--text-faint);
+}
+
+/* Override browser autofill (Chrome/Edge injetam fundo claro com !important) */
+.form-control:-webkit-autofill,
+.form-control:-webkit-autofill:hover,
+.form-control:-webkit-autofill:focus {
+    -webkit-text-fill-color: #ece8e7;
+    -webkit-box-shadow: 0 0 0px 1000px #09090b inset;
+    transition: background-color 5000s ease-in-out 0s;
+    caret-color: #ece8e7;
 }
 
 /* =========================================================
