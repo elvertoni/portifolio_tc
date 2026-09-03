@@ -217,7 +217,7 @@ input, textarea { caret-color: var(--signal); }
    ═══════════════════════════════════════════════════════════════════ */
 .shell {
   width: 100%;
-  max-width: 1560px;
+  max-width: 1320px;
   margin-inline: auto;
   padding-inline: var(--gut);
 }
@@ -229,7 +229,7 @@ input, textarea { caret-color: var(--signal); }
   padding-block: clamp(56px, 7vw, 104px);
 }
 
-/* Eyebrow — red, struck through */
+/* Eyebrow — red label with a clear underline */
 .eyebrow {
   display: inline-block;
   position: relative;
@@ -244,8 +244,8 @@ input, textarea { caret-color: var(--signal); }
 .eyebrow::after {
   content: "";
   position: absolute;
-  left: -4%; right: -4%; top: 52%;
-  height: 1.5px;
+  left: 0; right: 0; top: calc(100% + 3px);
+  height: 1px;
   background: var(--signal);
   transform: scaleX(var(--sx, 0));
   transform-origin: left;
@@ -377,9 +377,6 @@ a.chip:hover { transform: translateY(-2px); }
   border-color: var(--signal);
   background: linear-gradient(180deg, rgba(251, 55, 50, .11), rgba(255,255,255,0) 58%), var(--panel-2);
 }
-/* the flagship spans the grid instead of an inline style */
-.box--wide { grid-column: 1 / -1; }
-
 /* ═══════════════════════════════════════════════════════════════════
    PROJECT CARDS — screenshot on top, record below
    ═══════════════════════════════════════════════════════════════════ */
@@ -400,7 +397,6 @@ a.chip:hover { transform: translateY(-2px); }
   background: var(--panel-2);
   border-bottom: 1px solid var(--line);
 }
-.box--wide .pshot { aspect-ratio: 2.7 / 1; }
 .pshot img {
   width: 100%; height: 100%;
   object-fit: cover;
@@ -430,7 +426,7 @@ a.chip:hover { transform: translateY(-2px); }
   display: flex;
   flex-direction: column;
   gap: 14px;
-  padding: clamp(20px, 2.2vw, 30px);
+  padding: clamp(18px, 1.8vw, 24px);
   flex: 1;
 }
 .pmeta { display: flex; align-items: center; justify-content: space-between; gap: 1rem; flex-wrap: wrap; }
@@ -670,7 +666,17 @@ html:not(.js) #loader { display: none; }
   color: var(--bone);
   line-height: 1;
 }
-/* the drawn mark is 15px tall; the tappable one is --tap */
+.brand-logo {
+  display: block;
+  width: clamp(30px, 2.8vw, 40px);
+  height: auto;
+  transition: transform .55s var(--e-out), filter .35s var(--e-soft);
+}
+.mark:hover .brand-logo {
+  transform: rotate(-8deg) scale(1.06);
+  filter: drop-shadow(0 0 8px rgba(251, 55, 50, .28));
+}
+/* the tappable area stays generous even when the mark is compact */
 .mark::before {
   content: "";
   position: absolute;
@@ -679,17 +685,6 @@ html:not(.js) #loader { display: none; }
   transform: translateY(-50%);
   height: var(--tap);
 }
-.mark i {
-  display: block;
-  height: 2px;
-  width: 40px;
-  background: var(--bone);
-  transform: scaleX(.55);
-  transform-origin: left;
-  transition: transform .55s var(--e-io), background .35s;
-}
-.mark:hover i { transform: scaleX(1); background: var(--signal); }
-
 /* Navchain — chained pills */
 .navchain { display: flex; align-items: center; }
 .navchain a {
@@ -919,14 +914,16 @@ html:not(.js) #loader { display: none; }
   border-radius: 10px;
   overflow: hidden;
   flex: none;
-  background: var(--signal-deep);
+  background: var(--ink-deep);
   display: flex;
   align-items: center;
   justify-content: center;
-  font-family: var(--font-display);
-  font-weight: 800;
-  font-size: 18px;
-  color: #fff;
+  padding: 7px;
+}
+.dock-av img {
+  display: block;
+  width: 100%;
+  height: 100%;
 }
 .dock p {
   font-family: var(--font-mono);
@@ -1354,6 +1351,7 @@ footer {
 .gap-8 { gap: 2rem; }
 .gap-12 { gap: 3rem; }
 .grid { display: grid; }
+.projects-grid { width: 100%; max-width: 1180px; margin-inline: auto; }
 .grid-cols-1 { grid-template-columns: repeat(1, minmax(0, 1fr)); }
 .grid-cols-2 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
 .w-full { width: 100%; }

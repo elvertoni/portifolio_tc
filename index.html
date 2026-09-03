@@ -54,7 +54,7 @@
   <!-- ══ NAVEGAÇÃO FIXA ══════════════════════════════════════════ -->
   <header class="hdr" id="hdr">
     <a href="#top" class="mark" aria-label="Toni Coimbra — voltar ao topo">
-      T <i></i> C
+      <img class="brand-logo" src="assets/logo.svg" alt="" aria-hidden="true">
     </a>
 
     <nav class="navchain" aria-label="Navegação principal">
@@ -115,7 +115,7 @@
             <span class="bub" id="heroBub">
               Olá — tem um projeto?<br>Vamos conversar.
             </span>
-            <span class="dock-av">TC</span>
+            <span class="dock-av" aria-hidden="true"><img src="assets/logo.svg" alt=""></span>
             <p>
               Fale comigo,<br>não com um formulário
             </p>
@@ -285,10 +285,10 @@
           </p>
         </div>
 
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-4 stagger" data-io>
+        <div class="projects-grid grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 stagger" data-io>
 
           <!-- ProfessorDash — destaque -->
-          <article class="box box--card box--media box--feature box--wide">
+          <article class="box box--card box--media box--feature">
             <span class="pshot">
               <img src="assets/img/professordash.webp"
                    srcset="assets/img/professordash.webp 800w, assets/img/professordash@2x.webp 1600w"
@@ -385,46 +385,26 @@
             </div>
           </article>
 
-          <article class="box box--card" data-rise>
+          <article class="box box--card box--media" data-rise>
+            <span class="pshot">
+              <img src="assets/img/noivas-e-cia.png"
+                   width="1860" height="845" loading="lazy" decoding="async"
+                   alt="Ateliê de noivas com vestidos claros organizados em uma arara, espelho e luz natural.">
+            </span>
             <div class="pbody">
               <div class="pmeta">
-                <span class="chip chip--solid">TJPR</span>
-                <span class="mono-xs">2023–Presente</span>
+                <span class="chip chip--signal">Projeto</span>
+                <span class="mono-xs">Em destaque</span>
               </div>
-              <h3 class="d-sm">Análise de Jurisprudência com IA</h3>
+              <h3 class="d-sm">Noivas e Cia</h3>
               <p class="mono-sm">
-                Sistema capaz de ler, classificar e analisar um acervo de mais de 200.000
-                documentos PDF usando inteligência artificial, acelerando exponencialmente
-                a pesquisa jurisprudencial.
+                Projeto de interface e presença digital para a Noivas e Cia.
               </p>
               <div class="flex flex-wrap gap-2">
-                <span class="chip">Python</span>
-                <span class="chip">NLP</span>
-                <span class="chip">PDF Processing</span>
-                <span class="chip">LangChain</span>
+                <span class="chip">Design de interface</span>
+                <span class="chip">Front-end</span>
               </div>
-              <p class="pnote">Sistema interno — sem acesso público</p>
-            </div>
-          </article>
-
-          <article class="box box--card" data-rise>
-            <div class="pbody">
-              <div class="pmeta">
-                <span class="chip chip--solid">TJPR</span>
-                <span class="mono-xs">2023–Presente</span>
-              </div>
-              <h3 class="d-sm">Notificações Jurídicas via WhatsApp</h3>
-              <p class="mono-sm">
-                Fluxo automatizado para envio de intimações via WhatsApp, integrando Evolution
-                API e banco de dados para gestão de disparos, confirmações e respostas
-                padronizadas.
-              </p>
-              <div class="flex flex-wrap gap-2">
-                <span class="chip">n8n</span>
-                <span class="chip">Evolution API</span>
-                <span class="chip">Webhooks</span>
-              </div>
-              <p class="pnote">Sistema interno — sem acesso público</p>
+              <p class="pnote">Detalhes do projeto em atualização</p>
             </div>
           </article>
 

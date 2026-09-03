@@ -37,3 +37,24 @@ test('respeita prefers-reduced-motion sem bloquear o conteúdo', async ({ page }
   await expect(page.locator('#loader')).toHaveClass(/done/);
   await expect(page.locator('main h1')).toBeVisible();
 });
+
+test('mantém os projetos compactos e responsivos', async ({ page }) => {
+  await page.setViewportSize({ width: 1440, height: 900 });
+  await page.goto(`${pageUrl}#projetos`);
+
+  const desktopLayout = await page.locator('.projects-grid').evaluate((grid) => ({
+    columns: getComputedStyle(grid).gridTemplateColumns.split(' ').length,
+    width: grid.getBoundingClientRect().width,
+    featureWidth: grid.querySelector('.box--feature').getBoundingClientRect().width
+  }));
+
+  expect(desktopLayout.columns).toBe(3);
+  expect(desktopLayout.width).toBeLessThanOrEqual(1180);
+  expect(desktopLayout.featureWidth).toBeLessThanOrEqual(desktopLayout.width / 3 + 1);
+
+  await page.setViewportSize({ width: 390, height: 844 });
+  const mobileColumns = await page.locator('.projects-grid').evaluate((grid) =>
+    getComputedStyle(grid).gridTemplateColumns.split(' ').length
+  );
+  expect(mobileColumns).toBe(1);
+});
