@@ -3,6 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="dark">
   <title>Toni Coimbra — IA & Automação</title>
   <meta name="description" content="Portfólio de Toni Coimbra — Especialista em IA & Automação, Professor e Desenvolvedor Python. Projetos, experiência e contato.">
 
@@ -17,10 +18,6 @@
   <link rel="canonical" href="https://tonicoimbra.com/">
 
   <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
-  <link rel="preconnect" href="https://fonts.googleapis.com/">
-  <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin>
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@700;800&family=JetBrains+Mono:wght@400;500&display=swap">
-
   <link rel="stylesheet" href="assets/css/style.css">
 
   <!-- Marks the document before first paint. Every rule that hides content
@@ -30,6 +27,7 @@
 </head>
 
 <body>
+  <a class="skip-link" href="#top">Pular para o conteúdo principal</a>
   <!-- ══ PRELOADER ═══════════════════════════════════════════════ -->
   <div id="loader" aria-hidden="true">
     <div class="lo-word">
@@ -67,20 +65,20 @@
       <a href="#contato">Contato</a>
     </nav>
 
-    <button class="burger" id="burger" aria-label="Abrir menu" aria-expanded="false" aria-controls="drawer">
+    <button type="button" class="burger" id="burger" aria-label="Abrir menu" aria-expanded="false" aria-controls="drawer">
       <i></i><i></i><i></i>
     </button>
   </header>
 
-  <div id="drawer" aria-hidden="true">
+  <nav id="drawer" aria-label="Navegação móvel" aria-hidden="true" inert>
     <a href="#sobre">Sobre</a>
     <a href="#stack">Stack</a>
     <a href="#projetos">Projetos</a>
     <a href="#experiencia">Experiência</a>
     <a href="#contato">Contato</a>
-  </div>
+  </nav>
 
-  <main id="top">
+  <main id="top" tabindex="-1">
 
     <!-- ══════════════════════════════════════════════════════════════
          HERO
@@ -544,7 +542,7 @@
         <div class="cta-core">
           <div class="cta-head" data-io>
             <h2 data-mask><span>Contato</span></h2>
-            <svg class="cta-underline" viewBox="0 0 600 30" preserveAspectRatio="none">
+            <svg class="cta-underline" viewBox="0 0 600 30" preserveAspectRatio="none" aria-hidden="true" focusable="false">
               <path d="M0,25 Q150,0 300,18 T600,12"/>
             </svg>
           </div>
@@ -560,7 +558,7 @@
             <form id="contact-form" class="form" novalidate>
               <input type="hidden" name="access_key" value="9981a893-6116-438b-8528-4bb6d41fc606">
               <input type="hidden" name="subject" value="Novo contato pelo Portfólio!">
-              <input type="checkbox" name="botcheck" class="hidden" aria-hidden="true" tabindex="-1">
+              <input type="checkbox" name="botcheck" class="hidden" aria-label="Campo antispam" aria-hidden="true" tabindex="-1">
 
               <div class="form-row">
                 <label for="name" class="form-label">Nome completo</label>
@@ -600,7 +598,7 @@
           <!-- Social Links -->
           <div class="flex gap-3 mt-4">
             <a href="https://www.linkedin.com/in/elvertoni/" target="_blank" rel="noopener noreferrer"
-              class="chip" aria-label="LinkedIn">LinkedIn</a>
+              class="chip chip--signal" aria-label="Falar diretamente pelo LinkedIn">Falar no LinkedIn</a>
             <a href="https://github.com/elvertoni" target="_blank" rel="noopener noreferrer"
               class="chip" aria-label="GitHub">GitHub</a>
           </div>
@@ -667,7 +665,9 @@
           <span id="clock2">--:--:--</span>
           BRT
         </p>
-        <button class="totop" id="toTop" aria-label="Voltar ao topo">↑</button>
+        <button type="button" class="totop" id="toTop" aria-label="Voltar ao topo">
+          <svg viewBox="0 0 16 16" aria-hidden="true" focusable="false"><path d="M8 13V3m0 0L4 7m4-4 4 4" /></svg>
+        </button>
       </div>
     </div>
   </footer>

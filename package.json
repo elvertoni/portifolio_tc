@@ -1,0 +1,10 @@
+{
+  "name": "portifolio-tc",
+  "private": true,
+  "scripts": {
+    "test:smoke": "playwright test"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.51.0"
+  }
+}

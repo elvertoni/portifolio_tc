@@ -97,17 +97,29 @@
     try { seen = sessionStorage.getItem('tc-seen') === '1'; } catch (_) {}
     try { sessionStorage.setItem('tc-seen', '1'); } catch (_) {}
 
-    let progress = 0;
-    const duration = REDUCED ? 200 : (seen ? 550 : 1500);
-    const start = performance.now();
-
-    /* Whatever happens to the rAF chain, the page is never left behind a
-       black panel with the scroll locked. */
-    setTimeout(() => {
+    if (REDUCED) {
       loader.classList.add('done');
       document.body.classList.remove('is-locked');
       revealOnce();
-    }, duration + 1200);
+      return;
+    }
+
+    let progress = 0;
+    const duration = seen ? 550 : 1500;
+    const start = performance.now();
+    let finished = false;
+
+    function finish() {
+      if (finished) return;
+      finished = true;
+      loader.classList.add('done');
+      document.body.classList.remove('is-locked');
+      revealOnce();
+    }
+
+    /* Whatever happens to the rAF chain, the page is never left behind a
+       black panel with the scroll locked. */
+    setTimeout(finish, duration + 1200);
 
     function tick(now) {
       const elapsed = now - start;
@@ -125,11 +137,7 @@
       if (t < 1) {
         requestAnimationFrame(tick);
       } else {
-        setTimeout(() => {
-          loader.classList.add('done');
-          document.body.classList.remove('is-locked');
-          revealOnce();
-        }, 300);
+        setTimeout(finish, 300);
       }
     }
 
@@ -162,23 +170,27 @@
     /* burger / drawer */
     if (burger && drawer) {
       const links = $$('a', drawer);
+      let focusTimer;
 
       function setDrawer(open, restoreFocus) {
+        clearTimeout(focusTimer);
         drawer.classList.toggle('open', open);
         burger.classList.toggle('open', open);
         burger.setAttribute('aria-expanded', String(open));
+        burger.setAttribute('aria-label', open ? 'Fechar menu' : 'Abrir menu');
         drawer.setAttribute('aria-hidden', String(!open));
+        drawer.toggleAttribute('inert', !open);
         document.body.classList.toggle('is-locked', open);
         if (open) {
           // the panel covers the page; focus has to follow it in
-          setTimeout(() => { if (links[0]) links[0].focus(); }, 260);
+          focusTimer = setTimeout(() => { if (links[0]) links[0].focus(); }, 0);
         } else if (restoreFocus) {
           burger.focus();
         }
       }
 
       burger.addEventListener('click', () => setDrawer(!drawer.classList.contains('open')));
-      links.forEach(a => a.addEventListener('click', () => setDrawer(false)));
+      links.forEach(a => a.addEventListener('click', () => setDrawer(false, false)));
 
       document.addEventListener('keydown', e => {
         if (!drawer.classList.contains('open')) return;
@@ -205,13 +217,19 @@
     const navLinks = $$('.navchain a');
     const sections = $$('section[id]');
     if (navLinks.length && sections.length) {
+      function activateNav(id) {
+        navLinks.forEach(link => {
+          const active = link.getAttribute('href') === '#' + id;
+          link.classList.toggle('on', active);
+          if (active) link.setAttribute('aria-current', 'location');
+          else link.removeAttribute('aria-current');
+        });
+      }
       const navIO = new IntersectionObserver(entries => {
         entries.forEach(entry => {
           if (entry.isIntersecting) {
             const id = entry.target.getAttribute('id');
-            navLinks.forEach(link => {
-              link.classList.toggle('on', link.getAttribute('href') === '#' + id);
-            });
+            activateNav(id);
           }
         });
       }, { rootMargin: '-40% 0px -55% 0px', threshold: 0 });
@@ -323,8 +341,20 @@
           bub.classList.add('show');
           setTimeout(() => bub.classList.remove('show'), 6000);
         };
-        setTimeout(show, 2600);
-        setInterval(() => { if (!document.hidden) show(); }, 15000);
+        let timer;
+        const schedule = () => {
+          clearTimeout(timer);
+          if (document.hidden) return;
+          timer = setTimeout(() => {
+            show();
+            schedule();
+          }, 15000);
+        };
+        setTimeout(() => {
+          if (!document.hidden) show();
+          schedule();
+        }, 2600);
+        document.addEventListener('visibilitychange', schedule);
       });
     }, { threshold: 0.3 });
     io.observe(dock);
@@ -591,24 +621,36 @@
       submitBtn.textContent = 'Enviando';
       submitBtn.classList.add('is-busy');
       submitBtn.disabled = true;
+      form.setAttribute('aria-busy', 'true');
       result.className = 'hidden';
 
+      const controller = new AbortController();
+      const timeoutId = setTimeout(() => controller.abort(), 15000);
       try {
         const response = await fetch('https://api.web3forms.com/submit', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
-          body: JSON.stringify(Object.fromEntries(new FormData(form)))
+          body: JSON.stringify(Object.fromEntries(new FormData(form))),
+          signal: controller.signal
         });
         const json = await response.json().catch(() => ({}));
 
-        if (!response.ok) throw new Error(json.message || 'HTTP ' + response.status);
+        if (!response.ok || json.success === false || json.success === 'false') {
+          throw new Error(json.message || 'HTTP ' + response.status);
+        }
 
         say('Mensagem enviada. Respondo pelo e-mail que você informou.', 'ok');
         form.reset();
         fields.forEach(el => el.removeAttribute('aria-invalid'));
       } catch (err) {
+        if (err.name === 'AbortError') {
+          say('A tentativa demorou demais. Tente novamente ou me chame no LinkedIn.', 'warn');
+          return;
+        }
         say('Não consegui enviar agora. Me chame no LinkedIn ou tente de novo em instantes.', 'warn');
       } finally {
+        clearTimeout(timeoutId);
+        form.removeAttribute('aria-busy');
         submitBtn.textContent = original;
         submitBtn.classList.remove('is-busy');
         submitBtn.disabled = false;
@@ -627,7 +669,7 @@
     const toTop = $('#toTop');
     if (toTop) {
       toTop.addEventListener('click', () => {
-        window.scrollTo({ top: 0, behavior: 'smooth' });
+        window.scrollTo({ top: 0, behavior: REDUCED ? 'auto' : 'smooth' });
       });
     }
   }

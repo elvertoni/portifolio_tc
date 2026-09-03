@@ -2,6 +2,8 @@
 .gitignore
 .agent
 .gemini
+graphify-out
+node_modules
 extract.py
 README.md
 *.md

@@ -32,9 +32,46 @@ img, svg, video, canvas { display: block; vertical-align: middle; max-width: 100
 [hidden] { display: none; }
 ::placeholder { opacity: 1; color: var(--muted); }
 
+.skip-link {
+  position: fixed;
+  top: 12px;
+  left: var(--gut);
+  z-index: 120;
+  padding: .7em 1em;
+  border: 1px solid var(--bone);
+  border-radius: 999px;
+  background: var(--bone);
+  color: var(--ink);
+  font-family: var(--font-mono);
+  font-size: 12px;
+  transform: translateY(-180%);
+  transition: transform .2s var(--e-out);
+}
+.skip-link:focus-visible { transform: translateY(0); }
+
 /* ═══════════════════════════════════════════════════════════════════
    DESIGN TOKENS
    ═══════════════════════════════════════════════════════════════════ */
+@font-face {
+  font-family: 'Archivo';
+  font-style: normal;
+  font-weight: 700 800;
+  font-display: swap;
+  src: url('../fonts/archivo-latin.woff2') format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC,
+    U+02C6, U+02DA, U+02DC, U+2000-206F, U+20AC, U+2122, U+2191,
+    U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+@font-face {
+  font-family: 'JetBrains Mono';
+  font-style: normal;
+  font-weight: 400 500;
+  font-display: swap;
+  src: url('../fonts/jetbrains-mono-latin.woff2') format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC,
+    U+02C6, U+02DA, U+02DC, U+2000-206F, U+20AC, U+2122, U+2191,
+    U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
 :root {
   --ink:       #141414;
   --ink-deep:  #0d0d0d;
@@ -75,7 +112,6 @@ img, svg, video, canvas { display: block; vertical-align: middle; max-width: 100
   --e-out:  cubic-bezier(.16, 1, .3, 1);
   --e-io:   cubic-bezier(.76, 0, .24, 1);
   --e-soft: cubic-bezier(.25, .46, .45, .94);
-  --e-back: cubic-bezier(.34, 1.56, .64, 1);
 }
 
 /* ── Base ──────────────────────────────────────────────────────────── */
@@ -646,11 +682,13 @@ html:not(.js) #loader { display: none; }
 .mark i {
   display: block;
   height: 2px;
-  width: 22px;
+  width: 40px;
   background: var(--bone);
-  transition: width .55s var(--e-io), background .35s;
+  transform: scaleX(.55);
+  transform-origin: left;
+  transition: transform .55s var(--e-io), background .35s;
 }
-.mark:hover i { width: 40px; background: var(--signal); }
+.mark:hover i { transform: scaleX(1); background: var(--signal); }
 
 /* Navchain — chained pills */
 .navchain { display: flex; align-items: center; }
@@ -667,7 +705,7 @@ html:not(.js) #loader { display: none; }
   margin-left: -.7em;
   background: rgba(20,20,20,.55);
   backdrop-filter: blur(6px);
-  transition: color .34s var(--e-soft), border-color .34s var(--e-soft), transform .4s var(--e-back);
+  transition: color .34s var(--e-soft), border-color .34s var(--e-soft), transform .4s var(--e-out);
   overflow: hidden;
   isolation: isolate;
 }
@@ -727,8 +765,8 @@ html:not(.js) #loader { display: none; }
   gap: .1em;
   padding: var(--gut);
   clip-path: inset(0 0 100% 0);
-  /* visibility keeps the closed drawer out of the tab order — clip-path and
-     pointer-events hide it visually but leave its links keyboard-reachable */
+  /* visibility plus inert keep the closed drawer out of both the visual and
+     keyboard trees while the clip-path animates the open state. */
   visibility: hidden;
   transition: clip-path .8s var(--e-io), visibility 0s linear .8s;
   pointer-events: none;
@@ -910,7 +948,7 @@ html:not(.js) #loader { display: none; }
   transform-origin: bottom left;
   transform: scale(.6) translateY(8px);
   opacity: 0;
-  transition: transform .55s var(--e-back), opacity .35s ease;
+  transition: transform .55s var(--e-out), opacity .35s ease;
 }
 .dock .bub.show { transform: none; opacity: 1; }
 .dock .bub::after {
@@ -1101,7 +1139,6 @@ html:not(.js) #loader { display: none; }
   z-index: 1;
   pointer-events: none;
   overflow: hidden;
-  will-change: transform;
 }
 .ghosts span {
   position: absolute;
@@ -1119,7 +1156,7 @@ html:not(.js) #loader { display: none; }
 }
 
 /* Magnet button wrapper */
-.magnet { display: inline-block; will-change: transform; }
+.magnet { display: inline-block; }
 
 /* ═══════════════════════════════════════════════════════════════════
    FORM CONTROLS — custom for Volta Atelier
@@ -1290,6 +1327,17 @@ footer {
   color: var(--ink);
   border-color: var(--bone);
 }
+.totop svg {
+  width: 1.05em;
+  height: 1.05em;
+}
+.totop svg path {
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.4;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
 
 /* ═══════════════════════════════════════════════════════════════════
    LAYOUT UTILITIES
@@ -1430,4 +1478,6 @@ footer {
   .grain, .scrollcue i::after { display: none; }
   .dock, .marquee ul { animation: none; }
   #dust, .ghosts { display: none; }
+  #loader.done { transition: none !important; }
+  #drawer a { opacity: 1; transform: none; transition: none; }
 }
