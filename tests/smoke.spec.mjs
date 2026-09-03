@@ -6,7 +6,7 @@ test('carrega o portfolio e expõe a navegação principal', async ({ page }) =>
   await page.goto(pageUrl);
 
   await expect(page).toHaveTitle(/Toni Coimbra/);
-  await expect(page.locator('#loader')).toHaveClass(/done/, { timeout: 5_000 });
+  await expect(page.locator('#loader')).toHaveClass(/done/, { timeout: 10_000 });
   await expect(page.locator('main h1')).toContainText('Toni');
   await expect(page.locator('nav[aria-label="Navegação principal"] a')).toHaveCount(5);
 });

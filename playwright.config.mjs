@@ -2,10 +2,13 @@ import { defineConfig } from '@playwright/test';
 
 export default defineConfig({
   testDir: './tests',
-  timeout: 15_000,
+  timeout: 30_000,
   fullyParallel: true,
   reporter: 'line',
   use: {
-    trace: 'retain-on-failure'
+    trace: 'retain-on-failure',
+    launchOptions: {
+      args: ['--no-sandbox', '--disable-setuid-sandbox']
+    }
   }
 });

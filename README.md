@@ -134,27 +134,46 @@ portifolio_tc/
 - **Phase Cards (`.phase`):** Cards estruturados com identificador numérico, barra de progresso com animação expansiva no hover e tags categorizadas.
 
 ### 7. Projetos em Destaque
-- **Projeto Primário em Destaque (ProfessorDash):** Card hero com badge de status em tempo real e link direto para a aplicação em produção.
-- **Projetos de IA & Automação:** Detalhamento das soluções implementadas no TJPR e pipelines de visão computacional.
+- **ProfessorDash:** Portal do Aluno e gestão para professores da rede pública com Google OAuth, apostilas HTML e tarefas (`prof.tonicoimbra.com`).
+- **eSIMBA:** Monitoramento de benefícios e acolhimento com acesso institucional e trilha de auditoria (`e-simba.com.br`).
+- **Vitalis:** Central pessoal de saúde com controle de exames, tratamentos, treinos e lembretes (`vitalis.tonicoimbra.com`).
+- **Noivas & Cia:** Gestão comercial e controle de locação para aluguel de trajes e acessórios (`noivaseciabandeirantes.com.br`).
+- **Imagens Otimizadas:** Todas as capturas em formato WebP responsivo (`1x` e `@2x` retina), garantindo carregamento instantâneo (< 35 KB cada).
 
 ### 8. Formulário de Contato Inteligente
-- Totalmente integrado ao serviço **Web3Forms**.
+- Totalmente integrado ao serviço **Web3Forms** com validação client-side em tempo real.
 - Proteção anti-spam via honeypot (`botcheck`).
-- Respostas visuais em tempo real no próprio card sem recarregar a página.
+- Respostas visuais em verde acessível (`--ok`) no próprio card sem recarregar a página.
 - Botão com física magnética (`.magnet`), seguindo suavemente o cursor do mouse em dispositivos de ponteiro fino.
 
 ### 9. Footer
-- **Marquee Contínuo:** Faixa tipográfica animada em loop infinito.
-- **Relógio Secundário:** Sincronizado com fuso horário local.
+- **Marquee Contínuo:** Faixa tipográfica animada em loop infinito cobrindo até monitores ultrawide.
+- **Relógio Secundário:** Sincronizado com fuso horário oficial de Brasília (BRT).
 - **Botão Voltar ao Topo (`.totop`):** Ação suave de retorno ao topo.
+
+---
+
+## 🧪 Testes Automatizados (Playwright)
+
+O projeto conta com uma suíte de testes de fumaça (smoke tests) para validar regressão visual, acessibilidade, responsividade e degradação:
+
+```bash
+# Executar a suíte de testes do Playwright
+npm test
+
+# Ou diretamente:
+npm run test:smoke
+```
 
 ---
 
 ## ♿ Acessibilidade e Performance
 
 - **`prefers-reduced-motion`:** Respeito absoluto às preferências do sistema do usuário — desativa transições lentas, desliga ruído/grain, congela balões flutuantes e assegura que todos os elementos com reveal estejam instantaneamente visíveis.
-- **Sem Frameworks:** Zero dependência de bibliotecas pesadas de terceiros (Tailwind CDN, FontAwesome, React), garantindo First Contentful Paint (FCP) abaixo de 0.5s e pontuação máxima no Lighthouse.
-- **Semântica HTML5:** Utilização rigorosa de tags `<header>`, `<main>`, `<section>`, `<article>`, `<footer>`, além de atributos ARIA apropriados (`aria-expanded`, `aria-hidden`, `aria-label`).
+- **Fontes Locais WOFF2:** Arquivos `archivo-latin.woff2` e `jetbrains-mono-latin.woff2` servidos localmente com `font-display: swap`, eliminando chamadas externas ao Google Fonts.
+- **Zero Frameworks em Runtime:** Zero dependência de bibliotecas pesadas de terceiros (Tailwind CDN, FontAwesome, React), garantindo First Contentful Paint (FCP) abaixo de 0.5s e pontuação máxima no Lighthouse.
+- **Degradação No-JS:** Fallback transparente onde 100% do conteúdo é renderizado caso o JavaScript seja desativado.
+- **Semântica HTML5 & WCAG AA:** Utilização rigorosa de tags semânticas, atributos ARIA apropriados (`aria-expanded`, `aria-hidden`, `aria-label`, `aria-invalid`), contraste de cores validado e áreas de toque com no mínimo 44px (`--tap`).
 
 ---
 
@@ -162,7 +181,8 @@ portifolio_tc/
 
 - **LinkedIn:** [linkedin.com/in/elvertoni](https://www.linkedin.com/in/elvertoni/)
 - **GitHub:** [github.com/elvertoni](https://github.com/elvertoni)
-- **ProfessorDash:** [aulas.tonicoimbra.com](https://aulas.tonicoimbra.com)
+- **ProfessorDash:** [prof.tonicoimbra.com](https://prof.tonicoimbra.com)
+- **Noivas & Cia:** [noivaseciabandeirantes.com.br](https://noivaseciabandeirantes.com.br)
 
 ---
 

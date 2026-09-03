@@ -2,6 +2,7 @@
   "name": "portifolio-tc",
   "private": true,
   "scripts": {
+    "test": "playwright test",
     "test:smoke": "playwright test"
   },
   "devDependencies": {
