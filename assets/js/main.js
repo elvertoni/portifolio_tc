@@ -1,19 +1,5 @@
-/* ═══════════════════════════════════════════════════════════════════════
-   TONI COIMBRA — PORTFÓLIO · Runtime
-   ───────────────────────────────────────────────────────────────────────
-   0  Utilities
-   1  Reveal engine
-   2  Preloader
-   3  Header, drawer, nav highlighting
-   4  Hero: dust, clock, dock bubble
-   5  Wordwash (scroll-linked word reveal)
-   6  Stat counters
-   7  Ghost text field (CTA)
-   8  Magnet buttons
-   9  Marquee clone
-   10 Contact form (Web3Forms)
-   11 Footer: year, clock, to-top
-   ═══════════════════════════════════════════════════════════════════════ */
+/* Toni Coimbra — framework-free portfolio runtime.
+   Accessible navigation, project collage, reveal, counters and contact form. */
 (function () {
   'use strict';
 
@@ -41,13 +27,26 @@
     return state;
   }
   let last = performance.now();
+  let frameId = 0;
   function frame(now) {
+    if (document.hidden) {
+      frameId = 0;
+      return;
+    }
     const dt = Math.min(0.05, (now - last) / 1000);
     last = now;
     for (let i = 0; i < ticks.length; i++) ticks[i](dt, now);
-    requestAnimationFrame(frame);
+    frameId = requestAnimationFrame(frame);
   }
-  if (!REDUCED) requestAnimationFrame(frame);
+  if (!REDUCED) {
+    frameId = requestAnimationFrame(frame);
+    document.addEventListener('visibilitychange', () => {
+      if (!document.hidden && !frameId) {
+        last = performance.now();
+        frameId = requestAnimationFrame(frame);
+      }
+    });
+  }
 
   /* ═══════════════════════════════════════════════════════════════════
      1. REVEAL ENGINE
@@ -70,9 +69,7 @@
     $$('[data-io], [data-rise], [data-mask], .stagger, section').forEach(el => io.observe(el));
   }
 
-  /* If the loader is missing or its rAF never lands, nothing would ever be
-     revealed. Reveal on DOM ready as the floor; the loader path only ever
-     brings it forward. */
+  /* Register entrances once after the runtime has initialized. */
   let revealed = false;
   function revealOnce() {
     if (revealed) return;
@@ -80,70 +77,6 @@
     initReveal();
   }
 
-  /* ═══════════════════════════════════════════════════════════════════
-     2. PRELOADER
-     ═══════════════════════════════════════════════════════════════════ */
-  function initLoader() {
-    const loader = $('#loader');
-    if (!loader) { revealOnce(); return; }
-    const countEl = $('#loCount');
-    const barEl = $('#loBar');
-    const labelEl = $('#loLabel');
-    const labels = ['Tipografia', 'Cores', 'Componentes', 'Layout', 'Motion', 'Pronto'];
-
-    /* A returning visitor has already watched this once. Two seconds of
-       locked scroll is a toll, not an entrance. */
-    let seen = false;
-    try { seen = sessionStorage.getItem('tc-seen') === '1'; } catch (_) {}
-    try { sessionStorage.setItem('tc-seen', '1'); } catch (_) {}
-
-    if (REDUCED) {
-      loader.classList.add('done');
-      document.body.classList.remove('is-locked');
-      revealOnce();
-      return;
-    }
-
-    let progress = 0;
-    const duration = seen ? 550 : 1500;
-    const start = performance.now();
-    let finished = false;
-
-    function finish() {
-      if (finished) return;
-      finished = true;
-      loader.classList.add('done');
-      document.body.classList.remove('is-locked');
-      revealOnce();
-    }
-
-    /* Whatever happens to the rAF chain, the page is never left behind a
-       black panel with the scroll locked. */
-    setTimeout(finish, duration + 1200);
-
-    function tick(now) {
-      const elapsed = now - start;
-      const t = clamp(elapsed / duration, 0, 1);
-      // ease out cubic
-      const eased = 1 - Math.pow(1 - t, 3);
-      progress = Math.floor(eased * 100);
-
-      countEl.textContent = String(progress).padStart(3, '0');
-      barEl.style.transform = 'scaleX(' + (progress / 100) + ')';
-
-      const labelIdx = Math.min(Math.floor(eased * labels.length), labels.length - 1);
-      labelEl.textContent = labels[labelIdx];
-
-      if (t < 1) {
-        requestAnimationFrame(tick);
-      } else {
-        setTimeout(finish, 300);
-      }
-    }
-
-    document.body.classList.add('is-locked');
-    requestAnimationFrame(tick);
-  }
 
   /* ═══════════════════════════════════════════════════════════════════
      3. HEADER, DRAWER, NAV HIGHLIGHTING
@@ -180,6 +113,10 @@
         burger.setAttribute('aria-label', open ? 'Fechar menu' : 'Abrir menu');
         drawer.setAttribute('aria-hidden', String(!open));
         drawer.toggleAttribute('inert', !open);
+        const main = $('main');
+        const footer = $('footer');
+        if (main) main.toggleAttribute('inert', open);
+        if (footer) footer.toggleAttribute('inert', open);
         document.body.classList.toggle('is-locked', open);
         if (open) {
           // the panel covers the page; focus has to follow it in
@@ -191,6 +128,10 @@
 
       burger.addEventListener('click', () => setDrawer(!drawer.classList.contains('open')));
       links.forEach(a => a.addEventListener('click', () => setDrawer(false, false)));
+
+      matchMedia('(min-width: 901px)').addEventListener('change', e => {
+        if (e.matches && drawer.classList.contains('open')) setDrawer(false, false);
+      });
 
       document.addEventListener('keydown', e => {
         if (!drawer.classList.contains('open')) return;
@@ -237,71 +178,60 @@
     }
   }
 
-  /* ═══════════════════════════════════════════════════════════════════
-     4. HERO: DUST, CLOCK, DOCK BUBBLE
-     ═══════════════════════════════════════════════════════════════════ */
-  function initDust() {
-    const canvas = $('#dust');
+
+  function initCollage() {
+    const host = $('.collage-in');
     const hero = $('#hero');
-    if (!canvas || !hero || REDUCED) return;
-    const ctx = canvas.getContext('2d');
-    const particles = [];
-    const COUNT = Math.min(80, Math.floor(innerWidth / 18));
-    const DPR = Math.min(2, devicePixelRatio || 1);
+    if (!host || !hero || REDUCED || !matchMedia('(pointer: fine)').matches) return;
 
-    /* Back the canvas at device resolution and keep drawing in CSS pixels,
-       or every dot lands on a half-pixel and reads as a smudge on retina. */
-    function resize() {
-      const w = innerWidth;
-      const h = hero.offsetHeight;
-      canvas.width = Math.round(w * DPR);
-      canvas.height = Math.round(h * DPR);
-      canvas.style.width = w + 'px';
-      canvas.style.height = h + 'px';
-      ctx.setTransform(DPR, 0, 0, DPR, 0, 0);
-    }
-    resize();
-    window.addEventListener('resize', resize, { passive: true });
-    const vis = whenVisible(hero, '0px');
+    const cards = $$('.tile', host).map((el, i) => ({
+      el,
+      depth: [0.58, 0.82, 0.68][i] || 0.6,
+      phase: i * 1.2,
+      baseRotation: [-8, 8, -2][i] || 0,
+      x: 0,
+      y: 0,
+      rotation: 0
+    }));
+    const pointer = { x: innerWidth / 2, y: innerHeight / 2, nx: 0, ny: 0 };
+    const smooth = { x: pointer.x, y: pointer.y, nx: 0, ny: 0 };
+    const visible = whenVisible(hero, '0px');
 
-    class Dot {
-      constructor() { this.reset(true); }
-      reset(rand) {
-        const w = canvas.width / DPR, h = canvas.height / DPR;
-        this.x = Math.random() * w;
-        this.y = rand ? Math.random() * h : h + 5;
-        this.r = Math.random() * 1.2 + 0.3;
-        this.vx = (Math.random() - 0.5) * 0.25;
-        this.vy = -(Math.random() * 0.35 + 0.08);
-        this.life = 0;
-        this.max = Math.random() * 260 + 120;
-      }
-      update() {
-        this.x += this.vx;
-        this.y += this.vy;
-        this.life++;
-        const w = canvas.width / DPR;
-        if (this.life >= this.max || this.y < -5 || this.x < -5 || this.x > w + 5) this.reset();
-      }
-      draw() {
-        const p = this.life / this.max;
-        let a;
-        if (p < 0.15) a = p / 0.15 * 0.45;
-        else if (p > 0.7) a = (1 - (p - 0.7) / 0.3) * 0.45;
-        else a = 0.45;
-        ctx.fillStyle = `rgba(244,243,240,${a})`;
-        ctx.beginPath();
-        ctx.arc(this.x, this.y, this.r, 0, Math.PI * 2);
-        ctx.fill();
-      }
-    }
+    window.addEventListener('pointermove', e => {
+      pointer.x = e.clientX;
+      pointer.y = e.clientY;
+      pointer.nx = (e.clientX / innerWidth) * 2 - 1;
+      pointer.ny = (e.clientY / innerHeight) * 2 - 1;
+    }, { passive: true });
 
-    for (let i = 0; i < COUNT; i++) particles.push(new Dot());
+    onTick((dt, now) => {
+      if (!visible.on) return;
+      smooth.x = lerp(smooth.x, pointer.x, .1);
+      smooth.y = lerp(smooth.y, pointer.y, .1);
+      smooth.nx = lerp(smooth.nx, pointer.nx, .06);
+      smooth.ny = lerp(smooth.ny, pointer.ny, .06);
 
-    onTick(() => {
-      if (!vis.on) return;
-      ctx.clearRect(0, 0, canvas.width / DPR, canvas.height / DPR);
-      particles.forEach(p => { p.update(); p.draw(); });
+      const time = now / 1000;
+      cards.forEach(card => {
+        const rect = card.el.getBoundingClientRect();
+        const cx = rect.left + rect.width / 2;
+        const cy = rect.top + rect.height / 2;
+        const dx = cx - smooth.x;
+        const dy = cy - smooth.y;
+        const distance = Math.hypot(dx, dy) || 1;
+        const force = clamp(1 - distance / 300, 0, 1);
+        const push = force * force * 32 * (.5 + card.depth);
+        const idleX = Math.sin(time * .42 + card.phase) * 3.5 * (.4 + card.depth);
+        const idleY = Math.cos(time * .35 + card.phase * 1.3) * 4.5 * (.4 + card.depth);
+        const targetX = (dx / distance) * push + smooth.nx * -18 * card.depth;
+        const targetY = (dy / distance) * push + smooth.ny * -18 * card.depth;
+        const targetRotation = (dx / distance) * force * 5 * (.4 + card.depth);
+
+        card.x = lerp(card.x, targetX + idleX, .075);
+        card.y = lerp(card.y, targetY + idleY, .075);
+        card.rotation = lerp(card.rotation, targetRotation, .075);
+        card.el.style.transform = `translate3d(${card.x.toFixed(2)}px, ${card.y.toFixed(2)}px, 0) rotate(${(card.baseRotation + card.rotation).toFixed(2)}deg)`;
+      });
     });
   }
 
@@ -323,103 +253,6 @@
     });
   }
 
-  function initDock() {
-    const bub = $('#heroBub');
-    const dock = bub && bub.closest('.dock');
-    if (!bub || !dock || REDUCED) return;
-
-    /* The bubble greets someone who is looking at it. Firing it on a timer
-       from page load means it plays to an empty hero and then keeps
-       playing forever, three timers at a time. */
-    let running = false;
-    const io = new IntersectionObserver(es => {
-      es.forEach(e => {
-        if (!e.isIntersecting || running) return;
-        running = true;
-        io.disconnect();
-        const show = () => {
-          bub.classList.add('show');
-          setTimeout(() => bub.classList.remove('show'), 6000);
-        };
-        let timer;
-        const schedule = () => {
-          clearTimeout(timer);
-          if (document.hidden) return;
-          timer = setTimeout(() => {
-            show();
-            schedule();
-          }, 15000);
-        };
-        setTimeout(() => {
-          if (!document.hidden) show();
-          schedule();
-        }, 2600);
-        document.addEventListener('visibilitychange', schedule);
-      });
-    }, { threshold: 0.3 });
-    io.observe(dock);
-  }
-
-  /* ═══════════════════════════════════════════════════════════════════
-     5. WORDWASH — scroll-linked word reveal
-     ═══════════════════════════════════════════════════════════════════ */
-  function initWordwash() {
-    const els = $$('.wordwash');
-    if (!els.length) return;
-
-    els.forEach(el => {
-      const text = el.textContent.trim();
-      el.innerHTML = '';
-      text.split(/\s+/).forEach(w => {
-        const sp = document.createElement('span');
-        sp.textContent = w + ' ';
-        el.appendChild(sp);
-      });
-    });
-
-    if (REDUCED) {
-      $$('.wordwash span').forEach(s => s.classList.add('lit'));
-      return;
-    }
-
-    /* Word positions inside the paragraph only change when the paragraph
-       reflows. Cache the offsets and re-read them on resize instead of
-       forcing a layout per word per frame. */
-    const tracked = els.map(el => ({
-      el,
-      spans: $$('span', el),
-      offsets: [],
-      vis: whenVisible(el, '10%')
-    }));
-
-    function measure() {
-      tracked.forEach(t => {
-        const base = t.el.getBoundingClientRect().top + scrollY;
-        t.offsets = t.spans.map(sp => {
-          const r = sp.getBoundingClientRect();
-          return r.top + scrollY - base + r.height / 2;
-        });
-      });
-    }
-    measure();
-    let rid;
-    window.addEventListener('resize', () => {
-      clearTimeout(rid);
-      rid = setTimeout(measure, 150);
-    }, { passive: true });
-
-    onTick(() => {
-      const mid = innerHeight * 0.55;
-      tracked.forEach(t => {
-        if (!t.vis.on) return;
-        const top = t.el.getBoundingClientRect().top;
-        for (let i = 0; i < t.spans.length; i++) {
-          t.spans[i].classList.toggle('lit', top + t.offsets[i] < mid);
-        }
-      });
-    });
-  }
-
   /* ═══════════════════════════════════════════════════════════════════
      6. STAT COUNTERS
      ═══════════════════════════════════════════════════════════════════ */
@@ -435,6 +268,10 @@
         const target = parseFloat(el.dataset.count);
         const suffix = el.dataset.suffix || '';
         const dec = parseInt(el.dataset.dec || '0', 10);
+        if (REDUCED) {
+          el.textContent = String(target) + suffix;
+          return;
+        }
         const dur = 1500;
         const start = performance.now();
 
@@ -466,108 +303,6 @@
   }
 
   /* ═══════════════════════════════════════════════════════════════════
-     7. GHOST TEXT FIELD (CTA)
-     ═══════════════════════════════════════════════════════════════════ */
-  function initGhosts() {
-    const container = $('#ghosts');
-    if (!container || REDUCED) return;
-
-    const words = ['AUTOMAÇÃO', 'IA', 'PYTHON', 'DADOS', 'CÓDIGO', 'DOCKER', 'LANGCHAIN', 'POSTGRESQL', 'CONTATO', 'PROFESSOR'];
-    const count = 18;
-
-    /* Inset from the edges and placed by centre so the field reads as
-       depth rather than as words sliced in half by the section boundary. */
-    for (let i = 0; i < count; i++) {
-      const sp = document.createElement('span');
-      sp.textContent = words[i % words.length];
-      sp.style.left = (8 + Math.random() * 84) + '%';
-      sp.style.top = (6 + Math.random() * 88) + '%';
-      sp.style.fontSize = (Math.random() * 3.4 + 1.8) + 'rem';
-      sp.style.rotate = (Math.random() * 30 - 15) + 'deg';
-      container.appendChild(sp);
-    }
-
-    // slow drift
-    const vis = whenVisible(container.parentElement, '0px');
-    let angle = 0;
-    onTick(dt => {
-      if (!vis.on) return;
-      angle += dt * 0.08;
-      container.style.transform = `translate(${Math.sin(angle) * 12}px, ${Math.cos(angle * 0.7) * 8}px)`;
-    });
-  }
-
-  /* ═══════════════════════════════════════════════════════════════════
-     8. MAGNET BUTTONS
-     ═══════════════════════════════════════════════════════════════════ */
-  function initMagnets() {
-    if (REDUCED || !matchMedia('(pointer: fine)').matches) return;
-
-    const magnets = $$('.magnet');
-    magnets.forEach(wrap => {
-      let mx = 0, my = 0, cx = 0, cy = 0;
-      let inside = false;
-
-      wrap.addEventListener('mouseenter', () => { inside = true; });
-      wrap.addEventListener('mouseleave', () => {
-        inside = false;
-        mx = 0; my = 0;
-      });
-      wrap.addEventListener('mousemove', e => {
-        const r = wrap.getBoundingClientRect();
-        mx = (e.clientX - r.left - r.width / 2) * 0.32;
-        my = (e.clientY - r.top - r.height / 2) * 0.42;
-      });
-
-      let settled = true;
-      onTick(() => {
-        cx = lerp(cx, inside ? mx : 0, 0.16);
-        cy = lerp(cy, inside ? my : 0, 0.16);
-        const moving = Math.abs(cx) > 0.1 || Math.abs(cy) > 0.1;
-        if (moving) {
-          wrap.style.transform = `translate(${cx}px, ${cy}px)`;
-          settled = false;
-        } else if (!settled) {
-          wrap.style.transform = '';
-          settled = true;
-        }
-      });
-    });
-  }
-
-  /* ═══════════════════════════════════════════════════════════════════
-     9. MARQUEE CLONE
-     ═══════════════════════════════════════════════════════════════════ */
-  function initMarquee() {
-    $$('.marquee').forEach(track => {
-      const ul = $('ul', track);
-      if (!ul) return;
-
-      /* One clone is only seamless while a single copy is wider than the
-         viewport. On a wide desktop it is not, and a gap walks across the
-         band. Clone until two copies cover the track, then once more. */
-      function fill() {
-        $$('ul[data-clone]', track).forEach(n => n.remove());
-        const unit = ul.getBoundingClientRect().width;
-        if (!unit) return;
-        const needed = Math.max(1, Math.ceil(track.offsetWidth / unit) + 1);
-        for (let i = 0; i < needed; i++) {
-          const clone = ul.cloneNode(true);
-          clone.setAttribute('aria-hidden', 'true');
-          clone.setAttribute('data-clone', '');
-          track.appendChild(clone);
-        }
-      }
-      fill();
-      let rid;
-      window.addEventListener('resize', () => {
-        clearTimeout(rid);
-        rid = setTimeout(fill, 200);
-      }, { passive: true });
-    });
-  }
-
-  /* ═══════════════════════════════════════════════════════════════════
      10. CONTACT FORM — Web3Forms
      ═══════════════════════════════════════════════════════════════════ */
   function initForm() {
@@ -575,6 +310,10 @@
     const result = $('#form-result');
     const submitBtn = $('#submit-btn');
     if (!form || !result || !submitBtn) return;
+
+    /* Keep the native browser submission as a no-JS fallback; JS owns the
+       Portuguese validation and async state only when it is available. */
+    form.noValidate = true;
 
     const fields = $$('.form-field', form);
 
@@ -678,16 +417,15 @@
      BOOT
      ═══════════════════════════════════════════════════════════════════ */
   document.addEventListener('DOMContentLoaded', () => {
-    initLoader();
+    document.documentElement.classList.add('js');
+    // Show the work immediately; retain the loader ID for integrations.
+    const loader = $('#loader');
+    if (loader) loader.classList.add('done');
+    revealOnce();
     initHeader();
-    initDust();
+    initCollage();
     initClock();
-    initDock();
-    initWordwash();
     initCounters();
-    initGhosts();
-    initMagnets();
-    initMarquee();
     initForm();
     initFooter();
   });
