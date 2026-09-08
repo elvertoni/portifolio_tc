@@ -4,7 +4,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Project
 
-Framework-free static portfolio site (Toni Coimbra). Pure HTML5/CSS3/ES6+, no build step, no bundler. `index.html` loads `assets/css/style.css` and `assets/js/main.js` (defer). Design system: "Volta Atelier" — brutalist-editorial, dark warm background (`#141414`), signal red accent (`#fb3732`). See `design-system/design-system.html` for the token/component source of truth, `design-system/marca-canvas/` for the brand mark (the "ligadura TC"), and `CODEBASE.md` for a full architectural writeup (file map, JS module breakdown, deploy flow).
+Framework-free static portfolio site (Toni Coimbra). Pure HTML5/CSS3/ES6+, no build step, no bundler. `index.html` loads `assets/css/style.css` and `assets/js/main.js` (defer). Design system: "Volta Atelier" — brutalist-editorial, dark warm background (`#141414`), signal red accent (`#fb3732`). `assets/css/style.css` is the single source of truth for tokens and components; `design-system/design-system.html` is a catalog only. The brand mark source remains `design-system/marca-canvas/`, and `CODEBASE.md` contains the architectural writeup.
 
 ## Commands
 

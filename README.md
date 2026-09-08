@@ -93,7 +93,7 @@ portifolio_tc/
 │   │   └── main.js          # Runtime JS (rAF loop, reveal, partículas, form)
 │   └── favicon.svg          # Favicon vetorial
 ├── design-system/
-│   └── design-system.html   # Espelho de referência completo do Volta Atelier
+│   └── design-system.html   # Catálogo visual que consome o CSS canônico
 ├── .dockerignore            # Regras de exclusão do Docker
 ├── Dockerfile               # Configuração Nginx Alpine para produção
 ├── index.html               # Estrutura HTML semântica completa
