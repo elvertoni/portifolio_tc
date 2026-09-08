@@ -36,6 +36,9 @@ O projeto adota uma arquitetura **Jamstack estática de alta fidelidade**, sem f
 | [`assets/css/style.css`](file:///c:/ARQUIVOS/PROJETOS/TONI/portifolio_tc/assets/css/style.css) | Folha de estilos unificada (Tokens, Reset, Componentes, Layout) | Referenciado por `index.html`. Governa todos os nós do DOM |
 | [`assets/js/main.js`](file:///c:/ARQUIVOS/PROJETOS/TONI/portifolio_tc/assets/js/main.js) | Lógica interativa, animações, motor de reveal, validação e formulário | Referenciado por `index.html` com `defer`. Altera classes `.is-in`, `.stuck`, `.open` |
 | [`assets/img/`](file:///c:/ARQUIVOS/PROJETOS/TONI/portifolio_tc/assets/img/) | Capturas reais dos produtos em produção (`.webp` e `@2x.webp`) | Exibidas na grade de projetos com carregamento preguiçoso (`loading="lazy"`) |
+| [`assets/logo.svg`](file:///c:/ARQUIVOS/PROJETOS/TONI/portifolio_tc/assets/logo.svg) | Ligadura TC em `viewBox` 200×128; o vão entre T e C é recortado por `<mask>` para ficar transparente | Usada no cabeçalho e no rodapé via `.brand-logo` |
+| [`assets/favicon.svg`](file:///c:/ARQUIVOS/PROJETOS/TONI/portifolio_tc/assets/favicon.svg) | Corte de 16 px da mesma marca sobre campo arredondado `#141414` | `<link rel="icon">` do `index.html` e das páginas de `design-system/` |
+| [`design-system/marca-canvas/`](file:///c:/ARQUIVOS/PROJETOS/TONI/portifolio_tc/design-system/marca-canvas/) | Fonte da verdade da marca: construção, medidas, logotipo, lockups e provas de redução | Origem dos dois SVG acima; qualquer alteração da marca começa aqui |
 | [`tests/smoke.spec.mjs`](file:///c:/ARQUIVOS/PROJETOS/TONI/portifolio_tc/tests/smoke.spec.mjs) | Suíte de testes automatizados com Playwright | Executa validação de a11y, layout responsivo e reduced-motion via `npm test` |
 | [`nginx.conf`](file:///c:/ARQUIVOS/PROJETOS/TONI/portifolio_tc/nginx.conf) | Configuração de Nginx para produção com Gzip, cache e headers de segurança | Montado pelo `Dockerfile` |
 | [`design-system/design-system.html`](file:///c:/ARQUIVOS/PROJETOS/TONI/portifolio_tc/design-system/design-system.html) | Documentação viva de referência original (Volta Atelier) | Fonte da verdade para qualquer novo componente ou token |
@@ -45,18 +48,21 @@ O projeto adota uma arquitetura **Jamstack estática de alta fidelidade**, sem f
 
 ## 3. Mapeamento de Módulos JavaScript (`assets/js/main.js`)
 
-O runtime é executado dentro de uma IIFE imediatamente invocada com `'use strict'`:
+O runtime é executado dentro de uma IIFE imediatamente invocada com `'use strict'`. A
+constante `REDUCED` (de `prefers-reduced-motion`) desliga tudo que é movimento.
 
-1. **`frame(now)` & `onTick(fn)`:** Loop central em `requestAnimationFrame` que consolida todas as atualizações contínuas em um único ciclo, evitando múltiplos timers desordenados. Desativado automaticamente sob `prefers-reduced-motion`.
-2. **`initReveal()`:** `IntersectionObserver` único que adiciona a classe `.is-in` aos elementos decorados com `[data-rise]`, `[data-mask]`, `.stagger` ou `<section>`.
-3. **`initLoader()`:** Preloader com easing out cúbico `1 - Math.pow(1 - t, 3)`, atualizando contagem `000` a `100`, barra `#loBar` e liberando o scroll do `<body>` via remoção da classe `is-locked`.
-4. **`initHeader()`:** Monitoramento de rolagem para atribuir a classe `.stuck` (ativação de backdrop-filter e background translúcido) e toggle de acessibilidade no `#drawer` mobile.
-5. **`initDust()`:** Canvas `#dust` com emissão e dissipação contínua de partículas com física de flutuação e opacidade em curva senoidal.
-6. **`initWordwash()`:** Divide o parágrafo marcado como `.wordwash` em `<span>` individuais e ativa a classe `.lit` conforme o scroll atravessa o centro da viewport.
-7. **`initCounters()`:** Animação de contagem numérica com easing cúbico para elementos com `[data-count]`.
-8. **`initGhosts()`:** Geração de palavras-chave flutuantes em background no `#cta` com rotação aleatória e deriva orbital suave.
-9. **`initMagnets()`:** Cálculo vetorial suave (`lerp` em 0.16) para botões que perseguem o cursor do mouse.
-10. **`initForm()`:** Manipulador assíncrono `fetch` para envio via JSON para a API `https://api.web3forms.com/submit`.
+1. **`frame(now)` & `onTick(fn)`:** Loop central em `requestAnimationFrame` que consolida todas as atualizações contínuas em um único ciclo, evitando múltiplos timers desordenados.
+2. **`initReveal()` / `revealOnce()`:** `IntersectionObserver` único que adiciona a classe `.is-in` aos elementos decorados com `[data-rise]`, `[data-mask]`, `.stagger` ou `<section>`.
+3. **`initHeader()`:** Monitoramento de rolagem para atribuir a classe `.stuck` (backdrop-filter e background translúcido) e toggle de acessibilidade no `#drawer` mobile, com fechamento no Escape e ao voltar para desktop.
+4. **`initCollage()`:** Paralaxe das `.tile` do herói seguindo o ponteiro. Sai cedo sob movimento reduzido ou ponteiro grosso (`pointer: coarse`) — no lugar fica a composição estática.
+5. **`initClock()`:** Relógio de São Paulo em `#clock` e `#clock2`, com `setInterval` interrompido quando a aba fica oculta.
+6. **`initCounters()`:** Animação de contagem numérica com easing cúbico para elementos com `[data-count]`.
+7. **`initForm()`:** Manipulador assíncrono `fetch` para envio via JSON para a API `https://api.web3forms.com/submit`, com honeypot anti-spam e mensagens em `#form-result`.
+8. **`initFooter()`:** Ano corrente em `#current-year` e botão `#toTop`, que respeita `prefers-reduced-motion` no `scrollTo`.
+
+O boot acontece em `DOMContentLoaded`. Não há animação de preloader: o elemento
+`#loader` permanece no DOM e recebe a classe `done` imediatamente, para não
+atrasar a primeira leitura.
 
 ---
 
