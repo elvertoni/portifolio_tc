@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex">
+  <meta name="color-scheme" content="dark light">
+  <title>TC — Redesign axial</title>
+  <link rel="icon" type="image/svg+xml" sizes="any" href="../assets/favicon.svg">
+  <style>
+    @font-face {
+      font-family: 'Archivo';
+      src: url('../assets/fonts/archivo-latin.woff2') format('woff2');
+      font-display: swap;
+    }
+    @font-face {
+      font-family: 'JetBrains Mono';
+      src: url('../assets/fonts/jetbrains-mono-latin.woff2') format('woff2');
+      font-display: swap;
+    }
+    :root {
+      --black: #09090a;
+      --bone: #f4f3f0;
+      --orange: #ff5c00;
+      --line-dark: rgba(9, 9, 10, .2);
+      --line-light: rgba(244, 243, 240, .2);
+    }
+    * { box-sizing: border-box; }
+    html { background: var(--black); }
+    body {
+      margin: 0;
+      min-width: 320px;
+      color: var(--bone);
+      background: var(--black);
+      font-family: 'Archivo', sans-serif;
+    }
+    button { font: inherit; }
+    .intro {
+      display: grid;
+      grid-template-columns: minmax(0, 1.5fr) minmax(280px, .5fr);
+      min-height: 76vh;
+      padding: clamp(32px, 5vw, 80px);
+      border-bottom: 1px solid var(--line-light);
+    }
+    .intro h1 {
+      align-self: end;
+      max-width: 9ch;
+      margin: 0;
+      font-size: clamp(68px, 12vw, 190px);
+      line-height: .78;
+      letter-spacing: -.04em;
+      text-transform: uppercase;
+    }
+    .intro-copy {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      gap: 48px;
+      padding-left: clamp(0px, 3vw, 48px);
+    }
+    .intro-copy strong {
+      color: var(--orange);
+      font: 700 12px/1 'JetBrains Mono', monospace;
+      letter-spacing: .14em;
+      text-transform: uppercase;
+    }
+    .intro-copy p {
+      max-width: 44ch;
+      margin: 0;
+      font: 13px/1.7 'JetBrains Mono', monospace;
+    }
+    .concept {
+      display: grid;
+      grid-template-columns: minmax(0, 1.35fr) minmax(340px, .65fr);
+      min-height: 100vh;
+    }
+    .concept--orange { color: var(--black); background: var(--orange); }
+    .concept--bone { color: var(--black); background: var(--bone); }
+    .concept--black { color: var(--bone); background: var(--black); }
+    .symbol-field {
+      position: relative;
+      display: grid;
+      place-items: center;
+      min-height: 70vh;
+      overflow: hidden;
+    }
+    .symbol-field::after {
+      content: '';
+      position: absolute;
+      inset: 24px;
+      border: 1px solid currentColor;
+      opacity: .18;
+      pointer-events: none;
+    }
+    .symbol {
+      width: min(68%, 620px);
+      aspect-ratio: 1;
+      color: currentColor;
+    }
+    .symbol svg { width: 100%; height: 100%; display: block; }
+    .info {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      gap: 52px;
+      padding: clamp(36px, 5vw, 80px);
+      border-left: 1px solid currentColor;
+    }
+    .code {
+      display: flex;
+      justify-content: space-between;
+      gap: 20px;
+      font: 700 11px/1 'JetBrains Mono', monospace;
+      letter-spacing: .14em;
+      text-transform: uppercase;
+    }
+    .info h2 {
+      max-width: 8ch;
+      margin: auto 0 24px;
+      font-size: clamp(48px, 6vw, 100px);
+      line-height: .84;
+      letter-spacing: -.04em;
+      text-transform: uppercase;
+    }
+    .info p {
+      max-width: 48ch;
+      margin: 0;
+      font-size: 16px;
+      line-height: 1.55;
+    }
+    .scale-test {
+      display: flex;
+      align-items: flex-end;
+      gap: 22px;
+      padding-block: 28px;
+      border-block: 1px solid currentColor;
+    }
+    .scale-test span {
+      display: grid;
+      gap: 9px;
+      justify-items: center;
+      font: 9px/1 'JetBrains Mono', monospace;
+    }
+    .scale-test svg { display: block; }
+    .select {
+      min-height: 54px;
+      border: 2px solid currentColor;
+      color: inherit;
+      background: transparent;
+      font-weight: 700;
+      letter-spacing: -.01em;
+      cursor: pointer;
+      transition: color .2s ease, background-color .2s ease;
+    }
+    .concept--orange .select:hover,
+    .concept--orange .select:focus-visible,
+    .concept--orange .select[aria-pressed="true"],
+    .concept--bone .select:hover,
+    .concept--bone .select:focus-visible,
+    .concept--bone .select[aria-pressed="true"] {
+      color: var(--bone);
+      background: var(--black);
+      outline: none;
+    }
+    .concept--black .select:hover,
+    .concept--black .select:focus-visible,
+    .concept--black .select[aria-pressed="true"] {
+      color: var(--black);
+      background: var(--bone);
+      outline: none;
+    }
+    .end {
+      display: flex;
+      justify-content: space-between;
+      gap: 32px;
+      padding: 30px clamp(32px, 5vw, 80px) 56px;
+      color: var(--bone);
+      background: var(--black);
+      font: 11px/1.5 'JetBrains Mono', monospace;
+    }
+    #choice { color: var(--orange); }
+    @media (max-width: 860px) {
+      .intro { grid-template-columns: 1fr; min-height: 680px; gap: 60px; }
+      .intro-copy { padding-left: 0; }
+      .concept { grid-template-columns: 1fr; }
+      .symbol-field { min-height: 62vh; }
+      .info { min-height: 620px; border-left: 0; border-top: 1px solid currentColor; }
+      .info h2 { margin-top: auto; }
+      .end { flex-direction: column; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { transition: none !important; }
+    }
+  </style>
+</head>
+<body>
+  <header class="intro">
+    <h1>Autoria em estado bruto.</h1>
+    <div class="intro-copy">
+      <strong>TC / Redesign axial</strong>
+      <p>Sem botão power. Sem seta. Sem ícone tech genérico. Uma única estrutura deve carregar as iniciais Toni Coimbra e sobreviver em preto puro a 16 pixels.</p>
+    </div>
+  </header>
+
+  <main aria-label="Propostas agressivas de redesign TC">
+    <article class="concept concept--orange" data-concept="A">
+      <div class="symbol-field">
+        <div class="symbol" data-symbol="beam" aria-label="Monograma TC Viga Compartilhada"></div>
+      </div>
+      <div class="info">
+        <div class="code"><span>A / Viga</span><span>Uma massa</span></div>
+        <div>
+          <h2>Viga TC</h2>
+          <p>O topo pertence ao T e ao C ao mesmo tempo. A identidade nasce como uma única peça estrutural: seca, compacta e impossível de separar em “ícone + detalhe”.</p>
+        </div>
+        <div class="scale-test" data-scale="beam" aria-label="Teste de redução da opção A"></div>
+        <button class="select" type="button" aria-pressed="false">Escolher A</button>
+      </div>
+    </article>
+
+    <article class="concept concept--bone" data-concept="B">
+      <div class="symbol-field">
+        <div class="symbol" data-symbol="cut" aria-label="Monograma TC Corte Facetado"></div>
+      </div>
+      <div class="info">
+        <div class="code"><span>B / Corte</span><span>Contraforma</span></div>
+        <div>
+          <h2>Corte axial</h2>
+          <p>O C é uma moldura interrompida e o T fica suspenso no centro. As diagonais dão impacto editorial e transformam a abertura em assinatura, não em seta.</p>
+        </div>
+        <div class="scale-test" data-scale="cut" aria-label="Teste de redução da opção B"></div>
+        <button class="select" type="button" aria-pressed="false">Escolher B</button>
+      </div>
+    </article>
+
+    <article class="concept concept--black" data-concept="C">
+      <div class="symbol-field">
+        <div class="symbol" data-symbol="totem" aria-label="Monograma TC Totem"></div>
+      </div>
+      <div class="info">
+        <div class="code"><span>C / Totem</span><span>Assinatura vertical</span></div>
+        <div>
+          <h2>Totem TC</h2>
+          <p>As iniciais deixam de competir lado a lado e passam a ocupar um eixo. É a opção mais estranha e memorável: o T aciona, o C sustenta.</p>
+        </div>
+        <div class="scale-test" data-scale="totem" aria-label="Teste de redução da opção C"></div>
+        <button class="select" type="button" aria-pressed="false">Escolher C</button>
+      </div>
+    </article>
+  </main>
+
+  <footer class="end">
+    <span>Grid 128 × 128 · haste mínima 16u · construção monocromática</span>
+    <span id="choice" aria-live="polite">Nenhuma opção selecionada</span>
+  </footer>
+
+  <script>
+    const symbols = {
+      beam: '<svg viewBox="0 0 128 128" aria-hidden="true"><path fill="currentColor" d="M16 16h96v20H80v44H60V36H36v56h40v20H16z"/></svg>',
+      cut: '<svg viewBox="0 0 128 128" aria-hidden="true"><path fill="currentColor" d="M112 16H48L16 48v32l32 32h64V88H56L40 72V56l16-16h56z"/><path fill="currentColor" d="M48 48h64v20H90v44H68V68H48z"/></svg>',
+      totem: '<svg viewBox="0 0 128 128" aria-hidden="true"><path fill="currentColor" d="M20 12h88v18H74v34H54V30H20z"/><path fill="none" stroke="currentColor" stroke-width="16" stroke-linecap="square" stroke-linejoin="miter" d="M100 68H52c-12 0-20 7-20 18s8 18 20 18h48"/></svg>'
+    };
+
+    document.querySelectorAll('[data-symbol]').forEach(element => {
+      element.innerHTML = symbols[element.dataset.symbol];
+    });
+
+    document.querySelectorAll('[data-scale]').forEach(element => {
+      const symbol = symbols[element.dataset.scale];
+      element.innerHTML = [64, 32, 16].map(size =>
+        `<span>${symbol.replace('<svg ', `<svg width="${size}" height="${size}" `)}<b>${size}px</b></span>`
+      ).join('');
+    });
+
+    const concepts = Array.from(document.querySelectorAll('.concept'));
+    const choice = document.querySelector('#choice');
+    concepts.forEach(concept => {
+      const button = concept.querySelector('.select');
+      button.addEventListener('click', () => {
+        concepts.forEach(item => item.querySelector('.select').setAttribute('aria-pressed', 'false'));
+        button.setAttribute('aria-pressed', 'true');
+        choice.textContent = `Opção ${concept.dataset.concept} selecionada`;
+        localStorage.setItem('toni-logo-redesign', concept.dataset.concept);
+      });
+    });
+
+    const saved = localStorage.getItem('toni-logo-redesign');
+    const selected = concepts.find(concept => concept.dataset.concept === saved);
+    if (selected) selected.querySelector('.select').click();
+  </script>
+</body>
+</html>

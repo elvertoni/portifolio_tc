@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" role="img" aria-labelledby="title desc">
+  <title id="title">TC Power Loop</title>
+  <desc id="desc">C circular branco envolvendo um acionamento horizontal laranja.</desc>
+  <g fill="none" stroke-linecap="round" stroke-linejoin="round">
+    <path stroke="#f4f3f0" stroke-width="14" d="M91 27a44 44 0 1 0 0 74"/>
+    <path stroke="#ffa31a" stroke-width="13" d="M38 64h49"/>
+    <path stroke="#ffa31a" stroke-width="13" d="M85 48c5 10 5 22 0 32"/>
+  </g>
+</svg>

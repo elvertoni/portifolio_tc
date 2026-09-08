@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" role="img" aria-labelledby="title desc">
+  <title id="title">TC Corte Facetado</title>
+  <desc id="desc">C angular envolve um T suspenso, construídos por cortes retos e diagonais.</desc>
+  <path fill="currentColor" d="M112 16H48L16 48v32l32 32h64V88H56L40 72V56l16-16h56z"/>
+  <path fill="currentColor" d="M48 48h64v20H90v44H68V68H48z"/>
+</svg>

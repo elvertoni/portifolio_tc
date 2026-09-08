@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" role="img" aria-labelledby="title desc">
+  <title id="title">TC Signal Path</title>
+  <desc id="desc">C branco e T laranja em um percurso contínuo que termina como sinal de saída.</desc>
+  <g fill="none" stroke-linecap="round" stroke-linejoin="round">
+    <path stroke="#f4f3f0" stroke-width="13" d="M92 28H53c-18 0-32 14-32 32v8c0 18 14 32 32 32h39"/>
+    <path stroke="#ffa31a" stroke-width="12" d="M43 45h46M67 45v35c0 11 8 20 19 20h6"/>
+    <circle cx="99" cy="45" r="6" fill="#ffa31a" stroke="none"/>
+  </g>
+</svg>

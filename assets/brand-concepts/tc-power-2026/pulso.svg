@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" role="img" aria-labelledby="title desc">
+  <title id="title">Toni Coimbra — Pulso</title>
+  <desc id="desc">O traço do botão de ligar recebe a barra do T. O arco envolve o conjunto e mantém a memória circular da marca.</desc>
+  <path d="M32 33a44 44 0 1 0 64 0" fill="none" stroke="currentColor" stroke-width="14" stroke-linecap="round"/><path d="M49 15h30M64 15v51" fill="none" stroke="var(--accent, currentColor)" stroke-width="14" stroke-linecap="round"/>
+</svg>

@@ -1,0 +1,664 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex">
+  <meta name="color-scheme" content="dark light">
+  <meta name="theme-color" content="#141414">
+  <title>Toni Coimbra — Estudos de assinatura</title>
+  <link rel="icon" type="image/svg+xml" sizes="any" href="../assets/favicon.svg">
+  <style>
+    @font-face {
+      font-family: 'Archivo';
+      src: url('../assets/fonts/archivo-latin.woff2') format('woff2');
+      font-weight: 700 800;
+      font-display: swap;
+    }
+
+    @font-face {
+      font-family: 'JetBrains Mono';
+      src: url('../assets/fonts/jetbrains-mono-latin.woff2') format('woff2');
+      font-weight: 400 500;
+      font-display: swap;
+    }
+
+    :root {
+      --black: #141414;
+      --bone: #f4f3f0;
+      --orange: #fb3732;
+      --amber: #ffa31a;
+      --ink-muted: #5d5b57;
+      --paper-line: rgba(20, 20, 20, .2);
+      --night-line: rgba(244, 243, 240, .22);
+      --focus: #72d6ff;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      background: var(--black);
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      min-width: 320px;
+      color: var(--bone);
+      background: var(--black);
+      font-family: 'Archivo', sans-serif;
+    }
+
+    ::selection {
+      color: var(--black);
+      background: var(--orange);
+    }
+
+    * {
+      scrollbar-color: var(--orange) var(--black);
+      scrollbar-width: thin;
+    }
+
+    a,
+    button {
+      font: inherit;
+    }
+
+    a {
+      color: inherit;
+      text-underline-offset: .22em;
+    }
+
+    :focus-visible {
+      outline: 3px solid var(--focus);
+      outline-offset: 4px;
+    }
+
+    .masthead {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+      min-height: 72px;
+      padding-inline: clamp(20px, 4vw, 64px);
+      border-bottom: 1px solid var(--night-line);
+      font: 500 11px/1.3 'JetBrains Mono', monospace;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+    }
+
+    .masthead__name {
+      color: var(--orange);
+      font-weight: 500;
+    }
+
+    .intro {
+      display: grid;
+      grid-template-columns: minmax(0, 1.45fr) minmax(280px, .55fr);
+      align-items: end;
+      gap: clamp(44px, 8vw, 120px);
+      min-height: calc(82vh - 72px);
+      padding: clamp(56px, 8vw, 120px) clamp(20px, 4vw, 64px);
+    }
+
+    .intro h1 {
+      max-width: 10ch;
+      margin: 0;
+      font-size: clamp(3.7rem, 9vw, 6rem);
+      font-weight: 800;
+      line-height: .82;
+      letter-spacing: -.04em;
+      text-wrap: balance;
+      text-transform: uppercase;
+    }
+
+    .intro h1 span {
+      color: var(--orange);
+    }
+
+    .intro p {
+      max-width: 46ch;
+      margin: 0;
+      color: #d1cfca;
+      font-size: 17px;
+      line-height: 1.6;
+    }
+
+    .intro p strong {
+      color: var(--bone);
+    }
+
+    .concept {
+      --surface: var(--bone);
+      --foreground: var(--black);
+      --muted: var(--ink-muted);
+      --line: var(--paper-line);
+      color: var(--foreground);
+      background: var(--surface);
+    }
+
+    .concept--dark {
+      --surface: var(--black);
+      --foreground: var(--bone);
+      --muted: #b9b6b0;
+      --line: var(--night-line);
+    }
+
+    .concept--orange {
+      --surface: var(--orange);
+      --foreground: var(--black);
+      --muted: #250d00;
+      --line: rgba(10, 10, 10, .3);
+    }
+
+    .concept__stage {
+      display: grid;
+      place-items: center;
+      min-height: 72vh;
+      padding: clamp(72px, 10vw, 150px) clamp(20px, 5vw, 80px);
+      overflow: hidden;
+    }
+
+    .wordmark {
+      position: relative;
+      display: inline-flex;
+      align-items: baseline;
+      justify-content: center;
+      max-width: 100%;
+      font-size: clamp(2.75rem, 8.4vw, 6rem);
+      font-weight: 800;
+      line-height: .78;
+      letter-spacing: -.04em;
+      white-space: nowrap;
+      text-transform: uppercase;
+    }
+
+    .wordmark__toni,
+    .wordmark__coimbra {
+      display: inline-block;
+    }
+
+    .wordmark__toni {
+      color: var(--bone);
+    }
+
+    .wordmark__coimbra {
+      color: var(--orange);
+    }
+
+    .wordmark--seam {
+      filter: drop-shadow(0 18px 25px rgba(0, 0, 0, .2));
+    }
+
+    .wordmark--seam .wordmark__toni {
+      position: relative;
+      z-index: 1;
+      padding-right: .08em;
+      clip-path: polygon(0 0, 100% 0, calc(100% - .11em) 100%, 0 100%);
+    }
+
+    .wordmark--seam .wordmark__toni::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      right: .04em;
+      bottom: 0;
+      width: .16em;
+      background: var(--orange);
+      clip-path: polygon(100% 0, 100% 100%, 0 100%);
+    }
+
+    .wordmark--seam .wordmark__coimbra {
+      margin-left: -.12em;
+      padding-left: .09em;
+      clip-path: polygon(.11em 0, 100% 0, 100% 100%, 0 100%);
+    }
+
+    .concept--light .wordmark--seam .wordmark__toni {
+      color: var(--black);
+    }
+
+    .concept--light .wordmark--seam {
+      filter: none;
+    }
+
+    .wordmark--block {
+      align-items: stretch;
+    }
+
+    .wordmark--block .wordmark__toni {
+      padding: .11em .2em .1em .1em;
+      color: var(--black);
+      background: var(--orange);
+      clip-path: polygon(0 0, 100% 0, calc(100% - .13em) 100%, 0 100%);
+    }
+
+    .wordmark--block .wordmark__coimbra {
+      align-self: center;
+      margin-left: -.09em;
+      padding-left: .08em;
+    }
+
+    .wordmark--lock {
+      display: grid;
+      justify-items: end;
+      color: var(--black);
+      line-height: .7;
+      white-space: normal;
+    }
+
+    .wordmark--lock .wordmark__toni,
+    .wordmark--lock .wordmark__coimbra {
+      position: relative;
+      display: block;
+    }
+
+    .wordmark--lock .wordmark__toni {
+      z-index: 1;
+      padding-right: .4em;
+      color: var(--black);
+    }
+
+    .wordmark--lock .wordmark__toni::after {
+      content: '';
+      position: absolute;
+      right: .08em;
+      bottom: -.15em;
+      width: .26em;
+      height: .32em;
+      background: var(--black);
+      clip-path: polygon(0 0, 100% 0, 62% 100%, 0 100%);
+    }
+
+    .wordmark--lock .wordmark__coimbra {
+      padding-top: .12em;
+      color: var(--bone);
+      clip-path: polygon(0 .12em, 76% .12em, 78% 0, 100% 0, 100% 100%, 0 100%);
+    }
+
+    .concept__body {
+      display: grid;
+      grid-template-columns: minmax(260px, .7fr) minmax(0, 1.3fr);
+      border-top: 1px solid var(--line);
+    }
+
+    .concept__identity,
+    .concept__proof {
+      padding: clamp(36px, 5vw, 72px) clamp(20px, 4vw, 64px);
+    }
+
+    .concept__identity {
+      display: flex;
+      min-height: 460px;
+      flex-direction: column;
+      border-right: 1px solid var(--line);
+    }
+
+    .concept__label {
+      display: flex;
+      justify-content: space-between;
+      gap: 16px;
+      margin-bottom: 84px;
+      font: 500 11px/1.3 'JetBrains Mono', monospace;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+    }
+
+    .concept__identity h2 {
+      max-width: 9ch;
+      margin: auto 0 20px;
+      font-size: clamp(2.5rem, 5.5vw, 5rem);
+      font-weight: 800;
+      line-height: .84;
+      letter-spacing: -.04em;
+      text-transform: uppercase;
+    }
+
+    .concept__identity p {
+      max-width: 48ch;
+      margin: 0 0 36px;
+      color: var(--muted);
+      font-size: 16px;
+      line-height: 1.6;
+    }
+
+    .select-concept {
+      width: 100%;
+      min-height: 52px;
+      padding: 0 20px;
+      border: 2px solid var(--foreground);
+      border-radius: 0;
+      color: inherit;
+      background: transparent;
+      font-weight: 800;
+      cursor: pointer;
+      transition: color .24s cubic-bezier(.16, 1, .3, 1), background-color .24s cubic-bezier(.16, 1, .3, 1);
+    }
+
+    .select-concept:hover,
+    .select-concept[aria-pressed='true'] {
+      color: var(--surface);
+      background: var(--foreground);
+    }
+
+    .concept__proof {
+      display: grid;
+      align-content: center;
+      gap: 40px;
+    }
+
+    .proof-row {
+      display: grid;
+      grid-template-columns: 130px minmax(0, 1fr);
+      align-items: center;
+      gap: 28px;
+      min-height: 92px;
+      padding-block: 20px;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .proof-row:first-child {
+      border-top: 1px solid var(--line);
+    }
+
+    .proof-row__label {
+      color: var(--muted);
+      font: 500 11px/1.4 'JetBrains Mono', monospace;
+      letter-spacing: .07em;
+      text-transform: uppercase;
+    }
+
+    .proof-logo {
+      display: inline-flex;
+      align-items: baseline;
+      max-width: 100%;
+      font-size: clamp(1.4rem, 3vw, 2.4rem);
+      font-weight: 800;
+      line-height: .8;
+      letter-spacing: -.04em;
+      white-space: nowrap;
+      text-transform: uppercase;
+    }
+
+    .proof-logo--mono,
+    .proof-logo--mono span {
+      color: var(--foreground);
+    }
+
+    .proof-logo--mono.wordmark--seam .wordmark__toni::after {
+      background: var(--foreground);
+    }
+
+    .proof-logo--mono.wordmark--block .wordmark__toni {
+      color: var(--surface);
+      background: var(--foreground);
+    }
+
+    .proof-logo.wordmark--lock {
+      justify-self: start;
+      font-size: clamp(1.5rem, 3.5vw, 2.8rem);
+    }
+
+    .concept--orange .proof-logo--mono,
+    .concept--orange .proof-logo--mono span {
+      color: var(--black);
+    }
+
+    .choice-bar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+      min-height: 68px;
+      padding: 14px clamp(20px, 4vw, 64px);
+      color: var(--bone);
+      background: rgba(10, 10, 10, .94);
+      border-top: 1px solid var(--night-line);
+      backdrop-filter: blur(12px);
+      font: 500 11px/1.4 'JetBrains Mono', monospace;
+      letter-spacing: .05em;
+      text-transform: uppercase;
+    }
+
+    #choice {
+      color: var(--orange);
+      text-align: right;
+    }
+
+    @media (max-width: 840px) {
+      .masthead {
+        min-height: 64px;
+      }
+
+      .intro {
+        grid-template-columns: 1fr;
+        align-content: end;
+        min-height: calc(100svh - 64px);
+      }
+
+      .intro p {
+        max-width: 38ch;
+      }
+
+      .concept__stage {
+        min-height: 54vh;
+      }
+
+      .concept__body {
+        grid-template-columns: 1fr;
+      }
+
+      .concept__identity {
+        min-height: 520px;
+        border-right: 0;
+        border-bottom: 1px solid var(--line);
+      }
+    }
+
+    @media (max-width: 560px) {
+      .masthead a:last-child {
+        display: none;
+      }
+
+      .intro {
+        min-height: 720px;
+      }
+
+      .intro h1 {
+        font-size: clamp(3.45rem, 18vw, 5rem);
+      }
+
+      .concept__stage {
+        min-height: 440px;
+        padding-inline: 12px;
+      }
+
+      .wordmark {
+        font-size: clamp(2.25rem, 11.1vw, 3.75rem);
+      }
+
+      .wordmark--lock {
+        font-size: clamp(3.5rem, 18vw, 5.2rem);
+      }
+
+      .concept__label {
+        margin-bottom: 64px;
+      }
+
+      .proof-row {
+        grid-template-columns: 90px minmax(0, 1fr);
+        gap: 16px;
+      }
+
+      .proof-logo {
+        font-size: clamp(1.05rem, 5.4vw, 1.55rem);
+      }
+
+      .choice-bar {
+        align-items: flex-start;
+        flex-direction: column;
+        gap: 5px;
+      }
+
+      #choice {
+        text-align: left;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      html {
+        scroll-behavior: auto;
+      }
+
+      *,
+      *::before,
+      *::after {
+        transition-duration: .01ms !important;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header class="masthead">
+    <span class="masthead__name">Toni Coimbra</span>
+    <a href="./logo-redesign.html">Voltar aos monogramas</a>
+  </header>
+
+  <section class="intro" aria-labelledby="page-title">
+    <h1 id="page-title">O nome é a <span>marca.</span></h1>
+    <p><strong>Uma palavra, duas identidades, um único corte.</strong> TONI e COIMBRA se encostam até a troca de cor virar parte da construção — como duas peças aparadas para ocupar o mesmo encaixe.</p>
+  </section>
+
+  <main aria-label="Propostas de assinatura Toni Coimbra">
+    <article class="concept concept--light" data-concept="A">
+      <div class="concept__stage">
+        <div class="wordmark wordmark--seam" role="img" aria-label="Toni Coimbra, assinatura com emenda diagonal">
+          <span class="wordmark__toni" aria-hidden="true">Toni</span><span class="wordmark__coimbra" aria-hidden="true">Coimbra</span>
+        </div>
+      </div>
+      <div class="concept__body">
+        <section class="concept__identity">
+          <div class="concept__label"><span>A / Emenda</span><span>Recomendada</span></div>
+          <h2>Corte de encontro</h2>
+          <p>O I termina em diagonal e o C entra no mesmo corte. O nome continua inteiro, mas a mudança de cor revela exatamente onde Toni encontra Coimbra.</p>
+          <button class="select-concept" type="button" aria-pressed="false">Escolher emenda</button>
+        </section>
+        <section class="concept__proof" aria-label="Testes da opção A">
+          <div class="proof-row">
+            <span class="proof-row__label">Cabeçalho</span>
+            <div class="proof-logo wordmark--seam" aria-label="Toni Coimbra em tamanho de cabeçalho">
+              <span class="wordmark__toni" aria-hidden="true">Toni</span><span class="wordmark__coimbra" aria-hidden="true">Coimbra</span>
+            </div>
+          </div>
+          <div class="proof-row">
+            <span class="proof-row__label">Uma cor</span>
+            <div class="proof-logo proof-logo--mono wordmark--seam" aria-label="Toni Coimbra em uma cor">
+              <span class="wordmark__toni" aria-hidden="true">Toni</span><span class="wordmark__coimbra" aria-hidden="true">Coimbra</span>
+            </div>
+          </div>
+        </section>
+      </div>
+    </article>
+
+    <article class="concept concept--dark" data-concept="B">
+      <div class="concept__stage">
+        <div class="wordmark wordmark--block" role="img" aria-label="Toni Coimbra, assinatura com bloco de cor aparado">
+          <span class="wordmark__toni" aria-hidden="true">Toni</span><span class="wordmark__coimbra" aria-hidden="true">Coimbra</span>
+        </div>
+      </div>
+      <div class="concept__body">
+        <section class="concept__identity">
+          <div class="concept__label"><span>B / Massa</span><span>Mais agressiva</span></div>
+          <h2>Bloco aparado</h2>
+          <p>TONI é recortado dentro da massa laranja. A ponta diagonal se abre e libera COIMBRA na mesma cor, criando uma passagem brusca entre cheio e vazio.</p>
+          <button class="select-concept" type="button" aria-pressed="false">Escolher bloco</button>
+        </section>
+        <section class="concept__proof" aria-label="Testes da opção B">
+          <div class="proof-row">
+            <span class="proof-row__label">Cabeçalho</span>
+            <div class="proof-logo wordmark--block" aria-label="Toni Coimbra em tamanho de cabeçalho">
+              <span class="wordmark__toni" aria-hidden="true">Toni</span><span class="wordmark__coimbra" aria-hidden="true">Coimbra</span>
+            </div>
+          </div>
+          <div class="proof-row">
+            <span class="proof-row__label">Uma cor</span>
+            <div class="proof-logo proof-logo--mono wordmark--block" aria-label="Toni Coimbra em uma cor">
+              <span class="wordmark__toni" aria-hidden="true">Toni</span><span class="wordmark__coimbra" aria-hidden="true">Coimbra</span>
+            </div>
+          </div>
+        </section>
+      </div>
+    </article>
+
+    <article class="concept concept--orange" data-concept="C">
+      <div class="concept__stage">
+        <div class="wordmark wordmark--lock" role="img" aria-label="Toni Coimbra, assinatura em encaixe vertical">
+          <span class="wordmark__toni" aria-hidden="true">Toni</span>
+          <span class="wordmark__coimbra" aria-hidden="true">Coimbra</span>
+        </div>
+      </div>
+      <div class="concept__body">
+        <section class="concept__identity">
+          <div class="concept__label"><span>C / Encaixe</span><span>Mais compacto</span></div>
+          <h2>Bloco acoplado</h2>
+          <p>O nome vira uma peça vertical. A haste aparada desce de TONI e trava COIMBRA, criando uma assinatura de presença forte para capas e aberturas.</p>
+          <button class="select-concept" type="button" aria-pressed="false">Escolher encaixe</button>
+        </section>
+        <section class="concept__proof" aria-label="Testes da opção C">
+          <div class="proof-row">
+            <span class="proof-row__label">Capa</span>
+            <div class="proof-logo wordmark--lock" aria-label="Toni Coimbra em tamanho de capa">
+              <span class="wordmark__toni" aria-hidden="true">Toni</span>
+              <span class="wordmark__coimbra" aria-hidden="true">Coimbra</span>
+            </div>
+          </div>
+          <div class="proof-row">
+            <span class="proof-row__label">Uma cor</span>
+            <div class="proof-logo proof-logo--mono wordmark--lock" aria-label="Toni Coimbra em uma cor">
+              <span class="wordmark__toni" aria-hidden="true">Toni</span>
+              <span class="wordmark__coimbra" aria-hidden="true">Coimbra</span>
+            </div>
+          </div>
+        </section>
+      </div>
+    </article>
+  </main>
+
+  <footer class="choice-bar">
+    <span>Archivo ExtraBold 800 · corte óptico · duas cores planas</span>
+    <span id="choice" aria-live="polite">Nenhuma direção selecionada</span>
+  </footer>
+
+  <script>
+    (() => {
+      'use strict';
+
+      const concepts = Array.from(document.querySelectorAll('[data-concept]'));
+      const choice = document.querySelector('#choice');
+
+      const selectConcept = concept => {
+        concepts.forEach(item => {
+          item.querySelector('.select-concept').setAttribute('aria-pressed', 'false');
+        });
+
+        const button = concept.querySelector('.select-concept');
+        button.setAttribute('aria-pressed', 'true');
+        choice.textContent = `Direção ${concept.dataset.concept} selecionada`;
+        localStorage.setItem('toni-wordmark-concept', concept.dataset.concept);
+      };
+
+      concepts.forEach(concept => {
+        concept.querySelector('.select-concept').addEventListener('click', () => {
+          selectConcept(concept);
+        });
+      });
+
+      const savedChoice = localStorage.getItem('toni-wordmark-concept');
+      const savedConcept = concepts.find(concept => concept.dataset.concept === savedChoice);
+      if (savedConcept) selectConcept(savedConcept);
+    })();
+  </script>
+</body>
+</html>

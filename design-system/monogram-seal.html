@@ -1,0 +1,553 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<meta name="color-scheme" content="dark">
+<meta name="theme-color" content="#141414">
+<title>Monograma Toni Coimbra</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;600;800;900&family=JetBrains+Mono:wght@400;500;700&display=swap">
+<!--
+THESIS: seis monogramas construídos em grid vetorial, julgados pela redução a 16px, não pelo efeito. Recusa a família rejeitada (C de traço fino + barra âmbar) e recusa tratamento tipográfico com filtro.
+OWN-WORLD: --ink #141414, --bone #f4f3f0, --signal #fb3732. Archivo 900 para nome, JetBrains Mono para dado técnico. Massa sólida, cantos duros, contra-forma como recurso principal.
+STORY: o visitante escolhe uma marca que sobrevive em avatar de 16px e assina material grande sem trocar de forma.
+FIRST VIEWPORT: título curto, critério de julgamento em uma linha, primeiro monograma já visível com sua régua de redução.
+FORM: folha de construção, um bloco por marca: prova grande, tira de redução 64/32/24/16, aba de navegador real, versão clara e versão de uma cor.
+FINISH: unreviewed and undocumented is unfinished; this build ends with the finish review, the verdict, DESIGN.md, and every shipping raster carrying its provenance.
+-->
+<style>
+  :root{
+    --ink:#141414;
+    --ink-deep:#0d0d0d;
+    --panel:#1c1c1e;
+    --panel-2:#232326;
+    --bone:#f4f3f0;
+    --muted:#8e8e95;
+    --dim:#8e8e95;
+    --signal:#fb3732;
+    --line:rgba(255,255,255,.11);
+    --line-2:rgba(255,255,255,.2);
+    --focus:#72d6ff;
+  }
+  *{box-sizing:border-box;}
+  html{background:var(--ink);scroll-behavior:smooth;}
+  body{
+    margin:0;background:var(--ink);color:var(--bone);
+    font-family:'Archivo',system-ui,sans-serif;
+    -webkit-font-smoothing:antialiased;
+  }
+  ::selection{background:var(--signal);color:var(--ink);}
+  :focus-visible{outline:2px solid var(--focus);outline-offset:3px;}
+
+  .mono{font-family:'JetBrains Mono',ui-monospace,monospace;letter-spacing:.06em;text-transform:uppercase;}
+
+  /* ---------- topo ---------- */
+  header.bar{
+    position:sticky;top:0;z-index:20;
+    display:flex;align-items:center;justify-content:space-between;gap:20px;
+    min-height:56px;padding:0 clamp(20px,4vw,56px);
+    background:rgba(13,13,13,.94);backdrop-filter:blur(10px);
+    border-bottom:1px solid var(--line);
+    font-size:12px;font-weight:500;color:var(--muted);
+  }
+  header.bar b{color:var(--bone);font-weight:700;}
+  header.bar a{color:var(--muted);text-decoration:none;border-bottom:1px solid var(--line-2);padding-bottom:2px;}
+  header.bar a:hover{color:var(--signal);border-color:var(--signal);}
+
+  .intro{
+    padding:clamp(56px,9vw,104px) clamp(20px,4vw,56px) clamp(40px,6vw,64px);
+    border-bottom:1px solid var(--line);
+  }
+  .intro h1{
+    margin:0 0 22px;max-width:16ch;
+    font-size:clamp(2.6rem,7vw,5rem);font-weight:900;line-height:.92;letter-spacing:-.035em;
+    text-wrap:balance;
+  }
+  .intro h1 em{font-style:normal;color:var(--signal);}
+  .intro p{margin:0;max-width:62ch;font-size:16.5px;line-height:1.65;color:#c9c7c1;}
+  .criteria{
+    display:flex;flex-wrap:wrap;gap:10px;margin-top:28px;
+    font-size:11px;font-weight:500;
+  }
+  .criteria span{
+    padding:7px 12px;border:1px solid var(--line-2);color:var(--muted);
+  }
+  .criteria span b{color:var(--bone);font-weight:700;}
+
+  /* ---------- bloco de conceito ---------- */
+  .sheet{
+    display:grid;grid-template-columns:minmax(300px,.85fr) minmax(0,1.15fr);
+    border-bottom:1px solid var(--line);
+  }
+  .sheet__stage{
+    position:relative;display:grid;place-items:center;
+    min-height:min(64vh,520px);padding:clamp(36px,5vw,64px);
+    border-right:1px solid var(--line);
+    background:var(--ink-deep);
+    background-image:
+      linear-gradient(var(--line) 1px,transparent 1px),
+      linear-gradient(90deg,var(--line) 1px,transparent 1px);
+    background-size:32px 32px;
+    background-position:center center;
+  }
+  .sheet__stage .plate{
+    width:min(260px,52vw);aspect-ratio:1;display:grid;place-items:center;
+    color:var(--bone);
+  }
+  .sheet__stage .plate svg{width:100%;height:100%;display:block;}
+  .sheet__idx{
+    position:absolute;top:18px;left:20px;
+    font-size:11px;font-weight:700;color:var(--dim);
+  }
+
+  .sheet__data{padding:clamp(32px,4.5vw,56px) clamp(20px,4vw,56px);display:flex;flex-direction:column;gap:30px;}
+  .sheet__head h2{
+    margin:0 0 10px;font-size:clamp(1.5rem,3vw,2.15rem);font-weight:900;
+    letter-spacing:-.02em;line-height:1;text-transform:uppercase;
+  }
+  .sheet__head p{margin:0;max-width:56ch;font-size:15px;line-height:1.6;color:#c1bfba;}
+  .sheet__head p strong{color:var(--bone);font-weight:600;}
+
+  .spec{display:flex;flex-wrap:wrap;gap:0;border-top:1px solid var(--line);}
+  .spec div{
+    flex:1 1 130px;padding:12px 14px 12px 0;border-right:1px solid var(--line);
+    padding-right:14px;
+  }
+  .spec div:last-child{border-right:0;}
+  .spec dt{margin:0 0 5px;font-size:11px;font-weight:500;color:var(--dim);
+    font-family:'JetBrains Mono',ui-monospace,monospace;letter-spacing:.06em;text-transform:uppercase;}
+  .spec dd{margin:0;font-size:13px;font-weight:600;color:var(--bone);}
+
+  /* régua de redução */
+  .rule{display:flex;flex-direction:column;gap:14px;}
+  .rule__label{
+    display:flex;align-items:baseline;gap:10px;
+    font-size:11px;font-weight:500;color:var(--dim);
+  }
+  .rule__label b{color:var(--bone);font-weight:700;letter-spacing:.02em;}
+  .sizes{display:flex;align-items:flex-end;gap:clamp(14px,2.5vw,28px);flex-wrap:wrap;}
+  .size{display:flex;flex-direction:column;align-items:center;gap:8px;}
+  .size__box{display:grid;place-items:center;color:var(--bone);}
+  .size__box svg{display:block;}
+  .size__n{font-family:'JetBrains Mono',ui-monospace,monospace;font-size:11px;color:var(--dim);}
+
+  .grounds{display:flex;gap:12px;flex-wrap:wrap;}
+  .chip{
+    display:flex;align-items:center;gap:12px;padding:12px 16px;border:1px solid var(--line);
+  }
+  .chip--dark{background:var(--ink);color:var(--bone);}
+  .chip--light{background:var(--bone);color:var(--ink);}
+  .chip--signal{background:var(--signal);color:var(--ink);}
+  .chip__t{
+    font-family:'JetBrains Mono',ui-monospace,monospace;font-size:11px;letter-spacing:.06em;
+    text-transform:uppercase;opacity:.8;
+  }
+
+  /* aba de navegador */
+  .tab{
+    display:inline-flex;align-items:center;gap:9px;
+    padding:9px 16px 9px 12px;background:var(--panel-2);
+    border:1px solid var(--line);border-bottom:0;max-width:280px;
+  }
+  .tab svg{flex:none;display:block;color:var(--bone);}
+  .tab span{
+    font-size:12px;color:#cfcdc8;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;
+  }
+  .tabwrap{display:flex;flex-direction:column;gap:0;}
+  .tabwrap .bararea{height:6px;background:var(--panel);border:1px solid var(--line);}
+
+  /* lockup */
+  .lockup{
+    display:flex;align-items:center;gap:18px;padding:20px 22px;
+    border:1px solid var(--line);background:var(--panel);
+  }
+  .lockup svg{flex:none;color:var(--bone);display:block;}
+  .lockup__rule{width:1px;align-self:stretch;background:var(--line-2);}
+  .lockup__name{display:flex;flex-direction:column;gap:5px;}
+  .lockup__name b{
+    font-size:clamp(15px,2vw,19px);font-weight:900;letter-spacing:.01em;line-height:1;
+    text-transform:uppercase;
+  }
+  .lockup__name i{
+    font-style:normal;font-family:'JetBrains Mono',ui-monospace,monospace;
+    font-size:11px;letter-spacing:.12em;color:var(--muted);text-transform:uppercase;
+  }
+
+  .verdict{
+    display:flex;gap:10px;align-items:flex-start;padding:14px 16px;
+    border-left:2px solid var(--signal);background:rgba(251,55,50,.07);
+    font-size:13.5px;line-height:1.55;color:#d9d7d2;
+  }
+  .verdict b{color:var(--bone);}
+  .verdict--ok{border-left-color:#4ac97e;background:rgba(74,201,126,.07);}
+
+  /* fecho */
+  .closing{
+    padding:clamp(48px,7vw,88px) clamp(20px,4vw,56px);
+    display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:clamp(24px,4vw,48px);
+  }
+  .closing h2{
+    grid-column:1/-1;margin:0 0 6px;font-size:clamp(1.6rem,3.4vw,2.4rem);font-weight:900;
+    letter-spacing:-.025em;
+  }
+  .closing p{margin:0;font-size:15px;line-height:1.65;color:#c1bfba;}
+  .closing p b{color:var(--bone);}
+  .closing .pick{border-top:2px solid var(--signal);padding-top:16px;}
+  .closing .alt{border-top:1px solid var(--line);padding-top:16px;}
+
+  @media (max-width:900px){
+    .sheet{grid-template-columns:1fr;}
+    .sheet__stage{border-right:0;border-bottom:1px solid var(--line);min-height:auto;}
+    .sheet__stage .plate{width:min(210px,60vw);}
+  }
+  @media (prefers-reduced-motion:reduce){html{scroll-behavior:auto;}}
+</style>
+</head>
+<body>
+
+<!-- ============ DEFINIÇÕES VETORIAIS ============ -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+  <defs>
+    <!-- 01 PUNÇÃO — placa cheia, letras em contra-forma -->
+    <symbol id="m1" viewBox="0 0 128 128">
+      <path fill="currentColor" fill-rule="evenodd"
+        d="M0,0H128V128H0Z M18,34H60V50H45V94H33V50H18Z M68,34H110V50H84V78H110V94H68Z"/>
+    </symbol>
+
+    <!-- 02 LIGADURA — haste compartilhada, silhueta única -->
+    <symbol id="m2" viewBox="0 0 128 128">
+      <path fill="currentColor" d="M12,16H116V52H96V36H66V92H96V76H116V112H44V36H12Z"/>
+    </symbol>
+
+    <!-- 03 COLOFÃO — T sobre C, mesma medida -->
+    <symbol id="m3" viewBox="0 0 128 128">
+      <path fill="currentColor" d="M14,14H104V30H67V62H51V30H14Z"/>
+      <path fill="currentColor" d="M14,66H104V82H30V98H104V114H14Z"/>
+    </symbol>
+
+    <!-- 04 COLCHETE — C grande, T inscrito em escala menor -->
+    <symbol id="m4" viewBox="0 0 128 128">
+      <path fill="currentColor" d="M10,10H118V32H32V96H118V118H10Z"/>
+      <path fill="var(--signal,currentColor)" d="M46,44H106V58H83V88H69V58H46Z"/>
+    </symbol>
+
+    <!-- 05 SELO — disco sólido, T em contra-forma -->
+    <symbol id="m5" viewBox="0 0 128 128">
+      <path fill="currentColor" fill-rule="evenodd"
+        d="M64,8A56,56 0 1 0 64,120A56,56 0 1 0 64,8Z M30,42H98V58H72V102H56V58H30Z"/>
+    </symbol>
+
+    <!-- 06 ANEL — C circular pesado de corte reto, T inscrito -->
+    <symbol id="m6" viewBox="0 0 128 128">
+      <path fill="none" stroke="currentColor" stroke-width="22" stroke-linecap="butt"
+        d="M105.7,47.1A45,45 0 1 0 105.7,80.9"/>
+      <path fill="currentColor" d="M42,48H86V61H71V88H57V61H42Z"/>
+    </symbol>
+  </defs>
+</svg>
+
+<header class="bar mono">
+  <span style="text-transform:none;letter-spacing:.02em"><b>Toni Coimbra</b> · folha de construção · monograma</span>
+  <a href="./wordmark-concepts.html">Estudos anteriores</a>
+</header>
+
+<section class="intro">
+  <h1>Marca que sobrevive a <em>16 pixels.</em></h1>
+  <p>Seis monogramas desenhados em vetor sobre grid de 8 unidades, não fonte com efeito. O critério de aprovação é um só: o que ainda se lê no avatar e no favicon é o que fica. Tudo que só funciona grande está reprovado antes de começar.</p>
+  <div class="criteria mono">
+    <span><b>Grid</b> 128 / módulo 8</span>
+    <span><b>Peso mínimo</b> 14 un.</span>
+    <span><b>Teste</b> 64 · 32 · 24 · 16 px</span>
+    <span><b>Cores</b> ink · bone · signal</span>
+    <span><b>Recusado</b> C fino + barra âmbar</span>
+  </div>
+</section>
+
+<!-- ===================== 01 ===================== -->
+<article class="sheet">
+  <div class="sheet__stage">
+    <span class="sheet__idx mono">01</span>
+    <div class="plate"><svg viewBox="0 0 128 128" role="img" aria-label="Monograma Punção"><use href="#m1"/></svg></div>
+  </div>
+  <div class="sheet__data">
+    <div class="sheet__head">
+      <h2>Punção</h2>
+      <p><strong>Placa cheia, letras vazadas.</strong> A massa vem primeiro e as iniciais existem como contra-forma, do jeito que um punção de metal marca o papel. É a única das seis que já nasce em formato de ícone de aplicativo: a placa é a moldura.</p>
+    </div>
+    <dl class="spec">
+      <div><dt>Construção</dt><dd>Contra-forma</dd></div>
+      <div><dt>Elementos</dt><dd>1 caminho</dd></div>
+      <div><dt>Leitura 16px</dt><dd>Marca, não letra</dd></div>
+    </dl>
+    <div class="rule">
+      <div class="rule__label mono"><b>Redução</b> <span>mesma forma em quatro escalas</span></div>
+      <div class="sizes">
+        <div class="size"><div class="size__box"><svg width="64" height="64" viewBox="0 0 128 128" aria-hidden="true"><use href="#m1"/></svg></div><span class="size__n">64</span></div>
+        <div class="size"><div class="size__box"><svg width="32" height="32" viewBox="0 0 128 128" aria-hidden="true"><use href="#m1"/></svg></div><span class="size__n">32</span></div>
+        <div class="size"><div class="size__box"><svg width="24" height="24" viewBox="0 0 128 128" aria-hidden="true"><use href="#m1"/></svg></div><span class="size__n">24</span></div>
+        <div class="size"><div class="size__box"><svg width="16" height="16" viewBox="0 0 128 128" aria-hidden="true"><use href="#m1"/></svg></div><span class="size__n">16</span></div>
+        <div class="size">
+          <div class="tabwrap">
+            <div class="tab"><svg width="16" height="16" viewBox="0 0 128 128" aria-hidden="true"><use href="#m1"/></svg><span>Toni Coimbra — IA &amp; Automação</span></div>
+            <div class="bararea"></div>
+          </div>
+          <span class="size__n">aba real</span>
+        </div>
+      </div>
+    </div>
+    <div class="grounds">
+      <div class="chip chip--light"><svg width="34" height="34" viewBox="0 0 128 128" aria-hidden="true"><use href="#m1"/></svg><span class="chip__t">fundo claro</span></div>
+      <div class="chip chip--signal"><svg width="34" height="34" viewBox="0 0 128 128" aria-hidden="true"><use href="#m1"/></svg><span class="chip__t">uma cor</span></div>
+    </div>
+    <div class="lockup">
+      <svg width="46" height="46" viewBox="0 0 128 128" aria-hidden="true"><use href="#m1"/></svg>
+      <div class="lockup__rule"></div>
+      <div class="lockup__name"><b>Toni Coimbra</b><i>IA · Automação · Ensino</i></div>
+    </div>
+    <p class="verdict"><span><b>Risco honesto:</b> duas letras dentro de uma placa pequena viram textura aos 16px. Ganha em avatar quadrado, perde em cabeçalho sobre fundo escuro, onde a placa vira um bloco pesado.</span></p>
+  </div>
+</article>
+
+<!-- ===================== 02 ===================== -->
+<article class="sheet">
+  <div class="sheet__stage">
+    <span class="sheet__idx mono">02</span>
+    <div class="plate"><svg viewBox="0 0 128 128" role="img" aria-label="Monograma Ligadura"><use href="#m2"/></svg></div>
+  </div>
+  <div class="sheet__data">
+    <div class="sheet__head">
+      <h2>Ligadura</h2>
+      <p><strong>Uma haste serve as duas letras.</strong> A barra do T é também o braço superior do C; a haste vertical é o tronco do T e a lombada do C. Sai uma silhueta contínua, sem moldura, que é o que um monograma clássico faz de mais econômico: duas letras, um desenho só.</p>
+    </div>
+    <dl class="spec">
+      <div><dt>Construção</dt><dd>Haste partilhada</dd></div>
+      <div><dt>Elementos</dt><dd>1 caminho</dd></div>
+      <div><dt>Leitura 16px</dt><dd>T + C íntegros</dd></div>
+    </dl>
+    <div class="rule">
+      <div class="rule__label mono"><b>Redução</b> <span>mesma forma em quatro escalas</span></div>
+      <div class="sizes">
+        <div class="size"><div class="size__box"><svg width="64" height="64" viewBox="0 0 128 128" aria-hidden="true"><use href="#m2"/></svg></div><span class="size__n">64</span></div>
+        <div class="size"><div class="size__box"><svg width="32" height="32" viewBox="0 0 128 128" aria-hidden="true"><use href="#m2"/></svg></div><span class="size__n">32</span></div>
+        <div class="size"><div class="size__box"><svg width="24" height="24" viewBox="0 0 128 128" aria-hidden="true"><use href="#m2"/></svg></div><span class="size__n">24</span></div>
+        <div class="size"><div class="size__box"><svg width="16" height="16" viewBox="0 0 128 128" aria-hidden="true"><use href="#m2"/></svg></div><span class="size__n">16</span></div>
+        <div class="size">
+          <div class="tabwrap">
+            <div class="tab"><svg width="16" height="16" viewBox="0 0 128 128" aria-hidden="true"><use href="#m2"/></svg><span>Toni Coimbra — IA &amp; Automação</span></div>
+            <div class="bararea"></div>
+          </div>
+          <span class="size__n">aba real</span>
+        </div>
+      </div>
+    </div>
+    <div class="grounds">
+      <div class="chip chip--light"><svg width="34" height="34" viewBox="0 0 128 128" aria-hidden="true"><use href="#m2"/></svg><span class="chip__t">fundo claro</span></div>
+      <div class="chip chip--signal"><svg width="34" height="34" viewBox="0 0 128 128" aria-hidden="true"><use href="#m2"/></svg><span class="chip__t">uma cor</span></div>
+    </div>
+    <div class="lockup">
+      <svg width="46" height="46" viewBox="0 0 128 128" aria-hidden="true"><use href="#m2"/></svg>
+      <div class="lockup__rule"></div>
+      <div class="lockup__name"><b>Toni Coimbra</b><i>IA · Automação · Ensino</i></div>
+    </div>
+    <p class="verdict verdict--ok"><span><b>Recomendada.</b> É a que mantém as duas iniciais legíveis aos 16px sem moldura, funciona vazada em qualquer fundo e assina o cabeçalho sem virar bloco. Aceita placa quadrada depois, quando precisar de avatar.</span></p>
+  </div>
+</article>
+
+<!-- ===================== 03 ===================== -->
+<article class="sheet">
+  <div class="sheet__stage">
+    <span class="sheet__idx mono">03</span>
+    <div class="plate"><svg viewBox="0 0 128 128" role="img" aria-label="Monograma Colofão"><use href="#m3"/></svg></div>
+  </div>
+  <div class="sheet__data">
+    <div class="sheet__head">
+      <h2>Colofão</h2>
+      <p><strong>T sobre C, justificados na mesma medida.</strong> As duas letras ocupam exatamente a mesma largura e formam um bloco quadrado, como a assinatura de uma editora no pé da folha. Autoridade vem do alinhamento, não de efeito.</p>
+    </div>
+    <dl class="spec">
+      <div><dt>Construção</dt><dd>Empilhada</dd></div>
+      <div><dt>Elementos</dt><dd>2 caminhos</dd></div>
+      <div><dt>Leitura 16px</dt><dd>Duas barras</dd></div>
+    </dl>
+    <div class="rule">
+      <div class="rule__label mono"><b>Redução</b> <span>mesma forma em quatro escalas</span></div>
+      <div class="sizes">
+        <div class="size"><div class="size__box"><svg width="64" height="64" viewBox="0 0 128 128" aria-hidden="true"><use href="#m3"/></svg></div><span class="size__n">64</span></div>
+        <div class="size"><div class="size__box"><svg width="32" height="32" viewBox="0 0 128 128" aria-hidden="true"><use href="#m3"/></svg></div><span class="size__n">32</span></div>
+        <div class="size"><div class="size__box"><svg width="24" height="24" viewBox="0 0 128 128" aria-hidden="true"><use href="#m3"/></svg></div><span class="size__n">24</span></div>
+        <div class="size"><div class="size__box"><svg width="16" height="16" viewBox="0 0 128 128" aria-hidden="true"><use href="#m3"/></svg></div><span class="size__n">16</span></div>
+        <div class="size">
+          <div class="tabwrap">
+            <div class="tab"><svg width="16" height="16" viewBox="0 0 128 128" aria-hidden="true"><use href="#m3"/></svg><span>Toni Coimbra — IA &amp; Automação</span></div>
+            <div class="bararea"></div>
+          </div>
+          <span class="size__n">aba real</span>
+        </div>
+      </div>
+    </div>
+    <div class="grounds">
+      <div class="chip chip--light"><svg width="34" height="34" viewBox="0 0 128 128" aria-hidden="true"><use href="#m3"/></svg><span class="chip__t">fundo claro</span></div>
+      <div class="chip chip--signal"><svg width="34" height="34" viewBox="0 0 128 128" aria-hidden="true"><use href="#m3"/></svg><span class="chip__t">uma cor</span></div>
+    </div>
+    <div class="lockup">
+      <svg width="46" height="46" viewBox="0 0 128 128" aria-hidden="true"><use href="#m3"/></svg>
+      <div class="lockup__rule"></div>
+      <div class="lockup__name"><b>Toni Coimbra</b><i>IA · Automação · Ensino</i></div>
+    </div>
+    <p class="verdict"><span><b>Risco honesto:</b> o vão do C tem 14 unidades e fecha visualmente aos 16px, onde o conjunto vira três barras horizontais. Melhor como marca de capa e de slide do que como favicon.</span></p>
+  </div>
+</article>
+
+<!-- ===================== 04 ===================== -->
+<article class="sheet">
+  <div class="sheet__stage">
+    <span class="sheet__idx mono">04</span>
+    <div class="plate"><svg viewBox="0 0 128 128" role="img" aria-label="Monograma Colchete"><use href="#m4"/></svg></div>
+  </div>
+  <div class="sheet__data">
+    <div class="sheet__head">
+      <h2>Colchete</h2>
+      <p><strong>C grande abriga um T pequeno.</strong> A diferença de escala é o recurso: o C vira recipiente e o T vira o conteúdo, em vermelho de sinal. É a única com duas cores estruturais, e a que mais parece marca de instituição.</p>
+    </div>
+    <dl class="spec">
+      <div><dt>Construção</dt><dd>Contraste de escala</dd></div>
+      <div><dt>Elementos</dt><dd>2 caminhos · 2 cores</dd></div>
+      <div><dt>Leitura 16px</dt><dd>C com ponto</dd></div>
+    </dl>
+    <div class="rule">
+      <div class="rule__label mono"><b>Redução</b> <span>mesma forma em quatro escalas</span></div>
+      <div class="sizes">
+        <div class="size"><div class="size__box"><svg width="64" height="64" viewBox="0 0 128 128" aria-hidden="true"><use href="#m4"/></svg></div><span class="size__n">64</span></div>
+        <div class="size"><div class="size__box"><svg width="32" height="32" viewBox="0 0 128 128" aria-hidden="true"><use href="#m4"/></svg></div><span class="size__n">32</span></div>
+        <div class="size"><div class="size__box"><svg width="24" height="24" viewBox="0 0 128 128" aria-hidden="true"><use href="#m4"/></svg></div><span class="size__n">24</span></div>
+        <div class="size"><div class="size__box"><svg width="16" height="16" viewBox="0 0 128 128" aria-hidden="true"><use href="#m4"/></svg></div><span class="size__n">16</span></div>
+        <div class="size">
+          <div class="tabwrap">
+            <div class="tab"><svg width="16" height="16" viewBox="0 0 128 128" aria-hidden="true"><use href="#m4"/></svg><span>Toni Coimbra — IA &amp; Automação</span></div>
+            <div class="bararea"></div>
+          </div>
+          <span class="size__n">aba real</span>
+        </div>
+      </div>
+    </div>
+    <div class="grounds">
+      <div class="chip chip--light"><svg width="34" height="34" viewBox="0 0 128 128" aria-hidden="true"><use href="#m4"/></svg><span class="chip__t">fundo claro</span></div>
+      <div class="chip chip--signal" style="--signal:currentColor"><svg width="34" height="34" viewBox="0 0 128 128" aria-hidden="true"><use href="#m4"/></svg><span class="chip__t">uma cor</span></div>
+    </div>
+    <div class="lockup">
+      <svg width="46" height="46" viewBox="0 0 128 128" aria-hidden="true"><use href="#m4"/></svg>
+      <div class="lockup__rule"></div>
+      <div class="lockup__name"><b>Toni Coimbra</b><i>IA · Automação · Ensino</i></div>
+    </div>
+    <p class="verdict"><span><b>Risco honesto:</b> em uma cor só, o T solto dentro do C perde a separação e o conjunto vira um C com sujeira dentro. Depende de duas cores para existir, o que é uma dependência cara numa marca pessoal.</span></p>
+  </div>
+</article>
+
+<!-- ===================== 05 ===================== -->
+<article class="sheet">
+  <div class="sheet__stage">
+    <span class="sheet__idx mono">05</span>
+    <div class="plate"><svg viewBox="0 0 128 128" role="img" aria-label="Monograma Selo"><use href="#m5"/></svg></div>
+  </div>
+  <div class="sheet__data">
+    <div class="sheet__head">
+      <h2>Selo</h2>
+      <p><strong>Disco cheio, T vazado.</strong> Abre mão do C no símbolo e aposta tudo em uma inicial só, que é o que sobra legível na menor escala possível. O nome completo carrega o Coimbra ao lado; o disco carrega o reconhecimento.</p>
+    </div>
+    <dl class="spec">
+      <div><dt>Construção</dt><dd>Contra-forma</dd></div>
+      <div><dt>Elementos</dt><dd>1 caminho</dd></div>
+      <div><dt>Leitura 16px</dt><dd>Perfeita</dd></div>
+    </dl>
+    <div class="rule">
+      <div class="rule__label mono"><b>Redução</b> <span>mesma forma em quatro escalas</span></div>
+      <div class="sizes">
+        <div class="size"><div class="size__box"><svg width="64" height="64" viewBox="0 0 128 128" aria-hidden="true"><use href="#m5"/></svg></div><span class="size__n">64</span></div>
+        <div class="size"><div class="size__box"><svg width="32" height="32" viewBox="0 0 128 128" aria-hidden="true"><use href="#m5"/></svg></div><span class="size__n">32</span></div>
+        <div class="size"><div class="size__box"><svg width="24" height="24" viewBox="0 0 128 128" aria-hidden="true"><use href="#m5"/></svg></div><span class="size__n">24</span></div>
+        <div class="size"><div class="size__box"><svg width="16" height="16" viewBox="0 0 128 128" aria-hidden="true"><use href="#m5"/></svg></div><span class="size__n">16</span></div>
+        <div class="size">
+          <div class="tabwrap">
+            <div class="tab"><svg width="16" height="16" viewBox="0 0 128 128" aria-hidden="true"><use href="#m5"/></svg><span>Toni Coimbra — IA &amp; Automação</span></div>
+            <div class="bararea"></div>
+          </div>
+          <span class="size__n">aba real</span>
+        </div>
+      </div>
+    </div>
+    <div class="grounds">
+      <div class="chip chip--light"><svg width="34" height="34" viewBox="0 0 128 128" aria-hidden="true"><use href="#m5"/></svg><span class="chip__t">fundo claro</span></div>
+      <div class="chip chip--signal"><svg width="34" height="34" viewBox="0 0 128 128" aria-hidden="true"><use href="#m5"/></svg><span class="chip__t">uma cor</span></div>
+    </div>
+    <div class="lockup">
+      <svg width="46" height="46" viewBox="0 0 128 128" aria-hidden="true"><use href="#m5"/></svg>
+      <div class="lockup__rule"></div>
+      <div class="lockup__name"><b>Toni Coimbra</b><i>IA · Automação · Ensino</i></div>
+    </div>
+    <p class="verdict"><span><b>Risco honesto:</b> um T dentro de um círculo é território ocupado, de placa de trânsito a marca de banco. Ganha em legibilidade e perde em propriedade: é a mais segura e a menos sua das seis.</span></p>
+  </div>
+</article>
+
+<!-- ===================== 06 ===================== -->
+<article class="sheet">
+  <div class="sheet__stage">
+    <span class="sheet__idx mono">06</span>
+    <div class="plate"><svg viewBox="0 0 128 128" role="img" aria-label="Monograma Anel"><use href="#m6"/></svg></div>
+  </div>
+  <div class="sheet__data">
+    <div class="sheet__head">
+      <h2>Anel</h2>
+      <p><strong>C circular de corte reto com T inscrito.</strong> É a leitura mais literal de selo: anel grosso, abertura cortada a prumo, inicial no centro. O peso do anel é quase o dobro dos estudos antigos e as pontas são retas, não arredondadas, que é o que separa selo de ícone de aplicativo genérico.</p>
+    </div>
+    <dl class="spec">
+      <div><dt>Construção</dt><dd>Anel + inscrição</dd></div>
+      <div><dt>Elementos</dt><dd>2 caminhos</dd></div>
+      <div><dt>Leitura 16px</dt><dd>Anel fecha</dd></div>
+    </dl>
+    <div class="rule">
+      <div class="rule__label mono"><b>Redução</b> <span>mesma forma em quatro escalas</span></div>
+      <div class="sizes">
+        <div class="size"><div class="size__box"><svg width="64" height="64" viewBox="0 0 128 128" aria-hidden="true"><use href="#m6"/></svg></div><span class="size__n">64</span></div>
+        <div class="size"><div class="size__box"><svg width="32" height="32" viewBox="0 0 128 128" aria-hidden="true"><use href="#m6"/></svg></div><span class="size__n">32</span></div>
+        <div class="size"><div class="size__box"><svg width="24" height="24" viewBox="0 0 128 128" aria-hidden="true"><use href="#m6"/></svg></div><span class="size__n">24</span></div>
+        <div class="size"><div class="size__box"><svg width="16" height="16" viewBox="0 0 128 128" aria-hidden="true"><use href="#m6"/></svg></div><span class="size__n">16</span></div>
+        <div class="size">
+          <div class="tabwrap">
+            <div class="tab"><svg width="16" height="16" viewBox="0 0 128 128" aria-hidden="true"><use href="#m6"/></svg><span>Toni Coimbra — IA &amp; Automação</span></div>
+            <div class="bararea"></div>
+          </div>
+          <span class="size__n">aba real</span>
+        </div>
+      </div>
+    </div>
+    <div class="grounds">
+      <div class="chip chip--light"><svg width="34" height="34" viewBox="0 0 128 128" aria-hidden="true"><use href="#m6"/></svg><span class="chip__t">fundo claro</span></div>
+      <div class="chip chip--signal"><svg width="34" height="34" viewBox="0 0 128 128" aria-hidden="true"><use href="#m6"/></svg><span class="chip__t">uma cor</span></div>
+    </div>
+    <div class="lockup">
+      <svg width="46" height="46" viewBox="0 0 128 128" aria-hidden="true"><use href="#m6"/></svg>
+      <div class="lockup__rule"></div>
+      <div class="lockup__name"><b>Toni Coimbra</b><i>IA · Automação · Ensino</i></div>
+    </div>
+    <p class="verdict"><span><b>Risco honesto:</b> é vizinha da família que você já recusou. O que muda é peso e corte, não a ideia. Só entra se a rejeição anterior foi de execução e não de conceito.</span></p>
+  </div>
+</article>
+
+<section class="closing">
+  <h2>Onde eu apostaria</h2>
+  <div class="pick">
+    <p><b>02 · Ligadura</b> como marca principal. É a única que entrega as duas iniciais em um desenho só, sem moldura e sem depender de cor, e ainda se lê aos 16px. A haste compartilhada é uma decisão de construção, não um efeito: dá para explicar em uma frase e ninguém reproduz por acidente.</p>
+  </div>
+  <div class="alt">
+    <p><b>01 · Punção</b> como variante de avatar. Mesma família, com a placa fazendo a moldura que redes sociais exigem. Duas peças do mesmo sistema, não duas marcas.</p>
+  </div>
+  <div class="alt">
+    <p><b>Se nada agradar,</b> o problema não é escolha: é princípio. Diga qual das seis construções chega mais perto e eu levo só ela adiante, ajustando peso, vão e proporção em cima da forma escolhida.</p>
+  </div>
+</section>
+
+</body>
+</html>

@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex">
+  <title>Toni Coimbra — três direções para o monograma</title>
+  <style>
+    @font-face { font-family: Archivo; src: url('../assets/fonts/archivo-latin.woff2') format('woff2'); font-weight: 700 800; }
+    @font-face { font-family: Mono; src: url('../assets/fonts/jetbrains-mono-latin.woff2') format('woff2'); }
+    :root { --ink: #141414; --paper: #f4f3f0; --muted: #a5a5ac; --line: #393939; --signal: #fb3732; }
+    * { box-sizing: border-box; }
+    body { margin: 0; background: var(--ink); color: var(--paper); font-family: Arial, sans-serif; }
+    header { padding: 42px 48px 30px; display: flex; justify-content: space-between; align-items: end; gap: 24px; }
+    h1 { margin: 0; font: 800 38px/1.06 Archivo, sans-serif; letter-spacing: -.03em; }
+    header p { margin: 0; max-width: 340px; font: 11px/1.7 Mono, monospace; color: var(--muted); }
+    main { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); border-block: 1px solid var(--line); margin: 0 48px; }
+    article { min-width: 0; padding: 30px; border-right: 1px solid var(--line); }
+    article:first-child { padding-left: 0; }
+    article:last-child { border-right: 0; padding-right: 0; }
+    .heading { display: flex; align-items: baseline; gap: 12px; }
+    .heading span { font: 11px Mono, monospace; color: var(--muted); }
+    h2 { margin: 0; font: 700 28px Archivo, sans-serif; letter-spacing: -.025em; }
+    .subtitle { color: var(--muted); font-size: 13px; margin: 9px 0 0; }
+    .large { min-height: 265px; display: grid; place-items: center; }
+    svg { display: block; flex: none; overflow: visible; }
+    .accent { --accent: var(--signal); }
+    .samples { display: grid; grid-template-columns: 1fr 1fr; }
+    .sample { height: 112px; display: grid; place-items: center; }
+    .paper { background: var(--paper); color: var(--ink); }
+    .red { background: var(--signal); color: var(--ink); }
+    .sizes { display: flex; gap: 26px; align-items: center; min-height: 94px; border-bottom: 1px solid var(--line); }
+    .sizes > div { display: flex; align-items: center; gap: 7px; }
+    .sizes small { font: 9px Mono, monospace; color: var(--muted); }
+    .lockup { display: flex; gap: 12px; align-items: center; margin: 26px 0; }
+    .lockup strong { font: 700 23px/1 Archivo, sans-serif; letter-spacing: -.035em; }
+    .description { font-size: 14px; line-height: 1.65; min-height: 92px; margin: 0 0 14px; }
+    .trade { color: var(--muted); font-size: 12px; line-height: 1.5; min-height: 36px; margin: 0; }
+    .download { display: inline-flex; align-items: center; min-height: 44px; font: 10px Mono, monospace; color: var(--paper); text-underline-offset: 5px; }
+    a:focus-visible { outline: 2px solid var(--signal); outline-offset: 4px; }
+    footer { display: flex; justify-content: space-between; gap: 30px; padding: 22px 48px 30px; color: var(--muted); font: 10px/1.7 Mono, monospace; }
+    footer strong { color: var(--paper); font-weight: 400; }
+    @media (max-width: 850px) {
+      header { display: block; padding: 30px 24px; }
+      h1 { font-size: 32px; }
+      header p { margin-top: 18px; }
+      main { grid-template-columns: 1fr; margin: 0 24px; }
+      article, article:first-child, article:last-child { padding: 28px 0; border-right: 0; border-bottom: 1px solid var(--line); }
+      .description, .trade { min-height: 0; }
+      .description { margin-top: 16px; }
+      footer { padding-inline: 24px; flex-direction: column; gap: 8px; }
+    }
+  </style>
+</head>
+<body>
+  <header><h1>Toni Coimbra.<br>Três formas de ligar.</h1><p>TC / ESTUDOS DE IDENTIDADE<br>Monograma · uma cor · redução real<br>Propostas para avaliação, sem alterar a marca do site.</p></header>
+  <main>
+    <article>
+      <div class="heading"><span>01</span><h2>Pulso</h2></div>
+      <p class="subtitle">Energia em primeiro plano</p>
+      <div class="large"><svg viewBox="0 0 128 128" width="210" height="210" aria-label="Monograma TC Pulso" class="accent"><path d="M32 33a44 44 0 1 0 64 0" fill="none" stroke="currentColor" stroke-width="14" stroke-linecap="round"/><path d="M49 15h30M64 15v51" fill="none" stroke="var(--accent, currentColor)" stroke-width="14" stroke-linecap="round"/></svg></div>
+      <div class="samples"><div class="sample paper"><svg viewBox="0 0 128 128" width="72" height="72" aria-label="Monograma TC Pulso"><path d="M32 33a44 44 0 1 0 64 0" fill="none" stroke="currentColor" stroke-width="14" stroke-linecap="round"/><path d="M49 15h30M64 15v51" fill="none" stroke="var(--accent, currentColor)" stroke-width="14" stroke-linecap="round"/></svg></div><div class="sample red"><svg viewBox="0 0 128 128" width="72" height="72" aria-label="Monograma TC Pulso"><path d="M32 33a44 44 0 1 0 64 0" fill="none" stroke="currentColor" stroke-width="14" stroke-linecap="round"/><path d="M49 15h30M64 15v51" fill="none" stroke="var(--accent, currentColor)" stroke-width="14" stroke-linecap="round"/></svg></div></div>
+      <div class="sizes"><div><svg viewBox="0 0 128 128" width="16" height="16" aria-label="Monograma TC Pulso"><path d="M32 33a44 44 0 1 0 64 0" fill="none" stroke="currentColor" stroke-width="14" stroke-linecap="round"/><path d="M49 15h30M64 15v51" fill="none" stroke="var(--accent, currentColor)" stroke-width="14" stroke-linecap="round"/></svg><small>16px</small></div><div><svg viewBox="0 0 128 128" width="24" height="24" aria-label="Monograma TC Pulso"><path d="M32 33a44 44 0 1 0 64 0" fill="none" stroke="currentColor" stroke-width="14" stroke-linecap="round"/><path d="M49 15h30M64 15v51" fill="none" stroke="var(--accent, currentColor)" stroke-width="14" stroke-linecap="round"/></svg><small>24px</small></div><div><svg viewBox="0 0 128 128" width="48" height="48" aria-label="Monograma TC Pulso"><path d="M32 33a44 44 0 1 0 64 0" fill="none" stroke="currentColor" stroke-width="14" stroke-linecap="round"/><path d="M49 15h30M64 15v51" fill="none" stroke="var(--accent, currentColor)" stroke-width="14" stroke-linecap="round"/></svg><small>48px</small></div></div>
+      <div class="lockup"><svg viewBox="0 0 128 128" width="40" height="40" aria-label="Monograma TC Pulso"><path d="M32 33a44 44 0 1 0 64 0" fill="none" stroke="currentColor" stroke-width="14" stroke-linecap="round"/><path d="M49 15h30M64 15v51" fill="none" stroke="var(--accent, currentColor)" stroke-width="14" stroke-linecap="round"/></svg><strong>Toni Coimbra</strong></div>
+      <p class="description">O traço do botão de ligar recebe a barra do T. O arco envolve o conjunto e mantém a memória circular da marca.</p>
+      <p class="trade">Power imediato; o C é mais abstrato.</p>
+      <a class="download" href="../assets/brand-concepts/tc-power-2026/pulso.svg" download>Baixar vetor SVG</a>
+    </article>
+    <article>
+      <div class="heading"><span>02</span><h2>Encaixe</h2></div>
+      <p class="subtitle">As iniciais como estrutura</p>
+      <div class="large"><svg viewBox="0 0 128 128" width="210" height="210" aria-label="Monograma TC Encaixe" class="accent"><path d="M110 15H54C28 15 12 34 12 64s16 49 42 49h56V93H56c-15 0-23-11-23-29s8-29 23-29h12v43h21V35h21Z" fill="currentColor"/></svg></div>
+      <div class="samples"><div class="sample paper"><svg viewBox="0 0 128 128" width="72" height="72" aria-label="Monograma TC Encaixe"><path d="M110 15H54C28 15 12 34 12 64s16 49 42 49h56V93H56c-15 0-23-11-23-29s8-29 23-29h12v43h21V35h21Z" fill="currentColor"/></svg></div><div class="sample red"><svg viewBox="0 0 128 128" width="72" height="72" aria-label="Monograma TC Encaixe"><path d="M110 15H54C28 15 12 34 12 64s16 49 42 49h56V93H56c-15 0-23-11-23-29s8-29 23-29h12v43h21V35h21Z" fill="currentColor"/></svg></div></div>
+      <div class="sizes"><div><svg viewBox="0 0 128 128" width="16" height="16" aria-label="Monograma TC Encaixe"><path d="M110 15H54C28 15 12 34 12 64s16 49 42 49h56V93H56c-15 0-23-11-23-29s8-29 23-29h12v43h21V35h21Z" fill="currentColor"/></svg><small>16px</small></div><div><svg viewBox="0 0 128 128" width="24" height="24" aria-label="Monograma TC Encaixe"><path d="M110 15H54C28 15 12 34 12 64s16 49 42 49h56V93H56c-15 0-23-11-23-29s8-29 23-29h12v43h21V35h21Z" fill="currentColor"/></svg><small>24px</small></div><div><svg viewBox="0 0 128 128" width="48" height="48" aria-label="Monograma TC Encaixe"><path d="M110 15H54C28 15 12 34 12 64s16 49 42 49h56V93H56c-15 0-23-11-23-29s8-29 23-29h12v43h21V35h21Z" fill="currentColor"/></svg><small>48px</small></div></div>
+      <div class="lockup"><svg viewBox="0 0 128 128" width="40" height="40" aria-label="Monograma TC Encaixe"><path d="M110 15H54C28 15 12 34 12 64s16 49 42 49h56V93H56c-15 0-23-11-23-29s8-29 23-29h12v43h21V35h21Z" fill="currentColor"/></svg><strong>Toni Coimbra</strong></div>
+      <p class="description">A curva do C encontra uma barra superior compartilhada com o T. Um único desenho, compacto e de construção precisa.</p>
+      <p class="trade">TC mais legível; ligar vira uma associação sutil.</p>
+      <a class="download" href="../assets/brand-concepts/tc-power-2026/encaixe.svg" download>Baixar vetor SVG</a>
+    </article>
+    <article>
+      <div class="heading"><span>03</span><h2>Chave</h2></div>
+      <p class="subtitle">O T revela o C</p>
+      <div class="large"><svg viewBox="0 0 128 128" width="210" height="210" aria-label="Monograma TC Chave" class="accent"><path fill="currentColor" d="M108.9 34A54 54 0 1 0 116.1536 78H88V53H74V93H54V53H36V34Z"/></svg></div>
+      <div class="samples"><div class="sample paper"><svg viewBox="0 0 128 128" width="72" height="72" aria-label="Monograma TC Chave"><path fill="currentColor" d="M108.9 34A54 54 0 1 0 116.1536 78H88V53H74V93H54V53H36V34Z"/></svg></div><div class="sample red"><svg viewBox="0 0 128 128" width="72" height="72" aria-label="Monograma TC Chave"><path fill="currentColor" d="M108.9 34A54 54 0 1 0 116.1536 78H88V53H74V93H54V53H36V34Z"/></svg></div></div>
+      <div class="sizes"><div><svg viewBox="0 0 128 128" width="16" height="16" aria-label="Monograma TC Chave"><path fill="currentColor" d="M108.9 34A54 54 0 1 0 116.1536 78H88V53H74V93H54V53H36V34Z"/></svg><small>16px</small></div><div><svg viewBox="0 0 128 128" width="24" height="24" aria-label="Monograma TC Chave"><path fill="currentColor" d="M108.9 34A54 54 0 1 0 116.1536 78H88V53H74V93H54V53H36V34Z"/></svg><small>24px</small></div><div><svg viewBox="0 0 128 128" width="48" height="48" aria-label="Monograma TC Chave"><path fill="currentColor" d="M108.9 34A54 54 0 1 0 116.1536 78H88V53H74V93H54V53H36V34Z"/></svg><small>48px</small></div></div>
+      <div class="lockup"><svg viewBox="0 0 128 128" width="40" height="40" aria-label="Monograma TC Chave"><path fill="currentColor" d="M108.9 34A54 54 0 1 0 116.1536 78H88V53H74V93H54V53H36V34Z"/></svg><strong>Toni Coimbra</strong></div>
+      <p class="description">O T é recortado de uma massa circular aberta. A abertura funciona como interrupção do circuito e dá personalidade ao selo.</p>
+      <p class="trade">Mais autoral; exige mais cuidado na redução.</p>
+      <a class="download" href="../assets/brand-concepts/tc-power-2026/chave.svg" download>Baixar vetor SVG</a>
+    </article>
+  </main>
+  <footer><span><strong>Minha recomendação: Encaixe.</strong><br>Equilibra personalidade, leitura das iniciais e uso em diferentes tamanhos.</span><span>Formas antes de efeitos.<br>A cor pode mudar; a assinatura precisa permanecer.</span></footer>
+</body>
+</html>

@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex">
+  <meta name="color-scheme" content="dark">
+  <title>Estudos de marca — Toni Coimbra</title>
+  <style>
+    @font-face {
+      font-family: 'Archivo';
+      src: url('../assets/fonts/archivo-latin.woff2') format('woff2');
+      font-display: swap;
+    }
+    @font-face {
+      font-family: 'JetBrains Mono';
+      src: url('../assets/fonts/jetbrains-mono-latin.woff2') format('woff2');
+      font-display: swap;
+    }
+    :root {
+      --ink: #141414;
+      --ink-deep: #09090a;
+      --bone: #f4f3f0;
+      --orange: #ffa31a;
+      --muted: #a2a09b;
+      --line: rgba(244, 243, 240, .14);
+    }
+    * { box-sizing: border-box; }
+    html { background: var(--ink-deep); color: var(--bone); }
+    body {
+      margin: 0;
+      min-width: 320px;
+      font-family: 'Archivo', sans-serif;
+      background:
+        radial-gradient(circle at 50% -20%, rgba(255, 163, 26, .1), transparent 34rem),
+        var(--ink-deep);
+    }
+    button { font: inherit; }
+    .shell { width: min(1440px, calc(100% - 64px)); margin-inline: auto; }
+    header {
+      display: grid;
+      grid-template-columns: minmax(0, 1.4fr) minmax(260px, .6fr);
+      gap: 48px;
+      align-items: end;
+      padding-block: clamp(64px, 9vw, 132px) clamp(48px, 6vw, 88px);
+      border-bottom: 1px solid var(--line);
+    }
+    h1 {
+      max-width: 900px;
+      margin: 0;
+      font-size: clamp(48px, 7.6vw, 118px);
+      line-height: .88;
+      letter-spacing: -.04em;
+      text-wrap: balance;
+    }
+    header p {
+      margin: 0;
+      max-width: 48ch;
+      color: var(--muted);
+      font: 13px/1.7 'JetBrains Mono', monospace;
+    }
+    .concepts {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      border-bottom: 1px solid var(--line);
+    }
+    .concept {
+      position: relative;
+      min-width: 0;
+      padding: clamp(28px, 3.5vw, 56px);
+      border-right: 1px solid var(--line);
+      transition: background-color .25s ease;
+    }
+    .concept:last-child { border-right: 0; }
+    .concept.is-selected { background: rgba(255, 163, 26, .06); }
+    .option {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 16px;
+      margin-bottom: 44px;
+      color: var(--muted);
+      font: 11px/1 'JetBrains Mono', monospace;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+    }
+    .option strong { color: var(--orange); font-weight: 600; }
+    .mark-stage {
+      display: grid;
+      place-items: center;
+      min-height: clamp(230px, 26vw, 370px);
+      margin-bottom: 40px;
+    }
+    .mark-stage img { width: min(76%, 280px); aspect-ratio: 1; }
+    h2 {
+      margin: 0 0 14px;
+      font-size: clamp(28px, 2.7vw, 46px);
+      line-height: .96;
+      letter-spacing: -.035em;
+    }
+    .thesis {
+      min-height: 5.8em;
+      margin: 0;
+      color: var(--muted);
+      font-size: 15px;
+      line-height: 1.55;
+    }
+    .tests {
+      display: grid;
+      grid-template-columns: 1fr 1fr auto;
+      gap: 10px;
+      align-items: end;
+      margin-block: 34px;
+    }
+    .sample {
+      display: grid;
+      place-items: center;
+      height: 86px;
+      border-radius: 14px;
+    }
+    .sample--dark { background: var(--ink); }
+    .sample--light { background: var(--bone); }
+    .sample img { width: 54px; height: 54px; }
+    .sample--light img { filter: brightness(.16); }
+    .micro {
+      display: grid;
+      place-items: center;
+      width: 50px;
+      height: 50px;
+      background: var(--ink);
+      border: 1px solid var(--line);
+      border-radius: 11px;
+    }
+    .micro img { width: 16px; height: 16px; }
+    .lockup {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      min-height: 72px;
+      padding-block: 18px;
+      border-block: 1px solid var(--line);
+    }
+    .lockup img { width: 38px; height: 38px; flex: none; }
+    .lockup span {
+      font-size: 16px;
+      font-weight: 650;
+      letter-spacing: -.02em;
+    }
+    .select {
+      width: 100%;
+      min-height: 48px;
+      margin-top: 28px;
+      border: 1px solid rgba(244, 243, 240, .34);
+      border-radius: 999px;
+      color: var(--bone);
+      background: transparent;
+      cursor: pointer;
+      transition: color .2s ease, background-color .2s ease, border-color .2s ease;
+    }
+    .select:hover,
+    .select:focus-visible,
+    .select[aria-pressed="true"] {
+      color: var(--ink-deep);
+      background: var(--orange);
+      border-color: var(--orange);
+      outline: none;
+    }
+    footer {
+      display: flex;
+      justify-content: space-between;
+      gap: 24px;
+      padding-block: 28px 48px;
+      color: var(--muted);
+      font: 11px/1.5 'JetBrains Mono', monospace;
+    }
+    #choice { color: var(--bone); }
+    @media (max-width: 900px) {
+      .shell { width: min(100% - 32px, 720px); }
+      header { grid-template-columns: 1fr; }
+      .concepts { grid-template-columns: 1fr; }
+      .concept { border-right: 0; border-bottom: 1px solid var(--line); }
+      .concept:last-child { border-bottom: 0; }
+      .mark-stage { min-height: 260px; }
+      .thesis { min-height: 0; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { scroll-behavior: auto !important; transition: none !important; }
+    }
+  </style>
+</head>
+<body>
+  <div class="shell">
+    <header>
+      <h1>Três caminhos para o mesmo gesto.</h1>
+      <p>TC, acionamento e tecnologia. Os estudos mantêm a paleta atual e testam quanto da assinatura original deve permanecer.</p>
+    </header>
+
+    <main class="concepts" aria-label="Propostas de logotipo">
+      <article class="concept" data-concept="A">
+        <div class="option"><strong>Opção A</strong><span>Evolução</span></div>
+        <div class="mark-stage"><img src="../assets/brand-concepts/tc-power-loop.svg" alt="Símbolo TC Power Loop"></div>
+        <h2>Power Loop</h2>
+        <p class="thesis">A assinatura atual redesenhada com proporções mais calmas e terminais consistentes. Preserva reconhecimento; o acionamento continua sendo a leitura dominante.</p>
+        <div class="tests" aria-label="Testes de aplicação">
+          <div class="sample sample--dark"><img src="../assets/brand-concepts/tc-power-loop.svg" alt=""></div>
+          <div class="sample sample--light"><img src="../assets/brand-concepts/tc-power-loop.svg" alt=""></div>
+          <div class="micro"><img src="../assets/brand-concepts/tc-power-loop.svg" alt=""></div>
+        </div>
+        <div class="lockup"><img src="../assets/brand-concepts/tc-power-loop.svg" alt=""><span>TONI COIMBRA</span></div>
+        <button class="select" type="button" aria-pressed="false">Selecionar Power Loop</button>
+      </article>
+
+      <article class="concept" data-concept="B">
+        <div class="option"><strong>Opção B</strong><span>Monograma</span></div>
+        <div class="mark-stage"><img src="../assets/brand-concepts/tc-open-core.svg" alt="Símbolo TC Open Core"></div>
+        <h2>Open Core</h2>
+        <p class="thesis">O C permanece como campo aberto e o T ganha leitura imediata. É a solução mais equilibrada entre nome próprio, tecnologia e presença profissional.</p>
+        <div class="tests" aria-label="Testes de aplicação">
+          <div class="sample sample--dark"><img src="../assets/brand-concepts/tc-open-core.svg" alt=""></div>
+          <div class="sample sample--light"><img src="../assets/brand-concepts/tc-open-core.svg" alt=""></div>
+          <div class="micro"><img src="../assets/brand-concepts/tc-open-core.svg" alt=""></div>
+        </div>
+        <div class="lockup"><img src="../assets/brand-concepts/tc-open-core.svg" alt=""><span>TONI COIMBRA</span></div>
+        <button class="select" type="button" aria-pressed="false">Selecionar Open Core</button>
+      </article>
+
+      <article class="concept" data-concept="C">
+        <div class="option"><strong>Opção C</strong><span>Redesign</span></div>
+        <div class="mark-stage"><img src="../assets/brand-concepts/tc-signal-path.svg" alt="Símbolo TC Signal Path"></div>
+        <h2>Signal Path</h2>
+        <p class="thesis">Uma construção mais arquitetônica: o C vira percurso e o T conduz o sinal até a saída. Comunica automação e fluxo com personalidade mais técnica.</p>
+        <div class="tests" aria-label="Testes de aplicação">
+          <div class="sample sample--dark"><img src="../assets/brand-concepts/tc-signal-path.svg" alt=""></div>
+          <div class="sample sample--light"><img src="../assets/brand-concepts/tc-signal-path.svg" alt=""></div>
+          <div class="micro"><img src="../assets/brand-concepts/tc-signal-path.svg" alt=""></div>
+        </div>
+        <div class="lockup"><img src="../assets/brand-concepts/tc-signal-path.svg" alt=""><span>TONI COIMBRA</span></div>
+        <button class="select" type="button" aria-pressed="false">Selecionar Signal Path</button>
+      </article>
+    </main>
+
+    <footer>
+      <span>Estudos vetoriais · fundo claro/escuro · redução a 16px</span>
+      <span id="choice" aria-live="polite">Nenhuma opção selecionada</span>
+    </footer>
+  </div>
+
+  <script>
+    const concepts = Array.from(document.querySelectorAll('.concept'));
+    const choice = document.querySelector('#choice');
+
+    concepts.forEach(concept => {
+      const button = concept.querySelector('.select');
+      button.addEventListener('click', () => {
+        concepts.forEach(item => {
+          item.classList.remove('is-selected');
+          item.querySelector('.select').setAttribute('aria-pressed', 'false');
+        });
+        concept.classList.add('is-selected');
+        button.setAttribute('aria-pressed', 'true');
+        choice.textContent = `Opção ${concept.dataset.concept} selecionada`;
+        localStorage.setItem('toni-logo-concept', concept.dataset.concept);
+      });
+    });
+
+    const saved = localStorage.getItem('toni-logo-concept');
+    const selected = concepts.find(concept => concept.dataset.concept === saved);
+    if (selected) selected.querySelector('.select').click();
+  </script>
+</body>
+</html>
