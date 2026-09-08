@@ -225,3 +225,30 @@ test('preserva a mensagem e oferece recuperação quando o envio falha', async (
   await expect(page.locator('#message')).toHaveValue('Esta mensagem deve ser preservada.');
   await expect(page.locator('#submit-btn')).toBeEnabled();
 });
+
+test('preserva a mensagem quando a resposta do formulário é inválida', async ({ page }) => {
+  await page.route('https://api.web3forms.com/submit', route =>
+    route.fulfill({ status: 200, contentType: 'text/html', body: '<html>proxy error</html>' })
+  );
+  await page.goto(pageUrl);
+  await page.locator('#name').fill('Teste de interface');
+  await page.locator('#email').fill('teste@example.com');
+  await page.locator('#message').fill('Esta mensagem não pode ser perdida.');
+  await page.locator('#submit-btn').click();
+  await expect(page.locator('#form-result')).toContainText('Não consegui enviar');
+  await expect(page.locator('#message')).toHaveValue('Esta mensagem não pode ser perdida.');
+});
+
+test('mantém todos os links do menu visíveis em viewport baixa', async ({ page }) => {
+  await page.setViewportSize({ width: 844, height: 320 });
+  await page.goto(pageUrl);
+  await page.locator('#burger').click();
+  const boxes = await page.locator('#drawer a').evaluateAll(links =>
+    links.map(link => {
+      const box = link.getBoundingClientRect();
+      return { top: box.top, bottom: box.bottom };
+    })
+  );
+  expect(boxes[0].top).toBeGreaterThanOrEqual(64);
+  expect(boxes.every(box => box.bottom > 0 && box.top < 320)).toBe(true);
+});

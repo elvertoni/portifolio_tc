@@ -664,9 +664,10 @@ a.chip:hover { transform: translateY(-2px); }
   background: var(--ink-deep);
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: flex-start;
   gap: .1em;
-  padding: var(--gut);
+  padding: calc(var(--rail) + 16px) var(--gut) 24px;
+  overflow-y: auto;
   clip-path: inset(0 0 100% 0);
   /* visibility plus inert keep the closed drawer out of both the visual and
      keyboard trees while the clip-path animates the open state. */
@@ -683,7 +684,7 @@ a.chip:hover { transform: translateY(-2px); }
 #drawer a {
   font-family: var(--font-display);
   font-weight: 800;
-  font-size: clamp(2.2rem, 11vw, 4.2rem);
+  font-size: clamp(2rem, min(11vw, 11vh), 4.2rem);
   line-height: 1.02;
   letter-spacing: -.03em;
   text-transform: uppercase;

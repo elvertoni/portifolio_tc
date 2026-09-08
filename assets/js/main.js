@@ -374,7 +374,9 @@
         });
         const json = await response.json().catch(() => ({}));
 
-        if (!response.ok || json.success === false || json.success === 'false') {
+        // Only an explicit success from Web3Forms is a successful submission.
+        // A proxy, error page, or malformed 200 response must keep the message.
+        if (!response.ok || (json.success !== true && json.success !== 'true')) {
           throw new Error(json.message || 'HTTP ' + response.status);
         }
 

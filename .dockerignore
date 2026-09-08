@@ -2,8 +2,23 @@
 .gitignore
 .agent
 .gemini
+.claude
+.impeccable
 graphify-out
 node_modules
 extract.py
 README.md
 *.md
+
+# Nada abaixo daqui pertence a um servidor público.
+tests
+test-results
+playwright-report
+blob-report
+playwright.config.mjs
+package.json
+package-lock.json
+*.log
+logo_branco.eps
+logo_preta.png
+style_2_reference.txt
