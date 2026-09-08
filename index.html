@@ -17,13 +17,11 @@
   <meta name="theme-color" content="#141414">
   <link rel="canonical" href="https://tonicoimbra.com/">
 
-  <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
+  <link rel="icon" type="image/svg+xml" sizes="any" href="assets/favicon.svg">
+  <link rel="preload" href="assets/fonts/archivo-latin.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="stylesheet" href="assets/css/style.css">
 
-  <!-- Marks the document before first paint. Every rule that hides content
-       for the reveal animation is scoped to .js, so a blocked or broken
-       main.js degrades to a plain, fully readable page. -->
-  <script>document.documentElement.className += ' js';</script>
+  <!-- Animation is enabled only after the runtime starts successfully. -->
 </head>
 
 <body>
@@ -44,23 +42,17 @@
   </div>
 
   <!-- ══ MOBILIÁRIO FIXO ═════════════════════════════════════════ -->
-  <div class="grain" aria-hidden="true"></div>
-  <div class="vignette" aria-hidden="true"></div>
-  <div class="frame-mark fm-tl" aria-hidden="true"><i></i><i></i></div>
-  <div class="frame-mark fm-bl" aria-hidden="true"><i></i><i></i></div>
-  <div class="frame-mark fm-tr" aria-hidden="true"><i></i><i></i></div>
-  <div class="frame-mark fm-br" aria-hidden="true"><i></i><i></i></div>
-
   <!-- ══ NAVEGAÇÃO FIXA ══════════════════════════════════════════ -->
   <header class="hdr" id="hdr">
     <a href="#top" class="mark" aria-label="Toni Coimbra — voltar ao topo">
-      <img class="brand-logo" src="assets/logo.svg" alt="" aria-hidden="true">
+      <img class="brand-logo" src="assets/logo.svg" alt="" width="50" height="32" aria-hidden="true">
+      <span class="brand-name">Toni Coimbra<span>Design de origem. Código de profissão.</span></span>
     </a>
 
     <nav class="navchain" aria-label="Navegação principal">
+      <a href="#projetos">Projetos</a>
       <a href="#sobre">Sobre</a>
       <a href="#stack">Stack</a>
-      <a href="#projetos">Projetos</a>
       <a href="#experiencia">Experiência</a>
       <a href="#contato">Contato</a>
     </nav>
@@ -71,9 +63,9 @@
   </header>
 
   <nav id="drawer" aria-label="Navegação móvel" aria-hidden="true" inert>
+    <a href="#projetos">Projetos</a>
     <a href="#sobre">Sobre</a>
     <a href="#stack">Stack</a>
-    <a href="#projetos">Projetos</a>
     <a href="#experiencia">Experiência</a>
     <a href="#contato">Contato</a>
   </nav>
@@ -84,48 +76,184 @@
          HERO
          ══════════════════════════════════════════════════════════════ -->
     <section id="hero" aria-label="Toni Coimbra — IA & Automação">
-      <canvas id="dust" aria-hidden="true"></canvas>
-
+      <div class="hero-topline">
+        <p>IA & Automação <span>/</span> Desenvolvimento Python</p>
+        <p class="hero-meta">Curitiba, Brasil <span id="clock">--:--:--</span> BRT</p>
+      </div>
       <div class="hero-stage" id="heroStage">
-        <h1 class="hero-name">
-          <span class="hero-word hw-a">
-            <span class="d-mega" data-mask><span>Toni</span></span>
-          </span>
-          <span class="hero-word hw-b">
-            <span class="d-mega" data-mask><span>Coimbra</span></span>
-          </span>
-        </h1>
-
-        <ul class="hero-list stagger" data-io>
-          <li>IA & Automação</li>
-          <li>Desenvolvedor Python</li>
-          <li>Professor — SEED-PR</li>
-        </ul>
-
-        <div class="hero-meta stagger" data-io>
-          <p class="mono-sm text-muted">TJPR — Assessoria STF/STJ</p>
-          <p class="mono-sm text-dim">
-            <span id="clock">--:--:--</span> BRT
-          </p>
-          <p class="mono-sm text-dim">Curitiba, PR</p>
+        <div class="hero-intro">
+          <p class="hero-statement">O olhar do design.<br>A lógica do código<span class="signal-dot">.</span></p>
+          <p class="hero-description">Da experiência gráfica à inteligência artificial. Transformo complexidade em sistemas que funcionam.</p>
+          <ul class="hero-list">
+            <li>TJPR — Assessoria STF/STJ</li>
+            <li>Professor — SEED-PR</li>
+          </ul>
+          <div class="hero-actions">
+            <a href="#projetos" class="btn">Ver projetos <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 17 17 7M7 7h10v10"/></svg></a>
+            <a href="#contato" class="hero-contact" id="heroDock">Vamos conversar <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14m-5-5 5 5-5 5"/></svg></a>
+          </div>
         </div>
-
-        <div class="hero-dock">
-          <a href="#contato" class="dock" id="heroDock">
-            <span class="bub" id="heroBub">
-              Olá — tem um projeto?<br>Vamos conversar.
-            </span>
-            <span class="dock-av" aria-hidden="true"><img src="assets/logo.svg" alt=""></span>
-            <p>
-              Fale comigo,<br>não com um formulário
-            </p>
-          </a>
+        <div class="hero-art">
+          <div class="collage" aria-hidden="true">
+            <div class="collage-in">
+              <figure class="tile tile--education"><img src="assets/img/cover-education-640.webp" alt="" width="640" height="640" fetchpriority="high"></figure>
+              <figure class="tile tile--civic"><img src="assets/img/cover-civic-640.webp" alt="" width="640" height="640" decoding="async"></figure>
+              <figure class="tile tile--health"><img src="assets/img/cover-health-640.webp" alt="" width="640" height="640" decoding="async"></figure>
+            </div>
+          </div>
+          <p class="art-caption"><span>Educação · Gestão · Saúde</span> Tecnologia em contextos reais</p>
         </div>
       </div>
+      <h1 class="hero-name"><span>Toni</span> <span>Coimbra<span class="signal-dot">.</span></span></h1>
+      <div class="hero-bottomline">
+        <span>Precisão visual. Inteligência aplicada.</span>
+        <a href="#projetos">Conheça meu trabalho <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5v14m-5-5 5 5 5-5"/></svg></a>
+      </div>
+    </section>
 
-      <div class="scrollcue" aria-hidden="true">
-        <i></i>
-        <span>Scroll</span>
+    <!-- ══════════════════════════════════════════════════════════════
+         PROJETOS
+         ══════════════════════════════════════════════════════════════ -->
+    <section id="projetos" class="sec" aria-label="Projetos em Destaque">
+      <div class="shell">
+        <div class="flex items-end justify-between gap-6 flex-wrap mb-12" data-io>
+          <div>
+            <h2 class="d-lg mt-4" data-mask><span>Projetos que<br><span class="text-muted">saem do papel.</span></span></h2>
+          </div>
+          <p class="mono-sm measure max-w-md md:text-right">
+            Sistemas em produção — portais educacionais, plataformas de saúde
+            e automações que processam milhares de documentos e horas de trabalho.
+          </p>
+        </div>
+
+        <div class="projects-grid">
+
+          <!-- ProfessorDash — destaque -->
+          <article class="box box--card box--media box--feature">
+            <span class="pshot">
+              <img src="assets/img/professordash.webp"
+                   srcset="assets/img/professordash.webp 800w, assets/img/professordash@2x.webp 1600w"
+                   sizes="(min-width: 1024px) 780px, (min-width: 768px) 50vw, 100vw"
+                   width="800" height="296" loading="lazy" decoding="async"
+                   alt="Portal do aluno do ProfessorDash: cabeçalho escuro com a jornada da turma e os cartões de aula pronta, publicação e progresso do aluno.">
+              <span class="project-cover"><img src="assets/img/cover-education-640.webp" alt="" loading="lazy" decoding="async"></span>
+            </span>
+            <div class="pbody">
+              <div class="pmeta">
+                <span class="chip chip--signal">Em produção</span>
+                <span class="mono-xs">2024–Presente</span>
+              </div>
+              <h3 class="d-md">
+                <a class="plink" href="https://prof.tonicoimbra.com" target="_blank" rel="noopener noreferrer">ProfessorDash — Portal do Aluno <svg class="project-arrow" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 17 17 7M7 7h10v10"/></svg></a>
+              </h3>
+              <p class="mono-sm measure">
+                Sistema completo de gestão de turmas, aulas, materiais e atividades para
+                professores da rede pública. Portal público para alunos com Google OAuth,
+                apostilas HTML, grade de tarefas e boletim automático.
+              </p>
+              <div class="flex flex-wrap gap-2">
+                <span class="chip">Python</span>
+                <span class="chip">Django 5</span>
+                <span class="chip">HTMX</span>
+                <span class="chip">Alpine.js</span>
+                <span class="chip">Tailwind CSS</span>
+                <span class="chip">PostgreSQL</span>
+                <span class="chip">Docker</span>
+                <span class="chip">EasyPanel</span>
+              </div>
+            </div>
+          </article>
+
+          <article class="box box--card box--media" data-rise>
+            <span class="pshot">
+              <img src="assets/img/esimba.webp"
+                   srcset="assets/img/esimba.webp 800w, assets/img/esimba@2x.webp 1600w"
+                   sizes="(min-width: 768px) 50vw, 100vw"
+                   width="800" height="364" loading="lazy" decoding="async"
+                   alt="Tela de acesso institucional do eSIMBA, com o brasão do sistema e o formulário de login.">
+              <span class="project-cover"><img src="assets/img/cover-civic-640.webp" alt="" loading="lazy" decoding="async"></span>
+            </span>
+            <div class="pbody">
+              <div class="pmeta">
+                <span class="chip chip--solid">Institucional</span>
+                <span class="mono-xs">2025–Presente</span>
+              </div>
+              <h3 class="d-sm">
+                <a class="plink" href="https://e-simba.com.br" target="_blank" rel="noopener noreferrer">eSIMBA — Monitoramento de Benefícios <svg class="project-arrow" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 17 17 7M7 7h10v10"/></svg></a>
+              </h3>
+              <p class="mono-sm">
+                Sistema integrado de monitoramento de benefícios e acolhimento, com acesso
+                institucional, trilha de auditoria e controle de permissões por perfil.
+              </p>
+              <div class="flex flex-wrap gap-2">
+                <span class="chip">Django</span>
+                <span class="chip">PostgreSQL</span>
+                <span class="chip">Docker</span>
+              </div>
+            </div>
+          </article>
+
+          <article class="box box--card box--media" data-rise>
+            <span class="pshot">
+              <img src="assets/img/vitalis.webp"
+                   srcset="assets/img/vitalis.webp 800w, assets/img/vitalis@2x.webp 1600w"
+                   sizes="(min-width: 768px) 50vw, 100vw"
+                   width="800" height="364" loading="lazy" decoding="async"
+                   alt="Página inicial do Vitalis com a chamada Cuide, Registre, Evolua e um cartão mostrando a linha do tempo do dia.">
+              <span class="project-cover"><img src="assets/img/cover-health-640.webp" alt="" loading="lazy" decoding="async"></span>
+            </span>
+            <div class="pbody">
+              <div class="pmeta">
+                <span class="chip chip--solid">Produto</span>
+                <span class="mono-xs">2025–Presente</span>
+              </div>
+              <h3 class="d-sm">
+                <a class="plink" href="https://vitalis.tonicoimbra.com" target="_blank" rel="noopener noreferrer">Vitalis — Saúde, treino e nutrição <svg class="project-arrow" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 17 17 7M7 7h10v10"/></svg></a>
+              </h3>
+              <p class="mono-sm">
+                Central pessoal de saúde: exames, tratamentos, treino e dieta num só lugar, com
+                lembretes de remédio, exame e retorno médico e histórico por conta.
+              </p>
+              <div class="flex flex-wrap gap-2">
+                <span class="chip">Django</span>
+                <span class="chip">Celery</span>
+                <span class="chip">PostgreSQL</span>
+                <span class="chip">Redis</span>
+              </div>
+            </div>
+          </article>
+
+          <article class="box box--card box--media" data-rise>
+            <span class="pshot">
+              <img src="assets/img/noivas-e-cia.webp"
+                   srcset="assets/img/noivas-e-cia.webp 800w, assets/img/noivas-e-cia@2x.webp 1600w"
+                   sizes="(min-width: 768px) 50vw, 100vw"
+                   width="800" height="364" loading="lazy" decoding="async"
+                   alt="Sistema Noivas e Cia: tela inicial com gestão comercial, catálogo de trajes e controle de locação para eventos.">
+              <span class="project-cover project-cover--commerce"><img src="assets/img/cover-commerce-640.webp" alt="" loading="lazy" decoding="async"></span>
+            </span>
+            <div class="pbody">
+              <div class="pmeta">
+                <span class="chip chip--solid">Comercial</span>
+                <span class="mono-xs">2025–Presente</span>
+              </div>
+              <h3 class="d-sm">
+                <a class="plink" href="https://noivaseciabandeirantes.com.br" target="_blank" rel="noopener noreferrer">Noivas &amp; Cia — Gestão &amp; Locação <svg class="project-arrow" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 17 17 7M7 7h10v10"/></svg></a>
+              </h3>
+              <p class="mono-sm">
+                Sistema completo de gestão comercial e controle de locações para aluguel de trajes e
+                acessórios para eventos, com contratos, catálogo e financeiro.
+              </p>
+              <div class="flex flex-wrap gap-2">
+                <span class="chip">Django 5</span>
+                <span class="chip">Tailwind CSS</span>
+                <span class="chip">SQLite</span>
+                <span class="chip">Docker</span>
+              </div>
+            </div>
+          </article>
+
+        </div>
       </div>
     </section>
 
@@ -136,8 +264,7 @@
       <div class="shell">
         <div class="flex items-end justify-between gap-6 flex-wrap mb-12" data-io>
           <div>
-            <span class="eyebrow">Quem sou</span>
-            <h2 class="d-lg mt-4" data-mask><span>Automação, IA e código</span></h2>
+            <h2 class="d-lg mt-4" data-mask><span>Da composição gráfica<br>à construção de sistemas.</span></h2>
           </div>
           <p class="mono-sm measure max-w-md md:text-right">
             Mais de 20 anos de experiência pregressa em diagramação e arte-finalismo.
@@ -146,7 +273,7 @@
           </p>
         </div>
 
-        <p class="mono-md wordwash measure-wide mb-16" data-io>
+        <p class="mono-md about-story measure-wide mb-16" data-io>
           Atuando no Tribunal de Justiça do Paraná (Assessoria STF/STJ) focado em
           soluções de automação e integração de IA para otimização de fluxos
           operacionais internos e análise inteligente de dados. Construo pipelines
@@ -183,8 +310,7 @@
       <div class="shell">
         <div class="flex items-end justify-between gap-6 flex-wrap mb-12" data-io>
           <div>
-            <span class="eyebrow">Tech Stack</span>
-            <h2 class="d-lg mt-4" data-mask><span>Ferramentas do arsenal</span></h2>
+            <h2 class="d-lg mt-4" data-mask><span>O que está por trás.</span></h2>
           </div>
           <p class="mono-sm max-w-md md:text-right">
             Tecnologias e ferramentas que compõem meu dia-a-dia no tribunal,
@@ -195,7 +321,7 @@
         <div class="grid grid-cols-1 md:grid-cols-2 gap-4 stagger" data-io>
           <!-- IA & ML -->
           <div class="phase">
-            <span class="num">01 — IA & Machine Learning</span>
+            <span class="num">IA & Machine Learning</span>
             <h3>Inteligência Artificial</h3>
             <div class="bar"><i></i></div>
             <p class="mono-sm">
@@ -214,7 +340,7 @@
 
           <!-- Automação -->
           <div class="phase">
-            <span class="num">02 — Automação & Integração</span>
+            <span class="num">Automação & Integração</span>
             <h3>Automação</h3>
             <div class="bar"><i></i></div>
             <p class="mono-sm">
@@ -232,7 +358,7 @@
 
           <!-- Dados -->
           <div class="phase">
-            <span class="num">03 — Dados & Processamento</span>
+            <span class="num">Dados & Processamento</span>
             <h3>Dados</h3>
             <div class="bar"><i></i></div>
             <p class="mono-sm">
@@ -250,7 +376,7 @@
 
           <!-- Infra -->
           <div class="phase">
-            <span class="num">04 — Infraestrutura & Dev</span>
+            <span class="num">Infraestrutura & Dev</span>
             <h3>Infra</h3>
             <div class="bar"><i></i></div>
             <p class="mono-sm">
@@ -269,156 +395,7 @@
       </div>
     </section>
 
-    <!-- ══════════════════════════════════════════════════════════════
-         PROJETOS
-         ══════════════════════════════════════════════════════════════ -->
-    <section id="projetos" class="sec" aria-label="Projetos em Destaque">
-      <div class="shell">
-        <div class="flex items-end justify-between gap-6 flex-wrap mb-12" data-io>
-          <div>
-            <span class="eyebrow">Projetos</span>
-            <h2 class="d-lg mt-4" data-mask><span>Trabalho selecionado</span></h2>
-          </div>
-          <p class="mono-sm measure max-w-md md:text-right">
-            Sistemas em produção — portais educacionais, plataformas de saúde
-            e automações que processam milhares de documentos e horas de trabalho.
-          </p>
-        </div>
 
-        <div class="projects-grid grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 stagger" data-io>
-
-          <!-- ProfessorDash — destaque -->
-          <article class="box box--card box--media box--feature">
-            <span class="pshot">
-              <img src="assets/img/professordash.webp"
-                   srcset="assets/img/professordash.webp 800w, assets/img/professordash@2x.webp 1600w"
-                   sizes="(min-width: 768px) 1300px, 100vw"
-                   width="800" height="296" loading="lazy" decoding="async"
-                   alt="Portal do aluno do ProfessorDash: cabeçalho escuro com a jornada da turma e os cartões de aula pronta, publicação e progresso do aluno.">
-            </span>
-            <div class="pbody">
-              <div class="pmeta">
-                <span class="chip chip--signal">Em produção</span>
-                <span class="mono-xs">2024–Presente</span>
-              </div>
-              <h3 class="d-md">
-                <a class="plink" href="https://prof.tonicoimbra.com" target="_blank" rel="noopener noreferrer">
-                  ProfessorDash — Portal do Aluno
-                </a>
-              </h3>
-              <p class="mono-sm measure">
-                Sistema completo de gestão de turmas, aulas, materiais e atividades para
-                professores da rede pública. Portal público para alunos com Google OAuth,
-                apostilas HTML, grade de tarefas e boletim automático.
-              </p>
-              <div class="flex flex-wrap gap-2">
-                <span class="chip">Python</span>
-                <span class="chip">Django 5</span>
-                <span class="chip">HTMX</span>
-                <span class="chip">Alpine.js</span>
-                <span class="chip">Tailwind CSS</span>
-                <span class="chip">PostgreSQL</span>
-                <span class="chip">Docker</span>
-                <span class="chip">EasyPanel</span>
-              </div>
-            </div>
-          </article>
-
-          <article class="box box--card box--media" data-rise>
-            <span class="pshot">
-              <img src="assets/img/esimba.webp"
-                   srcset="assets/img/esimba.webp 800w, assets/img/esimba@2x.webp 1600w"
-                   sizes="(min-width: 768px) 50vw, 100vw"
-                   width="800" height="364" loading="lazy" decoding="async"
-                   alt="Tela de acesso institucional do eSIMBA, com o brasão do sistema e o formulário de login.">
-            </span>
-            <div class="pbody">
-              <div class="pmeta">
-                <span class="chip chip--solid">Institucional</span>
-                <span class="mono-xs">2025–Presente</span>
-              </div>
-              <h3 class="d-sm">
-                <a class="plink" href="https://e-simba.com.br" target="_blank" rel="noopener noreferrer">
-                  eSIMBA — Monitoramento de Benefícios
-                </a>
-              </h3>
-              <p class="mono-sm">
-                Sistema integrado de monitoramento de benefícios e acolhimento, com acesso
-                institucional, trilha de auditoria e controle de permissões por perfil.
-              </p>
-              <div class="flex flex-wrap gap-2">
-                <span class="chip">Django</span>
-                <span class="chip">PostgreSQL</span>
-                <span class="chip">Docker</span>
-              </div>
-            </div>
-          </article>
-
-          <article class="box box--card box--media" data-rise>
-            <span class="pshot">
-              <img src="assets/img/vitalis.webp"
-                   srcset="assets/img/vitalis.webp 800w, assets/img/vitalis@2x.webp 1600w"
-                   sizes="(min-width: 768px) 50vw, 100vw"
-                   width="800" height="364" loading="lazy" decoding="async"
-                   alt="Página inicial do Vitalis com a chamada Cuide, Registre, Evolua e um cartão mostrando a linha do tempo do dia.">
-            </span>
-            <div class="pbody">
-              <div class="pmeta">
-                <span class="chip chip--solid">Produto</span>
-                <span class="mono-xs">2025–Presente</span>
-              </div>
-              <h3 class="d-sm">
-                <a class="plink" href="https://vitalis.tonicoimbra.com" target="_blank" rel="noopener noreferrer">
-                  Vitalis — Saúde, treino e nutrição
-                </a>
-              </h3>
-              <p class="mono-sm">
-                Central pessoal de saúde: exames, tratamentos, treino e dieta num só lugar, com
-                lembretes de remédio, exame e retorno médico e histórico por conta.
-              </p>
-              <div class="flex flex-wrap gap-2">
-                <span class="chip">Django</span>
-                <span class="chip">Celery</span>
-                <span class="chip">PostgreSQL</span>
-                <span class="chip">Redis</span>
-              </div>
-            </div>
-          </article>
-
-          <article class="box box--card box--media" data-rise>
-            <span class="pshot">
-              <img src="assets/img/noivas-e-cia.webp"
-                   srcset="assets/img/noivas-e-cia.webp 800w, assets/img/noivas-e-cia@2x.webp 1600w"
-                   sizes="(min-width: 768px) 50vw, 100vw"
-                   width="800" height="364" loading="lazy" decoding="async"
-                   alt="Sistema Noivas e Cia: tela inicial com gestão comercial, catálogo de trajes e controle de locação para eventos.">
-            </span>
-            <div class="pbody">
-              <div class="pmeta">
-                <span class="chip chip--solid">Comercial</span>
-                <span class="mono-xs">2025–Presente</span>
-              </div>
-              <h3 class="d-sm">
-                <a class="plink" href="https://noivaseciabandeirantes.com.br" target="_blank" rel="noopener noreferrer">
-                  Noivas &amp; Cia — Gestão &amp; Locação
-                </a>
-              </h3>
-              <p class="mono-sm">
-                Sistema completo de gestão comercial e controle de locações para aluguel de trajes e
-                acessórios para eventos, com contratos, catálogo e financeiro.
-              </p>
-              <div class="flex flex-wrap gap-2">
-                <span class="chip">Django 5</span>
-                <span class="chip">Tailwind CSS</span>
-                <span class="chip">SQLite</span>
-                <span class="chip">Docker</span>
-              </div>
-            </div>
-          </article>
-
-        </div>
-      </div>
-    </section>
 
     <!-- ══════════════════════════════════════════════════════════════
          EXPERIÊNCIA PROFISSIONAL
@@ -427,7 +404,6 @@
       <div class="shell">
         <div class="flex items-end justify-between gap-6 flex-wrap mb-12" data-io>
           <div>
-            <span class="eyebrow">Experiência</span>
             <h2 class="d-lg mt-4" data-mask><span>Trajetória profissional</span></h2>
           </div>
           <p class="mono-sm max-w-md md:text-right">
@@ -489,7 +465,6 @@
       <div class="shell">
         <div class="flex items-end justify-between gap-6 flex-wrap mb-12" data-io>
           <div>
-            <span class="eyebrow">Formação</span>
             <h2 class="d-lg mt-4" data-mask><span>Histórico acadêmico</span></h2>
           </div>
         </div>
@@ -529,21 +504,18 @@
 
         <div class="cta-core">
           <div class="cta-head" data-io>
-            <h2 data-mask><span>Contato</span></h2>
-            <svg class="cta-underline" viewBox="0 0 600 30" preserveAspectRatio="none" aria-hidden="true" focusable="false">
-              <path d="M0,25 Q150,0 300,18 T600,12"/>
-            </svg>
+            <h2 data-mask><span>Vamos dar<br>forma à sua<br><span class="text-signal">próxima ideia.</span></span></h2>
+
           </div>
 
           <p class="mono-sm max-w-xl measure">
-            Estou sempre aberto a discutir novas tecnologias, automações inteligentes
-            e como a IA pode resolver problemas reais. Preencha o formulário abaixo
-            e entrarei em contato.
+            Uma automação, um sistema, uma nova possibilidade.
+            Conte o que você tem em mente e vamos conversar sobre como tirar a ideia do papel.
           </p>
 
           <!-- Contact Form -->
           <div class="box p-6 cta-form">
-            <form id="contact-form" class="form" novalidate>
+            <form id="contact-form" class="form" action="https://api.web3forms.com/submit" method="POST">
               <input type="hidden" name="access_key" value="9981a893-6116-438b-8528-4bb6d41fc606">
               <input type="hidden" name="subject" value="Novo contato pelo Portfólio!">
               <input type="checkbox" name="botcheck" class="hidden" aria-label="Campo antispam" aria-hidden="true" tabindex="-1">
@@ -618,7 +590,10 @@
     <div class="shell py-8 md:py-12">
       <div class="grid grid-cols-2 lg:grid-cols-4 gap-8 md:gap-12">
         <div class="fcol fcol--wide">
-          <a href="#top" class="mark mb-6">T <i></i> C</a>
+          <a href="#top" class="mark mb-6" aria-label="Toni Coimbra — voltar ao topo">
+            <img class="brand-logo" src="assets/logo.svg" alt="" width="50" height="32" loading="lazy">
+            <span class="brand-name">Toni Coimbra</span>
+          </a>
           <p class="mono-sm measure max-w-md">
             Especialista em IA & Automação, Professor de Desenvolvimento
             de Sistemas e Desenvolvedor Python. Construído com HTML,
@@ -631,9 +606,9 @@
 
         <div class="fcol">
           <h3>Navegação</h3>
+          <a href="#projetos">Projetos</a>
           <a href="#sobre">Sobre</a>
           <a href="#stack">Stack</a>
-          <a href="#projetos">Projetos</a>
           <a href="#experiencia">Experiência</a>
           <a href="#contato">Contato</a>
         </div>
