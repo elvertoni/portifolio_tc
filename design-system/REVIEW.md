@@ -17,6 +17,16 @@ projetos mostram as interfaces reais.
 
 ## Principais mudanças
 
+- **Sistema visual:** tokens semânticos de cor, tipografia, espaçamento, raios,
+  bordas e motion foram consolidados em `assets/css/style.css`, mantendo
+  aliases compatíveis com os componentes existentes.
+- **Marca:** a ligadura TC entrou no catálogo com construção, escada de redução,
+  provas em fundo escuro, claro e monocromático, lockups com respiro e regras de
+  uso. As provas carregam `assets/logo.svg` e `assets/favicon.svg` — o catálogo
+  não guarda cópia do desenho, e um teste garante isso.
+- **Catálogo:** `design-system.html` passou a documentar os tokens públicos,
+  escalas tipográficas, ritmo, superfícies, ações, chips, campos e estados
+  em uma página responsiva que consome a folha canônica.
 - **Primeira impressão:** apresentação profissional, chamada para os projetos
   e assinatura integram uma composição com hierarquia clara.
 - **Sequência:** projetos imediatamente depois da abertura; trajetória,
@@ -34,10 +44,11 @@ projetos mostram as interfaces reais.
 
 ## Verificação
 
-`npm test -- --output=test-results/smoke` executa 15 testes Playwright.
+`npm test -- --output=test-results/smoke` executa 21 testes Playwright.
 Há cobertura de 320 a 1920 px, navegação, menu, movimento reduzido,
-conteúdo sem JavaScript e formulário. Os envios são interceptados: nenhuma
-mensagem real é enviada durante os testes.
+conteúdo sem JavaScript, formulário e o catálogo de design system em
+desktop/mobile. Os envios são interceptados: nenhuma mensagem real é enviada
+durante os testes.
 
 As conferências visuais usam desktop, tablet e celular. Capturas locais ficam
 em `test-results/`, que não deve ser versionado.

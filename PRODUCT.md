@@ -42,7 +42,8 @@ A marca aparece no portfólio web, favicon, avatares, capas de projetos, apresen
 - Conteúdo e posicionamento profissional em `index.html`.
 - Símbolo atual em `assets/logo.svg`.
 - Favicon atual em `assets/favicon.svg`.
-- Estudos rejeitados em `assets/brand-concepts/` e `design-system/logo-concepts.html`; não devem orientar a nova forma.
+- Construção, medidas, lockups e provas de redução da marca em `design-system/marca-canvas/`.
+- Os estudos de marca descartados saíram do working tree; ficam no histórico do git para consulta e não devem orientar a nova forma.
 
 ## Product Principles
 

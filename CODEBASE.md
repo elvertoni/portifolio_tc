@@ -21,8 +21,8 @@ O projeto adota uma arquitetura **Jamstack estática de alta fidelidade**, sem f
        │                   │           │                   │
        │ - Tokens (:root)  │           │ - Central rAF Loop│
        │ - Archivo & Mono  │           │ - Observer Engine │
-       │ - Layout & Grid   │           │ - Canvas Dust FX  │
-       │ - Componentes     │           │ - Web3Forms Ajax  │
+       │ - Componentes     │           │ - Colagem/Relógio │
+       │ - Skins de seção  │           │ - Web3Forms Ajax  │
        └───────────────────┘           └───────────────────┘
 ```
 
@@ -33,8 +33,8 @@ O projeto adota uma arquitetura **Jamstack estática de alta fidelidade**, sem f
 | Arquivo | Função Principal | Dependentes / Relações |
 |---|---|---|
 | [`index.html`](file:///c:/ARQUIVOS/PROJETOS/TONI/portifolio_tc/index.html) | Ponto de entrada do DOM, estrutura das seções | Carrega `style.css` e `main.js`. Usa fontes locais em `assets/fonts/` |
-| [`assets/css/style.css`](file:///c:/ARQUIVOS/PROJETOS/TONI/portifolio_tc/assets/css/style.css) | Folha de estilos unificada (Tokens, Reset, Componentes, Layout) | Referenciado por `index.html`. Governa todos os nós do DOM |
-| [`assets/js/main.js`](file:///c:/ARQUIVOS/PROJETOS/TONI/portifolio_tc/assets/js/main.js) | Lógica interativa, animações, motor de reveal, validação e formulário | Referenciado por `index.html` com `defer`. Altera classes `.is-in`, `.stuck`, `.open` |
+| [`assets/css/style.css`](file:///c:/ARQUIVOS/PROJETOS/TONI/portifolio_tc/assets/css/style.css) | Folha unificada em ordem de cascata: tokens, reset, primitivas, componentes, skins de seção, responsivo | Referenciado por `index.html`. Cada seletor é declarado uma vez; não há bloco de correção no fim do arquivo |
+| [`assets/js/main.js`](file:///c:/ARQUIVOS/PROJETOS/TONI/portifolio_tc/assets/js/main.js) | Lógica interativa, animações, motor de reveal, validação e formulário | Referenciado por `index.html` com `defer`. Altera classes `.is-in`, `.open`, `.on` |
 | [`assets/img/`](file:///c:/ARQUIVOS/PROJETOS/TONI/portifolio_tc/assets/img/) | Capturas reais dos produtos em produção (`.webp` e `@2x.webp`) | Exibidas na grade de projetos com carregamento preguiçoso (`loading="lazy"`) |
 | [`assets/logo.svg`](file:///c:/ARQUIVOS/PROJETOS/TONI/portifolio_tc/assets/logo.svg) | Ligadura TC em `viewBox` 200×128; o vão entre T e C é recortado por `<mask>` para ficar transparente | Usada no cabeçalho e no rodapé via `.brand-logo` |
 | [`assets/favicon.svg`](file:///c:/ARQUIVOS/PROJETOS/TONI/portifolio_tc/assets/favicon.svg) | Corte de 16 px da mesma marca sobre campo arredondado `#141414` | `<link rel="icon">` do `index.html` e das páginas de `design-system/` |
@@ -53,23 +53,28 @@ constante `REDUCED` (de `prefers-reduced-motion`) desliga tudo que é movimento.
 
 1. **`frame(now)` & `onTick(fn)`:** Loop central em `requestAnimationFrame` que consolida todas as atualizações contínuas em um único ciclo, evitando múltiplos timers desordenados.
 2. **`initReveal()` / `revealOnce()`:** `IntersectionObserver` único que adiciona a classe `.is-in` aos elementos decorados com `[data-rise]`, `[data-mask]`, `.stagger` ou `<section>`.
-3. **`initHeader()`:** Monitoramento de rolagem para atribuir a classe `.stuck` (backdrop-filter e background translúcido) e toggle de acessibilidade no `#drawer` mobile, com fechamento no Escape e ao voltar para desktop.
+3. **`initHeader()`:** Acessibilidade do `#drawer` mobile (foco preso no painel, fechamento no Escape e ao voltar para desktop) e realce da seção ativa na `.navchain` via `IntersectionObserver`. A barra é opaca em repouso, então não há estado de rolagem para rastrear.
 4. **`initCollage()`:** Paralaxe das `.tile` do herói seguindo o ponteiro. Sai cedo sob movimento reduzido ou ponteiro grosso (`pointer: coarse`) — no lugar fica a composição estática.
 5. **`initClock()`:** Relógio de São Paulo em `#clock` e `#clock2`, com `setInterval` interrompido quando a aba fica oculta.
 6. **`initCounters()`:** Animação de contagem numérica com easing cúbico para elementos com `[data-count]`.
 7. **`initForm()`:** Manipulador assíncrono `fetch` para envio via JSON para a API `https://api.web3forms.com/submit`, com honeypot anti-spam e mensagens em `#form-result`.
 8. **`initFooter()`:** Ano corrente em `#current-year` e botão `#toTop`, que respeita `prefers-reduced-motion` no `scrollTo`.
 
-O boot acontece em `DOMContentLoaded`. Não há animação de preloader: o elemento
-`#loader` permanece no DOM e recebe a classe `done` imediatamente, para não
-atrasar a primeira leitura.
+O boot acontece em `DOMContentLoaded` e a primeira coisa que ele faz é marcar
+`<html class="js">` — a classe que habilita as animações no CSS e que os testes
+usam como sinal de que o runtime subiu. Não há preloader: a página pinta o
+conteúdo direto.
+
+O loop de `requestAnimationFrame` só é iniciado quando algum efeito se registra
+via `onTick`. Em ponteiro grosso ou com movimento reduzido nada se registra, e o
+loop nunca roda.
 
 ---
 
 ## 4. Convenções e Regras de Estilo
 
 ### CSS
-- **Tokens Primeiro:** Nunca utilize cores hexadecimais arbitrárias no corpo das classes. Use sempre as variáveis CSS declaradas em `:root` (`var(--bone)`, `var(--signal)`, `var(--panel)`, etc.).
+- **Tokens Primeiro:** Nunca utilize cores hexadecimais arbitrárias no corpo das classes. Use as variáveis semânticas declaradas em `:root` (`var(--color-text)`, `var(--color-accent)`, `var(--color-surface)`, etc.); os aliases curtos permanecem por compatibilidade.
 - **Proibição de Roxo/Violeta:** Em conformidade com o design system Volta Atelier e diretrizes do projeto, o acento primário é sempre `--signal` (`#fb3732`) ou `--amber` (`#ffa31a`). Tons arroxeados/violetas estão banidos.
 - **Tipografia Fluida:** Utilize sempre funções `clamp()` para tamanhos de fonte, garantindo escalabilidade harmoniosa entre mobile (320px) e monitores ultrawide (1560px+).
 
