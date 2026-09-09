@@ -1,7 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" role="img" aria-labelledby="title desc">
-  <title id="title">TC Totem</title>
-  <desc id="desc">T superior conectado a um C inferior compacto, formando uma assinatura vertical.</desc>
-  <path fill="currentColor" d="M20 12h88v18H74v34H54V30H20z"/>
-  <path fill="none" stroke="currentColor" stroke-width="16" stroke-linecap="square" stroke-linejoin="miter" d="M100 68H52c-12 0-20 7-20 18s8 18 20 18h48"/>
-</svg>

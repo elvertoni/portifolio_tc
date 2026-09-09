@@ -4,4 +4,8 @@ playwright-report/
 blob-report/
 graphify-out/
 *.log
+
+# O arquivo abaixo não existe hoje. A regra fica porque é o nome do bundle de
+# ~2,5 MB que o canvas da marca gera ao ser exportado: se você reexportar,
+# ele continua fora do repositório. Os artboards .dc.html é que são a fonte.
 design-system/marca-canvas/marca-toni-coimbra.html

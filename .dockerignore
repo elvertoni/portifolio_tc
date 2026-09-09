@@ -1,12 +1,15 @@
 .git
 .gitignore
+
+# Ferramental de agentes: nada disso existe hoje no repositório, mas as regras
+# ficam para que uma reinstalação não vaze para a imagem.
 .agent
 .gemini
 .claude
 .impeccable
 graphify-out
+
 node_modules
-extract.py
 README.md
 *.md
 
@@ -19,6 +22,3 @@ playwright.config.mjs
 package.json
 package-lock.json
 *.log
-logo_branco.eps
-logo_preta.png
-style_2_reference.txt

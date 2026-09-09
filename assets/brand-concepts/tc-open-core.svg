@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" role="img" aria-labelledby="title desc">
-  <title id="title">TC Open Core</title>
-  <desc id="desc">C circular branco com um T laranja explícito atravessando sua abertura.</desc>
-  <g fill="none" stroke-linecap="round" stroke-linejoin="round">
-    <path stroke="#f4f3f0" stroke-width="13" d="M92 27a44 44 0 1 0 0 74"/>
-    <path stroke="#ffa31a" stroke-width="12" d="M43 44h49M68 44v45"/>
-  </g>
-</svg>
