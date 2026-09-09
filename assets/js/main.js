@@ -10,9 +10,17 @@
   const lerp = (a, b, t) => a + (b - a) * t;
   const REDUCED = matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-  /* single rAF loop */
+  /* single rAF loop, started only once something asks for a frame. On a
+     phone every per-frame effect opts out, and an empty loop still wakes
+     the compositor sixty times a second for nothing. */
   const ticks = [];
-  function onTick(fn) { ticks.push(fn); }
+  function onTick(fn) {
+    ticks.push(fn);
+    if (!REDUCED && !frameId) {
+      last = performance.now();
+      frameId = requestAnimationFrame(frame);
+    }
+  }
 
   /* Every per-frame effect below is anchored to one section. Gating on
      intersection keeps the loop from burning frames on a canvas nobody
@@ -39,9 +47,8 @@
     frameId = requestAnimationFrame(frame);
   }
   if (!REDUCED) {
-    frameId = requestAnimationFrame(frame);
     document.addEventListener('visibilitychange', () => {
-      if (!document.hidden && !frameId) {
+      if (!document.hidden && !frameId && ticks.length) {
         last = performance.now();
         frameId = requestAnimationFrame(frame);
       }
@@ -79,26 +86,13 @@
 
 
   /* ═══════════════════════════════════════════════════════════════════
-     3. HEADER, DRAWER, NAV HIGHLIGHTING
+     3. DRAWER, NAV HIGHLIGHTING
+
+     The header bar is opaque at rest, so there is no scrolled state to track.
      ═══════════════════════════════════════════════════════════════════ */
   function initHeader() {
-    const hdr = $('#hdr');
     const burger = $('#burger');
     const drawer = $('#drawer');
-
-    if (!hdr) return;
-
-    /* scroll → stuck class */
-    let ticking = false;
-    window.addEventListener('scroll', () => {
-      if (!ticking) {
-        requestAnimationFrame(() => {
-          hdr.classList.toggle('stuck', scrollY > 40);
-          ticking = false;
-        });
-        ticking = true;
-      }
-    }, { passive: true });
 
     /* burger / drawer */
     if (burger && drawer) {
@@ -268,16 +262,10 @@
         const target = parseFloat(el.dataset.count);
         const suffix = el.dataset.suffix || '';
         const dec = parseInt(el.dataset.dec || '0', 10);
-        if (REDUCED) {
-          el.textContent = String(target) + suffix;
-          return;
-        }
-        const dur = 1500;
-        const start = performance.now();
 
         /* The number and its unit are two different things; the stylesheet
-           already has a rule for the unit (.stat b sup) that nothing was
-           ever emitting. */
+           styles the unit separately (.stat b sup). Reduced motion skips the
+           count, not the typography. */
         const numNode = document.createTextNode('');
         el.textContent = '';
         el.appendChild(numNode);
@@ -286,6 +274,13 @@
           sup.textContent = suffix;
           el.appendChild(sup);
         }
+
+        if (REDUCED) {
+          numNode.nodeValue = dec ? target.toFixed(dec) : String(target);
+          return;
+        }
+        const dur = 1500;
+        const start = performance.now();
 
         function tick(now) {
           const t = clamp((now - start) / dur, 0, 1);
@@ -420,9 +415,6 @@
      ═══════════════════════════════════════════════════════════════════ */
   document.addEventListener('DOMContentLoaded', () => {
     document.documentElement.classList.add('js');
-    // Show the work immediately; retain the loader ID for integrations.
-    const loader = $('#loader');
-    if (loader) loader.classList.add('done');
     revealOnce();
     initHeader();
     initCollage();

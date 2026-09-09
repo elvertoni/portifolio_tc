@@ -17,35 +17,24 @@
   <meta name="theme-color" content="#141414">
   <link rel="canonical" href="https://tonicoimbra.com/">
 
-  <link rel="icon" type="image/svg+xml" sizes="any" href="assets/favicon.svg?v=20260908">
+  <link rel="icon" type="image/svg+xml" sizes="any" href="assets/favicon.svg?v=20260909">
+  <!-- Both faces are in the first screen: Archivo draws the name, JetBrains
+       Mono every line of running text. Preloading only one leaves the other
+       swapping in after first paint. -->
   <link rel="preload" href="assets/fonts/archivo-latin.woff2" as="font" type="font/woff2" crossorigin>
-  <link rel="stylesheet" href="assets/css/style.css?v=20260908">
+  <link rel="preload" href="assets/fonts/jetbrains-mono-latin.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="assets/css/style.css?v=20260909">
 
   <!-- Animation is enabled only after the runtime starts successfully. -->
 </head>
 
 <body>
   <a class="skip-link" href="#top">Pular para o conteúdo principal</a>
-  <!-- ══ PRELOADER ═══════════════════════════════════════════════ -->
-  <div id="loader" aria-hidden="true">
-    <div class="lo-word">
-      <span>Toni Coimbra</span>
-      <b>●</b>
-      <span>Portfolio</span>
-    </div>
-    <div class="lo-count" id="loCount">000</div>
-    <div class="lo-side">
-      <p class="mono-xs text-dim">Carregando</p>
-      <p class="mono-xs text-muted mt-1" id="loLabel">Inicializando</p>
-    </div>
-    <div class="lo-bar"><i id="loBar"></i></div>
-  </div>
 
-  <!-- ══ MOBILIÁRIO FIXO ═════════════════════════════════════════ -->
   <!-- ══ NAVEGAÇÃO FIXA ══════════════════════════════════════════ -->
   <header class="hdr" id="hdr">
     <a href="#top" class="mark" aria-label="Toni Coimbra — voltar ao topo">
-      <img class="brand-logo" src="assets/logo.svg?v=20260908" alt="" width="50" height="32" aria-hidden="true">
+      <img class="brand-logo" src="assets/logo.svg?v=20260909" alt="" width="50" height="32" aria-hidden="true">
       <span class="brand-name">Toni Coimbra<span>Design de origem. Código de profissão.</span></span>
     </a>
 
@@ -80,7 +69,7 @@
         <p>IA & Automação <span>/</span> Desenvolvimento Python</p>
         <p class="hero-meta">Curitiba, Brasil <span id="clock">--:--:--</span> BRT</p>
       </div>
-      <div class="hero-stage" id="heroStage">
+      <div class="hero-stage">
         <div class="hero-intro">
           <p class="hero-statement">O olhar do design.<br>A lógica do código<span class="signal-dot">.</span></p>
           <p class="hero-description">Da experiência gráfica à inteligência artificial. Transformo complexidade em sistemas que funcionam.</p>
@@ -90,7 +79,7 @@
           </ul>
           <div class="hero-actions">
             <a href="#projetos" class="btn">Ver projetos <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 17 17 7M7 7h10v10"/></svg></a>
-            <a href="#contato" class="hero-contact" id="heroDock">Vamos conversar <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14m-5-5 5 5-5 5"/></svg></a>
+            <a href="#contato" class="hero-contact">Vamos conversar <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14m-5-5 5 5-5 5"/></svg></a>
           </div>
         </div>
         <div class="hero-art">
@@ -120,7 +109,7 @@
           <div>
             <h2 class="d-lg mt-4" data-mask><span>Projetos que<br><span class="text-muted">saem do papel.</span></span></h2>
           </div>
-          <p class="mono-sm measure max-w-md md:text-right">
+          <p class="mono-sm measure max-w-md">
             Sistemas em produção — portais educacionais, plataformas de saúde
             e automações que processam milhares de documentos e horas de trabalho.
           </p>
@@ -129,7 +118,7 @@
         <div class="projects-grid">
 
           <!-- ProfessorDash — destaque -->
-          <article class="box box--card box--media box--feature">
+          <article class="box--media box--feature">
             <span class="pshot">
               <img src="assets/img/professordash.webp"
                    srcset="assets/img/professordash.webp 800w, assets/img/professordash@2x.webp 1600w"
@@ -164,7 +153,7 @@
             </div>
           </article>
 
-          <article class="box box--card box--media" data-rise>
+          <article class="box--media" data-rise>
             <span class="pshot">
               <img src="assets/img/esimba.webp"
                    srcset="assets/img/esimba.webp 800w, assets/img/esimba@2x.webp 1600w"
@@ -193,7 +182,7 @@
             </div>
           </article>
 
-          <article class="box box--card box--media" data-rise>
+          <article class="box--media" data-rise>
             <span class="pshot">
               <img src="assets/img/vitalis.webp"
                    srcset="assets/img/vitalis.webp 800w, assets/img/vitalis@2x.webp 1600w"
@@ -223,7 +212,7 @@
             </div>
           </article>
 
-          <article class="box box--card box--media" data-rise>
+          <article class="box--media" data-rise>
             <span class="pshot">
               <img src="assets/img/noivas-e-cia.webp"
                    srcset="assets/img/noivas-e-cia.webp 800w, assets/img/noivas-e-cia@2x.webp 1600w"
@@ -266,7 +255,7 @@
           <div>
             <h2 class="d-lg mt-4" data-mask><span>Da composição gráfica<br>à construção de sistemas.</span></h2>
           </div>
-          <p class="mono-sm measure max-w-md md:text-right">
+          <p class="mono-sm measure max-w-md">
             Mais de 20 anos de experiência pregressa em diagramação e arte-finalismo.
             Hoje aplico essa mesma atenção a detalhes no desenvolvimento de software,
             automação e inteligência artificial.
@@ -283,19 +272,19 @@
         </p>
 
         <div class="grid grid-cols-2 lg:grid-cols-4 gap-3 stagger" data-io>
-          <div class="box stat">
+          <div class="stat">
             <span class="mono-xs">Experiência prévia</span>
             <b data-count="20" data-suffix="+">20+</b>
           </div>
-          <div class="box stat">
+          <div class="stat">
             <span class="mono-xs">Documentos processados</span>
             <b data-count="200" data-suffix="K+">200K+</b>
           </div>
-          <div class="box stat">
+          <div class="stat">
             <span class="mono-xs">Posição atual</span>
             <b>TJPR</b>
           </div>
-          <div class="box stat">
+          <div class="stat">
             <span class="mono-xs">Formação</span>
             <b>UFPR</b>
           </div>
@@ -312,7 +301,7 @@
           <div>
             <h2 class="d-lg mt-4" data-mask><span>O que está por trás.</span></h2>
           </div>
-          <p class="mono-sm max-w-md md:text-right">
+          <p class="mono-sm max-w-md">
             Tecnologias e ferramentas que compõem meu dia-a-dia no tribunal,
             em sala de aula e em projetos pessoais.
           </p>
@@ -406,7 +395,7 @@
           <div>
             <h2 class="d-lg mt-4" data-mask><span>Trajetória profissional</span></h2>
           </div>
-          <p class="mono-sm max-w-md md:text-right">
+          <p class="mono-sm max-w-md">
             Da indústria gráfica à inteligência artificial — cada fase
             construiu a atenção a detalhes que aplico hoje.
           </p>
@@ -499,13 +488,9 @@
          ══════════════════════════════════════════════════════════════ -->
     <section id="contato" aria-label="Contato">
       <div id="cta" data-io>
-        <!-- Ghost text -->
-        <div class="ghosts" id="ghosts" aria-hidden="true"></div>
-
         <div class="cta-core">
-          <div class="cta-head" data-io>
+          <div class="cta-head">
             <h2 data-mask><span>Vamos dar<br>forma à sua<br><span class="text-signal">próxima ideia.</span></span></h2>
-
           </div>
 
           <p class="mono-sm max-w-xl measure">
@@ -514,7 +499,7 @@
           </p>
 
           <!-- Contact Form -->
-          <div class="box p-6 cta-form">
+          <div class="cta-form">
             <form id="contact-form" class="form" action="https://api.web3forms.com/submit" method="POST">
               <input type="hidden" name="access_key" value="9981a893-6116-438b-8528-4bb6d41fc606">
               <input type="hidden" name="subject" value="Novo contato pelo Portfólio!">
@@ -552,15 +537,17 @@
               </div>
             </form>
 
-            <div id="form-result" role="status" aria-live="polite" class="hidden"></div>
+            <div id="form-result" role="status" class="hidden"></div>
           </div>
 
           <!-- Social Links -->
           <div class="flex gap-3 mt-4">
+            <!-- No aria-label here: an accessible name that does not contain the
+                 visible label breaks voice control (WCAG 2.5.3). -->
             <a href="https://www.linkedin.com/in/elvertoni/" target="_blank" rel="noopener noreferrer"
-              class="chip chip--signal" aria-label="Falar diretamente pelo LinkedIn">Falar no LinkedIn</a>
+              class="chip chip--signal">Falar no LinkedIn</a>
             <a href="https://github.com/elvertoni" target="_blank" rel="noopener noreferrer"
-              class="chip" aria-label="GitHub">GitHub</a>
+              class="chip">GitHub</a>
           </div>
         </div>
       </div>
@@ -591,7 +578,7 @@
       <div class="grid grid-cols-2 lg:grid-cols-4 gap-8 md:gap-12">
         <div class="fcol fcol--wide">
           <a href="#top" class="mark mb-6" aria-label="Toni Coimbra — voltar ao topo">
-            <img class="brand-logo" src="assets/logo.svg?v=20260908" alt="" width="50" height="32" loading="lazy">
+            <img class="brand-logo" src="assets/logo.svg?v=20260909" alt="" width="50" height="32" loading="lazy">
             <span class="brand-name">Toni Coimbra</span>
           </a>
           <p class="mono-sm measure max-w-md">
@@ -635,6 +622,6 @@
     </div>
   </footer>
 
-  <script src="assets/js/main.js?v=20260908" defer></script>
+  <script src="assets/js/main.js?v=20260909" defer></script>
 </body>
 </html>

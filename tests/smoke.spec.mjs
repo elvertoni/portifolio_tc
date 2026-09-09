@@ -1,12 +1,13 @@
 import { test, expect } from '@playwright/test';
 
 const pageUrl = new URL('../index.html', import.meta.url).href;
+const designSystemUrl = new URL('../design-system/design-system.html', import.meta.url).href;
 
 test('carrega o portfolio e expõe a navegação principal', async ({ page }) => {
   await page.goto(pageUrl);
 
   await expect(page).toHaveTitle(/Toni Coimbra/);
-  await expect(page.locator('#loader')).toHaveClass(/done/, { timeout: 10_000 });
+  await expect(page.locator('html')).toHaveClass(/js/, { timeout: 10_000 });
   await expect(page.locator('main h1')).toContainText('Toni');
   await expect(page.locator('nav[aria-label="Navegação principal"] a')).toHaveCount(5);
 });
@@ -34,7 +35,7 @@ test('respeita prefers-reduced-motion sem bloquear o conteúdo', async ({ page }
   await page.goto(pageUrl);
 
   await expect(page.locator('body')).not.toHaveClass(/is-locked/);
-  await expect(page.locator('#loader')).toHaveClass(/done/);
+  await expect(page.locator('html')).toHaveClass(/js/);
   await expect(page.locator('main h1')).toBeVisible();
   await expect(page.locator('[data-count="20"]')).toHaveText('20+');
   await expect(page.locator('[data-count="200"]')).toHaveText('200K+');
@@ -64,7 +65,7 @@ test('destaca o primeiro projeto e adapta a galeria ao celular', async ({ page }
 test('aplica o efeito de profundidade do design system ao collage central', async ({ page }) => {
   await page.setViewportSize({ width: 1440, height: 900 });
   await page.goto(pageUrl);
-  await expect(page.locator('#loader')).toHaveClass(/done/, { timeout: 10_000 });
+  await expect(page.locator('html')).toHaveClass(/js/, { timeout: 10_000 });
 
   await expect.poll(() => page.locator('.collage .tile').evaluateAll((tiles) =>
     tiles.length === 3 && tiles.every((tile) => tile.style.transform.includes('translate3d('))
@@ -163,7 +164,7 @@ test('mantém leitura e links disponíveis sem JavaScript', async ({ browser }) 
   const page = await context.newPage();
   await page.goto(pageUrl);
   await expect(page.locator('main h1')).toBeVisible();
-  await expect(page.locator('#loader')).toBeHidden();
+  await expect(page.locator('html')).not.toHaveClass(/js/);
   await expect(page.locator('.box--feature .plink')).toBeVisible();
   await expect(page.locator('#contact-form')).toBeVisible();
   await page.locator('.hero-actions a[href="#projetos"]').click();
@@ -251,4 +252,66 @@ test('mantém todos os links do menu visíveis em viewport baixa', async ({ page
   );
   expect(boxes[0].top).toBeGreaterThanOrEqual(64);
   expect(boxes.every(box => box.bottom > 0 && box.top < 320)).toBe(true);
+});
+
+test('documenta tokens e componentes no catálogo canônico', async ({ page }) => {
+  await page.goto(designSystemUrl);
+
+  await expect(page).toHaveTitle(/Toni Coimbra.*Design System/);
+  await expect(page.locator('main h1')).toContainText('Design system');
+  await expect(page.locator('.ds-token-row')).toHaveCount(11);
+  await expect(page.locator('.ds-type-row')).toHaveCount(8);
+  await expect(page.locator('.ds-space-row')).toHaveCount(8);
+  await expect(page.locator('.ds-demo')).toHaveCount(6);
+  await expect(page.locator('link[rel="stylesheet"]')).toHaveAttribute('href', '../assets/css/style.css');
+  await expect(page.locator('#catalog-email')).toBeVisible();
+});
+
+test('mantém o catálogo legível em mobile e com movimento reduzido', async ({ page }) => {
+  await page.setViewportSize({ width: 390, height: 844 });
+  await page.emulateMedia({ reducedMotion: 'reduce' });
+  await page.goto(designSystemUrl);
+
+  expect(await page.evaluate(() => document.documentElement.scrollWidth)).toBeLessThanOrEqual(390);
+  await expect(page.locator('#catalog-title')).toBeVisible();
+  await expect(page.locator('.ds-token-row').first()).toBeVisible();
+  expect(await page.locator('.ds-component-grid').evaluate(grid =>
+    getComputedStyle(grid).gridTemplateColumns.split(' ').length
+  )).toBe(1);
+  await expect(page.locator('#catalog-email')).toBeVisible();
+});
+
+test('registra a marca aprovada e prova a redução no catálogo', async ({ page }) => {
+  await page.goto(designSystemUrl);
+
+  // As provas carregam os arquivos que o site usa; o catálogo não guarda cópia
+  // do desenho, senão a documentação passa a divergir da marca.
+  const fontes = await page.locator('#marca img').evaluateAll((imgs) =>
+    [...new Set(imgs.map((i) => i.getAttribute('src')))].sort()
+  );
+  expect(fontes).toEqual(['../assets/favicon.svg', '../assets/logo.svg']);
+
+  // A escada desce nos tamanhos documentados e o último degrau é o corte de 16.
+  const escada = await page.locator('.ds-scale-step img').evaluateAll((imgs) =>
+    imgs.map((i) => Math.round(i.getBoundingClientRect().height))
+  );
+  expect(escada).toEqual([64, 48, 32, 24, 16]);
+  await expect(page.locator('.ds-scale-step--cut img')).toHaveAttribute('src', '../assets/favicon.svg');
+
+  await expect(page.locator('.ds-spec-row')).toHaveCount(7);
+  await expect(page.locator('nav[aria-label="Seções do design system"] a')).toHaveCount(6);
+});
+
+test('a prova em fundo claro declara o esquema que a marca lê', async ({ page }) => {
+  await page.goto(designSystemUrl);
+
+  // O T do logo.svg troca de cor por prefers-color-scheme. Sem declarar o
+  // esquema no contêiner, a prova em fundo claro mostraria um T osso sobre
+  // bone — invisível — para quem estiver com o sistema no escuro.
+  await expect(page.locator('.ds-ground--light')).toHaveCSS('color-scheme', 'light');
+
+  const alturas = await page.locator('.ds-ground img').evaluateAll((imgs) =>
+    imgs.map((i) => Math.round(i.getBoundingClientRect().height))
+  );
+  expect(alturas).toEqual([77, 77, 77]);
 });
