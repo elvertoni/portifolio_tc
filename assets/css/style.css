@@ -275,6 +275,11 @@ input, textarea { caret-color: var(--signal); }
    per line on a desktop shell. Caps the line, not the container. */
 .measure { max-width: var(--measure); }
 .measure-wide { max-width: calc(var(--measure) * 1.25); }
+.about-story {
+  line-height: 1.82;
+  text-wrap: pretty;
+  hyphens: auto;
+}
 
 /* ═══════════════════════════════════════════════════════════════════
    SHARED PRIMITIVES
@@ -1131,6 +1136,10 @@ a.chip:hover { transform: translateY(-2px); }
 
 /* Submit in flight: the label swaps, so mark the wait visually too */
 .btn.is-busy { cursor: progress; }
+.btn[disabled].is-busy {
+  opacity: .88;
+  cursor: wait;
+}
 .btn.is-busy::after {
   content: "";
   width: .85em; height: .85em;

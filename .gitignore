@@ -9,3 +9,10 @@ graphify-out/
 # ~2,5 MB que o canvas da marca gera ao ser exportado: se você reexportar,
 # ele continua fora do repositório. Os artboards .dc.html é que são a fonte.
 design-system/marca-canvas/marca-toni-coimbra.html
+
+# Bundles exportados do design system: artefato local, não entra no repo.
+*.zip
+
+# Catálogo 3D legado, restaurado do histórico para consulta: depende de CDN
+# (Tailwind, three.js) e não faz parte do que o site publica.
+catalogo-3d-legado.html

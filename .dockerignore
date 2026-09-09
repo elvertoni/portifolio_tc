@@ -22,3 +22,8 @@ playwright.config.mjs
 package.json
 package-lock.json
 *.log
+
+# Bundles exportados na raiz nunca podem ser servidos publicamente.
+*.zip
+
+catalogo-3d-legado.html

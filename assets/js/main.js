@@ -352,7 +352,7 @@
       }
 
       const original = submitBtn.textContent;
-      submitBtn.textContent = 'Enviando';
+      submitBtn.textContent = 'Enviando...';
       submitBtn.classList.add('is-busy');
       submitBtn.disabled = true;
       form.setAttribute('aria-busy', 'true');
