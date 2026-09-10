@@ -690,9 +690,9 @@ a.chip:hover { transform: translateY(-2px); }
   background: var(--bone);
   transition: transform .45s var(--e-io), opacity .3s;
 }
-.burger.open i:nth-child(1) { transform: translateY(2.75px) rotate(45deg); }
+.burger.open i:nth-child(1) { transform: translateY(5.5px) rotate(45deg); }
 .burger.open i:nth-child(2) { opacity: 0; }
-.burger.open i:nth-child(3) { transform: translateY(-2.75px) rotate(-45deg); }
+.burger.open i:nth-child(3) { transform: translateY(-5.5px) rotate(-45deg); }
 
 /* Drawer */
 #drawer {
@@ -720,6 +720,10 @@ a.chip:hover { transform: translateY(-2px); }
   transition: clip-path .8s var(--e-io), visibility 0s;
 }
 #drawer a {
+  display: flex;
+  align-items: center;
+  min-height: var(--tap);
+  flex-shrink: 0;
   font-family: var(--font-display);
   font-weight: 800;
   font-size: clamp(2rem, min(11vw, 11vh), 4.2rem);
@@ -788,7 +792,7 @@ a.chip:hover { transform: translateY(-2px); }
 .hero-description {
   margin-top: 24px;
   max-width: 52ch;
-  font-size: clamp(12px, .95vw, 14px);
+  font-size: var(--size-body-sm);
   line-height: 1.85;
   color: var(--muted);
 }
@@ -1070,7 +1074,7 @@ a.chip:hover { transform: translateY(-2px); }
   padding: .9em 1.2em;
   min-height: var(--tap);
   font-family: var(--font-mono);
-  font-size: max(16px, clamp(11px, .86vw, 13px));
+  font-size: 16px;
   line-height: 1.75;
   color: var(--bone);
   background: var(--panel);
@@ -1078,10 +1082,6 @@ a.chip:hover { transform: translateY(-2px); }
   border-radius: var(--radius-media);
   transition: border-color .35s var(--e-soft), background .35s var(--e-soft),
               box-shadow .35s var(--e-soft);
-}
-@media (min-width: 768px) {
-  /* 16px only exists to stop iOS zooming the page on focus */
-  .form-field { font-size: clamp(11px, .86vw, 13px); }
 }
 .form-field:focus {
   outline: none;
@@ -1130,7 +1130,9 @@ a.chip:hover { transform: translateY(-2px); }
   font-size: clamp(11px, .86vw, 13px);
   line-height: 1.6;
   text-align: left;
+  overflow-wrap: anywhere;
 }
+.form-result a { text-decoration: underline; text-underline-offset: .2em; }
 .form-result--ok    { color: var(--ok);    border-color: rgba(74, 222, 128, .34); background: rgba(74, 222, 128, .10); }
 .form-result--warn  { color: var(--amber); border-color: rgba(255, 163, 26, .34);  background: rgba(255, 163, 26, .10); }
 
@@ -1373,7 +1375,7 @@ footer {
   .hero-topline > p:first-child > span { margin-inline: 5px; }
   .hero-stage { grid-template-columns: 1fr; gap: 12px; padding-block: 32px 24px; }
   .hero-statement { font-size: clamp(29px, 7.8vw, 46px); }
-  .hero-description { font-size: 12px; margin-top: 18px; }
+  .hero-description { margin-top: 18px; }
   .hero-list { display: flex; flex-wrap: wrap; gap: 0 14px; margin-top: 16px; }
   .hero-actions { margin-top: 20px; gap: 12px; }
   .hero-actions .btn { flex: none; min-height: 48px; padding-inline: 16px; gap: 12px; }
@@ -1437,6 +1439,9 @@ footer {
   .stat:hover, .stat:focus-within, .phase:hover, .phase:focus-within,
   .box--card:hover, .box--card:focus-within { --lift: 0px; }
   .navchain a:hover, a.chip:hover, .fcol a:not(.mark):hover { transform: none; }
+  .mark:hover .brand-logo { transform: none; }
+  .box--media:hover .project-cover,
+  .box--media:focus-within .project-cover { transform: rotate(4deg) scale(.96); }
 
   #drawer a { opacity: 1; transform: none; transition: none; }
 }
@@ -1747,16 +1752,28 @@ code {
 .ds-rule-row p { color: var(--muted); }
 .ds-page footer { margin-top: 0; }
 
-@media (max-width: 760px) {
+@media (max-width: 900px) {
+  .ds-page .hdr { gap: var(--space-4); }
+  .ds-page .mark { flex-shrink: 0; }
   .ds-page .navchain {
     display: flex;
     max-width: 58vw;
+    min-width: 0;
     overflow-x: auto;
-    justify-content: flex-end;
-    scrollbar-width: none;
+    justify-content: flex-start;
+    padding: var(--space-1);
+    scrollbar-width: thin;
+    scrollbar-color: var(--line-ui) transparent;
   }
-  .ds-page .navchain::-webkit-scrollbar { display: none; }
   .ds-page .navchain a { flex: none; font-size: 11px; padding-inline: .85em; }
+}
+
+@media (max-width: 600px) {
+  .ds-page .brand-name { display: none; }
+  .ds-page .navchain { max-width: none; }
+}
+
+@media (max-width: 760px) {
   .ds-page .ds-section-head,
   .ds-component-grid { grid-template-columns: 1fr; }
   .ds-token-row { grid-template-columns: 40px minmax(0, 1fr); }

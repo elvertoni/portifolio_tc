@@ -17,15 +17,15 @@
   <meta name="theme-color" content="#141414">
   <link rel="canonical" href="https://tonicoimbra.com/">
 
-  <link rel="icon" type="image/svg+xml" sizes="any" href="assets/favicon.svg?v=20260909">
-  <link rel="apple-touch-icon" href="assets/favicon.svg?v=20260909">
+  <link rel="icon" type="image/svg+xml" sizes="any" href="assets/favicon.svg?v=20260910">
+  <link rel="apple-touch-icon" href="assets/favicon.svg?v=20260910">
   <link rel="manifest" href="site.webmanifest">
   <!-- Both faces are in the first screen: Archivo draws the name, JetBrains
        Mono every line of running text. Preloading only one leaves the other
        swapping in after first paint. -->
   <link rel="preload" href="assets/fonts/archivo-latin.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="preload" href="assets/fonts/jetbrains-mono-latin.woff2" as="font" type="font/woff2" crossorigin>
-  <link rel="stylesheet" href="assets/css/style.css?v=20260909">
+  <link rel="stylesheet" href="assets/css/style.css?v=20260910">
 
   <!-- Animation is enabled only after the runtime starts successfully. -->
 </head>
@@ -36,7 +36,7 @@
   <!-- ══ NAVEGAÇÃO FIXA ══════════════════════════════════════════ -->
   <header class="hdr" id="hdr">
     <a href="#top" class="mark" aria-label="Toni Coimbra — voltar ao topo">
-      <img class="brand-logo" src="assets/logo.svg?v=20260909" alt="" width="50" height="32" aria-hidden="true">
+      <img class="brand-logo" src="assets/logo.svg?v=20260910" alt="" width="50" height="32" aria-hidden="true">
       <span class="brand-name">Toni Coimbra<span>Design de origem. Código de profissão.</span></span>
     </a>
 
@@ -124,10 +124,10 @@
             <span class="pshot">
               <img src="assets/img/professordash.webp"
                    srcset="assets/img/professordash.webp 800w, assets/img/professordash@2x.webp 1600w"
-                   sizes="(min-width: 1024px) 780px, (min-width: 768px) 50vw, 100vw"
+                   sizes="(max-width: 900px) calc(100vw - 8vw), (min-width: 1320px) 704px, 56vw"
                    width="800" height="296" loading="lazy" decoding="async"
                    alt="Portal do aluno do ProfessorDash: cabeçalho escuro com a jornada da turma e os cartões de aula pronta, publicação e progresso do aluno.">
-              <span class="project-cover"><img src="assets/img/cover-education-640.webp" alt="" loading="lazy" decoding="async"></span>
+              <span class="project-cover"><img src="assets/img/cover-education-640.webp" alt="" width="640" height="640" loading="lazy" decoding="async"></span>
             </span>
             <div class="pbody">
               <div class="pmeta">
@@ -162,7 +162,7 @@
                    sizes="(min-width: 768px) 50vw, 100vw"
                    width="800" height="364" loading="lazy" decoding="async"
                    alt="Tela de acesso institucional do eSIMBA, com o brasão do sistema e o formulário de login.">
-              <span class="project-cover"><img src="assets/img/cover-civic-640.webp" alt="" loading="lazy" decoding="async"></span>
+              <span class="project-cover"><img src="assets/img/cover-civic-640.webp" alt="" width="640" height="640" loading="lazy" decoding="async"></span>
             </span>
             <div class="pbody">
               <div class="pmeta">
@@ -191,7 +191,7 @@
                    sizes="(min-width: 768px) 50vw, 100vw"
                    width="800" height="364" loading="lazy" decoding="async"
                    alt="Página inicial do Vitalis com a chamada Cuide, Registre, Evolua e um cartão mostrando a linha do tempo do dia.">
-              <span class="project-cover"><img src="assets/img/cover-health-640.webp" alt="" loading="lazy" decoding="async"></span>
+              <span class="project-cover"><img src="assets/img/cover-health-640.webp" alt="" width="640" height="640" loading="lazy" decoding="async"></span>
             </span>
             <div class="pbody">
               <div class="pmeta">
@@ -221,7 +221,7 @@
                    sizes="(min-width: 768px) 50vw, 100vw"
                    width="800" height="364" loading="lazy" decoding="async"
                    alt="Sistema Noivas e Cia: tela inicial com gestão comercial, catálogo de trajes e controle de locação para eventos.">
-              <span class="project-cover project-cover--commerce"><img src="assets/img/cover-commerce-640.webp" alt="" loading="lazy" decoding="async"></span>
+              <span class="project-cover project-cover--commerce"><img src="assets/img/cover-commerce-640.webp" alt="" width="640" height="640" loading="lazy" decoding="async"></span>
             </span>
             <div class="pbody">
               <div class="pmeta">
@@ -517,7 +517,7 @@
 
               <div class="form-row">
                 <label for="email" class="form-label">E-mail de contato</label>
-                <input type="email" id="email" name="email" required autocomplete="email"
+                <input type="email" id="email" name="email" required autocomplete="email" autocapitalize="none" spellcheck="false"
                   class="form-field" placeholder="joao@exemplo.com"
                   aria-describedby="email-error">
                 <p class="form-error" id="email-error">Confira o e-mail — é por ele que eu respondo.</p>
@@ -580,7 +580,7 @@
       <div class="grid grid-cols-2 lg:grid-cols-4 gap-8 md:gap-12">
         <div class="fcol fcol--wide">
           <a href="#top" class="mark mb-6" aria-label="Toni Coimbra — voltar ao topo">
-            <img class="brand-logo" src="assets/logo.svg?v=20260909" alt="" width="50" height="32" loading="lazy">
+            <img class="brand-logo" src="assets/logo.svg?v=20260910" alt="" width="50" height="32" loading="lazy">
             <span class="brand-name">Toni Coimbra</span>
           </a>
           <p class="mono-sm measure max-w-md">
@@ -589,7 +589,7 @@
             CSS & Vanilla JS.
           </p>
           <p class="mono-xs mt-4">
-            © <span id="current-year"></span> Toni Coimbra
+            © <span id="current-year">2026</span> Toni Coimbra
           </p>
         </div>
 
@@ -624,6 +624,6 @@
     </div>
   </footer>
 
-  <script src="assets/js/main.js?v=20260909" defer></script>
+  <script src="assets/js/main.js?v=20260910" defer></script>
 </body>
 </html>

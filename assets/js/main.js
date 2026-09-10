@@ -14,12 +14,15 @@
      phone every per-frame effect opts out, and an empty loop still wakes
      the compositor sixty times a second for nothing. */
   const ticks = [];
-  function onTick(fn) {
-    ticks.push(fn);
-    if (!REDUCED && !frameId) {
+  function requestTick() {
+    if (!REDUCED && !document.hidden && !frameId && ticks.some(tick => tick.visible.on)) {
       last = performance.now();
       frameId = requestAnimationFrame(frame);
     }
+  }
+  function onTick(fn, visible) {
+    ticks.push({ fn, visible });
+    requestTick();
   }
 
   /* Every per-frame effect below is anchored to one section. Gating on
@@ -29,7 +32,10 @@
     const state = { on: false };
     if (!el) return state;
     new IntersectionObserver(
-      es => { state.on = es[0].isIntersecting; },
+      es => {
+        state.on = es[0].isIntersecting;
+        requestTick();
+      },
       { rootMargin: margin || '120px' }
     ).observe(el);
     return state;
@@ -37,21 +43,18 @@
   let last = performance.now();
   let frameId = 0;
   function frame(now) {
-    if (document.hidden) {
-      frameId = 0;
-      return;
-    }
+    frameId = 0;
+    if (document.hidden) return;
     const dt = Math.min(0.05, (now - last) / 1000);
     last = now;
-    for (let i = 0; i < ticks.length; i++) ticks[i](dt, now);
-    frameId = requestAnimationFrame(frame);
+    for (let i = 0; i < ticks.length; i++) {
+      if (ticks[i].visible.on) ticks[i].fn(dt, now);
+    }
+    if (ticks.some(tick => tick.visible.on)) frameId = requestAnimationFrame(frame);
   }
   if (!REDUCED) {
     document.addEventListener('visibilitychange', () => {
-      if (!document.hidden && !frameId && ticks.length) {
-        last = performance.now();
-        frameId = requestAnimationFrame(frame);
-      }
+      requestTick();
     });
   }
 
@@ -121,7 +124,16 @@
       }
 
       burger.addEventListener('click', () => setDrawer(!drawer.classList.contains('open')));
-      links.forEach(a => a.addEventListener('click', () => setDrawer(false, false)));
+      links.forEach(a => a.addEventListener('click', () => {
+        setDrawer(false, false);
+        const target = document.getElementById(a.hash.slice(1));
+        if (!target) return;
+        if (!target.hasAttribute('tabindex')) {
+          target.setAttribute('tabindex', '-1');
+          target.addEventListener('blur', () => target.removeAttribute('tabindex'), { once: true });
+        }
+        target.focus({ preventScroll: true });
+      }));
 
       matchMedia('(min-width: 901px)').addEventListener('change', e => {
         if (e.matches && drawer.classList.contains('open')) setDrawer(false, false);
@@ -206,8 +218,10 @@
       smooth.ny = lerp(smooth.ny, pointer.ny, .06);
 
       const time = now / 1000;
-      cards.forEach(card => {
-        const rect = card.el.getBoundingClientRect();
+      // Read every card before writing transforms to avoid layout thrashing.
+      const rects = cards.map(card => card.el.getBoundingClientRect());
+      cards.forEach((card, index) => {
+        const rect = rects[index];
         const cx = rect.left + rect.width / 2;
         const cy = rect.top + rect.height / 2;
         const dx = cx - smooth.x;
@@ -226,7 +240,7 @@
         card.rotation = lerp(card.rotation, targetRotation, .075);
         card.el.style.transform = `translate3d(${card.x.toFixed(2)}px, ${card.y.toFixed(2)}px, 0) rotate(${(card.baseRotation + card.rotation).toFixed(2)}deg)`;
       });
-    });
+    }, visible);
   }
 
   function initClock() {
@@ -343,6 +357,7 @@
 
     form.addEventListener('submit', async e => {
       e.preventDefault();
+      if (form.getAttribute('aria-busy') === 'true') return;
 
       const bad = fields.filter(el => !mark(el));
       if (bad.length) {

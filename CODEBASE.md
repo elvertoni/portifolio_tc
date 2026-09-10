@@ -40,6 +40,7 @@ O projeto adota uma arquitetura **Jamstack estática de alta fidelidade**, sem f
 | [`assets/favicon.svg`](file:///c:/ARQUIVOS/PROJETOS/TONI/portifolio_tc/assets/favicon.svg) | Corte de 16 px da mesma marca sobre campo arredondado `#141414` | `<link rel="icon">` do `index.html` e das páginas de `design-system/` |
 | [`design-system/marca-canvas/`](file:///c:/ARQUIVOS/PROJETOS/TONI/portifolio_tc/design-system/marca-canvas/) | Fonte da verdade da marca: construção, medidas, logotipo, lockups e provas de redução | Origem dos dois SVG acima; qualquer alteração da marca começa aqui |
 | [`tests/smoke.spec.mjs`](file:///c:/ARQUIVOS/PROJETOS/TONI/portifolio_tc/tests/smoke.spec.mjs) | Suíte de testes automatizados com Playwright | Executa validação de a11y, layout responsivo e reduced-motion via `npm test` |
+| [`tests/runtime.spec.mjs`](file:///c:/ARQUIVOS/PROJETOS/TONI/portifolio_tc/tests/runtime.spec.mjs) | Testes de comportamento do runtime | Cobre a suspensão do loop de `requestAnimationFrame`, o foco levado à seção pelo menu mobile e o bloqueio de envio duplicado do formulário |
 | [`nginx.conf`](file:///c:/ARQUIVOS/PROJETOS/TONI/portifolio_tc/nginx.conf) | Configuração de Nginx para produção com Gzip, cache e headers de segurança | Montado pelo `Dockerfile` |
 | [`design-system/design-system.html`](file:///c:/ARQUIVOS/PROJETOS/TONI/portifolio_tc/design-system/design-system.html) | Catálogo visual do Volta Atelier | Demonstra os padrões definidos em `assets/css/style.css`; não contém tokens próprios |
 | [`Dockerfile`](file:///c:/ARQUIVOS/PROJETOS/TONI/portifolio_tc/Dockerfile) | Configuração de empacotamento Nginx Alpine | Utilizado para deploy em container (EasyPanel / VPS) |
@@ -51,7 +52,7 @@ O projeto adota uma arquitetura **Jamstack estática de alta fidelidade**, sem f
 O runtime é executado dentro de uma IIFE imediatamente invocada com `'use strict'`. A
 constante `REDUCED` (de `prefers-reduced-motion`) desliga tudo que é movimento.
 
-1. **`frame(now)` & `onTick(fn)`:** Loop central em `requestAnimationFrame` que consolida todas as atualizações contínuas em um único ciclo, evitando múltiplos timers desordenados.
+1. **`frame(now)`, `onTick(fn, visible)` & `whenVisible(el)`:** Loop central em `requestAnimationFrame` que consolida todas as atualizações contínuas em um único ciclo, evitando múltiplos timers desordenados. Cada efeito se registra junto com o estado de visibilidade da sua seção (`whenVisible`), e o loop só roda enquanto algum deles está na tela — fora disso ele se desliga e `requestTick()` o reacende quando a seção volta ou a aba deixa de estar oculta.
 2. **`initReveal()` / `revealOnce()`:** `IntersectionObserver` único que adiciona a classe `.is-in` aos elementos decorados com `[data-rise]`, `[data-mask]`, `.stagger` ou `<section>`.
 3. **`initHeader()`:** Acessibilidade do `#drawer` mobile (foco preso no painel, fechamento no Escape e ao voltar para desktop) e realce da seção ativa na `.navchain` via `IntersectionObserver`. A barra é opaca em repouso, então não há estado de rolagem para rastrear.
 4. **`initCollage()`:** Paralaxe das `.tile` do herói seguindo o ponteiro. Sai cedo sob movimento reduzido ou ponteiro grosso (`pointer: coarse`) — no lugar fica a composição estática.
@@ -65,9 +66,10 @@ O boot acontece em `DOMContentLoaded` e a primeira coisa que ele faz é marcar
 usam como sinal de que o runtime subiu. Não há preloader: a página pinta o
 conteúdo direto.
 
-O loop de `requestAnimationFrame` só é iniciado quando algum efeito se registra
-via `onTick`. Em ponteiro grosso ou com movimento reduzido nada se registra, e o
-loop nunca roda.
+O loop de `requestAnimationFrame` só é iniciado quando algum efeito registrado
+via `onTick` está visível. Em ponteiro grosso ou com movimento reduzido nada se
+registra, e o loop nunca roda; com o herói fora da tela ou a aba oculta ele para
+sozinho até que `requestTick()` seja chamado de novo.
 
 ---
 

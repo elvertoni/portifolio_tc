@@ -124,7 +124,9 @@ portifolio_tc/
 │   ├── og-card.html         # Fonte 1200×630 do assets/og.png
 │   ├── marca-canvas/        # Fonte da verdade da marca: construção e provas
 │   └── REVIEW.md            # Registro das decisões de design
-├── tests/smoke.spec.mjs     # Suíte Playwright (roda em file://, sem servidor)
+├── tests/
+│   ├── smoke.spec.mjs       # Suíte Playwright (roda em file://, sem servidor)
+│   └── runtime.spec.mjs     # Testes de comportamento do runtime (loop, foco, envio)
 ├── Dockerfile               # Configuração Nginx Alpine para produção
 ├── nginx.conf               # Gzip, política de cache e headers de segurança
 ├── index.html               # Estrutura HTML semântica completa
