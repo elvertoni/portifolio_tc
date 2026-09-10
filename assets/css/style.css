@@ -1245,6 +1245,283 @@ footer {
 }
 
 /* ═══════════════════════════════════════════════════════════════════
+   GALERIA EM ARCO — para superfícies com muitas imagens
+
+   Um componente completo em dois estados. O que está declarado aqui é o
+   estado sem JavaScript: um trilho horizontal com scroll-snap, legível,
+   navegável pelo teclado e com todas as imagens presentes. `assets/js/
+   gallery.js` acrescenta `.is-live` e só então as fichas saem da linha e
+   entram no anel 3D.
+
+   Nada abaixo depende do portfólio: um projeto que precise da galeria copia
+   este bloco e aquele arquivo. Por isso as medidas moram em variáveis locais
+   ao componente, e não em tokens novos no :root.
+   ═══════════════════════════════════════════════════════════════════ */
+.gallery {
+  --gallery-card: clamp(232px, 26vw, 360px);
+  /* teto de altura da ficha, não proporção fixa: segura a imagem quadrada sem
+     recortar a captura larga, que já é mais baixa que isto */
+  --gallery-card-max: 292px;
+  /* o fundo contra o qual as bordas do palco desvanecem; sobrescreva se a
+     galeria for montada sobre um painel em vez da página */
+  --gallery-ground: var(--ink);
+  --gallery-radius: var(--radius-emphasis);
+  position: relative;
+}
+.gallery-stage {
+  display: flex;
+  /* as fichas guardam a forma da própria imagem, então a faixa é irregular por
+     natureza; centrar deixa a irregularidade simétrica em vez de pendurada */
+  align-items: center;
+  gap: var(--space-6);
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  padding-block: var(--space-2);
+  /* a barra padrão do navegador não pertence a design system nenhum */
+  scrollbar-width: thin;
+  scrollbar-color: var(--line-ui) transparent;
+}
+.gallery-stage::-webkit-scrollbar { height: 6px; }
+.gallery-stage::-webkit-scrollbar-track { background: transparent; }
+.gallery-stage::-webkit-scrollbar-thumb {
+  border-radius: var(--radius-pill);
+  background: var(--line-ui);
+}
+.gallery-stage:focus-visible {
+  outline: 2px solid var(--signal);
+  outline-offset: 4px;
+}
+.gallery-track {
+  display: contents;
+}
+.gallery-item {
+  flex: none;
+  width: var(--gallery-card);
+  scroll-snap-align: start;
+  list-style: none;
+}
+
+/* A ficha: moldura, imagem e registro. É o mesmo objeto nos dois estados —
+   só o que a posiciona muda. */
+.gcard {
+  position: relative;
+  margin: 0;
+  border-radius: var(--gallery-radius);
+  overflow: hidden;
+  background: var(--panel);
+  box-shadow: 0 30px 70px -22px rgba(0, 0, 0, .85);
+}
+.gcard::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  border-radius: inherit;
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, .13);
+  pointer-events: none;
+}
+/* O registro fica sobre a imagem, e a imagem pode ser qualquer coisa — uma
+   captura de tela clara apagaria o texto osso. O véu garante o piso de
+   contraste sem depender de sorte no conteúdo. */
+.gcard::before {
+  content: "";
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 1;
+  height: 58%;
+  border-radius: inherit;
+  background: linear-gradient(to top, rgba(8, 8, 9, .88), rgba(8, 8, 9, .52) 44%, transparent);
+  pointer-events: none;
+}
+/* Sem aspect-ratio de propósito: a ficha assume a forma da imagem. Forçar um
+   recorte comum transformaria uma captura de tela larga em tarja ilegível, que
+   é exatamente o conteúdo que este componente existe para mostrar. */
+.gcard img {
+  width: 100%;
+  height: auto;
+  max-height: var(--gallery-card-max);
+  object-fit: cover;
+  transition: transform var(--motion-slow) var(--e-soft);
+}
+.gcard figcaption {
+  position: absolute;
+  z-index: 3;
+  right: var(--space-3);
+  bottom: var(--space-3);
+  left: var(--space-3);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-2);
+  flex-wrap: wrap;
+}
+.gcard-title {
+  font-family: var(--font-mono);
+  font-size: var(--size-meta);
+  letter-spacing: .04em;
+  color: var(--bone);
+  text-shadow: 0 1px 12px rgba(0, 0, 0, .9);
+}
+/* Sobre a imagem o chip precisa do próprio fundo para se sustentar. Isso
+   ganha de .chip:hover na especificidade, então o hover é neutralizado de
+   propósito: aqui o chip é rótulo, não controle, e um hover que troca só a
+   cor do texto deixaria ink sobre ink. */
+.gcard figcaption .chip,
+.gcard figcaption .chip:hover {
+  background: rgba(8, 8, 9, .72);
+  backdrop-filter: blur(7px);
+  border-color: rgba(255, 255, 255, .2);
+  color: var(--bone);
+}
+
+/* Controles: sempre visíveis, sempre no alvo de toque, sempre com ícone
+   desenhado — a seta é um path, não um caractere emprestado da fonte. */
+.gallery-controls {
+  display: flex;
+  align-items: center;
+  gap: var(--space-4);
+  margin-block: var(--space-6) var(--space-12);
+}
+.gallery-nav {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: var(--tap);
+  height: var(--tap);
+  border: 1px solid var(--line-ui);
+  border-radius: var(--radius-pill);
+  background: transparent;
+  color: var(--bone);
+  cursor: pointer;
+  transition: border-color var(--motion-base) var(--e-soft),
+              background var(--motion-base) var(--e-soft),
+              color var(--motion-base) var(--e-soft);
+}
+.gallery-nav:hover {
+  border-color: var(--signal);
+  background: var(--panel);
+  color: var(--signal-text);
+}
+.gallery-nav svg {
+  width: 18px;
+  height: 18px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.5;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+.gallery-nav--next svg { transform: scaleX(-1); }
+.gallery-status {
+  flex: 1;
+  font-family: var(--font-mono);
+  font-size: var(--size-meta);
+  letter-spacing: .04em;
+  color: var(--muted);
+  font-variant-numeric: tabular-nums;
+}
+
+/* ── Estado 3D: só depois que o gallery.js assume ─────────────────── */
+.gallery.is-live .gallery-stage {
+  display: block;
+  position: relative;
+  height: clamp(268px, 26vw, 372px);
+  padding-block: 0;
+  overflow: hidden;
+  perspective: 1250px;
+  perspective-origin: 50% 46%;
+  cursor: grab;
+  touch-action: pan-y;
+  scrollbar-width: none;
+}
+.gallery.is-live .gallery-stage::-webkit-scrollbar { display: none; }
+/* O anel continua além do recorte. Sem isto o corte reto na borda parece um
+   erro de layout; com o esmaecimento, parece o que é — uma volta que segue.
+   Fica em pseudo-elementos e não em mask porque uma máscara achataria o
+   contexto 3D e apagaria o anel de foco do palco. */
+.gallery.is-live .gallery-stage::before,
+.gallery.is-live .gallery-stage::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  z-index: 50;
+  width: clamp(28px, 7%, 88px);
+  pointer-events: none;
+}
+.gallery.is-live .gallery-stage::before {
+  left: 0;
+  background: linear-gradient(90deg, var(--gallery-ground), transparent);
+}
+.gallery.is-live .gallery-stage::after {
+  right: 0;
+  background: linear-gradient(270deg, var(--gallery-ground), transparent);
+}
+.gallery.is-live.is-dragging .gallery-stage { cursor: grabbing; }
+.gallery.is-live .gallery-track {
+  display: block;
+  position: absolute;
+  inset: 0;
+  transform-style: preserve-3d;
+}
+.gallery.is-live .gallery-item {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: var(--gallery-card);
+  will-change: transform, opacity, filter;
+  backface-visibility: hidden;
+  transform-style: preserve-3d;
+  transition: filter var(--motion-base) var(--e-soft);
+}
+.gallery.is-live .gcard figcaption {
+  opacity: 0;
+  transform: translateY(9px);
+  transition: opacity var(--motion-base) var(--e-soft),
+              transform var(--motion-slow) var(--e-out);
+}
+.gallery.is-live .gallery-item.is-front .gcard figcaption {
+  opacity: 1;
+  transform: none;
+}
+.gallery.is-live .gallery-item.is-front .gcard:hover img { transform: scale(1.04); }
+
+/* O seguidor circular. Vive no <body> porque o cursor é um só na página,
+   independentemente de quantas galerias existam. */
+.gallery-follower {
+  position: fixed;
+  z-index: 90;
+  top: 0;
+  left: 0;
+  display: grid;
+  place-items: center;
+  width: 78px;
+  height: 78px;
+  border-radius: 50%;
+  background: var(--bone);
+  color: var(--ink);
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  pointer-events: none;
+  opacity: 0;
+  scale: .4;
+  transition: opacity var(--motion-base) var(--e-soft), scale var(--motion-base) var(--e-out);
+}
+.gallery-follower.is-on { opacity: 1; scale: 1; }
+.gallery-follower.is-press { scale: .88; }
+.gallery-follower i {
+  position: absolute;
+  inset: 6px;
+  border: 1px solid rgba(20, 20, 20, .28);
+  border-radius: 50%;
+}
+.gallery-follower span { position: relative; }
+
+/* ═══════════════════════════════════════════════════════════════════
    LAYOUT UTILITIES
    ═══════════════════════════════════════════════════════════════════ */
 .flex { display: flex; }
@@ -1442,6 +1719,9 @@ footer {
   .mark:hover .brand-logo { transform: none; }
   .box--media:hover .project-cover,
   .box--media:focus-within .project-cover { transform: rotate(4deg) scale(.96); }
+  /* o anel 3D nunca chega aqui — gallery.js não marca .is-live sob movimento
+     reduzido — mas o trilho continua respondendo ao ponteiro sem viagem */
+  .gcard:hover img { transform: none; }
 
   #drawer a { opacity: 1; transform: none; transition: none; }
 }

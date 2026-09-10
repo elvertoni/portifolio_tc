@@ -35,12 +35,14 @@ O projeto adota uma arquitetura **Jamstack estática de alta fidelidade**, sem f
 | [`index.html`](file:///c:/ARQUIVOS/PROJETOS/TONI/portifolio_tc/index.html) | Ponto de entrada do DOM, estrutura das seções | Carrega `style.css` e `main.js`. Usa fontes locais em `assets/fonts/` |
 | [`assets/css/style.css`](file:///c:/ARQUIVOS/PROJETOS/TONI/portifolio_tc/assets/css/style.css) | Folha unificada em ordem de cascata: tokens, reset, primitivas, componentes, skins de seção, responsivo | Referenciado por `index.html`. Cada seletor é declarado uma vez; não há bloco de correção no fim do arquivo |
 | [`assets/js/main.js`](file:///c:/ARQUIVOS/PROJETOS/TONI/portifolio_tc/assets/js/main.js) | Lógica interativa, animações, motor de reveal, validação e formulário | Referenciado por `index.html` com `defer`. Altera classes `.is-in`, `.open`, `.on` |
+| [`assets/js/gallery.js`](file:///c:/ARQUIVOS/PROJETOS/TONI/portifolio_tc/assets/js/gallery.js) | Galeria em arco autônoma para superfícies com muitas imagens | Referenciado apenas por `design-system/design-system.html` com `defer`. Liga em `[data-gallery]`, acrescenta `.is-live` e não depende de `main.js` |
 | [`assets/img/`](file:///c:/ARQUIVOS/PROJETOS/TONI/portifolio_tc/assets/img/) | Capturas reais dos produtos em produção (`.webp` e `@2x.webp`) | Exibidas na grade de projetos com carregamento preguiçoso (`loading="lazy"`) |
 | [`assets/logo.svg`](file:///c:/ARQUIVOS/PROJETOS/TONI/portifolio_tc/assets/logo.svg) | Ligadura TC em `viewBox` 200×128; o vão entre T e C é recortado por `<mask>` para ficar transparente | Usada no cabeçalho e no rodapé via `.brand-logo` |
 | [`assets/favicon.svg`](file:///c:/ARQUIVOS/PROJETOS/TONI/portifolio_tc/assets/favicon.svg) | Corte de 16 px da mesma marca sobre campo arredondado `#141414` | `<link rel="icon">` do `index.html` e das páginas de `design-system/` |
 | [`design-system/marca-canvas/`](file:///c:/ARQUIVOS/PROJETOS/TONI/portifolio_tc/design-system/marca-canvas/) | Fonte da verdade da marca: construção, medidas, logotipo, lockups e provas de redução | Origem dos dois SVG acima; qualquer alteração da marca começa aqui |
 | [`tests/smoke.spec.mjs`](file:///c:/ARQUIVOS/PROJETOS/TONI/portifolio_tc/tests/smoke.spec.mjs) | Suíte de testes automatizados com Playwright | Executa validação de a11y, layout responsivo e reduced-motion via `npm test` |
 | [`tests/runtime.spec.mjs`](file:///c:/ARQUIVOS/PROJETOS/TONI/portifolio_tc/tests/runtime.spec.mjs) | Testes de comportamento do runtime | Cobre a suspensão do loop de `requestAnimationFrame`, o foco levado à seção pelo menu mobile e o bloqueio de envio duplicado do formulário |
+| [`tests/gallery.spec.mjs`](file:///c:/ARQUIVOS/PROJETOS/TONI/portifolio_tc/tests/gallery.spec.mjs) | Testes da galeria em arco | Cobre a montagem do anel, a navegação por teclado e botões, o trilho sem JavaScript, a ausência de quadros sob movimento reduzido e a suspensão fora da tela |
 | [`nginx.conf`](file:///c:/ARQUIVOS/PROJETOS/TONI/portifolio_tc/nginx.conf) | Configuração de Nginx para produção com Gzip, cache e headers de segurança | Montado pelo `Dockerfile` |
 | [`design-system/design-system.html`](file:///c:/ARQUIVOS/PROJETOS/TONI/portifolio_tc/design-system/design-system.html) | Catálogo visual do Volta Atelier | Demonstra os padrões definidos em `assets/css/style.css`; não contém tokens próprios |
 | [`Dockerfile`](file:///c:/ARQUIVOS/PROJETOS/TONI/portifolio_tc/Dockerfile) | Configuração de empacotamento Nginx Alpine | Utilizado para deploy em container (EasyPanel / VPS) |
@@ -70,6 +72,36 @@ O loop de `requestAnimationFrame` só é iniciado quando algum efeito registrado
 via `onTick` está visível. Em ponteiro grosso ou com movimento reduzido nada se
 registra, e o loop nunca roda; com o herói fora da tela ou a aba oculta ele para
 sozinho até que `requestTick()` seja chamado de novo.
+
+---
+
+## 3.1. Galeria em arco (`assets/js/gallery.js`)
+
+Módulo autônomo, fora do runtime do portfólio. Existe para superfícies com
+muitas imagens e é consumido copiando dois pedaços: este arquivo e o bloco
+`GALERIA EM ARCO` de `assets/css/style.css`. Não importa nada, não tem etapa de
+compilação e não depende de `main.js`.
+
+- **Dois estados.** O CSS declara um trilho com `scroll-snap`; o script acrescenta
+  `.is-live` e só então as fichas assumem a posição absoluta no anel 3D. Sem
+  JavaScript, o trilho é o que sobra — legível e completo.
+- **Geometria.** `x = sin(a)·R`, `z = (cos(a)−1)·R·0.55`, `y = (1−cos(a))·R·0.15`,
+  com `SPREAD` de 26° entre vizinhas e queda cúbica em `cos` na escala e na
+  opacidade. `R` sai da largura do palco, não da janela: a galeria costuma viver
+  dentro de uma coluna.
+- **Um laço para a página toda.** Todas as galerias compartilham o mesmo
+  `requestAnimationFrame`, que só acorda com alguma delas visível e a aba ativa.
+  Cada anel registra um `IntersectionObserver` e `requestTick()` reacende o laço.
+- **Entradas.** Arrasto por ponteiro, roda horizontal, botões, setas do teclado e
+  `Home`/`End`. A deriva lenta para enquanto o foco está dentro do palco e ao
+  receber foco o anel encosta no rosto mais próximo.
+- **Acessibilidade.** Só a ficha da frente é interativa: as demais recebem
+  `inert` e `pointer-events: none`. A da frente carrega `aria-current="true"` e o
+  número corrente é anunciado em `[data-gallery-status]` (`role="status"`).
+- **Movimento reduzido.** Nenhum quadro é agendado; o componente fica no trilho e
+  os botões passam a rolá-lo por passo de rolagem.
+- **Seguidor de cursor.** Um único elemento no `<body>`, criado apenas em ponteiro
+  fino com hover, porque o cursor da página é um só.
 
 ---
 

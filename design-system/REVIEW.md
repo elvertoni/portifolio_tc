@@ -41,15 +41,29 @@ projetos mostram as interfaces reais.
   e remoção de funções de efeitos sem uso. Imagens e fontes continuam locais.
 - **Acessibilidade:** conteúdo disponível sem JavaScript, foco visível,
   navegação por teclado e fechamento do menu ao mudar para desktop.
+- **Galeria em arco:** o carrossel 3D e o tratamento de hover sobre imagens que
+  viveram no catálogo antigo voltaram como componente reutilizável em `#galeria`,
+  para superfícies com muitas imagens. Voltaram redesenhados, não recolados: a
+  geometria do anel é a mesma (`SPREAD` reduzido de 34° para 26° e raio medido no
+  palco, não na janela, porque aqui a galeria vive dentro de uma coluna), mas o
+  componente ganhou trilho como estado base, navegação por teclado, região viva,
+  `inert` nas fichas de trás e um laço que dorme fora da tela. As fichas guardam a
+  proporção da própria imagem — forçar um recorte comum transformava as capturas
+  de tela largas em tarja ilegível — com teto de altura para a imagem quadrada, e
+  o registro sobre a imagem apoia-se num véu de contraste em vez de contar com a
+  sorte do conteúdo. O portfólio não carrega nada disso: o componente existe para
+  ser copiado por outros projetos.
 
 ## Verificação
 
-`npm test -- --output=test-results/smoke` executa 24 testes Playwright.
+`npm test -- --output=test-results/smoke` executa 29 testes Playwright.
 Há cobertura de 320 a 1920 px, navegação, menu, movimento reduzido,
 conteúdo sem JavaScript, formulário e o catálogo de design system em
 desktop/mobile, além do comportamento do runtime (suspensão do loop de
-animação, foco levado à seção e bloqueio de envio duplicado). Os envios são
-interceptados: nenhuma mensagem real é enviada durante os testes.
+animação, foco levado à seção e bloqueio de envio duplicado) e da galeria em
+arco (montagem do anel, teclado, trilho sem JavaScript, ausência de quadros sob
+movimento reduzido e suspensão fora da tela). Os envios são interceptados:
+nenhuma mensagem real é enviada durante os testes.
 
 As conferências visuais usam desktop, tablet e celular. Capturas locais ficam
 em `test-results/`, que não deve ser versionado.

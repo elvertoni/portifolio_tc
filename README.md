@@ -114,6 +114,7 @@ portifolio_tc/
 ├── assets/
 │   ├── css/style.css        # CSS unificado: tokens, componentes, skins de seção
 │   ├── js/main.js           # Runtime JS (rAF loop, reveal, relógio, contadores, form)
+│   ├── js/gallery.js        # Galeria em arco autônoma (só o catálogo carrega)
 │   ├── fonts/               # Archivo e JetBrains Mono em .woff2 (subset latin)
 │   ├── img/                 # Capturas dos produtos e capas conceituais (.webp)
 │   ├── logo.svg             # Lockup 200×128 da ligadura TC
@@ -126,7 +127,8 @@ portifolio_tc/
 │   └── REVIEW.md            # Registro das decisões de design
 ├── tests/
 │   ├── smoke.spec.mjs       # Suíte Playwright (roda em file://, sem servidor)
-│   └── runtime.spec.mjs     # Testes de comportamento do runtime (loop, foco, envio)
+│   ├── runtime.spec.mjs     # Testes de comportamento do runtime (loop, foco, envio)
+│   └── gallery.spec.mjs     # Testes da galeria em arco (anel, teclado, trilho)
 ├── Dockerfile               # Configuração Nginx Alpine para produção
 ├── nginx.conf               # Gzip, política de cache e headers de segurança
 ├── index.html               # Estrutura HTML semântica completa
@@ -182,6 +184,29 @@ portifolio_tc/
 - **Faixa de palavras-chave (`.marquee`):** Banda tipográfica estática alinhada à calha da página, com o excedente dissolvido por máscara na borda direita.
 - **Relógio Secundário:** Sincronizado com fuso horário oficial de Brasília (BRT).
 - **Botão Voltar ao Topo (`.totop`):** Ação suave de retorno ao topo.
+
+### 10. Galeria em arco (`.gallery`) — catalogada, não usada no portfólio
+
+Componente reutilizável para superfícies com muitas imagens, demonstrado em
+[`design-system/design-system.html#galeria`](design-system/design-system.html).
+O portfólio não o carrega: ele existe para ser copiado por outros projetos.
+
+- **Consumo:** copie o bloco `GALERIA EM ARCO` de `assets/css/style.css` e o
+  arquivo `assets/js/gallery.js`. Sem etapa de compilação, sem dependência de
+  `main.js`; o script liga sozinho em qualquer elemento com `data-gallery`.
+- **Marcação:** `[data-gallery-stage]`, `[data-gallery-track]` e uma `.gcard` por
+  item. `data-gallery-title` nomeia a ficha na região viva; sem ele o `alt`
+  assume. Controles opcionais: `[data-gallery-prev]`, `[data-gallery-next]`,
+  `[data-gallery-status]`.
+- **Variáveis do componente:** `--gallery-card` (largura da ficha),
+  `--gallery-card-max` (teto de altura), `--gallery-ground` (fundo contra o qual
+  as bordas do palco desvanecem) e `--gallery-radius`.
+- **Dois estados:** o CSS declara um trilho com `scroll-snap`; o script
+  acrescenta `.is-live` e só então as fichas entram no anel 3D. Sem JavaScript
+  ou sob `prefers-reduced-motion`, o trilho é o que fica — e nenhum quadro é
+  agendado.
+- **Entradas:** arrasto, roda horizontal, botões, setas do teclado e `Home`/`End`.
+  A deriva lenta para enquanto o foco está dentro do palco.
 
 ---
 

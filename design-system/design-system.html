@@ -27,6 +27,7 @@
       <a href="#tipografia">Tipo</a>
       <a href="#espacamento">Ritmo</a>
       <a href="#componentes">Componentes</a>
+      <a href="#galeria">Galeria</a>
       <a href="#regras">Regras</a>
     </nav>
   </header>
@@ -335,6 +336,89 @@
       </div>
     </section>
 
+    <section id="galeria" class="sec" aria-labelledby="gallery-title">
+      <div class="shell">
+        <div class="ds-section-head">
+          <h2 id="gallery-title" class="d-lg">Galeria</h2>
+          <p class="mono-sm">Quando uma tela precisa mostrar muitas imagens, a grade cansa antes da terceira fileira. Este componente põe as fichas num anel: a da frente tem autoridade, as de trás recuam e escurecem, e o conjunto responde ao arrasto, à roda horizontal e às setas do teclado. Sem JavaScript ou sob movimento reduzido, o mesmo bloco continua sendo um trilho legível com todas as imagens presentes.</p>
+        </div>
+
+        <div class="gallery" data-gallery data-gallery-label="Ver">
+          <div class="gallery-stage" data-gallery-stage aria-label="Projetos e capas editoriais">
+            <ul class="gallery-track" data-gallery-track>
+              <li class="gallery-item" data-gallery-title="ProfessorDash">
+                <figure class="gcard">
+                  <img src="../assets/img/professordash.webp" alt="Portal do aluno do ProfessorDash: cabeçalho escuro com a jornada da turma e os cartões de aula pronta, publicação e progresso do aluno." loading="lazy" decoding="async" width="800" height="296">
+                  <figcaption><span class="gcard-title">ProfessorDash</span> <span class="chip">Educação</span></figcaption>
+                </figure>
+              </li>
+              <li class="gallery-item" data-gallery-title="Capa · Educação">
+                <figure class="gcard">
+                  <img src="../assets/img/cover-education-640.webp" alt="Capa editorial de educação: placas escuras dispostas em camadas sobre fundo preto, com um livro aberto em relevo no centro, um gráfico de setor vermelho e uma lâmpada âmbar acesa ligada por fios finos." loading="lazy" decoding="async" width="640" height="640">
+                  <figcaption><span class="gcard-title">Capa · Educação</span> <span class="chip chip--signal">Editorial</span></figcaption>
+                </figure>
+              </li>
+              <li class="gallery-item" data-gallery-title="eSIMBA">
+                <figure class="gcard">
+                  <img src="../assets/img/esimba.webp" alt="Tela de acesso institucional do eSIMBA, com o brasão do sistema e o formulário de login." loading="lazy" decoding="async" width="800" height="364">
+                  <figcaption><span class="gcard-title">eSIMBA</span> <span class="chip">Institucional</span></figcaption>
+                </figure>
+              </li>
+              <li class="gallery-item" data-gallery-title="Capa · Institucional">
+                <figure class="gcard">
+                  <img src="../assets/img/cover-civic-640.webp" alt="Capa editorial institucional: um selo de concreto com a fachada de um tribunal em relevo, cercado por placas cinza, tiras vermelhas e uma malha de pontos ligada por linhas tracejadas." loading="lazy" decoding="async" width="640" height="640">
+                  <figcaption><span class="gcard-title">Capa · Institucional</span> <span class="chip chip--signal">Editorial</span></figcaption>
+                </figure>
+              </li>
+              <li class="gallery-item" data-gallery-title="Vitalis">
+                <figure class="gcard">
+                  <img src="../assets/img/vitalis.webp" alt="Página inicial do Vitalis com a chamada Cuide, Registre, Evolua e um cartão mostrando a linha do tempo do dia." loading="lazy" decoding="async" width="800" height="364">
+                  <figcaption><span class="gcard-title">Vitalis</span> <span class="chip">Saúde</span></figcaption>
+                </figure>
+              </li>
+              <li class="gallery-item" data-gallery-title="Capa · Saúde">
+                <figure class="gcard">
+                  <img src="../assets/img/cover-health-640.webp" alt="Capa editorial de saúde: painéis claros e escuros enfileirados sobre bancadas de pedra, atravessados por uma linha de eletrocardiograma âmbar e acompanhados de barras coloridas, uma cuia rasa e um ramo verde." loading="lazy" decoding="async" width="640" height="640">
+                  <figcaption><span class="gcard-title">Capa · Saúde</span> <span class="chip chip--signal">Editorial</span></figcaption>
+                </figure>
+              </li>
+              <li class="gallery-item" data-gallery-title="Noivas e Cia">
+                <figure class="gcard">
+                  <img src="../assets/img/noivas-e-cia.webp" alt="Sistema Noivas e Cia: tela inicial com gestão comercial, catálogo de trajes e controle de locação para eventos." loading="lazy" decoding="async" width="800" height="364">
+                  <figcaption><span class="gcard-title">Noivas e Cia</span> <span class="chip">Comércio</span></figcaption>
+                </figure>
+              </li>
+              <li class="gallery-item" data-gallery-title="Capa · Comércio">
+                <figure class="gcard">
+                  <img src="../assets/img/cover-commerce-640.webp" alt="Capa editorial de comércio: tecidos cinza, cru e vermelho empilhados em ondas sobre fundo preto, ao lado de uma arara com trajes em miniatura, amostras de pano e um provador refletido num espelho redondo." loading="lazy" decoding="async" width="640" height="640">
+                  <figcaption><span class="gcard-title">Capa · Comércio</span> <span class="chip chip--signal">Editorial</span></figcaption>
+                </figure>
+              </li>
+            </ul>
+          </div>
+
+          <div class="gallery-controls">
+            <button class="gallery-nav gallery-nav--prev" type="button" data-gallery-prev aria-label="Imagem anterior">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M13 5 6 12l7 7M6 12h12"/></svg>
+            </button>
+            <button class="gallery-nav gallery-nav--next" type="button" data-gallery-next aria-label="Próxima imagem">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M13 5 6 12l7 7M6 12h12"/></svg>
+            </button>
+            <p class="gallery-status" data-gallery-status role="status"></p>
+          </div>
+        </div>
+
+        <div class="ds-rule-list">
+          <div class="ds-rule-row"><strong>Onde usar</strong><p class="mono-sm">Superfícies com seis imagens ou mais que compartilham um mesmo assunto: telas de um produto, capas de uma coleção, registros de uma turma. Abaixo de seis fichas o anel não fecha e uma grade comum comunica melhor.</p></div>
+          <div class="ds-rule-row"><strong>Como consumir</strong><p class="mono-sm">Copie o bloco <code>GALERIA EM ARCO</code> de <code>assets/css/style.css</code> e o arquivo <code>assets/js/gallery.js</code>. O script não depende de <code>main.js</code>, não tem etapa de compilação e liga sozinho em qualquer elemento com <code>data-gallery</code>.</p></div>
+          <div class="ds-rule-row"><strong>Contrato de marcação</strong><p class="mono-sm">O bloco precisa de <code>[data-gallery-stage]</code>, <code>[data-gallery-track]</code> e uma ficha por item. <code>data-gallery-title</code> nomeia a ficha na região viva; sem ele, o <code>alt</code> da imagem assume. Os controles são opcionais e reconhecidos por <code>[data-gallery-prev]</code>, <code>[data-gallery-next]</code> e <code>[data-gallery-status]</code>.</p></div>
+          <div class="ds-rule-row"><strong>Estado sem JavaScript</strong><p class="mono-sm">O anel é progressivo: o CSS declara o trilho e o script acrescenta <code>.is-live</code>. Toda imagem precisa de <code>alt</code> real, porque o estado sem script é o que sobra quando o resto falha.</p></div>
+          <div class="ds-rule-row"><strong>Movimento reduzido</strong><p class="mono-sm">Sob <code>prefers-reduced-motion</code> nenhum quadro é agendado: o componente permanece no trilho e os botões passam a rolá-lo. A deriva também para enquanto o foco está dentro do palco.</p></div>
+          <div class="ds-rule-row"><strong>Custo por quadro</strong><p class="mono-sm">Um único laço serve todas as galerias da página e só acorda quando alguma está visível e a aba está ativa. Fora da tela o anel desliga; ao voltar, um <code>IntersectionObserver</code> o reacende.</p></div>
+        </div>
+      </div>
+    </section>
+
     <section id="regras" class="sec" aria-labelledby="rules-title">
       <div class="shell">
         <div class="ds-section-head">
@@ -359,5 +443,7 @@
       <p class="mono-xs">Toni Coimbra · Design system · Fonte canônica: assets/css/style.css</p>
     </div>
   </footer>
+
+  <script src="../assets/js/gallery.js" defer></script>
 </body>
 </html>

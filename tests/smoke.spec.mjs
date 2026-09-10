@@ -299,7 +299,7 @@ test('registra a marca aprovada e prova a redução no catálogo', async ({ page
   await expect(page.locator('.ds-scale-step--cut img')).toHaveAttribute('src', '../assets/favicon.svg');
 
   await expect(page.locator('.ds-spec-row')).toHaveCount(7);
-  await expect(page.locator('nav[aria-label="Seções do design system"] a')).toHaveCount(6);
+  await expect(page.locator('nav[aria-label="Seções do design system"] a')).toHaveCount(7);
 });
 
 test('a prova em fundo claro declara o esquema que a marca lê', async ({ page }) => {

@@ -2,7 +2,7 @@
 
 ## Project Structure & Module Organization
 
-This repository is a framework-free static portfolio. `index.html` defines the semantic page structure and loads the single stylesheet at `assets/css/style.css` and runtime at `assets/js/main.js`. Keep optimized project images in `assets/img/`, local fonts in `assets/fonts/`, and icons/social previews directly under `assets/`. Treat `design-system/design-system.html` as the visual reference for tokens and components. Playwright smoke tests live in `tests/`; production serving is defined by `Dockerfile` and `nginx.conf`. Do not commit generated `node_modules/`, `test-results/`, or `playwright-report/` content.
+This repository is a framework-free static portfolio. `index.html` defines the semantic page structure and loads the single stylesheet at `assets/css/style.css` and runtime at `assets/js/main.js`. Keep optimized project images in `assets/img/`, local fonts in `assets/fonts/`, and icons/social previews directly under `assets/`. Treat `design-system/design-system.html` as the visual reference for tokens and components; it is the only page that loads `assets/js/gallery.js`, the standalone arc gallery meant to be copied into other projects rather than folded into `main.js`. Playwright smoke tests live in `tests/`; production serving is defined by `Dockerfile` and `nginx.conf`. Do not commit generated `node_modules/`, `test-results/`, or `playwright-report/` content.
 
 ## Build, Test, and Development Commands
 
