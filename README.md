@@ -181,7 +181,7 @@ portifolio_tc/
 - Envio nativo para o Web3Forms permanece como fallback quando o JavaScript não está disponível.
 
 ### 9. Footer
-- **Faixa de palavras-chave (`.marquee`):** Banda tipográfica estática alinhada à calha da página, com o excedente dissolvido por máscara na borda direita.
+- **Faixa de palavras-chave (`.marquee`):** Banda tipográfica que desliza para a esquerda em ciclo contínuo, com as duas pontas dissolvidas por máscara. O conteúdo é duplicado na marcação para o laço fechar sem emenda, a animação vive sob `.js` e só roda com o rodapé na tela (`initMarquee`); sob `prefers-reduced-motion` a faixa fica parada e legível.
 - **Relógio Secundário:** Sincronizado com fuso horário oficial de Brasília (BRT).
 - **Botão Voltar ao Topo (`.totop`):** Ação suave de retorno ao topo.
 

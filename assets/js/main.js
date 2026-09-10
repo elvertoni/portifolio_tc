@@ -425,6 +425,17 @@
     }
   }
 
+  /* A faixa do rodapé anda por animação CSS, não pelo loop de rAF — mas uma
+     animação fora da tela continua custando compositor. O observador só liga
+     `.is-running` quando o rodapé aparece. */
+  function initMarquee() {
+    const marquee = $('.marquee');
+    if (!marquee || REDUCED) return;
+    new IntersectionObserver(entries => {
+      marquee.classList.toggle('is-running', entries[0].isIntersecting);
+    }, { rootMargin: '120px' }).observe(marquee);
+  }
+
   /* ═══════════════════════════════════════════════════════════════════
      BOOT
      ═══════════════════════════════════════════════════════════════════ */
@@ -437,5 +448,6 @@
     initCounters();
     initForm();
     initFooter();
+    initMarquee();
   });
 })();

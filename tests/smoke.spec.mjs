@@ -263,7 +263,8 @@ test('documenta tokens e componentes no catálogo canônico', async ({ page }) =
   await expect(page.locator('.ds-type-row')).toHaveCount(8);
   await expect(page.locator('.ds-space-row')).toHaveCount(8);
   await expect(page.locator('.ds-demo')).toHaveCount(6);
-  await expect(page.locator('link[rel="stylesheet"]')).toHaveAttribute('href', '../assets/css/style.css');
+  // O href carrega ?v=; o contrato é o arquivo, não a versão do dia.
+  await expect(page.locator('link[rel="stylesheet"]')).toHaveAttribute('href', /^\.\.\/assets\/css\/style\.css(\?|$)/);
   await expect(page.locator('#catalog-email')).toBeVisible();
 });
 
@@ -287,7 +288,7 @@ test('registra a marca aprovada e prova a redução no catálogo', async ({ page
   // As provas carregam os arquivos que o site usa; o catálogo não guarda cópia
   // do desenho, senão a documentação passa a divergir da marca.
   const fontes = await page.locator('#marca img').evaluateAll((imgs) =>
-    [...new Set(imgs.map((i) => i.getAttribute('src')))].sort()
+    [...new Set(imgs.map((i) => i.getAttribute('src').split('?')[0]))].sort()
   );
   expect(fontes).toEqual(['../assets/favicon.svg', '../assets/logo.svg']);
 
@@ -296,10 +297,27 @@ test('registra a marca aprovada e prova a redução no catálogo', async ({ page
     imgs.map((i) => Math.round(i.getBoundingClientRect().height))
   );
   expect(escada).toEqual([64, 48, 32, 24, 16]);
-  await expect(page.locator('.ds-scale-step--cut img')).toHaveAttribute('src', '../assets/favicon.svg');
+  await expect(page.locator('.ds-scale-step--cut img')).toHaveAttribute('src', /^\.\.\/assets\/favicon\.svg(\?|$)/);
 
   await expect(page.locator('.ds-spec-row')).toHaveCount(7);
   await expect(page.locator('nav[aria-label="Seções do design system"] a')).toHaveCount(7);
+});
+
+test('versiona os assets do catálogo como o index faz', async ({ page }) => {
+  await page.goto(designSystemUrl);
+
+  // O catálogo é servido atrás de um CDN que ignora o no-cache do nginx. Sem
+  // ?v= nos assets, a página nova pede o arquivo velho e volta a exibir a marca
+  // antiga com um CSS que não conhece os componentes novos.
+  const semVersao = await page.evaluate(() => {
+    const refs = [
+      ...[...document.querySelectorAll('link[rel="stylesheet"]')].map((l) => l.getAttribute('href')),
+      ...[...document.querySelectorAll('script[src]')].map((t) => t.getAttribute('src')),
+      ...[...document.querySelectorAll('img[src$=".svg"], img[src*=".svg?"]')].map((i) => i.getAttribute('src'))
+    ];
+    return refs.filter((ref) => !/\?v=\d{8}$/.test(ref));
+  });
+  expect(semVersao).toEqual([]);
 });
 
 test('a prova em fundo claro declara o esquema que a marca lê', async ({ page }) => {

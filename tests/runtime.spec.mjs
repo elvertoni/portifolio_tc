@@ -69,3 +69,39 @@ test('ignora novo envio enquanto a primeira mensagem aguarda resposta', async ({
   await expect(page.locator('#submit-btn')).toBeEnabled();
   expect(requests).toBe(1);
 });
+
+test('faz a faixa do rodapé andar para a esquerda só quando ela aparece', async ({ page }) => {
+  await page.setViewportSize({ width: 1440, height: 900 });
+  await page.goto(pageUrl);
+
+  // O laço fecha porque o conteúdo está duplicado: sem a segunda cópia, a volta
+  // mostraria uma faixa vazia entre um ciclo e outro.
+  const copias = page.locator('.marquee ul');
+  await expect(copias).toHaveCount(2);
+  const larguras = await copias.evaluateAll((uls) => uls.map((ul) => Math.round(ul.getBoundingClientRect().width)));
+  expect(larguras[0]).toBe(larguras[1]);
+
+  // Longe do rodapé a animação não roda: uma faixa fora da tela ainda custa compositor.
+  await page.evaluate(() => window.scrollTo({ top: 0, behavior: 'instant' }));
+  await expect(page.locator('.marquee')).not.toHaveClass(/is-running/);
+
+  await page.locator('.marquee').scrollIntoViewIfNeeded();
+  await expect(page.locator('.marquee')).toHaveClass(/is-running/);
+  await expect(copias.first()).toHaveCSS('animation-name', 'marquee-drift');
+
+  const antes = await copias.first().evaluate((ul) => getComputedStyle(ul).transform);
+  await page.waitForTimeout(600);
+  const depois = await copias.first().evaluate((ul) => getComputedStyle(ul).transform);
+  expect(depois).not.toBe(antes);
+  // matrix(a, b, c, d, tx, ty) — tx negativo é deslocamento para a esquerda.
+  expect(Number(depois.split(',')[4])).toBeLessThan(0);
+});
+
+test('mantém a faixa do rodapé parada sob movimento reduzido', async ({ page }) => {
+  await page.emulateMedia({ reducedMotion: 'reduce' });
+  await page.goto(pageUrl);
+  await page.locator('.marquee').scrollIntoViewIfNeeded();
+
+  await expect(page.locator('.marquee')).not.toHaveClass(/is-running/);
+  await expect(page.locator('.marquee li').first()).toBeVisible();
+});

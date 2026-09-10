@@ -1192,7 +1192,10 @@ footer {
   padding-inline: var(--gut);
   display: flex;
   user-select: none;
-  mask-image: linear-gradient(90deg, #000 0 68%, transparent 98%);
+  /* A faixa anda para a esquerda: entra pela direita e sai pela esquerda, então
+     as duas pontas precisam desvanecer — mascarar só uma faria a palavra
+     aparecer cortada de um lado. */
+  mask-image: linear-gradient(90deg, transparent, #000 6% 94%, transparent);
 }
 .marquee ul {
   display: flex;
@@ -1214,6 +1217,18 @@ footer {
   white-space: nowrap;
 }
 .marquee li em { font-style: normal; color: var(--signal); }
+/* As duas cópias têm a mesma largura, então deslocar as duas em -100% coloca a
+   segunda exatamente onde a primeira estava: o reinício do ciclo cai no mesmo
+   pixel e o corte não aparece. Só roda com .js e com o rodapé na tela —
+   `initMarquee` liga e desliga `.is-running`, porque uma animação fora do
+   viewport continua acordando o compositor à toa. */
+@keyframes marquee-drift {
+  from { transform: translate3d(0, 0, 0); }
+  to   { transform: translate3d(-100%, 0, 0); }
+}
+.js .marquee.is-running ul {
+  animation: marquee-drift 42s linear infinite;
+}
 
 /* To-top button */
 .totop {
@@ -1722,6 +1737,8 @@ footer {
   /* o anel 3D nunca chega aqui — gallery.js não marca .is-live sob movimento
      reduzido — mas o trilho continua respondendo ao ponteiro sem viagem */
   .gcard:hover img { transform: none; }
+  /* a faixa do rodapé para de andar; o texto continua lá, inteiro */
+  .js .marquee.is-running ul { animation: none; transform: none; }
 
   #drawer a { opacity: 1; transform: none; transition: none; }
 }
