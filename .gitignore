@@ -16,3 +16,6 @@ design-system/marca-canvas/marca-toni-coimbra.html
 # Catálogo 3D legado, restaurado do histórico para consulta: depende de CDN
 # (Tailwind, three.js) e não faz parte do que o site publica.
 catalogo-3d-legado.html
+
+# Configuração de editor: não pertence ao repositório nem à imagem.
+.vscode

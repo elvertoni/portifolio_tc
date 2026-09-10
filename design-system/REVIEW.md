@@ -56,7 +56,7 @@ projetos mostram as interfaces reais.
 
 ## Verificação
 
-`npm test -- --output=test-results/smoke` executa 32 testes Playwright.
+`npm test -- --output=test-results/smoke` executa 33 testes Playwright.
 Há cobertura de 320 a 1920 px, navegação, menu, movimento reduzido,
 conteúdo sem JavaScript, formulário e o catálogo de design system em
 desktop/mobile, além do comportamento do runtime (suspensão do loop de

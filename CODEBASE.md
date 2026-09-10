@@ -45,6 +45,7 @@ O projeto adota uma arquitetura **Jamstack estática de alta fidelidade**, sem f
 | [`tests/gallery.spec.mjs`](file:///c:/ARQUIVOS/PROJETOS/TONI/portifolio_tc/tests/gallery.spec.mjs) | Testes da galeria em arco | Cobre a montagem do anel, a navegação por teclado e botões, o trilho sem JavaScript, a ausência de quadros sob movimento reduzido e a suspensão fora da tela |
 | [`nginx.conf`](file:///c:/ARQUIVOS/PROJETOS/TONI/portifolio_tc/nginx.conf) | Configuração de Nginx para produção com Gzip, cache e headers de segurança | Montado pelo `Dockerfile` |
 | [`design-system/design-system.html`](file:///c:/ARQUIVOS/PROJETOS/TONI/portifolio_tc/design-system/design-system.html) | Catálogo visual do Volta Atelier | Demonstra os padrões definidos em `assets/css/style.css`; não contém tokens próprios |
+| [`design-system/volta-atelier.html`](file:///c:/ARQUIVOS/PROJETOS/TONI/portifolio_tc/design-system/volta-atelier.html) | O design system compilado num documento autônomo, para aplicar em outro projeto | Embute marca, subconjunto portátil do CSS e o `gallery.js` inteiro. É um retrato: um teste falha se divergir da folha canônica |
 | [`Dockerfile`](file:///c:/ARQUIVOS/PROJETOS/TONI/portifolio_tc/Dockerfile) | Configuração de empacotamento Nginx Alpine | Utilizado para deploy em container (EasyPanel / VPS) |
 
 ---

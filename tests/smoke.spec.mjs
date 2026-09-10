@@ -1,7 +1,30 @@
 import { test, expect } from '@playwright/test';
+import { readFileSync } from 'node:fs';
 
 const pageUrl = new URL('../index.html', import.meta.url).href;
 const designSystemUrl = new URL('../design-system/design-system.html', import.meta.url).href;
+
+test('o documento compilado não pode divergir da folha canônica', async () => {
+  const raiz = new URL('../', import.meta.url);
+  // normaliza a quebra de linha: o git converte CRLF no checkout e a comparação
+  // é de conteúdo, não de codificação
+  const ler = (rel) => readFileSync(new URL(rel, raiz), 'utf8').replace(/\r\n/g, '\n');
+  const folha = ler('assets/css/style.css');
+  const runtime = ler('assets/js/gallery.js');
+  const doc = ler('design-system/volta-atelier.html');
+
+  // volta-atelier.html embute um retrato do CSS e do runtime. Sem esta guarda
+  // ele mente em silêncio: a fonte muda, o documento continua mostrando o
+  // valor antigo e alguém aplica isso em outro projeto.
+  const linhas = folha.split('\n');
+  const abre = linhas.findIndex((l) => l.trim() === ':root {');
+  const fecha = linhas.findIndex((l, i) => i > abre && l === '}');
+  const tokens = linhas.slice(abre, fecha + 1).join('\n');
+  expect(abre).toBeGreaterThan(-1);
+  expect(tokens.length).toBeGreaterThan(1000);
+  expect(doc).toContain(tokens);
+  expect(doc).toContain(runtime.trim());
+});
 
 test('carrega o portfolio e expõe a navegação principal', async ({ page }) => {
   await page.goto(pageUrl);

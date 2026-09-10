@@ -6,6 +6,7 @@
 .agent
 .gemini
 .claude
+.vscode
 .impeccable
 graphify-out
 

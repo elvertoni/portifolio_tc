@@ -123,6 +123,7 @@ portifolio_tc/
 ├── design-system/
 │   ├── design-system.html   # Catálogo visual que consome o CSS canônico
 │   ├── og-card.html         # Fonte 1200×630 do assets/og.png
+│   ├── volta-atelier.html   # O design system compilado num documento só (autônomo)
 │   ├── marca-canvas/        # Fonte da verdade da marca: construção e provas
 │   └── REVIEW.md            # Registro das decisões de design
 ├── tests/
