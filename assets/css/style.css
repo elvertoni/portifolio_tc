@@ -105,6 +105,9 @@ img, svg, video, canvas { display: block; vertical-align: middle; max-width: 100
   --color-info:               #3b49e4;
   /* the form needs a success state; red-for-success reads as failure */
   --color-success:            #4ade80;
+  --color-on-accent:          #fff;
+  --color-scrollbar:          #6d6d75;
+  --color-scrollbar-hover:    var(--color-text-muted);
 
   /* Compatibility aliases used by the existing portfolio components. */
   --ink:       var(--color-bg);
@@ -193,14 +196,14 @@ body {
   overflow-x: hidden;
 }
 body.is-locked { overflow: hidden; height: 100vh; }
-::selection { background: var(--signal-deep); color: #fff; }
+::selection { background: var(--signal-deep); color: var(--color-on-accent); }
 input, textarea { caret-color: var(--signal); }
 
 /* ── Scrollbar ────────────────────────────────────────────────────── */
 ::-webkit-scrollbar       { width: 9px; height: 9px; }
 ::-webkit-scrollbar-track { background: var(--ink); }
-::-webkit-scrollbar-thumb { background: #2e2e33; border-radius: 9px; border: 2px solid var(--ink); }
-::-webkit-scrollbar-thumb:hover { background: #43434a; }
+::-webkit-scrollbar-thumb { background: var(--color-scrollbar); border-radius: 9px; border: 2px solid var(--ink); }
+::-webkit-scrollbar-thumb:hover { background: var(--color-scrollbar-hover); }
 
 /* ── Focus ────────────────────────────────────────────────────────── */
 :focus-visible {
@@ -322,7 +325,7 @@ input, textarea { caret-color: var(--signal); }
   border-color: var(--bone);
 }
 .chip--solid { background: var(--ink-deep); border-color: var(--ink-deep); color: var(--bone); }
-.chip--signal { background: var(--signal-deep); border-color: var(--signal-deep); color: #fff; }
+.chip--signal { background: var(--signal-deep); border-color: var(--signal-deep); color: var(--color-on-accent); }
 .chip--signal:hover { background: var(--bone); border-color: var(--bone); color: var(--ink); }
 
 /* A chip that is actually a link needs a real touch target. The pill keeps
@@ -375,7 +378,7 @@ a.chip:hover { transform: translateY(-2px); }
   transform: translateY(101%);
   transition: transform .5s var(--e-io);
 }
-.btn:hover { color: #fff; border-color: var(--signal-deep); }
+.btn:hover { color: var(--color-on-accent); border-color: var(--signal-deep); }
 .btn:hover::before { transform: translateY(0); }
 .btn[disabled] { opacity: .55; cursor: not-allowed; }
 .btn[disabled]:hover::before { transform: translateY(101%); }
@@ -455,7 +458,7 @@ a.chip:hover { transform: translateY(-2px); }
   border: 1px solid var(--line);
   border-radius: var(--radius-media);
 }
-.box--feature .pshot { aspect-ratio: 2.15; }
+.box--feature .pshot { aspect-ratio: 25 / 16; }
 .pshot > img {
   width: 100%; height: 100%;
   padding: 20px;
@@ -1647,7 +1650,7 @@ footer {
   .art-caption { flex-direction: column; text-align: center; gap: 3px; }
   .hero-name { gap: .12em; font-size: 11.8vw; }
   .projects-grid .box--feature { grid-template-columns: 1fr; gap: 0; }
-  .box--feature .pshot { aspect-ratio: 1.85; }
+  .box--feature .pshot { aspect-ratio: 25 / 16; }
   .box--feature .pbody { padding-top: 22px; }
   .cta-core { column-gap: 32px; }
 }
@@ -1682,8 +1685,8 @@ footer {
   .projects-grid { grid-template-columns: 1fr; gap: 40px; }
   .projects-grid .box--feature,
   .projects-grid > :last-child:nth-child(even) { grid-column: auto; grid-template-columns: 1fr; gap: 0; }
-  .pshot,
-  .box--feature .pshot { aspect-ratio: 1.45; }
+  .pshot { aspect-ratio: 1.45; }
+  .box--feature .pshot { aspect-ratio: 25 / 16; }
   .pshot > img { padding: 12px; }
   .project-cover { width: 58px; bottom: 10px; right: 10px; }
   .sec .d-lg { font-size: clamp(32px, 9vw, 48px); }
