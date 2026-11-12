@@ -20,8 +20,13 @@ Referência: `design-system.html`. Implementação: `../index.html`,
   de 10 caracteres dito na mensagem e aplicado por `minlength`.
 - **Servidor.** 404 real com `404.html`, dotfiles bloqueados, CSP na página
   principal, `robots.txt`, `sitemap.xml`, ícones PNG e `**/*.md` no `.dockerignore`.
-- Ficaram para decisão: o conteúdo da abertura (diagrama genérico vs. prova concreta),
-  a quantidade de slogans, pausa da faixa do rodapé e o texto do contato.
+- **Segunda passada.** Os passos do diagrama passaram a carregar fatos que o site já
+  afirma (200 mil PDFs, milhares de horas, quatro sistemas); saíram o slogan e o link
+  repetido do rodapé da abertura e a legenda do diagrama; o contato ganhou uma linha
+  sobre para onde vai a resposta; a faixa do rodapé pausa no hover e por um botão
+  (`#marquee-toggle`, WCAG 2.2.2); o `og.png` perdeu o relógio congelado e o "não com
+  um formulário", que contradizia o site. 34 testes.
+- Ainda dependem do Toni: prazo de resposta e e-mail direto no contato.
 
 ## 2026-11-12 — Fluxo vetorial na abertura
 

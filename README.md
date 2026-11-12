@@ -152,7 +152,8 @@ portifolio_tc/
 ### 2. Fluxo do herói (`.workflow`)
 
 Diagrama vetorial estático com três etapas em HTML: Organizar, Automatizar e
-Entregar. Horizontal no desktop e vertical até 600px, sem dependência de
+Entregar, cada uma com um fato do próprio portfólio (200 mil PDFs, milhares de
+horas poupadas, quatro sistemas em uso). Horizontal no desktop e vertical até 600px, sem dependência de
 JavaScript, imagens raster ou movimento contínuo. SVGs decorativos ficam
 ocultos da árvore de acessibilidade; a lista preserva a ordem de leitura.
 

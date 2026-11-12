@@ -19,3 +19,7 @@ catalogo-3d-legado.html
 
 # Configuração de editor: não pertence ao repositório nem à imagem.
 .vscode
+
+# Relatórios de auditoria e crítica gerados por agentes
+.auditoria/
+.impeccable/

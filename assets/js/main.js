@@ -353,6 +353,18 @@
     new IntersectionObserver(entries => {
       marquee.classList.toggle('is-running', entries[0].isIntersecting);
     }, { rootMargin: '120px' }).observe(marquee);
+
+    /* The band runs well past five seconds beside the footer links, so it
+       needs a stop the reader controls (WCAG 2.2.2). Hover pauses it too,
+       in CSS; this is the one a keyboard or a touch screen can reach. */
+    const toggle = $('#marquee-toggle');
+    if (!toggle) return;
+    toggle.hidden = false;
+    toggle.addEventListener('click', () => {
+      const paused = toggle.getAttribute('aria-pressed') !== 'true';
+      toggle.setAttribute('aria-pressed', String(paused));
+      marquee.classList.toggle('is-paused', paused);
+    });
   }
 
   /* ═══════════════════════════════════════════════════════════════════

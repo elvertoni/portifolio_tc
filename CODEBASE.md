@@ -61,7 +61,7 @@ constante `REDUCED` (de `prefers-reduced-motion`) desliga tudo que é movimento.
 5. **`initClock()`:** Relógio de São Paulo em `#clock` e `#clock2`, com `setInterval` interrompido quando a aba fica oculta.
 6. **`initCounters()`:** Animação de contagem numérica com easing cúbico para elementos com `[data-count]`.
 7. **`initForm()`:** Manipulador assíncrono `fetch` para envio via JSON para a API `https://api.web3forms.com/submit`, com honeypot anti-spam e mensagens em `#form-result`. A região viva existe vazia desde a carga (some só visualmente com `:empty`), o `aria-describedby` de cada campo só aponta para a mensagem de erro enquanto ela vale, e o botão ocupado usa `aria-disabled` em vez de `disabled` para não derrubar o foco no `<body>`.
-8. **`initMarquee()`:** Liga e desliga `.is-running` na faixa do rodapé conforme ela entra na tela. A faixa anda por animação CSS (`@keyframes marquee-drift`), não pelo loop de rAF, e o conteúdo é duplicado na marcação para o ciclo fechar sem emenda.
+8. **`initMarquee()`:** Liga e desliga `.is-running` na faixa do rodapé conforme ela entra na tela. A faixa anda por animação CSS (`@keyframes marquee-drift`), não pelo loop de rAF, e o conteúdo é duplicado na marcação para o ciclo fechar sem emenda. O botão `#marquee-toggle` (nasce `hidden`, só aparece quando a faixa pode andar) pausa e retoma por `aria-pressed`/`.is-paused`; o hover também pausa.
 9. **`initFooter()`:** Ano corrente em `#current-year` e botão `#toTop`, que respeita `prefers-reduced-motion` no `scrollTo` e leva o foco junto para `main#top`.
 
 O boot acontece em `DOMContentLoaded` e a primeira coisa que ele faz é marcar

@@ -106,4 +106,27 @@ test('mantém a faixa do rodapé parada sob movimento reduzido', async ({ page }
 
   await expect(page.locator('.marquee')).not.toHaveClass(/is-running/);
   await expect(page.locator('.marquee li').first()).toBeVisible();
+  // Parada por padrão, a faixa não precisa de botão de pausa.
+  await expect(page.locator('#marquee-toggle')).toBeHidden();
+});
+
+test('pausa e retoma a faixa do rodapé pelo botão', async ({ page }) => {
+  await page.setViewportSize({ width: 1440, height: 900 });
+  await page.goto(pageUrl);
+  await page.locator('.marquee').scrollIntoViewIfNeeded();
+  await expect(page.locator('.marquee')).toHaveClass(/is-running/);
+
+  // WCAG 2.2.2: movimento de mais de cinco segundos ao lado de outro conteúdo
+  // precisa de um controle que o teclado alcance.
+  const toggle = page.locator('#marquee-toggle');
+  await expect(toggle).toBeVisible();
+  await toggle.focus();
+  await page.keyboard.press('Enter');
+  await expect(toggle).toHaveAttribute('aria-pressed', 'true');
+  const faixa = page.locator('.marquee ul').first();
+  await expect(faixa).toHaveCSS('animation-play-state', 'paused');
+
+  await page.keyboard.press('Enter');
+  await expect(toggle).toHaveAttribute('aria-pressed', 'false');
+  await expect(faixa).toHaveCSS('animation-play-state', 'running');
 });
