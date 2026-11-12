@@ -29,6 +29,11 @@ Referência: `design-system.html`. Implementação: `../index.html`,
 - **Capas editoriais fora dos cards.** As miniaturas 3D no canto das capturas não
   diziam nada sobre os projetos e disputavam com a tela real; cada card mostra só a
   captura do próprio sistema. Os arquivos ficam para a galeria do catálogo.
+- **Diagrama redesenhado: "Prova de impressão".** Entre três direções (prova de
+  impressão, geometria da marca, ponto-linha-plano), o Toni escolheu a primeira: o
+  fluxo contado em pré-impressão — pilha esquadrejada, grade com registro, peça
+  refilada — com uma marca de registro no lugar da seta. A geometria da marca foi
+  descartada porque punha o C fora do amarelo e competia com o logo.
 - Ainda dependem do Toni: prazo de resposta e e-mail direto no contato.
 
 ## 2026-11-12 — Fluxo vetorial na abertura

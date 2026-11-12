@@ -829,22 +829,54 @@ a.chip:hover { transform: translateY(-2px); }
   padding-bottom: .12em;
 }
 
-/* A static diagram: HTML carries the reading order; SVG supplies geometry. */
+/* A static diagram: HTML carries the reading order; SVG supplies geometry.
+   Pré-impressão como método — a pilha esquadrejada, a grade com registro, a
+   peça refilada com marcas de corte: o fluxo contado na língua de quem fechou
+   arquivo por vinte anos. É tinta, não ação; o amarelo da tela é do botão. */
 .hero-art { position: relative; align-self: center; min-width: 0; }
-.workflow { width: 100%; padding-block: var(--space-8); }
+.workflow {
+  /* --wf-w is the glyph width; the connector is placed from it, because the
+     sheet's centre sits at 58/92 of that width (viewBox 92×116, sheet centre
+     at y 60 from y 2) and a fixed pixel offset drifts when the glyph shrinks */
+  --wf-w: 116px;
+  width: 100%;
+  padding-block: var(--space-8);
+}
 .workflow-steps { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); }
 .workflow-step { position: relative; min-width: 0; text-align: center; }
+/* What joins one stage to the next is alignment, not an arrow: a hairline
+   with a registration mark where the two sheets meet. */
 .workflow-step + .workflow-step::before {
-  content: ''; position: absolute; top: 60px; right: calc(50% + 48px);
-  width: calc(100% - 96px); height: 1px; background: var(--color-border-interactive);
+  content: ''; position: absolute; top: calc(var(--wf-w) * 58 / 92);
+  right: calc(50% + var(--wf-w) / 2); width: calc(100% - var(--wf-w)); height: 1px;
+  background: var(--color-border-interactive);
 }
-.workflow-step svg { width: 120px; max-width: 100%; margin-inline: auto; fill: none; stroke: var(--color-text-muted); stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
-.workflow-paper { fill: var(--color-surface); }
-/* The diagram is ink, not action: the yellow on this screen belongs to the
-   button. The stroke that carries each step's idea is lifted to full ink. */
-.workflow-step .workflow-accent { stroke: var(--color-text); }
-.workflow-step p { margin-top: var(--space-2); padding-inline: var(--space-2); font-size: 13px; color: var(--color-text-muted); }
-.workflow-step .workflow-title { margin-top: var(--space-4); padding: 0; font-family: var(--font-display); font-size: clamp(16px, 1.5vw, 22px); font-weight: var(--weight-display); color: var(--color-text); }
+.workflow-step + .workflow-step::after {
+  content: ''; position: absolute; top: calc(var(--wf-w) * 58 / 92 - 7.5px);
+  right: calc(100% - 7.5px); width: 15px; height: 15px;
+  background:
+    linear-gradient(var(--color-text-muted), var(--color-text-muted)) center / 1px 100% no-repeat,
+    linear-gradient(var(--color-text-muted), var(--color-text-muted)) center / 100% 1px no-repeat,
+    radial-gradient(circle, transparent 3.6px, var(--color-text-muted) 3.8px, var(--color-text-muted) 4.6px, transparent 4.9px);
+}
+.workflow-step svg {
+  display: block; width: var(--wf-w); max-width: 100%; margin-inline: auto; overflow: visible;
+  fill: none; stroke: var(--color-text-muted); stroke-width: 1.5; stroke-linecap: square; stroke-linejoin: miter;
+}
+/* the same hairline at 116px and at 64px: the stroke does not scale */
+.workflow-step svg * { vector-effect: non-scaling-stroke; }
+.workflow-step .wf-ghost { fill: var(--color-bg); stroke: var(--color-text-subtle); }
+.workflow-step .wf-sheet { fill: var(--color-surface); }
+.workflow-step .wf-text { stroke: var(--color-border-interactive); stroke-linecap: butt; }
+.workflow-step .wf-guide { stroke: var(--color-line-reference); stroke-width: 1; stroke-dasharray: 2 2; }
+.workflow-step .wf-block { fill: var(--color-text-muted); stroke: none; }
+.workflow-step .wf-frame { stroke: var(--color-border-interactive); }
+.workflow-step .wf-image { fill: var(--color-border-strong); stroke: none; }
+/* the stroke that carries each stage's idea is lifted to full ink */
+.workflow-step .wf-key { stroke: var(--color-text); }
+.workflow-step .wf-ink { fill: var(--color-text); stroke: none; }
+.workflow-step p { margin-top: var(--space-2); padding-inline: var(--space-2); font-size: 13px; line-height: 1.5; color: var(--color-text-muted); }
+.workflow-step .workflow-title { margin-top: var(--space-4); padding: 0; font-family: var(--font-display); font-size: clamp(16px, 1.5vw, 22px); font-weight: var(--weight-display); letter-spacing: -.02em; color: var(--color-text); }
 
 /* ═══════════════════════════════════════════════════════════════════
    STAT CARDS — a ruled entry on the page, not a panel
@@ -1588,6 +1620,9 @@ footer {
   .hero-statement { font-size: clamp(28px, 4.1vw, 38px); }
   .hero-actions { gap: 12px; }
   .hero-art { min-height: 300px; }
+  /* two hero columns leave each step ~90–135px: the glyph has to give way
+     before max-width squeezes it, or the connector math loses the sheet */
+  .workflow { --wf-w: min(116px, 11vw); }
   .hero-name { gap: .24em; font-size: 11.8vw; }
   .projects-grid .box--feature { grid-template-columns: 1fr; gap: 0; }
   .box--feature .pshot { aspect-ratio: 25 / 16; }
@@ -1617,13 +1652,15 @@ footer {
   .hero-actions { margin-top: 20px; gap: 12px; }
   .hero-actions .btn { flex: none; min-height: 48px; padding-inline: 16px; gap: 12px; }
   .hero-contact { font-size: 14px; gap: 6px; }
-  .workflow { padding-block: var(--space-4); }
-  .workflow-steps { grid-template-columns: 1fr; gap: var(--space-4); }
+  .workflow { --wf-w: 64px; padding-block: var(--space-4); }
+  .workflow-steps { grid-template-columns: 1fr; gap: var(--space-6); }
   .workflow-step { display: flex; align-items: center; gap: var(--space-4); text-align: left; }
-  .workflow-step svg { width: 64px; flex: none; margin: 0; }
+  .workflow-step svg { flex: none; margin: 0; }
   .workflow-step .workflow-title { margin-top: 0; font-size: 19px; }
-  .workflow-step p { padding: 0; margin-top: 0; }
-  .workflow-step + .workflow-step::before { top: calc(-1 * var(--space-4)); left: 32px; width: 1px; height: var(--space-4); }
+  .workflow-step p { padding: 0; margin-top: 2px; }
+  .workflow-step + .workflow-step::before { top: calc(-1 * var(--space-6) + 2px); right: auto; left: 32px; width: 1px; height: calc(var(--space-6) - 4px); }
+  /* stacked, step 2's own registration marks already touch the line */
+  .workflow-step + .workflow-step::after { content: none; }
   .hero-name { font-size: 11.5vw; }
   .projects-grid { grid-template-columns: 1fr; gap: 40px; }
   .projects-grid .box--feature,

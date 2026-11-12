@@ -153,7 +153,12 @@ portifolio_tc/
 
 Diagrama vetorial estático com três etapas em HTML: Organizar, Automatizar e
 Entregar, cada uma com um fato do próprio portfólio (200 mil PDFs, milhares de
-horas poupadas, quatro sistemas em uso). Horizontal no desktop e vertical até 600px, sem dependência de
+horas poupadas, quatro sistemas em uso). Os glifos falam pré-impressão — pilha de
+folhas se alinhando, página com grade e marcas de registro, peça refilada com
+marcas de corte — e o conector entre etapas é uma marca de registro, não uma
+seta. Traço único de 1,5px sem escala (`vector-effect: non-scaling-stroke`),
+só tinta; a largura do glifo vem de `--wf-w` (116px, `min(116px, 11vw)` até
+900px, 64px até 600px) e a posição do conector é calculada dela. Horizontal no desktop e vertical até 600px, sem dependência de
 JavaScript, imagens raster ou movimento contínuo. SVGs decorativos ficam
 ocultos da árvore de acessibilidade; a lista preserva a ordem de leitura.
 
