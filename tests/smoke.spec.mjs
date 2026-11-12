@@ -339,7 +339,7 @@ test('versiona os assets do catálogo como o index faz', async ({ page }) => {
       ...[...document.querySelectorAll('script[src]')].map((t) => t.getAttribute('src')),
       ...[...document.querySelectorAll('img[src$=".svg"], img[src*=".svg?"]')].map((i) => i.getAttribute('src'))
     ];
-    return refs.filter((ref) => !/\?v=\d{8}$/.test(ref));
+    return refs.filter((ref) => !/\?v=\d{8}(?:\d{2})?$/.test(ref));
   });
   expect(semVersao).toEqual([]);
 });

@@ -3,6 +3,14 @@
 Referência: `design-system.html`. Implementação: `../index.html`,
 `../assets/css/style.css` e `../assets/js/main.js`.
 
+## 2026-11-12 — Refinamentos após revisão
+
+- Captura do ProfessorDash atualizada a partir do portal publicado, em WebP 800 e 1600px.
+- Assinatura com mais espaço entre as palavras em telas pequenas e tracking de -0.04em.
+- Legenda da colagem em duas linhas no celular para distinguir os dois textos.
+- Assets versionados com data e revisão (YYYYMMDDNN), incluindo o catálogo.
+- Conferência visual a 390 e 1440px; documento autônomo regenerado.
+
 ## 2026-11-12 — Caderno Noturno substitui o Volta Atelier
 
 O portfólio passa a usar o Caderno Noturno (DS v4), o design system que o
