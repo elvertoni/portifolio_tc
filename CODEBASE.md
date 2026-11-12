@@ -57,7 +57,7 @@ constante `REDUCED` (de `prefers-reduced-motion`) desliga tudo que é movimento.
 1. **`frame(now)`, `onTick(fn, visible)` & `whenVisible(el)`:** Loop central em `requestAnimationFrame` que consolida todas as atualizações contínuas em um único ciclo, evitando múltiplos timers desordenados. Cada efeito se registra junto com o estado de visibilidade da sua seção (`whenVisible`), e o loop só roda enquanto algum deles está na tela — fora disso ele se desliga e `requestTick()` o reacende quando a seção volta ou a aba deixa de estar oculta.
 2. **`initReveal()` / `revealOnce()`:** `IntersectionObserver` único que adiciona a classe `.is-in` aos elementos decorados com `[data-rise]`, `[data-mask]`, `.stagger` ou `<section>`.
 3. **`initHeader()`:** Acessibilidade do `#drawer` mobile (foco preso no painel, fechamento no Escape e ao voltar para desktop) e realce da seção ativa na `.navchain` via `IntersectionObserver`. A barra é opaca em repouso, então não há estado de rolagem para rastrear.
-4. **`initCollage()`:** Paralaxe das `.tile` do herói seguindo o ponteiro. Sai cedo sob movimento reduzido ou ponteiro grosso (`pointer: coarse`) — no lugar fica a composição estática.
+4. **Fluxo do herói:** Lista HTML e SVG decorativo, estática e responsiva, sem runtime.
 5. **`initClock()`:** Relógio de São Paulo em `#clock` e `#clock2`, com `setInterval` interrompido quando a aba fica oculta.
 6. **`initCounters()`:** Animação de contagem numérica com easing cúbico para elementos com `[data-count]`.
 7. **`initForm()`:** Manipulador assíncrono `fetch` para envio via JSON para a API `https://api.web3forms.com/submit`, com honeypot anti-spam e mensagens em `#form-result`.

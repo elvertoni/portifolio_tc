@@ -2,7 +2,7 @@ import { test, expect } from '@playwright/test';
 
 const pageUrl = new URL('../index.html', import.meta.url).href;
 
-test('suspende os frames do collage fora da tela e retoma ao voltar', async ({ page }) => {
+test('mantém o diagrama sem frames contínuos na abertura', async ({ page }) => {
   await page.setViewportSize({ width: 1440, height: 900 });
   await page.addInitScript(() => {
     window.framesMeasured = 0;
@@ -21,10 +21,12 @@ test('suspende os frames do collage fora da tela e retoma ao voltar', async ({ p
   expect(await page.evaluate(() => window.framesMeasured)).toBe(before);
 
   await page.evaluate(() => window.scrollTo({ top: 0, behavior: 'instant' }));
-  await expect.poll(() => page.evaluate(() => window.framesMeasured)).toBeGreaterThan(before);
-  await expect.poll(() => page.locator('.tile').first().evaluate(tile =>
-    tile.style.transform.includes('translate3d(')
-  )).toBe(true);
+  await expect(page.locator('.workflow')).toBeVisible();
+  await page.waitForTimeout(1800);
+  const settled = await page.evaluate(() => window.framesMeasured);
+  await page.mouse.move(80, 80);
+  await page.waitForTimeout(250);
+  expect(await page.evaluate(() => window.framesMeasured)).toBe(settled);
 });
 
 test('leva o foco do menu mobile para a seção escolhida', async ({ page }) => {

@@ -3,6 +3,14 @@
 Referência: `design-system.html`. Implementação: `../index.html`,
 `../assets/css/style.css` e `../assets/js/main.js`.
 
+## 2026-11-12 — Fluxo vetorial na abertura
+
+A colagem abstrata foi substituída por Organizar → Automatizar → Entregar,
+com geometria SVG e texto HTML. Fluxo horizontal no desktop e vertical no
+celular. Paralaxe removido; as capas dos projetos continuam nos respectivos
+cards. Verificação visual a 390 e 1440px; 33 testes passaram, incluindo
+limites do diagrama a 320/390/768/1440px e ausência de frames contínuos.
+
 ## 2026-11-12 — Refinamentos após revisão
 
 - Captura do ProfessorDash atualizada a partir do portal publicado, em WebP 800 e 1600px.

@@ -847,92 +847,21 @@ a.chip:hover { transform: translateY(-2px); }
 .hero-bottomline a { display: flex; align-items: center; gap: 12px; min-height: var(--tap); }
 .hero-bottomline a:hover { color: var(--bone); }
 
-/* Collage — a quiet visual index for the work. The real product shots stay
-   in each card; these covers add one authored visual language across them.
-   The caption is a row under the composition, not a layer over it: the collage
-   takes the height that is left and the square is sized from that height, so a
-   rotated tile can never land on the type. */
-.hero-art { position: relative; align-self: stretch; min-height: 360px; display: flex; flex-direction: column; }
-.collage {
-  position: relative;
-  z-index: 2;
-  flex: 1 1 auto;
-  min-height: 0;
-  margin-top: -20px;
-  display: grid;
-  place-items: center;
-  pointer-events: none;
-  perspective: 1150px;
+/* A static diagram: HTML carries the reading order; SVG supplies geometry. */
+.hero-art { position: relative; align-self: center; min-width: 0; }
+.workflow { width: 100%; padding-block: var(--space-8); }
+.workflow-steps { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); }
+.workflow-step { position: relative; min-width: 0; text-align: center; }
+.workflow-step + .workflow-step::before {
+  content: ''; position: absolute; top: 60px; right: calc(50% + 48px);
+  width: calc(100% - 96px); height: 1px; background: var(--color-accent);
 }
-/* Capped by viewport height as well as width: a square sized only from the
-   width runs over the caption on short, wide screens. */
-.collage-in {
-  position: relative;
-  height: min(clamp(240px, 26vw, 400px), 42svh);
-  aspect-ratio: 1;
-  max-width: 100%;
-  transform: rotate(-4deg);
-  transform-style: preserve-3d;
-}
-.art-caption {
-  flex: none;
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 4px 14px;
-  padding-top: 18px;
-  font-size: 13px;
-  color: var(--muted);
-}
-.art-caption > span { color: var(--bone); }
-.tile {
-  position: absolute;
-  overflow: hidden;
-  border-radius: var(--radius-media);
-  background: var(--panel);
-  box-shadow: var(--shadow-float);
-  backface-visibility: hidden;
-}
-/* The parallax only runs where the runtime actually starts it. Promoting
-   these layers anywhere else costs memory for a composition that never moves. */
-@media (pointer: fine) and (prefers-reduced-motion: no-preference) {
-  .collage-in, .tile { will-change: transform; }
-}
-.tile img {
-  width: 100%;
-  height: 100%;
-  display: block;
-  object-fit: cover;
-}
-.tile::after {
-  content: '';
-  position: absolute;
-  inset: 0;
-  border-radius: var(--radius-media);
-  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, .09);
-  pointer-events: none;
-}
-.tile--education {
-  top: 0;
-  left: 0;
-  width: 67%;
-  aspect-ratio: 1;
-  transform: rotate(-8deg);
-}
-.tile--civic {
-  top: 14%;
-  right: -2%;
-  width: 60%;
-  aspect-ratio: 1;
-  transform: rotate(8deg);
-}
-.tile--health {
-  right: 20%;
-  bottom: 2%;
-  width: 57%;
-  aspect-ratio: 1;
-  transform: rotate(-2deg);
-}
+.workflow-step svg { width: 120px; max-width: 100%; margin-inline: auto; fill: none; stroke: var(--color-text-muted); stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+.workflow-paper { fill: var(--color-surface); }
+.workflow-step .workflow-accent { stroke: var(--color-accent); }
+.workflow-step h2 { margin-top: var(--space-4); font-family: var(--font-display); font-size: clamp(16px, 1.5vw, 22px); font-weight: var(--weight-display); }
+.workflow-step p { margin-top: var(--space-2); padding-inline: var(--space-2); font-size: 13px; color: var(--color-text-muted); }
+.workflow figcaption { margin-top: var(--space-8); text-align: center; color: var(--color-text-muted); font-size: 14px; }
 
 /* ═══════════════════════════════════════════════════════════════════
    STAT CARDS — a ruled entry on the page, not a panel
@@ -1654,8 +1583,6 @@ footer {
   .hero-statement { font-size: clamp(28px, 4.1vw, 38px); }
   .hero-actions { gap: 12px; }
   .hero-art { min-height: 300px; }
-  .collage-in { height: min(37vw, 330px, 100%); }
-  .art-caption { flex-direction: column; text-align: center; gap: 3px; }
   .hero-name { gap: .24em; font-size: 11.8vw; }
   .projects-grid .box--feature { grid-template-columns: 1fr; gap: 0; }
   .box--feature .pshot { aspect-ratio: 25 / 16; }
@@ -1683,10 +1610,14 @@ footer {
   .hero-actions { margin-top: 20px; gap: 12px; }
   .hero-actions .btn { flex: none; min-height: 48px; padding-inline: 16px; gap: 12px; }
   .hero-contact { font-size: 14px; gap: 6px; }
-  .hero-art { min-height: 270px; }
-  .collage { margin-top: 12px; }
-  .collage-in { height: min(220px, 100%); }
-  .art-caption { flex-direction: column; gap: var(--space-1); }
+  .workflow { padding-block: var(--space-4); }
+  .workflow-steps { grid-template-columns: 1fr; gap: var(--space-4); }
+  .workflow-step { display: flex; align-items: center; gap: var(--space-4); text-align: left; }
+  .workflow-step svg { width: 64px; flex: none; margin: 0; }
+  .workflow-step h2 { margin-top: 0; font-size: 19px; }
+  .workflow-step p { padding: 0; margin-top: 0; }
+  .workflow-step + .workflow-step::before { top: calc(-1 * var(--space-4)); left: 32px; width: 1px; height: var(--space-4); }
+  .workflow figcaption { margin-top: var(--space-4); text-align: left; }
   .hero-name { font-size: 11.5vw; }
   .hero-bottomline { gap: 12px; }
   .hero-bottomline > span { max-width: 28ch; }

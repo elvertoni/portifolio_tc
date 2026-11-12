@@ -86,29 +86,19 @@ test('destaca o primeiro projeto e adapta a galeria ao celular', async ({ page }
   expect(mobileColumns).toBe(1);
 });
 
-test('aplica o efeito de profundidade do design system ao collage central', async ({ page }) => {
-  await page.setViewportSize({ width: 1440, height: 900 });
+test('explica o método com diagrama legível em desktop e celular', async ({ page }) => {
   await page.goto(pageUrl);
-  await expect(page.locator('html')).toHaveClass(/js/, { timeout: 10_000 });
-
-  await expect.poll(() => page.locator('.collage .tile').evaluateAll((tiles) =>
-    tiles.length === 3 && tiles.every((tile) => tile.style.transform.includes('translate3d('))
-  )).toBe(true);
-  await expect(page.locator('.collage-in')).toHaveCSS('transform-style', 'preserve-3d');
-
-  await page.mouse.move(720, 420);
-  await page.waitForTimeout(350);
-  const centered = await page.locator('.collage .tile').evaluateAll((tiles) =>
-    tiles.map((tile) => getComputedStyle(tile).transform)
-  );
-
-  await page.mouse.move(80, 80);
-  await page.waitForTimeout(350);
-  const corner = await page.locator('.collage .tile').evaluateAll((tiles) =>
-    tiles.map((tile) => getComputedStyle(tile).transform)
-  );
-
-  expect(centered).not.toEqual(corner);
+  for (const width of [320, 390, 768, 1440]) {
+    await page.setViewportSize({ width, height: 900 });
+    await expect(page.locator('.workflow-step h2')).toHaveText(['Organizar', 'Automatizar', 'Entregar']);
+    for (const step of await page.locator('.workflow-step').all()) {
+      await expect(step).toBeVisible();
+      const bounds = await step.boundingBox();
+      expect(bounds.x).toBeGreaterThanOrEqual(0);
+      expect(bounds.x + bounds.width).toBeLessThanOrEqual(width);
+    }
+  }
+  await expect(page.locator('#hero img')).toHaveCount(0);
 });
 
 test('carrega capas editoriais e mantém o drawer isolado', async ({ page }) => {
@@ -196,10 +186,10 @@ test('mantém leitura e links disponíveis sem JavaScript', async ({ browser }) 
   await context.close();
 });
 
-test('respeita movimento reduzido também na composição de imagens', async ({ page }) => {
+test('mantém o diagrama estático sob movimento reduzido', async ({ page }) => {
   await page.emulateMedia({ reducedMotion: 'reduce' });
   await page.goto(pageUrl);
-  const transforms = () => page.locator('.tile').evaluateAll(tiles =>
+  const transforms = () => page.locator('.workflow-step').evaluateAll(tiles =>
     tiles.map(tile => getComputedStyle(tile).transform)
   );
   const before = await transforms();

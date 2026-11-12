@@ -1,5 +1,5 @@
 /* Toni Coimbra — framework-free portfolio runtime.
-   Accessible navigation, project collage, reveal, counters and contact form. */
+   Accessible navigation, reveal, counters and contact form. */
 (function () {
   'use strict';
 
@@ -185,63 +185,6 @@
   }
 
 
-  function initCollage() {
-    const host = $('.collage-in');
-    const hero = $('#hero');
-    if (!host || !hero || REDUCED || !matchMedia('(pointer: fine)').matches) return;
-
-    const cards = $$('.tile', host).map((el, i) => ({
-      el,
-      depth: [0.58, 0.82, 0.68][i] || 0.6,
-      phase: i * 1.2,
-      baseRotation: [-8, 8, -2][i] || 0,
-      x: 0,
-      y: 0,
-      rotation: 0
-    }));
-    const pointer = { x: innerWidth / 2, y: innerHeight / 2, nx: 0, ny: 0 };
-    const smooth = { x: pointer.x, y: pointer.y, nx: 0, ny: 0 };
-    const visible = whenVisible(hero, '0px');
-
-    window.addEventListener('pointermove', e => {
-      pointer.x = e.clientX;
-      pointer.y = e.clientY;
-      pointer.nx = (e.clientX / innerWidth) * 2 - 1;
-      pointer.ny = (e.clientY / innerHeight) * 2 - 1;
-    }, { passive: true });
-
-    onTick((dt, now) => {
-      if (!visible.on) return;
-      smooth.x = lerp(smooth.x, pointer.x, .1);
-      smooth.y = lerp(smooth.y, pointer.y, .1);
-      smooth.nx = lerp(smooth.nx, pointer.nx, .06);
-      smooth.ny = lerp(smooth.ny, pointer.ny, .06);
-
-      const time = now / 1000;
-      // Read every card before writing transforms to avoid layout thrashing.
-      const rects = cards.map(card => card.el.getBoundingClientRect());
-      cards.forEach((card, index) => {
-        const rect = rects[index];
-        const cx = rect.left + rect.width / 2;
-        const cy = rect.top + rect.height / 2;
-        const dx = cx - smooth.x;
-        const dy = cy - smooth.y;
-        const distance = Math.hypot(dx, dy) || 1;
-        const force = clamp(1 - distance / 300, 0, 1);
-        const push = force * force * 32 * (.5 + card.depth);
-        const idleX = Math.sin(time * .42 + card.phase) * 3.5 * (.4 + card.depth);
-        const idleY = Math.cos(time * .35 + card.phase * 1.3) * 4.5 * (.4 + card.depth);
-        const targetX = (dx / distance) * push + smooth.nx * -18 * card.depth;
-        const targetY = (dy / distance) * push + smooth.ny * -18 * card.depth;
-        const targetRotation = (dx / distance) * force * 5 * (.4 + card.depth);
-
-        card.x = lerp(card.x, targetX + idleX, .075);
-        card.y = lerp(card.y, targetY + idleY, .075);
-        card.rotation = lerp(card.rotation, targetRotation, .075);
-        card.el.style.transform = `translate3d(${card.x.toFixed(2)}px, ${card.y.toFixed(2)}px, 0) rotate(${(card.baseRotation + card.rotation).toFixed(2)}deg)`;
-      });
-    }, visible);
-  }
 
   function initClock() {
     const c1 = $('#clock');
@@ -443,7 +386,6 @@
     document.documentElement.classList.add('js');
     revealOnce();
     initHeader();
-    initCollage();
     initClock();
     initCounters();
     initForm();

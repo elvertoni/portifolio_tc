@@ -149,10 +149,12 @@ portifolio_tc/
 - Não há preloader. O conteúdo é pintado direto e o runtime marca `<html class="js">`, que habilita as animações no CSS.
 - Archivo e Geist são pré-carregadas, então a primeira pintura já sai na tipografia final; a JetBrains Mono só desenha os rótulos curtos e pode chegar depois sem deslocar nada.
 
-### 2. Composição do herói (`.collage`)
-- Três capas conceituais em `.tile`, com paralaxe de ponteiro suavizada por um único loop de `requestAnimationFrame`.
-- O loop só é iniciado se algum efeito se registrar: em ponteiro grosso ou com `prefers-reduced-motion` a composição fica estática e nenhum frame é agendado.
-- A legenda (`.art-caption`) é uma linha em fluxo abaixo do quadrado, nunca uma camada sobre ele.
+### 2. Fluxo do herói (`.workflow`)
+
+Diagrama vetorial estático com três etapas em HTML: Organizar, Automatizar e
+Entregar. Horizontal no desktop e vertical até 600px, sem dependência de
+JavaScript, imagens raster ou movimento contínuo. SVGs decorativos ficam
+ocultos da árvore de acessibilidade; a lista preserva a ordem de leitura.
 
 ### 3. Header & Navegação
 - **Barra noturna (`.hdr`):** Sempre `--color-night`, como no ProfessorDash; o foco dentro dela é amarelo.
