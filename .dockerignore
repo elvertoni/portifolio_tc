@@ -8,11 +8,13 @@
 .claude
 .vscode
 .impeccable
+.auditoria
 graphify-out
 
 node_modules
 README.md
-*.md
+# *.md só casa na raiz; **/ pega também design-system/REVIEW.md
+**/*.md
 
 # Nada abaixo daqui pertence a um servidor público.
 tests
@@ -31,3 +33,6 @@ catalogo-3d-legado.html
 
 # Ferramenta de compilação do documento autônomo: roda no repositório, não no servidor.
 design-system/*.mjs
+# Exportação vetorial da ligadura anterior (não rastreada) e a fonte do og.png.
+design-system/marca-vetor
+design-system/og-card.html

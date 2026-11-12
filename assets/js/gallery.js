@@ -217,6 +217,10 @@
       const idx = ((Math.round(pos) % total) + total) % total;
       if (idx !== shown) {
         shown = idx;
+        /* the status still tracks the drift, but only a turn the reader
+           asked for is spoken: while drifting the region goes quiet, or a
+           screen reader would be interrupted every few seconds */
+        if (status) status.setAttribute('aria-live', performance.now() < driftAt ? 'polite' : 'off');
         items.forEach((item, i) => {
           if (i === idx) item.setAttribute('aria-current', 'true');
           else item.removeAttribute('aria-current');

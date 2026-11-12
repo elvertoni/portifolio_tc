@@ -90,7 +90,7 @@ test('explica o método com diagrama legível em desktop e celular', async ({ pa
   await page.goto(pageUrl);
   for (const width of [320, 390, 768, 1440]) {
     await page.setViewportSize({ width, height: 900 });
-    await expect(page.locator('.workflow-step h2')).toHaveText(['Organizar', 'Automatizar', 'Entregar']);
+    await expect(page.locator('.workflow-step .workflow-title')).toHaveText(['Organizar', 'Automatizar', 'Entregar']);
     for (const step of await page.locator('.workflow-step').all()) {
       await expect(step).toBeVisible();
       const bounds = await step.boundingBox();

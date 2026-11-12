@@ -19,9 +19,9 @@ O projeto adota uma arquitetura **Jamstack estática de alta fidelidade**, sem f
        │ assets/css/       │           │ assets/js/        │
        │ style.css         │           │ main.js           │
        │                   │           │                   │
-       │ - Tokens (:root)  │           │ - Central rAF Loop│
+       │ - Tokens (:root)  │           │ - Drawer/Nav-spy  │
        │ - Archivo & Geist │           │ - Observer Engine │
-       │ - Componentes     │           │ - Colagem/Relógio │
+       │ - Componentes     │           │ - Relógio/Contador│
        │ - Skins de seção  │           │ - Web3Forms Ajax  │
        └───────────────────┘           └───────────────────┘
 ```
@@ -54,25 +54,23 @@ O projeto adota uma arquitetura **Jamstack estática de alta fidelidade**, sem f
 O runtime é executado dentro de uma IIFE imediatamente invocada com `'use strict'`. A
 constante `REDUCED` (de `prefers-reduced-motion`) desliga tudo que é movimento.
 
-1. **`frame(now)`, `onTick(fn, visible)` & `whenVisible(el)`:** Loop central em `requestAnimationFrame` que consolida todas as atualizações contínuas em um único ciclo, evitando múltiplos timers desordenados. Cada efeito se registra junto com o estado de visibilidade da sua seção (`whenVisible`), e o loop só roda enquanto algum deles está na tela — fora disso ele se desliga e `requestTick()` o reacende quando a seção volta ou a aba deixa de estar oculta.
+1. **Sem laço por quadro.** Nada na página precisa de um quadro a cada tick: as entradas são transições CSS, a faixa do rodapé é animação CSS e os contadores rodam um `requestAnimationFrame` curto que termina com eles. O laço compartilhado (`frame`/`onTick`/`whenVisible`) existia para a paralaxe da antiga colagem e saiu com ela; um efeito contínuo novo deve se limitar à própria seção por `IntersectionObserver`, como `initMarquee`.
 2. **`initReveal()` / `revealOnce()`:** `IntersectionObserver` único que adiciona a classe `.is-in` aos elementos decorados com `[data-rise]`, `[data-mask]`, `.stagger` ou `<section>`.
 3. **`initHeader()`:** Acessibilidade do `#drawer` mobile (foco preso no painel, fechamento no Escape e ao voltar para desktop) e realce da seção ativa na `.navchain` via `IntersectionObserver`. A barra é opaca em repouso, então não há estado de rolagem para rastrear.
 4. **Fluxo do herói:** Lista HTML e SVG decorativo, estática e responsiva, sem runtime.
 5. **`initClock()`:** Relógio de São Paulo em `#clock` e `#clock2`, com `setInterval` interrompido quando a aba fica oculta.
 6. **`initCounters()`:** Animação de contagem numérica com easing cúbico para elementos com `[data-count]`.
-7. **`initForm()`:** Manipulador assíncrono `fetch` para envio via JSON para a API `https://api.web3forms.com/submit`, com honeypot anti-spam e mensagens em `#form-result`.
+7. **`initForm()`:** Manipulador assíncrono `fetch` para envio via JSON para a API `https://api.web3forms.com/submit`, com honeypot anti-spam e mensagens em `#form-result`. A região viva existe vazia desde a carga (some só visualmente com `:empty`), o `aria-describedby` de cada campo só aponta para a mensagem de erro enquanto ela vale, e o botão ocupado usa `aria-disabled` em vez de `disabled` para não derrubar o foco no `<body>`.
 8. **`initMarquee()`:** Liga e desliga `.is-running` na faixa do rodapé conforme ela entra na tela. A faixa anda por animação CSS (`@keyframes marquee-drift`), não pelo loop de rAF, e o conteúdo é duplicado na marcação para o ciclo fechar sem emenda.
-9. **`initFooter()`:** Ano corrente em `#current-year` e botão `#toTop`, que respeita `prefers-reduced-motion` no `scrollTo`.
+9. **`initFooter()`:** Ano corrente em `#current-year` e botão `#toTop`, que respeita `prefers-reduced-motion` no `scrollTo` e leva o foco junto para `main#top`.
 
 O boot acontece em `DOMContentLoaded` e a primeira coisa que ele faz é marcar
 `<html class="js">` — a classe que habilita as animações no CSS e que os testes
 usam como sinal de que o runtime subiu. Não há preloader: a página pinta o
 conteúdo direto.
 
-O loop de `requestAnimationFrame` só é iniciado quando algum efeito registrado
-via `onTick` está visível. Em ponteiro grosso ou com movimento reduzido nada se
-registra, e o loop nunca roda; com o herói fora da tela ou a aba oculta ele para
-sozinho até que `requestTick()` seja chamado de novo.
+Com a página parada, nenhum quadro é pedido — o teste `mantém o diagrama sem
+frames contínuos na abertura` mede exatamente isso.
 
 ---
 

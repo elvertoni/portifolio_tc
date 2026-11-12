@@ -341,7 +341,10 @@ input, textarea { caret-color: var(--signal); }
 .measure { max-width: var(--measure); }
 .measure-wide { max-width: calc(var(--measure) * 1.25); }
 .about-story {
-  line-height: 1.75;
+  max-width: calc(var(--measure) * 1.25);
+  margin-left: auto;
+  color: var(--muted);
+  line-height: 1.9;
   text-wrap: pretty;
   hyphens: auto;
 }
@@ -609,6 +612,9 @@ a.chip:hover { transform: translateY(-2px); }
   border-color: var(--danger);
   background: rgba(255, 138, 128, .07);
 }
+/* An invalid field keeps its red border while focused, so the halo alone
+   would be the only focus cue — at 1.5:1. The outline restores a 3:1 ring. */
+.form-field[aria-invalid="true"]:focus { outline: 2px solid var(--color-focus); outline-offset: 2px; }
 .form-error {
   display: none;
   margin-top: 7px;
@@ -644,12 +650,18 @@ a.chip:hover { transform: translateY(-2px); }
 .form-result a { text-decoration: underline; text-underline-offset: .2em; }
 .form-result--ok    { color: var(--ok);    border-color: rgba(95, 208, 141, .34); background: rgba(95, 208, 141, .10); }
 .form-result--warn  { color: var(--amber); border-color: rgba(242, 189, 75, .34); background: rgba(242, 189, 75, .10); }
+/* Always in the tree so the live region exists before it speaks; while
+   empty it takes no room. */
+.form-result:empty { margin: 0; padding: 0; border: 0; }
 
 /* Submit in flight: the label swaps, so mark the wait visually too */
 .btn.is-busy { cursor: progress; }
-.btn[disabled].is-busy {
+.btn[aria-disabled="true"].is-busy,
+.btn[aria-disabled="true"].is-busy:hover {
   opacity: .88;
   cursor: wait;
+  background: var(--signal);
+  border-color: var(--signal);
 }
 .btn.is-busy::after {
   content: "";
@@ -1264,7 +1276,7 @@ code { font-family: var(--font-mono); font-size: .88em; color: var(--bone);
     <p class="doc-lede">O design system de Toni Coimbra, recortado para sair do portfólio e entrar em outro projeto. <strong>Sóbrio e editorial:</strong> azul-noite com um amarelo de ação, Archivo 800 nos títulos, Geist na interface e no texto, JetBrains Mono só para código, medidas e rótulos curtos. O vermelho só aparece quando algo deu errado.</p>
     <p class="doc-lede">É o mesmo sistema do ProfessorDash, aqui no tema noturno. Esta página é renderizada pela própria folha que ela documenta: os componentes abaixo são o CSS real, rodando.</p>
     <div class="doc-facts">
-      <div class="doc-fact mono-xs"><b>1057</b><span>linhas de CSS</span></div>
+      <div class="doc-fact mono-xs"><b>1069</b><span>linhas de CSS</span></div>
       <div class="doc-fact mono-xs"><b>11</b><span>camadas</span></div>
       <div class="doc-fact mono-xs"><b>25</b><span>tokens de cor</span></div>
       <div class="doc-fact mono-xs"><b>0</b><span>dependências</span></div>
@@ -1857,7 +1869,7 @@ input, textarea { caret-color: var(--signal); }
     <section class="doc-code">
   <header class="doc-code-bar">
     <span class="mono-xs doc-code-name">Camada · TYPE SCALE</span>
-    <span class="mono-xs doc-code-n">72 linhas</span>
+    <span class="mono-xs doc-code-n">75 linhas</span>
     <button class="doc-copy" type="button">Copiar</button>
   </header>
   <p class="body-sm doc-code-note">Inclui <code>.measure</code>, medida em <code>rem</code> e não em <code>ch</code>: a mesma variável encontra Geist e mono, e <code>ch</code> daria duas linhas diferentes.</p>
@@ -1929,7 +1941,10 @@ input, textarea { caret-color: var(--signal); }
 .measure { max-width: var(--measure); }
 .measure-wide { max-width: calc(var(--measure) * 1.25); }
 .about-story {
-  line-height: 1.75;
+  max-width: calc(var(--measure) * 1.25);
+  margin-left: auto;
+  color: var(--muted);
+  line-height: 1.9;
   text-wrap: pretty;
   hyphens: auto;
 }</code></pre>
@@ -2318,7 +2333,7 @@ a.chip:hover { transform: translateY(-2px); }
     <section class="doc-code">
   <header class="doc-code-bar">
     <span class="mono-xs doc-code-name">Camada · FORM CONTROLS</span>
-    <span class="mono-xs doc-code-n">88 linhas</span>
+    <span class="mono-xs doc-code-n">97 linhas</span>
     <button class="doc-copy" type="button">Copiar</button>
   </header>
   <p class="body-sm doc-code-note">O campo é <code>16px</code> fixo para o iOS não dar zoom no foco. <code>aria-invalid</code> é o que revela o erro — nunca a carga da página. Vermelho só significa “isto deu errado”: sucesso é verde, rota alternativa é âmbar.</p>
@@ -2359,6 +2374,9 @@ a.chip:hover { transform: translateY(-2px); }
   border-color: var(--danger);
   background: rgba(255, 138, 128, .07);
 }
+/* An invalid field keeps its red border while focused, so the halo alone
+   would be the only focus cue — at 1.5:1. The outline restores a 3:1 ring. */
+.form-field[aria-invalid=&quot;true&quot;]:focus { outline: 2px solid var(--color-focus); outline-offset: 2px; }
 .form-error {
   display: none;
   margin-top: 7px;
@@ -2394,12 +2412,18 @@ a.chip:hover { transform: translateY(-2px); }
 .form-result a { text-decoration: underline; text-underline-offset: .2em; }
 .form-result--ok    { color: var(--ok);    border-color: rgba(95, 208, 141, .34); background: rgba(95, 208, 141, .10); }
 .form-result--warn  { color: var(--amber); border-color: rgba(242, 189, 75, .34); background: rgba(242, 189, 75, .10); }
+/* Always in the tree so the live region exists before it speaks; while
+   empty it takes no room. */
+.form-result:empty { margin: 0; padding: 0; border: 0; }
 
 /* Submit in flight: the label swaps, so mark the wait visually too */
 .btn.is-busy { cursor: progress; }
-.btn[disabled].is-busy {
+.btn[aria-disabled=&quot;true&quot;].is-busy,
+.btn[aria-disabled=&quot;true&quot;].is-busy:hover {
   opacity: .88;
   cursor: wait;
+  background: var(--signal);
+  border-color: var(--signal);
 }
 .btn.is-busy::after {
   content: &quot;&quot;;
@@ -2765,7 +2789,7 @@ a.chip:hover { transform: translateY(-2px); }
     <section class="doc-code">
   <header class="doc-code-bar">
     <span class="mono-xs doc-code-name">gallery.js</span>
-    <span class="mono-xs doc-code-n">332 linhas</span>
+    <span class="mono-xs doc-code-n">336 linhas</span>
     <button class="doc-copy" type="button">Copiar</button>
   </header>
   <p class="body-sm doc-code-note">Autônomo: não importa nada, não depende do runtime principal e liga sozinho em qualquer <code>[data-gallery]</code> da página.</p>
@@ -2988,6 +3012,10 @@ a.chip:hover { transform: translateY(-2px); }
       const idx = ((Math.round(pos) % total) + total) % total;
       if (idx !== shown) {
         shown = idx;
+        /* the status still tracks the drift, but only a turn the reader
+           asked for is spoken: while drifting the region goes quiet, or a
+           screen reader would be interrupted every few seconds */
+        if (status) status.setAttribute(&#x27;aria-live&#x27;, performance.now() &lt; driftAt ? &#x27;polite&#x27; : &#x27;off&#x27;);
         items.forEach((item, i) =&gt; {
           if (i === idx) item.setAttribute(&#x27;aria-current&#x27;, &#x27;true&#x27;);
           else item.removeAttribute(&#x27;aria-current&#x27;);
@@ -3363,7 +3391,7 @@ img, svg, video, canvas { display: block; vertical-align: middle; max-width: 100
     <section class="doc-code">
   <header class="doc-code-bar">
     <span class="mono-xs doc-code-name">caderno-noturno.css</span>
-    <span class="mono-xs doc-code-n">1056 linhas</span>
+    <span class="mono-xs doc-code-n">1068 linhas</span>
     <button class="doc-copy" type="button">Copiar</button>
   </header>
   <p class="body-sm doc-code-note">A ordem não é arbitrária: reset e tokens antes de tudo, movimento reduzido por último. Cada seletor aparece uma única vez — se precisar sobrescrever algo, edite a regra original em vez de acrescentar um bloco no fim.</p>
@@ -3699,7 +3727,10 @@ input, textarea { caret-color: var(--signal); }
 .measure { max-width: var(--measure); }
 .measure-wide { max-width: calc(var(--measure) * 1.25); }
 .about-story {
-  line-height: 1.75;
+  max-width: calc(var(--measure) * 1.25);
+  margin-left: auto;
+  color: var(--muted);
+  line-height: 1.9;
   text-wrap: pretty;
   hyphens: auto;
 }
@@ -3967,6 +3998,9 @@ a.chip:hover { transform: translateY(-2px); }
   border-color: var(--danger);
   background: rgba(255, 138, 128, .07);
 }
+/* An invalid field keeps its red border while focused, so the halo alone
+   would be the only focus cue — at 1.5:1. The outline restores a 3:1 ring. */
+.form-field[aria-invalid=&quot;true&quot;]:focus { outline: 2px solid var(--color-focus); outline-offset: 2px; }
 .form-error {
   display: none;
   margin-top: 7px;
@@ -4002,12 +4036,18 @@ a.chip:hover { transform: translateY(-2px); }
 .form-result a { text-decoration: underline; text-underline-offset: .2em; }
 .form-result--ok    { color: var(--ok);    border-color: rgba(95, 208, 141, .34); background: rgba(95, 208, 141, .10); }
 .form-result--warn  { color: var(--amber); border-color: rgba(242, 189, 75, .34); background: rgba(242, 189, 75, .10); }
+/* Always in the tree so the live region exists before it speaks; while
+   empty it takes no room. */
+.form-result:empty { margin: 0; padding: 0; border: 0; }
 
 /* Submit in flight: the label swaps, so mark the wait visually too */
 .btn.is-busy { cursor: progress; }
-.btn[disabled].is-busy {
+.btn[aria-disabled=&quot;true&quot;].is-busy,
+.btn[aria-disabled=&quot;true&quot;].is-busy:hover {
   opacity: .88;
   cursor: wait;
+  background: var(--signal);
+  border-color: var(--signal);
 }
 .btn.is-busy::after {
   content: &quot;&quot;;
@@ -4652,6 +4692,10 @@ a.chip:hover { transform: translateY(-2px); }
       const idx = ((Math.round(pos) % total) + total) % total;
       if (idx !== shown) {
         shown = idx;
+        /* the status still tracks the drift, but only a turn the reader
+           asked for is spoken: while drifting the region goes quiet, or a
+           screen reader would be interrupted every few seconds */
+        if (status) status.setAttribute('aria-live', performance.now() < driftAt ? 'polite' : 'off');
         items.forEach((item, i) => {
           if (i === idx) item.setAttribute('aria-current', 'true');
           else item.removeAttribute('aria-current');

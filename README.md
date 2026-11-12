@@ -115,7 +115,7 @@ um padrão em outra página.
 portifolio_tc/
 ├── assets/
 │   ├── css/style.css        # CSS unificado: tokens, componentes, skins de seção
-│   ├── js/main.js           # Runtime JS (rAF loop, reveal, relógio, contadores, form)
+│   ├── js/main.js           # Runtime JS (reveal, drawer, relógio, contadores, form)
 │   ├── js/gallery.js        # Galeria em arco autônoma (só o catálogo carrega)
 │   ├── fonts/               # Archivo, Geist e JetBrains Mono em .woff2 (subset latin)
 │   ├── img/                 # Capturas dos produtos e capas conceituais (.webp)

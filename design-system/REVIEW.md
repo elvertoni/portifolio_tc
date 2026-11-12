@@ -3,6 +3,26 @@
 Referência: `design-system.html`. Implementação: `../index.html`,
 `../assets/css/style.css` e `../assets/js/main.js`.
 
+## 2026-11-12 — Revisão completa (auditoria front-end + crítica Impeccable)
+
+- **Um amarelo por tela, de fato.** O diagrama da abertura passou a tinta (conectores
+  em `--color-border-interactive`, traço de ênfase em `--color-text`), o ponto saiu de
+  "A lógica do código", as setas dos projetos ficam em `--muted` e só acendem no card
+  apontado, os asteriscos da faixa do rodapé ficaram `--dim`, e no contato o título e o
+  chip do LinkedIn deixaram o amarelo para o botão de envio. O ponto da assinatura e o
+  C da marca continuam amarelos.
+- **Abertura alinhada à coluna.** `#hero` usa a mesma borda esquerda de `.shell`
+  (1320px); a assinatura foi limitada a 180px, o máximo que cabe nessa coluna.
+- **Títulos.** Os passos do diagrama deixaram de ser `h2` antes do `h1` (agora
+  `.workflow-title`); os títulos do rodapé são `h2`.
+- **Formulário.** Erro ligado ao campo só enquanto vale, região viva presente desde a
+  carga, botão ocupado com `aria-disabled`, contorno de foco no campo inválido, mínimo
+  de 10 caracteres dito na mensagem e aplicado por `minlength`.
+- **Servidor.** 404 real com `404.html`, dotfiles bloqueados, CSP na página
+  principal, `robots.txt`, `sitemap.xml`, ícones PNG e `**/*.md` no `.dockerignore`.
+- Ficaram para decisão: o conteúdo da abertura (diagrama genérico vs. prova concreta),
+  a quantidade de slogans, pausa da faixa do rodapé e o texto do contato.
+
 ## 2026-11-12 — Fluxo vetorial na abertura
 
 A colagem abstrata foi substituída por Organizar → Automatizar → Entregar,

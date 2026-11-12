@@ -315,7 +315,10 @@ input, textarea { caret-color: var(--signal); }
 .measure { max-width: var(--measure); }
 .measure-wide { max-width: calc(var(--measure) * 1.25); }
 .about-story {
-  line-height: 1.75;
+  max-width: calc(var(--measure) * 1.25);
+  margin-left: auto;
+  color: var(--muted);
+  line-height: 1.9;
   text-wrap: pretty;
   hyphens: auto;
 }
@@ -532,8 +535,13 @@ a.chip:hover { transform: translateY(-2px); }
   width: 22px; height: 22px;
   flex: none;
   margin-left: 8px;
-  color: var(--signal-text);
+  /* four arrows on one screen would be four yellow things; the arrow lights
+     up only on the card being pointed at */
+  color: var(--muted);
+  transition: color var(--motion-fast) var(--e-out);
 }
+.plink:hover .project-arrow,
+.plink:focus-visible .project-arrow { color: var(--signal-text); }
 .project-arrow path { fill: none; stroke: currentColor; stroke-width: 1.5; }
 /* Inside a card the stack list reads as a run of terms, not as pills. */
 .pbody > .flex { gap: 8px 16px; }
@@ -762,7 +770,9 @@ a.chip:hover { transform: translateY(-2px); }
   display: flex;
   flex-direction: column;
   min-height: min(100svh, 1100px);
-  padding: calc(var(--rail) + 24px) var(--gut) 0;
+  /* Same left edge as every .shell below it: past 1320px the column centres,
+     and a hero that kept only the gutter started 60px left of the page. */
+  padding: calc(var(--rail) + 24px) max(var(--gut), calc((100% - 1320px) / 2 + var(--gut))) 0;
   overflow: clip;
 }
 .hero-topline,
@@ -837,7 +847,8 @@ a.chip:hover { transform: translateY(-2px); }
   gap: .2em;
   font-family: var(--font-display);
   font-weight: var(--weight-display);
-  font-size: clamp(52px, 12vw, 210px);
+  /* 180px is the most the signature can be and still fit the 1320px column */
+  font-size: clamp(52px, 12vw, 180px);
   line-height: .92;
   letter-spacing: -.04em;
   white-space: nowrap;
@@ -854,13 +865,15 @@ a.chip:hover { transform: translateY(-2px); }
 .workflow-step { position: relative; min-width: 0; text-align: center; }
 .workflow-step + .workflow-step::before {
   content: ''; position: absolute; top: 60px; right: calc(50% + 48px);
-  width: calc(100% - 96px); height: 1px; background: var(--color-accent);
+  width: calc(100% - 96px); height: 1px; background: var(--color-border-interactive);
 }
 .workflow-step svg { width: 120px; max-width: 100%; margin-inline: auto; fill: none; stroke: var(--color-text-muted); stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
 .workflow-paper { fill: var(--color-surface); }
-.workflow-step .workflow-accent { stroke: var(--color-accent); }
-.workflow-step h2 { margin-top: var(--space-4); font-family: var(--font-display); font-size: clamp(16px, 1.5vw, 22px); font-weight: var(--weight-display); }
+/* The diagram is ink, not action: the yellow on this screen belongs to the
+   button. The stroke that carries each step's idea is lifted to full ink. */
+.workflow-step .workflow-accent { stroke: var(--color-text); }
 .workflow-step p { margin-top: var(--space-2); padding-inline: var(--space-2); font-size: 13px; color: var(--color-text-muted); }
+.workflow-step .workflow-title { margin-top: var(--space-4); padding: 0; font-family: var(--font-display); font-size: clamp(16px, 1.5vw, 22px); font-weight: var(--weight-display); color: var(--color-text); }
 .workflow figcaption { margin-top: var(--space-8); text-align: center; color: var(--color-text-muted); font-size: 14px; }
 
 /* ═══════════════════════════════════════════════════════════════════
@@ -1043,6 +1056,9 @@ a.chip:hover { transform: translateY(-2px); }
   border-color: var(--danger);
   background: rgba(255, 138, 128, .07);
 }
+/* An invalid field keeps its red border while focused, so the halo alone
+   would be the only focus cue — at 1.5:1. The outline restores a 3:1 ring. */
+.form-field[aria-invalid="true"]:focus { outline: 2px solid var(--color-focus); outline-offset: 2px; }
 .form-error {
   display: none;
   margin-top: 7px;
@@ -1078,12 +1094,18 @@ a.chip:hover { transform: translateY(-2px); }
 .form-result a { text-decoration: underline; text-underline-offset: .2em; }
 .form-result--ok    { color: var(--ok);    border-color: rgba(95, 208, 141, .34); background: rgba(95, 208, 141, .10); }
 .form-result--warn  { color: var(--amber); border-color: rgba(242, 189, 75, .34); background: rgba(242, 189, 75, .10); }
+/* Always in the tree so the live region exists before it speaks; while
+   empty it takes no room. */
+.form-result:empty { margin: 0; padding: 0; border: 0; }
 
 /* Submit in flight: the label swaps, so mark the wait visually too */
 .btn.is-busy { cursor: progress; }
-.btn[disabled].is-busy {
+.btn[aria-disabled="true"].is-busy,
+.btn[aria-disabled="true"].is-busy:hover {
   opacity: .88;
   cursor: wait;
+  background: var(--signal);
+  border-color: var(--signal);
 }
 .btn.is-busy::after {
   content: "";
@@ -1104,7 +1126,7 @@ footer {
   border-top: 1px solid var(--line);
   z-index: 2;
 }
-.fcol h3 {
+.fcol h2 {
   font-family: var(--font-mono);
   font-size: var(--size-meta);
   font-weight: var(--weight-medium);
@@ -1122,6 +1144,7 @@ footer {
   line-height: 1.5;
   transition: color .3s, transform .4s var(--e-out);
   width: fit-content;
+  min-width: var(--tap);
 }
 .fcol a:not(.mark):hover { color: var(--bone); transform: translateX(5px); }
 
@@ -1158,7 +1181,7 @@ footer {
   color: var(--bone);
   white-space: nowrap;
 }
-.marquee li em { font-style: normal; color: var(--signal); }
+.marquee li em { font-style: normal; color: var(--dim); }
 /* As duas cópias têm a mesma largura, então deslocar as duas em -100% coloca a
    segunda exatamente onde a primeira estava: o reinício do ciclo cai no mesmo
    pixel e o corte não aparece. Só roda com .js e com o rodapé na tela —
@@ -1542,7 +1565,6 @@ footer {
 #sobre { border-bottom: 1px solid var(--line); }
 #sobre .shell > .flex { display: grid; grid-template-columns: 1.5fr 1fr; align-items: end; gap: 48px; }
 #sobre .d-lg { font-size: clamp(36px, 4vw, 58px); }
-.about-story { max-width: 72ch; margin-left: auto; color: var(--muted); line-height: 1.9; }
 
 #stack .grid { column-gap: clamp(32px, 6vw, 96px); row-gap: 40px; }
 #stack .phase h3 { font-size: clamp(26px, 3vw, 40px); text-transform: none; }
@@ -1568,14 +1590,10 @@ footer {
 /* ═══════════════════════════════════════════════════════════════════
    RESPONSIVE — narrow first, then the two ceilings
    ═══════════════════════════════════════════════════════════════════ */
-@media (min-width: 1600px) {
-  #hero { padding-inline: max(var(--gut), calc((100vw - 1500px) / 2)); }
-  .hero-name { font-size: 190px; }
-}
-
 @media (max-width: 900px) {
   .navchain { display: none; }
-  .burger { display: flex; }
+  /* without the runtime the burger opens nothing; the page still scrolls */
+  .js .burger { display: flex; }
   .brand-name > span { display: none; }
   #hero { min-height: auto; }
   .hero-meta { display: none; }
@@ -1606,7 +1624,9 @@ footer {
   .hero-stage { grid-template-columns: 1fr; gap: 12px; padding-block: 32px 24px; }
   .hero-statement { font-size: clamp(29px, 7.8vw, 46px); }
   .hero-description { margin-top: 18px; }
-  .hero-list { display: flex; flex-wrap: wrap; gap: 0 14px; margin-top: 16px; }
+  .hero-list { display: flex; flex-wrap: wrap; gap: 0 10px; margin-top: 16px; }
+  /* side by side the two roles need a seam, or they read as one line */
+  .hero-list li + li::before { content: '/'; margin-right: 10px; color: var(--dim); }
   .hero-actions { margin-top: 20px; gap: 12px; }
   .hero-actions .btn { flex: none; min-height: 48px; padding-inline: 16px; gap: 12px; }
   .hero-contact { font-size: 14px; gap: 6px; }
@@ -1614,13 +1634,13 @@ footer {
   .workflow-steps { grid-template-columns: 1fr; gap: var(--space-4); }
   .workflow-step { display: flex; align-items: center; gap: var(--space-4); text-align: left; }
   .workflow-step svg { width: 64px; flex: none; margin: 0; }
-  .workflow-step h2 { margin-top: 0; font-size: 19px; }
+  .workflow-step .workflow-title { margin-top: 0; font-size: 19px; }
   .workflow-step p { padding: 0; margin-top: 0; }
   .workflow-step + .workflow-step::before { top: calc(-1 * var(--space-4)); left: 32px; width: 1px; height: var(--space-4); }
   .workflow figcaption { margin-top: var(--space-4); text-align: left; }
   .hero-name { font-size: 11.5vw; }
   .hero-bottomline { gap: 12px; }
-  .hero-bottomline > span { max-width: 28ch; }
+  .hero-bottomline > span { max-width: 15rem; }
   .projects-grid { grid-template-columns: 1fr; gap: 40px; }
   .projects-grid .box--feature,
   .projects-grid > :last-child:nth-child(even) { grid-column: auto; grid-template-columns: 1fr; gap: 0; }

@@ -7,56 +7,12 @@
   const $ = (s, c) => (c || document).querySelector(s);
   const $$ = (s, c) => Array.prototype.slice.call((c || document).querySelectorAll(s));
   const clamp = (v, a, b) => (v < a ? a : v > b ? b : v);
-  const lerp = (a, b, t) => a + (b - a) * t;
   const REDUCED = matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-  /* single rAF loop, started only once something asks for a frame. On a
-     phone every per-frame effect opts out, and an empty loop still wakes
-     the compositor sixty times a second for nothing. */
-  const ticks = [];
-  function requestTick() {
-    if (!REDUCED && !document.hidden && !frameId && ticks.some(tick => tick.visible.on)) {
-      last = performance.now();
-      frameId = requestAnimationFrame(frame);
-    }
-  }
-  function onTick(fn, visible) {
-    ticks.push({ fn, visible });
-    requestTick();
-  }
-
-  /* Every per-frame effect below is anchored to one section. Gating on
-     intersection keeps the loop from burning frames on a canvas nobody
-     is looking at — the difference is the whole page's idle cost. */
-  function whenVisible(el, margin) {
-    const state = { on: false };
-    if (!el) return state;
-    new IntersectionObserver(
-      es => {
-        state.on = es[0].isIntersecting;
-        requestTick();
-      },
-      { rootMargin: margin || '120px' }
-    ).observe(el);
-    return state;
-  }
-  let last = performance.now();
-  let frameId = 0;
-  function frame(now) {
-    frameId = 0;
-    if (document.hidden) return;
-    const dt = Math.min(0.05, (now - last) / 1000);
-    last = now;
-    for (let i = 0; i < ticks.length; i++) {
-      if (ticks[i].visible.on) ticks[i].fn(dt, now);
-    }
-    if (ticks.some(tick => tick.visible.on)) frameId = requestAnimationFrame(frame);
-  }
-  if (!REDUCED) {
-    document.addEventListener('visibilitychange', () => {
-      requestTick();
-    });
-  }
+  /* Nothing on this page needs a frame every tick: the reveals are CSS
+     transitions, the footer band is a CSS animation and the counters run a
+     short rAF of their own that ends with them. A shared per-frame loop lived
+     here for the old pointer parallax; it went with it. */
 
   /* ═══════════════════════════════════════════════════════════════════
      1. REVEAL ENGINE
@@ -279,9 +235,14 @@
       return false;
     }
 
+    /* The error text is linked only while it applies: aria-describedby
+       reads a display:none target too, so a permanent link would greet an
+       untouched field with "Preciso de um nome…". */
     function mark(el) {
       const bad = problem(el);
       el.setAttribute('aria-invalid', String(bad));
+      if (bad) el.setAttribute('aria-describedby', el.id + '-error');
+      else el.removeAttribute('aria-describedby');
       return !bad;
     }
 
@@ -293,9 +254,15 @@
       });
     });
 
+    /* #form-result stays in the accessibility tree from load on, empty: a
+       live region that appears and fills in the same tick is often not read. */
     function say(text, kind) {
-      result.textContent = text;
       result.className = 'form-result form-result--' + kind;
+      result.textContent = text;
+    }
+    function clearResult() {
+      result.className = 'form-result';
+      result.textContent = '';
     }
 
     form.addEventListener('submit', async e => {
@@ -312,9 +279,12 @@
       const original = submitBtn.textContent;
       submitBtn.textContent = 'Enviando...';
       submitBtn.classList.add('is-busy');
-      submitBtn.disabled = true;
+      /* aria-disabled, not disabled: a disabled button drops the focus to
+         <body>, and the next Tab would start from the top of the page. The
+         aria-busy check above is what actually blocks a second send. */
+      submitBtn.setAttribute('aria-disabled', 'true');
       form.setAttribute('aria-busy', 'true');
-      result.className = 'hidden';
+      clearResult();
 
       const controller = new AbortController();
       const timeoutId = setTimeout(() => controller.abort(), 15000);
@@ -335,19 +305,22 @@
 
         say('Mensagem enviada. Respondo pelo e-mail que você informou.', 'ok');
         form.reset();
-        fields.forEach(el => el.removeAttribute('aria-invalid'));
+        fields.forEach(el => {
+          el.removeAttribute('aria-invalid');
+          el.removeAttribute('aria-describedby');
+        });
       } catch (err) {
         if (err.name === 'AbortError') {
           say('A tentativa demorou demais. Tente novamente ou me chame no LinkedIn.', 'warn');
           return;
         }
-        say('Não consegui enviar agora. Me chame no LinkedIn ou tente de novo em instantes.', 'warn');
+        say('Não consegui enviar agora. Tente de novo em instantes ou fale comigo no LinkedIn.', 'warn');
       } finally {
         clearTimeout(timeoutId);
         form.removeAttribute('aria-busy');
         submitBtn.textContent = original;
         submitBtn.classList.remove('is-busy');
-        submitBtn.disabled = false;
+        submitBtn.removeAttribute('aria-disabled');
       }
     });
   }
@@ -364,6 +337,9 @@
     if (toTop) {
       toTop.addEventListener('click', () => {
         window.scrollTo({ top: 0, behavior: REDUCED ? 'auto' : 'smooth' });
+        /* the view goes up, so the keyboard has to go with it */
+        const main = $('#top');
+        if (main) main.focus({ preventScroll: true });
       });
     }
   }
