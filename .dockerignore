@@ -28,3 +28,6 @@ package-lock.json
 *.zip
 
 catalogo-3d-legado.html
+
+# Ferramenta de compilação do documento autônomo: roda no repositório, não no servidor.
+design-system/*.mjs

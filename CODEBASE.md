@@ -20,7 +20,7 @@ O projeto adota uma arquitetura **Jamstack estática de alta fidelidade**, sem f
        │ style.css         │           │ main.js           │
        │                   │           │                   │
        │ - Tokens (:root)  │           │ - Central rAF Loop│
-       │ - Archivo & Mono  │           │ - Observer Engine │
+       │ - Archivo & Geist │           │ - Observer Engine │
        │ - Componentes     │           │ - Colagem/Relógio │
        │ - Skins de seção  │           │ - Web3Forms Ajax  │
        └───────────────────┘           └───────────────────┘
@@ -37,15 +37,14 @@ O projeto adota uma arquitetura **Jamstack estática de alta fidelidade**, sem f
 | [`assets/js/main.js`](file:///c:/ARQUIVOS/PROJETOS/TONI/portifolio_tc/assets/js/main.js) | Lógica interativa, animações, motor de reveal, validação e formulário | Referenciado por `index.html` com `defer`. Altera classes `.is-in`, `.open`, `.on` |
 | [`assets/js/gallery.js`](file:///c:/ARQUIVOS/PROJETOS/TONI/portifolio_tc/assets/js/gallery.js) | Galeria em arco autônoma para superfícies com muitas imagens | Referenciado apenas por `design-system/design-system.html` com `defer`. Liga em `[data-gallery]`, acrescenta `.is-live` e não depende de `main.js` |
 | [`assets/img/`](file:///c:/ARQUIVOS/PROJETOS/TONI/portifolio_tc/assets/img/) | Capturas reais dos produtos em produção (`.webp` e `@2x.webp`) | Exibidas na grade de projetos com carregamento preguiçoso (`loading="lazy"`) |
-| [`assets/logo.svg`](file:///c:/ARQUIVOS/PROJETOS/TONI/portifolio_tc/assets/logo.svg) | Ligadura TC em `viewBox` 200×128; o vão entre T e C é recortado por `<mask>` para ficar transparente | Usada no cabeçalho e no rodapé via `.brand-logo` |
-| [`assets/favicon.svg`](file:///c:/ARQUIVOS/PROJETOS/TONI/portifolio_tc/assets/favicon.svg) | Corte de 16 px da mesma marca sobre campo arredondado `#141414` | `<link rel="icon">` do `index.html` e das páginas de `design-system/` |
-| [`design-system/marca-canvas/`](file:///c:/ARQUIVOS/PROJETOS/TONI/portifolio_tc/design-system/marca-canvas/) | Fonte da verdade da marca: construção, medidas, logotipo, lockups e provas de redução | Origem dos dois SVG acima; qualquer alteração da marca começa aqui |
+| [`assets/logo.svg`](file:///c:/ARQUIVOS/PROJETOS/TONI/portifolio_tc/assets/logo.svg) | Monograma TC em `viewBox` 403,93×226,77, o mesmo do ProfessorDash; o T troca de cor por `prefers-color-scheme`, o C é amarelo fixo | Usada no cabeçalho e no rodapé via `.brand-logo` |
+| [`assets/favicon.svg`](file:///c:/ARQUIVOS/PROJETOS/TONI/portifolio_tc/assets/favicon.svg) | Selo: o mesmo monograma sobre campo arredondado `#0a0e1a` | `<link rel="icon">` do `index.html` e das páginas de `design-system/` |
 | [`tests/smoke.spec.mjs`](file:///c:/ARQUIVOS/PROJETOS/TONI/portifolio_tc/tests/smoke.spec.mjs) | Suíte de testes automatizados com Playwright | Executa validação de a11y, layout responsivo e reduced-motion via `npm test` |
 | [`tests/runtime.spec.mjs`](file:///c:/ARQUIVOS/PROJETOS/TONI/portifolio_tc/tests/runtime.spec.mjs) | Testes de comportamento do runtime | Cobre a suspensão do loop de `requestAnimationFrame`, o foco levado à seção pelo menu mobile e o bloqueio de envio duplicado do formulário |
 | [`tests/gallery.spec.mjs`](file:///c:/ARQUIVOS/PROJETOS/TONI/portifolio_tc/tests/gallery.spec.mjs) | Testes da galeria em arco | Cobre a montagem do anel, a navegação por teclado e botões, o trilho sem JavaScript, a ausência de quadros sob movimento reduzido e a suspensão fora da tela |
 | [`nginx.conf`](file:///c:/ARQUIVOS/PROJETOS/TONI/portifolio_tc/nginx.conf) | Configuração de Nginx para produção com Gzip, cache e headers de segurança | Montado pelo `Dockerfile` |
-| [`design-system/design-system.html`](file:///c:/ARQUIVOS/PROJETOS/TONI/portifolio_tc/design-system/design-system.html) | Catálogo visual do Volta Atelier | Demonstra os padrões definidos em `assets/css/style.css`; não contém tokens próprios |
-| [`design-system/volta-atelier.html`](file:///c:/ARQUIVOS/PROJETOS/TONI/portifolio_tc/design-system/volta-atelier.html) | O design system compilado num documento autônomo, para aplicar em outro projeto | Embute marca, subconjunto portátil do CSS e o `gallery.js` inteiro. É um retrato: um teste falha se divergir da folha canônica |
+| [`design-system/design-system.html`](file:///c:/ARQUIVOS/PROJETOS/TONI/portifolio_tc/design-system/design-system.html) | Catálogo visual do Caderno Noturno | Demonstra os padrões definidos em `assets/css/style.css`; não contém tokens próprios |
+| [`design-system/caderno-noturno.html`](file:///c:/ARQUIVOS/PROJETOS/TONI/portifolio_tc/design-system/caderno-noturno.html) | O design system compilado num documento autônomo, para aplicar em outro projeto | Gerado por `design-system/compilar-caderno.mjs` (`npm run build:doc`): embute marca, fontes, imagens, subconjunto portátil do CSS e o `gallery.js` inteiro. É um retrato: um teste falha se divergir da folha canônica |
 | [`Dockerfile`](file:///c:/ARQUIVOS/PROJETOS/TONI/portifolio_tc/Dockerfile) | Configuração de empacotamento Nginx Alpine | Utilizado para deploy em container (EasyPanel / VPS) |
 
 ---
@@ -111,7 +110,7 @@ compilação e não depende de `main.js`.
 
 ### CSS
 - **Tokens Primeiro:** Nunca utilize cores hexadecimais arbitrárias no corpo das classes. Use as variáveis semânticas declaradas em `:root` (`var(--color-text)`, `var(--color-accent)`, `var(--color-surface)`, etc.); os aliases curtos permanecem por compatibilidade.
-- **Proibição de Roxo/Violeta:** Em conformidade com o design system Volta Atelier e diretrizes do projeto, o acento primário é sempre `--signal` (`#fb3732`) ou `--amber` (`#ffa31a`). Tons arroxeados/violetas estão banidos.
+- **Cor com papel fixo:** No Caderno Noturno a identidade é azul-noite + amarelo; o único acento é `--signal` (`#ffd43b`, a cor de ação). Verde, âmbar e vermelho (`--color-danger`, `#ff8a80`) são só estado — vermelho significa erro e nada mais. Tons arroxeados/violetas continuam banidos.
 - **Tipografia Fluida:** Utilize sempre funções `clamp()` para tamanhos de fonte, garantindo escalabilidade harmoniosa entre mobile (320px) e monitores ultrawide (1560px+).
 
 ### HTML Semântico & Acessibilidade

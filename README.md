@@ -2,7 +2,7 @@
 
 > Portfólio pessoal e profissional de Toni Coimbra — Especialista em IA & Automação, Professor de Desenvolvimento de Sistemas e Desenvolvedor Python.
 
-Construído com base no **Volta Atelier Design System**, uma abordagem estética *brutalist-editorial* caracterizada por tipografia técnica refinada, fundo escuro quente (`#141414`), acento expressivo vermelho vibrante (`#fb3732`), micro-animações ricas e alta performance com **Vanilla CSS & JS puro**, sem frameworks ou dependências pesadas.
+Construído sobre o **Caderno Noturno** (DS v4), o mesmo design system do ProfessorDash, no tema noturno: sóbrio e editorial, fundo azul-noite (`#080c17`), cabeçalho sempre noturno, um único amarelo de ação (`#ffd43b`), Archivo nos títulos, Geist no texto e alta performance com **Vanilla CSS & JS puro**, sem frameworks ou dependências pesadas. Substituiu o Volta Atelier em 2026-11-12.
 
 ---
 
@@ -42,40 +42,42 @@ npm run test:smoke
 
 ---
 
-## 🎨 Design System — Volta Atelier
+## 🎨 Design System — Caderno Noturno
 
-O portfólio segue estritamente os padrões e design tokens do **Volta Atelier**.
+O portfólio segue os padrões e design tokens do **Caderno Noturno**, no tema noturno (o ProfessorDash tem também o tema papel; aqui ele não existe). A fonte canônica é `assets/css/style.css`; o documento autônomo `design-system/caderno-noturno.html` é gerado dela por `npm run build:doc`.
 
 ### 1. Paleta de Cores e Tokens CSS (`:root`)
 
-| Token | Valor Hex/RGBA | Aplicação |
+| Token | Valor | Aplicação |
 |---|---|---|
-| `--color-bg` | `#141414` | Fundo principal e áreas de leitura |
-| `--color-bg-deep` | `#0d0d0d` | Rodapé, drawer móvel e superfícies profundas |
-| `--color-surface` | `#1c1c1e` | Superfície padrão de cards, campos e blocos |
-| `--color-surface-raised` | `#232326` | Superfície elevada em hover e foco |
-| `--color-border` | `rgba(255, 255, 255, .11)` | Bordas decorativas e divisórias |
-| `--color-border-strong` | `rgba(255, 255, 255, .20)` | Bordas de estados elevados |
-| `--color-border-interactive` | `rgba(255, 255, 255, .34)` | Limites de controles, chips e campos |
-| `--color-text` | `#f4f3f0` | Títulos, dados principais e ações primárias |
-| `--color-text-muted` | `#a5a5ac` | Parágrafos, legendas e descrições |
-| `--color-text-subtle` | `#8d8d96` | Metadados e informação terciária |
-| `--color-accent` | `#fb3732` | Sinal visual, marca e atenção |
-| `--color-accent-strong` | `#d1211d` | Preenchimentos com texto branco |
-| `--color-accent-text` | `#ff5c57` | Acento vermelho usado como texto |
-| `--color-warning` | `#ffa31a` | Avisos e atenção |
-| `--color-success` | `#4ade80` | Confirmações e sucesso |
+| `--color-bg` | `#080c17` | Azul-noite: fundo principal e áreas de leitura |
+| `--color-bg-deep` | `#060913` | Rodapé e seções recuadas |
+| `--color-surface` | `#0f1729` | Superfície padrão de cards, campos e blocos |
+| `--color-surface-raised` | `#17213a` | Superfície elevada em hover e foco |
+| `--color-night` | `#0a0e1a` | Noite fixa: cabeçalho, gaveta, campo do selo |
+| `--color-night-raised` | `#121d36` | Ativo e hover sobre a noite fixa |
+| `--color-border` | `#1d2a4a` | Bordas decorativas e divisórias |
+| `--color-border-strong` | `#2f4170` | Bordas de estados elevados e chips sem interação |
+| `--color-border-interactive` | `#5b6e9e` | Limites de controles, campos e chips-link (≥ 3:1) |
+| `--color-text` | `#eef2f8` | Títulos, dados principais e ações |
+| `--color-text-muted` | `#a3b1c9` | Parágrafos, legendas e rótulos curtos |
+| `--color-text-subtle` | `#93a1bc` | Metadados e informação terciária |
+| `--color-accent` | `#ffd43b` | Ação principal, numeral e o C da marca |
+| `--color-accent-strong` | `#e6ad00` | Preenchimento da ação em hover |
+| `--color-on-accent` | `#1b1500` | Texto sobre o amarelo (12,8:1) |
+| `--color-paper` | `#f1f0ec` | Papel da marca: T do monograma e fundo claro de peças |
+| `--color-warning` | `#f2bd4b` | Avisos e atenção |
+| `--color-success` | `#5fd08d` | Confirmações e sucesso |
+| `--color-danger` | `#ff8a80` | Erro, e só erro |
+| `--color-focus` | `#8dbcf5` | Anel de foco (amarelo dentro da barra noturna) |
 
-Os aliases curtos (`--ink`, `--panel`, `--bone`, `--signal` e equivalentes) permanecem para compatibilidade com os componentes existentes. Para novas implementações, prefira os nomes semânticos.
+Os aliases curtos (`--ink`, `--panel`, `--bone`, `--signal` e equivalentes) permanecem para compatibilidade com os componentes existentes — atenção: `--signal` agora é o **amarelo de ação**, não mais vermelho. Para novas implementações, prefira os nomes semânticos.
 
 ### 2. Tipografia
 
-- **Display Font (`--font-display`):** `Archivo` (pesos 700 a 800) servida localmente por `assets/fonts/archivo-latin.woff2`.
-  - Usada para títulos de impacto, números de contadores e logo.
-  - Classes: `.d-mega`, `.d-xl`, `.d-lg`, `.d-md`, `.d-sm`.
-- **Monospace Font (`--font-mono`):** `JetBrains Mono` (pesos 400 a 500) servida localmente por `assets/fonts/jetbrains-mono-latin.woff2`.
-  - Usada para o corpo do texto, botões, chips, metadados e tags.
-  - Classes: `.mono-md`, `.mono-sm`, `.mono-xs`.
+- **Display (`--font-display`):** `Archivo` 700–800, `assets/fonts/archivo-latin.woff2`. Títulos, numerais e a assinatura, sempre em caixa de frase. Classes: `.d-mega`, `.d-xl`, `.d-lg`, `.d-md`, `.d-sm`.
+- **Texto (`--font-body`):** `Geist` variável, `assets/fonts/geist-latin-variable.woff2`. Interface, botões, chips, navegação e todo texto corrido. Classes: `.body-md`, `.body-sm`.
+- **Mono (`--font-mono`):** `JetBrains Mono` 400–500, `assets/fonts/jetbrains-mono-latin.woff2`. Só código, medidas e o rótulo curto (`.mono-xs`: 12px, caixa alta, cor neutra — nunca o amarelo).
 
 ### 3. Espaçamento, forma e comportamento
 
@@ -83,7 +85,7 @@ Use a escala `--space-1` a `--space-16` (4px a 64px) para gaps, margens e
 preenchimentos. A página mantém gutters e seções fluidos com `--gut` e
 `--rail`; não crie uma medida isolada quando um passo existente resolver.
 
-Os raios têm intenção definida: `--radius-control` para campos e mensagens,
+Os raios têm intenção definida (10, 14, 18 e 6px): `--radius-control` para campos e mensagens,
 `--radius-surface` para cards, `--radius-emphasis` para blocos destacados e
 `--radius-media` para recortes de imagem. `--radius-pill` fica reservado a
 controles pequenos, como botões, chips e navegação.
@@ -97,7 +99,7 @@ e movimento reduzido; `--tap` define o alvo mínimo de 44px.
 | Curva | Definição | Caso de Uso |
 |---|---|---|
 | `--e-out` | `cubic-bezier(.16, 1, .3, 1)` | Entradas de tela, reveals (`[data-rise]`, `[data-mask]`) e hovers de cards |
-| `--e-io` | `cubic-bezier(.76, 0, .24, 1)` | Transições de estado comandadas (wipe de `.btn`, drawer, barras de `.phase`) |
+| `--e-io` | `cubic-bezier(.76, 0, .24, 1)` | Transições de estado comandadas (burger, barras de `.phase`) |
 | `--e-soft`| `cubic-bezier(.25, .46, .45, .94)` | Hovers curtos de cor e borda (`.chip`, `.navchain a`, `.hdr`) |
 
 ---
@@ -115,16 +117,16 @@ portifolio_tc/
 │   ├── css/style.css        # CSS unificado: tokens, componentes, skins de seção
 │   ├── js/main.js           # Runtime JS (rAF loop, reveal, relógio, contadores, form)
 │   ├── js/gallery.js        # Galeria em arco autônoma (só o catálogo carrega)
-│   ├── fonts/               # Archivo e JetBrains Mono em .woff2 (subset latin)
+│   ├── fonts/               # Archivo, Geist e JetBrains Mono em .woff2 (subset latin)
 │   ├── img/                 # Capturas dos produtos e capas conceituais (.webp)
-│   ├── logo.svg             # Lockup 200×128 da ligadura TC
-│   ├── favicon.svg          # Corte de 16px da marca
+│   ├── logo.svg             # Monograma TC (viewBox 403,93×226,77), o mesmo do ProfessorDash
+│   ├── favicon.svg          # Selo: o monograma sobre o campo noturno
 │   └── og.png               # Social preview, gerado por design-system/og-card.html
 ├── design-system/
 │   ├── design-system.html   # Catálogo visual que consome o CSS canônico
 │   ├── og-card.html         # Fonte 1200×630 do assets/og.png
-│   ├── volta-atelier.html   # O design system compilado num documento só (autônomo)
-│   ├── marca-canvas/        # Fonte da verdade da marca: construção e provas
+│   ├── caderno-noturno.html # O design system num documento só (gerado; não editar)
+│   ├── compilar-caderno.mjs # Gera o caderno-noturno.html (npm run build:doc)
 │   └── REVIEW.md            # Registro das decisões de design
 ├── tests/
 │   ├── smoke.spec.mjs       # Suíte Playwright (roda em file://, sem servidor)
@@ -145,7 +147,7 @@ portifolio_tc/
 
 ### 1. Abertura sem espera
 - Não há preloader. O conteúdo é pintado direto e o runtime marca `<html class="js">`, que habilita as animações no CSS.
-- Ambas as fontes (Archivo e JetBrains Mono) são pré-carregadas, então a primeira pintura já sai na tipografia final.
+- Archivo e Geist são pré-carregadas, então a primeira pintura já sai na tipografia final; a JetBrains Mono só desenha os rótulos curtos e pode chegar depois sem deslocar nada.
 
 ### 2. Composição do herói (`.collage`)
 - Três capas conceituais em `.tile`, com paralaxe de ponteiro suavizada por um único loop de `requestAnimationFrame`.
@@ -153,12 +155,13 @@ portifolio_tc/
 - A legenda (`.art-caption`) é uma linha em fluxo abaixo do quadrado, nunca uma camada sobre ele.
 
 ### 3. Header & Navegação
-- **Marca (`.mark`):** Ligadura `TC` que inclina e ganha halo em `--signal` no hover, com alvo de toque ampliado por pseudo-elemento.
-- **Navchain (`.navchain`):** Links em texto, sem caixa, com a seção ativa marcada em `--signal-text` e `aria-current="location"` via `IntersectionObserver`.
-- **Mobile Drawer (`#drawer`):** Menu fullscreen com animação de corte `clip-path` e tipografia display escalonada.
+- **Barra noturna (`.hdr`):** Sempre `--color-night`, como no ProfessorDash; o foco dentro dela é amarelo.
+- **Marca (`.mark`):** Monograma `TC` dimensionado pela altura, sem efeito de hover, com alvo de toque ampliado por pseudo-elemento.
+- **Navchain (`.navchain`):** Links em texto Geist, com a seção ativa marcada por um fundo discreto (`--night-2`) e `aria-current="location"` via `IntersectionObserver`.
+- **Mobile Drawer (`#drawer`):** Menu fullscreen que entra por opacidade e deslocamento curto (sem recorte animado), com tipografia display escalonada.
 
 ### 4. Hero Section
-- **Assinatura tipográfica (`.hero-name`):** `TONI COIMBRA` ocupando a largura da abertura, com o ponto em `--signal`.
+- **Assinatura tipográfica (`.hero-name`):** `Toni Coimbra.` em caixa de frase, alinhada à esquerda, com o ponto em `--signal`.
 - **Relógio de Precisão:** Horário oficial de Brasília (BRT) atualizado segundo a segundo, pausado em aba oculta.
 - **Chamadas diretas:** `Ver projetos` e `Vamos conversar` no bloco de introdução, mais o link de descida na linha inferior.
 
@@ -228,7 +231,7 @@ npm run test:smoke
 ## ♿ Acessibilidade e Performance
 
 - **`prefers-reduced-motion`:** Respeito absoluto às preferências do sistema do usuário — para o movimento contínuo e o paralaxe, reduz as transições a mudanças curtas de cor e borda, e assegura que todo elemento com reveal já esteja visível.
-- **Fontes Locais WOFF2:** Arquivos `archivo-latin.woff2` e `jetbrains-mono-latin.woff2` servidos localmente com `font-display: swap`, eliminando chamadas externas ao Google Fonts.
+- **Fontes Locais WOFF2:** Arquivos `archivo-latin.woff2`, `geist-latin-variable.woff2` e `jetbrains-mono-latin.woff2` servidos localmente com `font-display: swap`, eliminando chamadas externas ao Google Fonts.
 - **Zero Frameworks em Runtime:** Zero dependência de bibliotecas pesadas de terceiros (Tailwind CDN, FontAwesome, React), garantindo First Contentful Paint (FCP) abaixo de 0.5s e pontuação máxima no Lighthouse.
 - **Degradação No-JS:** Fallback transparente onde 100% do conteúdo é renderizado caso o JavaScript seja desativado.
 - **Semântica HTML5 & WCAG AA:** Utilização rigorosa de tags semânticas, atributos ARIA apropriados (`aria-expanded`, `aria-hidden`, `aria-label`, `aria-invalid`), contraste de cores validado e áreas de toque com no mínimo 44px (`--tap`).

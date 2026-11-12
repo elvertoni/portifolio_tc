@@ -4,8 +4,8 @@
   "description": "Portfólio de Toni Coimbra — Especialista em IA & Automação, Professor e Desenvolvedor Python.",
   "start_url": "/",
   "display": "standalone",
-  "background_color": "#141414",
-  "theme_color": "#141414",
+  "background_color": "#080c17",
+  "theme_color": "#0a0e1a",
   "icons": [
     {
       "src": "assets/favicon.svg",

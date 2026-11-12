@@ -13,22 +13,31 @@
       src: url('../assets/fonts/archivo-latin.woff2') format('woff2');
     }
     @font-face {
+      font-family: 'Geist';
+      font-style: normal;
+      font-weight: 100 900;
+      src: url('../assets/fonts/geist-latin-variable.woff2') format('woff2');
+    }
+    @font-face {
       font-family: 'JetBrains Mono';
       font-style: normal;
       font-weight: 400 500;
       src: url('../assets/fonts/jetbrains-mono-latin.woff2') format('woff2');
     }
 
+    /* Caderno Noturno — os mesmos valores de assets/css/style.css */
     :root {
-      --ink: #141414;
-      --panel: #1c1c1e;
-      --bone: #f4f3f0;
-      --dim: #8d8d96;
-      --signal: #fb3732;
+      --ink: #080c17;
+      --night: #0a0e1a;
+      --panel: #0f1729;
+      --bone: #eef2f8;
+      --dim: #93a1bc;
+      --signal: #ffd43b;
+      --on-signal: #1b1500;
     }
 
     * { box-sizing: border-box; }
-    body { margin: 0; background: #2b2b30; }
+    body { margin: 0; background: #1d2a4a; }
 
     .card {
       position: relative;
@@ -37,7 +46,7 @@
       overflow: hidden;
       background: var(--ink);
       color: var(--bone);
-      font-family: 'JetBrains Mono', ui-monospace, Consolas, monospace;
+      font-family: Geist, system-ui, sans-serif;
     }
 
     #dust { position: absolute; inset: 0; }
@@ -48,13 +57,14 @@
       font-weight: 800;
       font-size: 168px;
       line-height: .84;
-      letter-spacing: -.035em;
+      letter-spacing: -.045em;
     }
     .name--first { left: 38px; top: 62px; }
     .name--last  { right: 38px; bottom: 66px; }
 
     .meta {
       position: absolute;
+      font-family: 'JetBrains Mono', ui-monospace, Consolas, monospace;
       font-size: 15px;
       font-weight: 400;
       line-height: 1.9;
@@ -86,7 +96,8 @@
     .bubble--ask {
       position: relative;
       background: var(--signal);
-      color: var(--bone);
+      color: var(--on-signal);
+      font-weight: 600;
       margin-right: 22px;
     }
     /* rabicho apontando para o cartão de baixo */
@@ -103,7 +114,7 @@
     }
     .bubble--card {
       background: var(--panel);
-      border: 1px solid rgba(255, 255, 255, .09);
+      border: 1px solid #1d2a4a;
       display: flex;
       align-items: center;
       gap: 16px;
@@ -114,7 +125,7 @@
       width: 52px;
       height: 52px;
       border-radius: 10px;
-      background: var(--bone);
+      background: var(--night);
       display: flex;
       align-items: center;
       justify-content: center;
@@ -126,8 +137,8 @@
   <div class="card">
     <canvas id="dust" width="1200" height="630"></canvas>
 
-    <div class="name name--first">TONI</div>
-    <div class="name name--last">COIMBRA</div>
+    <div class="name name--first">Toni</div>
+    <div class="name name--last">Coimbra</div>
 
     <div class="meta meta--place">
       <span>TJPR — Assessoria STF/STJ</span>
@@ -148,11 +159,11 @@
 Vamos conversar.</div>
       <div class="bubble bubble--card">
         <span class="seal">
-          <!-- Ligadura TC, corte de 16 px, em fundo claro: T em tinta, C em sinal. -->
-          <svg viewBox="0 0 200 128" width="40" height="26" role="img" aria-label="Toni Coimbra">
-            <path d="M8 14H150V44H78V114H46V44H20Z" fill="#141414"></path>
-            <path d="M188.65 46A50 50 0 1 0 188.65 82L162.8 82A26 30 0 1 1 162.8 46Z" fill="#f4f3f0" stroke="#f4f3f0" stroke-width="24" stroke-linejoin="round"></path>
-            <path d="M188.65 46A50 50 0 1 0 188.65 82L162.8 82A26 30 0 1 1 162.8 46Z" fill="#fb3732"></path>
+          <!-- O selo: monograma TC sobre o campo noturno, T papel e C amarelo
+               (os caminhos de assets/logo.svg). -->
+          <svg viewBox="0 0 403.93 226.77" width="40" height="23" role="img" aria-label="Toni Coimbra">
+            <path fill="#f1f0ec" d="M70.87 0.00L127.56 0.00L226.77 0.00L226.77 0.08C201.18 16.55 181.53 41.46 171.75 70.87L127.56 70.87L127.56 226.77L70.87 226.77L70.87 70.87L0.00 70.87L0.00 0.00L70.87 0.00Z"></path>
+            <path fill="#ffd43b" d="M299.54 170.08L403.93 170.08L403.93 226.77L299.54 226.77C268.23 226.77 239.88 214.08 219.36 193.56C198.84 173.04 186.15 144.69 186.15 113.39C186.15 82.08 198.84 53.73 219.36 33.21C239.88 12.69 268.23 0.00 299.54 0.00L403.93 0.00L403.93 56.69L299.54 56.69C283.88 56.69 269.71 63.04 259.45 73.30C249.19 83.55 242.84 97.73 242.84 113.39C242.84 129.04 249.19 143.22 259.45 153.48C269.71 163.73 283.88 170.08 299.54 170.08Z"></path>
           </svg>
         </span>
         <span>Fale comigo,
@@ -173,7 +184,7 @@ não com um formulário</span>
         /* concentra na faixa de baixo, como no cartão original */
         const y = 630 - Math.pow(rnd(), 2.6) * 300;
         const r = 0.6 + rnd() * 1.1;
-        ctx.fillStyle = 'rgba(244, 243, 240, ' + (0.04 + rnd() * 0.17).toFixed(3) + ')';
+        ctx.fillStyle = 'rgba(238, 242, 248, ' + (0.04 + rnd() * 0.17).toFixed(3) + ')';
         ctx.beginPath();
         ctx.arc(x, y, r, 0, Math.PI * 2);
         ctx.fill();

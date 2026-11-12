@@ -40,10 +40,11 @@ A marca aparece no portfólio web, favicon, avatares, capas de projetos, apresen
 ## Evidence on Hand
 
 - Conteúdo e posicionamento profissional em `index.html`.
-- Símbolo atual em `assets/logo.svg`.
-- Favicon atual em `assets/favicon.svg`.
-- Construção, medidas, lockups e provas de redução da marca em `design-system/marca-canvas/`.
-- Os estudos de marca descartados saíram do working tree; ficam no histórico do git para consulta e não devem orientar a nova forma.
+- Símbolo atual em `assets/logo.svg`: o monograma TC desenhado pelo Toni (CorelDRAW, 2026-11), o mesmo do ProfessorDash — T papel `#f1f0ec`, C amarelo `#ffd43b`.
+- Selo/favicon em `assets/favicon.svg`: o monograma sobre o campo noturno `#0a0e1a`.
+- Construção, redução, fundos e lockups documentados no catálogo (`design-system/design-system.html#marca`) e no documento autônomo `design-system/caderno-noturno.html`.
+- Design system: Caderno Noturno (DS v4), compartilhado com o ProfessorDash; o portfólio usa só o tema noturno.
+- A ligadura TC anterior, o Volta Atelier e os estudos de marca descartados saíram do working tree; ficam no histórico do git para consulta e não devem orientar a nova forma.
 
 ## Product Principles
 

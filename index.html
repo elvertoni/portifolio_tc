@@ -14,18 +14,19 @@
   <meta property="og:image" content="https://tonicoimbra.com/assets/og.png">
   <meta property="og:locale" content="pt_BR">
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="theme-color" content="#141414">
+  <meta name="theme-color" content="#0a0e1a">
   <link rel="canonical" href="https://tonicoimbra.com/">
 
-  <link rel="icon" type="image/svg+xml" sizes="any" href="assets/favicon.svg?v=20260914">
-  <link rel="apple-touch-icon" href="assets/favicon.svg?v=20260914">
+  <link rel="icon" type="image/svg+xml" sizes="any" href="assets/favicon.svg?v=20261112">
+  <link rel="apple-touch-icon" href="assets/favicon.svg?v=20261112">
   <link rel="manifest" href="site.webmanifest">
-  <!-- Both faces are in the first screen: Archivo draws the name, JetBrains
-       Mono every line of running text. Preloading only one leaves the other
-       swapping in after first paint. -->
+  <!-- Archivo draws the name and Geist every line of running text, so both
+       are in the first screen; preloading only one leaves the other swapping
+       in after first paint. JetBrains Mono only sets the short kickers and can
+       arrive late without moving anything. -->
   <link rel="preload" href="assets/fonts/archivo-latin.woff2" as="font" type="font/woff2" crossorigin>
-  <link rel="preload" href="assets/fonts/jetbrains-mono-latin.woff2" as="font" type="font/woff2" crossorigin>
-  <link rel="stylesheet" href="assets/css/style.css?v=20260914">
+  <link rel="preload" href="assets/fonts/geist-latin-variable.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="assets/css/style.css?v=20261112">
 
   <!-- Animation is enabled only after the runtime starts successfully. -->
 </head>
@@ -36,7 +37,7 @@
   <!-- ══ NAVEGAÇÃO FIXA ══════════════════════════════════════════ -->
   <header class="hdr" id="hdr">
     <a href="#top" class="mark" aria-label="Toni Coimbra — voltar ao topo">
-      <img class="brand-logo" src="assets/logo.svg?v=20260914" alt="" width="50" height="32" aria-hidden="true">
+      <img class="brand-logo" src="assets/logo.svg?v=20261112" alt="" width="57" height="32" aria-hidden="true">
       <span class="brand-name">Toni Coimbra<span>Design de origem. Código de profissão.</span></span>
     </a>
 
@@ -111,7 +112,7 @@
           <div>
             <h2 class="d-lg mt-4" data-mask><span>Projetos que<br><span class="text-muted">saem do papel.</span></span></h2>
           </div>
-          <p class="mono-sm measure max-w-md">
+          <p class="body-sm measure max-w-md">
             Sistemas em produção: portais educacionais, plataformas de saúde
             e automações que processam milhares de documentos e horas de trabalho.
           </p>
@@ -122,8 +123,8 @@
           <!-- ProfessorDash — destaque -->
           <article class="box--media box--feature">
             <span class="pshot">
-              <img src="assets/img/professordash.webp?v=20260914"
-                   srcset="assets/img/professordash.webp?v=20260914 800w, assets/img/professordash@2x.webp?v=20260914 1600w"
+              <img src="assets/img/professordash.webp?v=20261112"
+                   srcset="assets/img/professordash.webp?v=20261112 800w, assets/img/professordash@2x.webp?v=20261112 1600w"
                    sizes="(max-width: 900px) calc(100vw - 8vw), (min-width: 1320px) 704px, 56vw"
                    width="800" height="512" loading="lazy" decoding="async"
                    alt="Página inicial do ProfessorDash, com a chamada Ensinar com clareza e parte do diagrama de aprendizagem.">
@@ -137,7 +138,7 @@
               <h3 class="d-md">
                 <a class="plink" href="https://prof.tonicoimbra.com" target="_blank" rel="noopener noreferrer">ProfessorDash — Portal do Aluno <svg class="project-arrow" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 17 17 7M7 7h10v10"/></svg></a>
               </h3>
-              <p class="mono-sm measure">
+              <p class="body-sm measure">
                 Sistema completo de gestão de turmas, aulas, materiais e atividades para
                 professores da rede pública. Portal público para alunos com Google OAuth,
                 apostilas HTML, grade de tarefas e boletim automático.
@@ -172,7 +173,7 @@
               <h3 class="d-sm">
                 <a class="plink" href="https://e-simba.com.br" target="_blank" rel="noopener noreferrer">eSIMBA — Monitoramento de Benefícios <svg class="project-arrow" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 17 17 7M7 7h10v10"/></svg></a>
               </h3>
-              <p class="mono-sm">
+              <p class="body-sm">
                 Sistema integrado de monitoramento de benefícios e acolhimento, com acesso
                 institucional, trilha de auditoria e controle de permissões por perfil.
               </p>
@@ -201,7 +202,7 @@
               <h3 class="d-sm">
                 <a class="plink" href="https://vitalis.tonicoimbra.com" target="_blank" rel="noopener noreferrer">Vitalis — Saúde, treino e nutrição <svg class="project-arrow" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 17 17 7M7 7h10v10"/></svg></a>
               </h3>
-              <p class="mono-sm">
+              <p class="body-sm">
                 Central pessoal de saúde: exames, tratamentos, treino e dieta num só lugar, com
                 lembretes de remédio, exame e retorno médico e histórico por conta.
               </p>
@@ -231,7 +232,7 @@
               <h3 class="d-sm">
                 <a class="plink" href="https://noivaseciabandeirantes.com.br" target="_blank" rel="noopener noreferrer">Noivas &amp; Cia — Gestão &amp; Locação <svg class="project-arrow" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 17 17 7M7 7h10v10"/></svg></a>
               </h3>
-              <p class="mono-sm">
+              <p class="body-sm">
                 Sistema completo de gestão comercial e controle de locações para aluguel de trajes e
                 acessórios para eventos, com contratos, catálogo e financeiro.
               </p>
@@ -257,14 +258,14 @@
           <div>
             <h2 class="d-lg mt-4" data-mask><span>Da composição gráfica<br>à construção de sistemas.</span></h2>
           </div>
-          <p class="mono-sm measure max-w-md">
+          <p class="body-sm measure max-w-md">
             Mais de 20 anos de experiência pregressa em diagramação e arte-finalismo.
             Hoje aplico essa mesma atenção a detalhes no desenvolvimento de software,
             automação e inteligência artificial.
           </p>
         </div>
 
-        <p class="mono-md about-story measure-wide mb-16" data-io>
+        <p class="body-md about-story measure-wide mb-16" data-io>
           Atuando no Tribunal de Justiça do Paraná (Assessoria STF/STJ) focado em
           soluções de automação e integração de IA para otimização de fluxos
           operacionais internos e análise inteligente de dados. Construo pipelines
@@ -303,7 +304,7 @@
           <div>
             <h2 class="d-lg mt-4" data-mask><span>O que está por trás.</span></h2>
           </div>
-          <p class="mono-sm max-w-md">
+          <p class="body-sm max-w-md">
             Tecnologias e ferramentas que compõem meu dia-a-dia no tribunal,
             em sala de aula e em projetos pessoais.
           </p>
@@ -315,7 +316,7 @@
             <span class="num">IA & Machine Learning</span>
             <h3>Inteligência Artificial</h3>
             <div class="bar"><i></i></div>
-            <p class="mono-sm">
+            <p class="body-sm">
               Classificação e análise de documentos, NLP, integração com
               APIs de LLMs e visão computacional em tempo real.
             </p>
@@ -334,7 +335,7 @@
             <span class="num">Automação & Integração</span>
             <h3>Automação</h3>
             <div class="bar"><i></i></div>
-            <p class="mono-sm">
+            <p class="body-sm">
               Pipelines no-code/low-code, integrações via webhook,
               notificações inteligentes e fluxos automatizados.
             </p>
@@ -352,7 +353,7 @@
             <span class="num">Dados & Processamento</span>
             <h3>Dados</h3>
             <div class="bar"><i></i></div>
-            <p class="mono-sm">
+            <p class="body-sm">
               Bancos de dados, processamento de PDFs em lote,
               extração e transformação de dados estruturados.
             </p>
@@ -370,7 +371,7 @@
             <span class="num">Infraestrutura & Dev</span>
             <h3>Infra</h3>
             <div class="bar"><i></i></div>
-            <p class="mono-sm">
+            <p class="body-sm">
               Containers, deploy, versionamento e gestão de
               servidores para aplicações em produção.
             </p>
@@ -397,7 +398,7 @@
           <div>
             <h2 class="d-lg mt-4" data-mask><span>Trajetória profissional</span></h2>
           </div>
-          <p class="mono-sm max-w-md">
+          <p class="body-sm max-w-md">
             Da indústria gráfica à inteligência artificial — cada fase
             construiu a atenção a detalhes que aplico hoje.
           </p>
@@ -410,7 +411,7 @@
             <h3>TJPR</h3>
             <div class="bar"><i></i></div>
             <p class="phase-role d-sm mb-3">Automação & Inteligência Artificial</p>
-            <p class="mono-sm">Assessoria STF/STJ</p>
+            <p class="body-sm">Assessoria STF/STJ</p>
             <ul>
               <li>Ferramentas de IA para sumarização</li>
               <li>Integração de APIs</li>
@@ -424,7 +425,7 @@
             <h3>Professor</h3>
             <div class="bar"><i></i></div>
             <p class="phase-role d-sm mb-3">Curso Técnico — SEED-PR</p>
-            <p class="mono-sm">Desenvolvimento de Sistemas</p>
+            <p class="body-sm">Desenvolvimento de Sistemas</p>
             <ul>
               <li>Lógica de programação</li>
               <li>Banco de dados</li>
@@ -438,7 +439,7 @@
             <h3>Gráfica</h3>
             <div class="bar"><i></i></div>
             <p class="phase-role d-sm mb-3">Diagramador & Arte-finalista</p>
-            <p class="mono-sm">Indústria Gráfica</p>
+            <p class="body-sm">Indústria Gráfica</p>
             <ul>
               <li>Diagramação técnica</li>
               <li>Fechamento de arquivos complexos</li>
@@ -464,21 +465,21 @@
           <div class="box box--card p-6">
             <span class="chip chip--signal mb-4 inline-block">Pós-Graduação</span>
             <h3 class="d-sm mb-3">Inteligência Artificial Aplicada</h3>
-            <p class="mono-sm">Universidade Federal do Paraná (UFPR)</p>
+            <p class="body-sm">Universidade Federal do Paraná (UFPR)</p>
             <p class="mono-xs mt-2">Especialização voltada à aplicação prática de IA</p>
           </div>
 
           <div class="box box--card p-6">
             <span class="chip mb-4 inline-block">2023</span>
             <h3 class="d-sm mb-3">Análise e Desenv. de Sistemas</h3>
-            <p class="mono-sm">Universidade Positivo (UP)</p>
+            <p class="body-sm">Universidade Positivo (UP)</p>
             <p class="mono-xs mt-2">Transição formal para TI</p>
           </div>
 
           <div class="box box--card p-6">
             <span class="chip mb-4 inline-block">2006</span>
             <h3 class="d-sm mb-3">Sistemas de Informação</h3>
-            <p class="mono-sm">Universidade Estadual do N. do Paraná (UENP)</p>
+            <p class="body-sm">Universidade Estadual do N. do Paraná (UENP)</p>
             <p class="mono-xs mt-2">Base fundacional em computação</p>
           </div>
         </div>
@@ -495,7 +496,7 @@
             <h2 data-mask><span>Vamos dar<br>forma à sua<br><span class="text-signal">próxima ideia.</span></span></h2>
           </div>
 
-          <p class="mono-sm max-w-xl measure">
+          <p class="body-sm max-w-xl measure">
             Uma automação, um sistema, uma nova possibilidade.
             Conte o que você tem em mente e vamos conversar sobre como tirar a ideia do papel.
           </p>
@@ -596,10 +597,10 @@
       <div class="grid grid-cols-2 lg:grid-cols-4 gap-8 md:gap-12">
         <div class="fcol fcol--wide">
           <a href="#top" class="mark mb-6" aria-label="Toni Coimbra — voltar ao topo">
-            <img class="brand-logo" src="assets/logo.svg?v=20260914" alt="" width="50" height="32" loading="lazy">
+            <img class="brand-logo" src="assets/logo.svg?v=20261112" alt="" width="57" height="32" loading="lazy">
             <span class="brand-name">Toni Coimbra</span>
           </a>
-          <p class="mono-sm measure max-w-md">
+          <p class="body-sm measure max-w-md">
             Especialista em IA & Automação, Professor de Desenvolvimento
             de Sistemas e Desenvolvedor Python. Construído com HTML,
             CSS & Vanilla JS.
@@ -640,6 +641,6 @@
     </div>
   </footer>
 
-  <script src="assets/js/main.js?v=20260914" defer></script>
+  <script src="assets/js/main.js?v=20261112" defer></script>
 </body>
 </html>

@@ -3,7 +3,8 @@
   "private": true,
   "scripts": {
     "test": "playwright test",
-    "test:smoke": "playwright test"
+    "test:smoke": "playwright test",
+    "build:doc": "node design-system/compilar-caderno.mjs"
   },
   "devDependencies": {
     "@playwright/test": "^1.51.0"

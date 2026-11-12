@@ -3,14 +3,68 @@
 Referência: `design-system.html`. Implementação: `../index.html`,
 `../assets/css/style.css` e `../assets/js/main.js`.
 
+## 2026-11-12 — Caderno Noturno substitui o Volta Atelier
+
+O portfólio passa a usar o Caderno Noturno (DS v4), o design system que o
+ProfessorDash adotou no portal inteiro (decisões D.16–D.20 daquele
+repositório). Três escolhas do Toni definiram o recorte:
+
+- **Marca:** o monograma TC desenhado por ele no CorelDRAW substitui a
+  ligadura. `assets/logo.svg` e `assets/favicon.svg` usam os mesmos caminhos
+  do ProfessorDash; o T troca entre papel e tinta por `prefers-color-scheme`,
+  o C é sempre amarelo. A seção `#marca` do catálogo foi reescrita com a
+  construção medida no próprio SVG (altura 80, traço único 20, fenda 7,5).
+  `design-system/marca-canvas/`, fonte da ligadura, saiu do working tree.
+- **Tema:** só o noturno — o tema que o portal mostra ao visitante. Não há
+  tema papel nem alternador.
+- **Documentação:** o catálogo passou a documentar o Caderno Noturno com as
+  mesmas contagens que o teste fixa. O documento autônomo agora é
+  `caderno-noturno.html`, **gerado** por `compilar-caderno.mjs`
+  (`npm run build:doc`) a partir dos arquivos que o site serve, com as três
+  fontes e as oito imagens embutidas. `volta-atelier.html` saiu do working
+  tree.
+
+O que mudou na folha, além dos valores dos tokens:
+
+- Geist no texto corrido e na interface; `.mono-md`/`.mono-sm` viraram
+  `.body-md`/`.body-sm`. JetBrains Mono fica no rótulo curto (`.mono-xs`,
+  12px, caixa alta, cor neutra) e no código. Medida de leitura em `rem`.
+- Archivo 800 em caixa de frase. A assinatura `Toni Coimbra.` saiu das
+  pontas da linha e foi para a esquerda: sem a caixa alta, as duas palavras
+  separadas abriam um buraco no meio do nome.
+- Botão em pílula com o amarelo chapado e texto `#1b1500`; o wipe vermelho
+  saiu. Chip de destaque tingido, não preenchido.
+- Cabeçalho e gaveta sempre em `--color-night`; navegação em texto com ativo
+  discreto. A gaveta entra por opacidade e deslocamento, não por `clip-path`.
+- Ornamentos removidos: brilho e fio de luz no topo de `.box`, halo vermelho
+  e giro do logo no hover.
+- Vermelho só como erro (`--color-danger`); foco azul na página e amarelo na
+  barra noturna. Os apelidos antigos continuam, mas `--signal` agora é o
+  amarelo de ação.
+- `assets/og.png` regenerado a partir de `og-card.html` com a paleta e o selo
+  novos.
+
+Verificação: 33/33 testes; auditoria de contraste com cores computadas em
+`index.html`, no catálogo e no documento autônomo, a 390 e 1440px — zero
+textos abaixo de AA depois de corrigir o separador do topo do herói (estava
+em `--dim-line`, 2,3:1); nenhuma rolagem horizontal a 320, 390 e 1440px;
+botões Copiar do documento levados a 44px.
+
+Ficou de fora, de propósito: o paralaxe de ponteiro da colagem e a faixa de
+palavras em laço do rodapé. O Caderno pede home sem animação contínua, mas os
+dois são comportamento testado do site, não ornamento de cor — removê-los é
+uma decisão à parte. As capas editoriais e a captura do ProfessorDash ainda
+mostram vermelho porque são imagens da era Volta.
+
 ## Direção
 
 Um portfólio editorial que aproxima a experiência gráfica de Toni Coimbra
-da sua atuação em desenvolvimento, automação e inteligência artificial.
-Preservam-se Archivo, JetBrains Mono, preto, branco quente, vermelho de
-sinalização e a marca existente.
+da sua atuação em desenvolvimento, automação e inteligência artificial. Desde
+2026-11-12, no Caderno Noturno: azul-noite, amarelo de ação, Archivo, Geist e
+o monograma TC compartilhado com o ProfessorDash. O registro abaixo descreve
+a fase Volta Atelier e fica como histórico.
 
-A assinatura tipográfica ocupa a largura da abertura. A composição de imagens
+A assinatura tipográfica abre a página. A composição de imagens
 mantém profundidade e reação ao ponteiro, com uma versão estática para quem
 prefere movimento reduzido. As capas são imagens conceituais; as capturas nos
 projetos mostram as interfaces reais.

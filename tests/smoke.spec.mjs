@@ -11,11 +11,12 @@ test('o documento compilado não pode divergir da folha canônica', async () => 
   const ler = (rel) => readFileSync(new URL(rel, raiz), 'utf8').replace(/\r\n/g, '\n');
   const folha = ler('assets/css/style.css');
   const runtime = ler('assets/js/gallery.js');
-  const doc = ler('design-system/volta-atelier.html');
+  const doc = ler('design-system/caderno-noturno.html');
 
-  // volta-atelier.html embute um retrato do CSS e do runtime. Sem esta guarda
+  // caderno-noturno.html embute um retrato do CSS e do runtime. Sem esta guarda
   // ele mente em silêncio: a fonte muda, o documento continua mostrando o
-  // valor antigo e alguém aplica isso em outro projeto.
+  // valor antigo e alguém aplica isso em outro projeto. Se este teste falhar,
+  // regenere o documento com `npm run build:doc`.
   const linhas = folha.split('\n');
   const abre = linhas.findIndex((l) => l.trim() === ':root {');
   const fecha = linhas.findIndex((l, i) => i > abre && l === '}');
