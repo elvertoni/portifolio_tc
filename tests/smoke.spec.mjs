@@ -101,14 +101,17 @@ test('explica o método com diagrama legível em desktop e celular', async ({ pa
   await expect(page.locator('#hero img')).toHaveCount(0);
 });
 
-test('carrega capas editoriais e mantém o drawer isolado', async ({ page }) => {
+test('carrega as capturas dos projetos e mantém o drawer isolado', async ({ page }) => {
   await page.setViewportSize({ width: 390, height: 844 });
   await page.goto(pageUrl);
 
   await page.locator('#projetos').scrollIntoViewIfNeeded();
-  const covers = page.locator('.project-cover img');
-  await expect(covers).toHaveCount(4);
-  await expect.poll(() => covers.evaluateAll((images) =>
+  // A capa de cada projeto é a captura do próprio sistema, sem miniatura
+  // decorativa por cima: a tela real é a prova de autoria.
+  await expect(page.locator('.project-cover')).toHaveCount(0);
+  const shots = page.locator('.pshot > img');
+  await expect(shots).toHaveCount(4);
+  await expect.poll(() => shots.evaluateAll((images) =>
     images.every((image) => image.complete && image.naturalWidth > 0)
   )).toBe(true);
   expect(await page.evaluate(() => document.documentElement.scrollWidth)).toBeLessThanOrEqual(390);

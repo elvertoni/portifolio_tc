@@ -118,7 +118,7 @@ portifolio_tc/
 │   ├── js/main.js           # Runtime JS (reveal, drawer, relógio, contadores, form)
 │   ├── js/gallery.js        # Galeria em arco autônoma (só o catálogo carrega)
 │   ├── fonts/               # Archivo, Geist e JetBrains Mono em .woff2 (subset latin)
-│   ├── img/                 # Capturas dos produtos e capas conceituais (.webp)
+│   ├── img/                 # Capturas dos produtos (.webp); capas conceituais só na galeria do catálogo
 │   ├── logo.svg             # Monograma TC (viewBox 403,93×226,77), o mesmo do ProfessorDash
 │   ├── favicon.svg          # Selo: o monograma sobre o campo noturno
 │   └── og.png               # Social preview, gerado por design-system/og-card.html

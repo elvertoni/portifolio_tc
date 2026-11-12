@@ -26,6 +26,9 @@ Referência: `design-system.html`. Implementação: `../index.html`,
   sobre para onde vai a resposta; a faixa do rodapé pausa no hover e por um botão
   (`#marquee-toggle`, WCAG 2.2.2); o `og.png` perdeu o relógio congelado e o "não com
   um formulário", que contradizia o site. 34 testes.
+- **Capas editoriais fora dos cards.** As miniaturas 3D no canto das capturas não
+  diziam nada sobre os projetos e disputavam com a tela real; cada card mostra só a
+  captura do próprio sistema. Os arquivos ficam para a galeria do catálogo.
 - Ainda dependem do Toni: prazo de resposta e e-mail direto no contato.
 
 ## 2026-11-12 — Fluxo vetorial na abertura
